@@ -8,7 +8,6 @@ import * as authAPI from "../lib/api/auth";
 import {
   AuthState,
   ChangeFieldReqType,
-  InitializeFormReqType,
   LoginReqType,
   RegisterReqType,
 } from "../types";
@@ -34,7 +33,7 @@ export const changeField = createAction(
 );
 export const initializeForm = createAction(
   INITIALIZE_FORM,
-  (form: InitializeFormReqType) => form
+  (form: "register" | "login") => form
 ); // register / login
 export const register = createAction(
   REGISTER,

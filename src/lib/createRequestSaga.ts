@@ -1,7 +1,7 @@
-import { call, put } from 'redux-saga/effects';
-import { startLoading, finishLoading } from '../modules/loading';
+import { call, put } from "redux-saga/effects";
+import { startLoading, finishLoading } from "../modules/loading";
 
-export const createRequestActionTypes = (type) => {
+export const createRequestActionTypes = (type: string) => {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return [type, SUCCESS, FAILURE];
@@ -9,13 +9,13 @@ export const createRequestActionTypes = (type) => {
 
 // type에는 REGISTER, LOGIN 들어감
 // request에는 authAPI.register, authAPI.login 들어감
-export default function createRequestSaga(type, request) {
+export default function createRequestSaga(type: string, request) {
   // request: 요청
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
 
   // 제너레이터 함수 사용
-  return function* (action) {
+  return function* (action: any) {
     // 파라미터로 action을 받아 오면 action의 정보를 조회할 수 있음
     // put(): 특정 액션을 디스패치
     yield put(startLoading(type)); // 로딩 시작

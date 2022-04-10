@@ -6,7 +6,7 @@ import Button from "../common/Button";
 
 type AuthFormProps = {
   type: "register" | "login";
-  form: "register" | "login";
+  form: string;
   onChange: () => void;
   onSubmit: (form: { username: string; password: string }) => void;
   error: string | null;

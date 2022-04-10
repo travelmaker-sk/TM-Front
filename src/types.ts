@@ -1,11 +1,7 @@
 export type ChangeFieldReqType = {
-  form: "register" | "login";
-  key: "nickname" | "username" | "password" | "passwordConfirm";
+  form: string;
+  key: string;
   value: string;
-};
-
-export type InitializeFormReqType = {
-  form: "register" | "login";
 };
 
 export type RegisterReqType = {
