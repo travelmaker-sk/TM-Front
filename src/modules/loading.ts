@@ -1,20 +1,20 @@
-import { createAction, handleActions } from 'redux-actions';
+import { createAction, handleActions } from "redux-actions";
 
 // 액션 타입 정의
-const START_LOADING = 'loading/START_LOADING';
-const FINISH_LOADING = 'loading/FINISH_LOADING';
+const START_LOADING = "loading/START_LOADING";
+const FINISH_LOADING = "loading/FINISH_LOADING";
 
 // 요청을 위한 액션 타입을 payload로 설정한다. (예: "sample/GET_POST")
 
 // 액션 생성 함수
 export const startLoading = createAction(
   START_LOADING,
-  (requestType) => requestType,
+  (requestType: boolean) => requestType
 );
 
 export const finishLoading = createAction(
   FINISH_LOADING,
-  (requestType) => requestType,
+  (requestType: boolean) => requestType
 );
 
 // 초기값
@@ -23,16 +23,16 @@ const initialState = {};
 // 리듀서
 const loading = handleActions(
   {
-    [START_LOADING]: (state, action) => ({
+    [START_LOADING]: (state, action: any) => ({
       ...state,
       [action.payload]: true,
     }),
-    [FINISH_LOADING]: (state, action) => ({
+    [FINISH_LOADING]: (state, action: any) => ({
       ...state,
       [action.payload]: false,
     }),
   },
-  initialState,
+  initialState
 );
 
 export default loading;

@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Responsive from "./Responsive";
 import Button from "./Button";
 import Logo from "./Logo";
+import { UserState } from "../../types";
 
 type HeaderProps = {
-  user: any;
+  user: UserState;
   onLogout: () => void;
 };
 

@@ -1,20 +1,24 @@
-import { createAction, handleActions } from 'redux-actions';
-import { takeLatest, call } from 'redux-saga/effects';
-import * as authAPI from '../lib/api/auth';
+import { createAction, handleActions } from "redux-actions";
+import { takeLatest, call } from "redux-saga/effects";
+import * as authAPI from "../lib/api/auth";
 import createRequestSaga, {
   createRequestActionTypes,
-} from '../lib/createRequestSaga';
+} from "../lib/createRequestSaga";
+import { UserState } from "../types";
 
 // 액션 타입 정의
 // 새로고침 이후 임시 로그인 처리
-const TEMP_SET_USER = 'user/TEMP_SET_USER';
+const TEMP_SET_USER = "user/TEMP_SET_USER";
 // 회원 정보 확인
 const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] =
-  createRequestActionTypes('user/CHECK');
-const LOGOUT = 'user/LOGOUT';
+  createRequestActionTypes("user/CHECK");
+const LOGOUT = "user/LOGOUT";
 
 // 액션 생성 함수
-export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
+export const tempSetUser = createAction(
+  TEMP_SET_USER,
+  (user: UserState) => user
+);
 export const check = createAction(CHECK);
 export const logout = createAction(LOGOUT);
 
@@ -24,16 +28,16 @@ const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
 function checkFailureSaga() {
   try {
-    localStorage.removeItem('user'); // localStorage 에서 user 제거하고
+    localStorage.removeItem("user"); // localStorage 에서 user 제거하고
   } catch (e) {
-    console.log('localStorage is not working');
+    console.log("localStorage is not working");
   }
 }
 
 function* logoutSaga() {
   try {
     yield call(authAPI.logout); // logout API 호출
-    localStorage.removeItem('user'); // localStorage 에서 user 제거
+    localStorage.removeItem("user"); // localStorage 에서 user 제거
   } catch (e) {
     console.log(e);
   }
@@ -48,13 +52,13 @@ export function* userSaga() {
 }
 
 // 초기값
-const initialState = {
+const initialState: UserState = {
   user: null,
   checkError: null,
 };
 
 // 리듀서
-export default handleActions(
+export default handleActions<UserState, string>(
   {
     [TEMP_SET_USER]: (state, { payload: user }) => ({
       ...state,
@@ -75,5 +79,5 @@ export default handleActions(
       user: null,
     }),
   },
-  initialState,
+  initialState
 );

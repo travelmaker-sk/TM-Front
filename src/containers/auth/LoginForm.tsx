@@ -4,6 +4,7 @@ import { changeField, initializeForm, login } from "../../modules/auth";
 import AuthForm from "../../components/auth/AuthForm";
 import { check } from "../../modules/user";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../../types";
 
 const LoginForm = () => {
   // useDispatch(): 액션을 발생시킨다.
@@ -13,12 +14,14 @@ const LoginForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   // useSelector(): 리덕스 스토어의 상태를 가져온다.
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
-    form: auth.login,
-    auth: auth.auth,
-    authError: auth.authError,
-    user: user.user,
-  }));
+  const { form, auth, authError, user } = useSelector<RootState>(
+    ({ auth, user }) => ({
+      form: auth.login,
+      auth: auth.auth,
+      authError: auth.authError,
+      user: user.user,
+    })
+  );
 
   // 인풋 변경 이벤트 핸들러
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

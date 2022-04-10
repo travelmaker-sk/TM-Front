@@ -5,9 +5,9 @@ import palette from "../../styles/palette";
 import Button from "../common/Button";
 
 type AuthFormProps = {
-  type: "login" | "register";
-  form: any;
-  onChange: (target: { value: any; name: any }) => void;
+  type: "register" | "login";
+  form: "register" | "login";
+  onChange: () => void;
   onSubmit: (form: { username: string; password: string }) => void;
   error: string | null;
 };

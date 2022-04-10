@@ -1,43 +1,56 @@
-import { createAction, handleActions } from 'redux-actions';
-import produce from 'immer';
-import { takeLatest } from 'redux-saga/effects';
+import { createAction, handleActions } from "redux-actions";
+import produce from "immer";
+import { takeLatest } from "redux-saga/effects";
 import createRequestSaga, {
   createRequestActionTypes,
-} from '../lib/createRequestSaga';
-import * as authAPI from '../lib/api/auth';
+} from "../lib/createRequestSaga";
+import * as authAPI from "../lib/api/auth";
+import {
+  AuthState,
+  ChangeFieldReqType,
+  InitializeFormReqType,
+  LoginReqType,
+  RegisterReqType,
+} from "../types";
 
 // 액션 타입 정의
-const CHANGE_FIELD = 'auth/CHANGE_FIELD';
-const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
+const CHANGE_FIELD = "auth/CHANGE_FIELD";
+const INITIALIZE_FORM = "auth/INITIALIZE_FORM";
 
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] =
-  createRequestActionTypes('auth/REGISTER');
+  createRequestActionTypes("auth/REGISTER");
 
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] =
-  createRequestActionTypes('auth/LOGIN');
+  createRequestActionTypes("auth/LOGIN");
 
 // 액션 생성 함수
 export const changeField = createAction(
   CHANGE_FIELD,
-  ({ form, key, value }) => ({
+  ({ form, key, value }: ChangeFieldReqType) => ({
     form, // register , login
     key, // nickname, username, password, passwordConfirm
     value, // 실제 바꾸려는 값
-  }),
+  })
 );
-export const initializeForm = createAction(INITIALIZE_FORM, (form) => form); // register / login
+export const initializeForm = createAction(
+  INITIALIZE_FORM,
+  (form: InitializeFormReqType) => form
+); // register / login
 export const register = createAction(
   REGISTER,
-  ({ nickname, username, password }) => ({
+  ({ nickname, username, password }: RegisterReqType) => ({
     nickname,
     username,
     password,
-  }),
+  })
 );
-export const login = createAction(LOGIN, ({ username, password }) => ({
-  username,
-  password,
-}));
+export const login = createAction(
+  LOGIN,
+  ({ username, password }: LoginReqType) => ({
+    username,
+    password,
+  })
+);
 
 // saga 생성
 // 1. 리덕스 사가 미들웨어 설정
@@ -51,23 +64,23 @@ export function* authSaga() {
 }
 
 // 초기값
-const initialState = {
+const initialState: AuthState = {
   register: {
-    nickname: '',
-    username: '',
-    password: '',
-    passwordConfirm: '',
+    nickname: "",
+    username: "",
+    password: "",
+    passwordConfirm: "",
   },
   login: {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   },
   auth: null,
   authError: null,
 };
 
 // 리듀서
-const auth = handleActions(
+const auth = handleActions<AuthState, string>(
   {
     [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
       produce(state, (draft) => {
@@ -101,7 +114,7 @@ const auth = handleActions(
       authError: error,
     }),
   },
-  initialState,
+  initialState
 );
 
 export default auth;
