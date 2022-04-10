@@ -3,6 +3,12 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 
+type TCommonButtonProps = {
+  fullWidth: boolean;
+  cyan?: boolean;
+  to: string;
+};
+
 const buttonStyle = css`
   border: 1px solid ${palette.gray[6]};
   border-radius: 1px;
@@ -10,14 +16,12 @@ const buttonStyle = css`
   padding: 0.3rem 0.8rem;
   outline: none;
   cursor: pointer;
-
   background: white;
   color: ${palette.gray[6]};
   &:hover {
     color: ${palette.gray[5]};
   }
-
-  ${(props) =>
+  ${(props: TCommonButtonProps) =>
     props.fullWidth &&
     css`
       padding-top: 0.75rem;
@@ -25,7 +29,6 @@ const buttonStyle = css`
       width: 100%;
       font-size: 1.125rem;
     `}
-
   ${(props) =>
     props.cyan &&
     css`
@@ -39,17 +42,17 @@ const buttonStyle = css`
     `}
 `;
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<TCommonButtonProps>`
   ${buttonStyle}
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link)<TCommonButtonProps>`
   ${buttonStyle}
 `;
 
-const Button = (props) => {
+const Button = (props: TCommonButtonProps) => {
   return props.to ? (
-    <StyledLink {...props} cyan={props.cyan ? 1 : 0} />
+    <StyledLink {...props} cyan={props.cyan} />
   ) : (
     <StyledButton {...props} />
   );

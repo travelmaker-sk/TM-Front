@@ -4,7 +4,14 @@ import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 import Button from "../common/Button";
 
-// 회원가입 / 로그인 폼
+type AuthFormProps = {
+  type: "login" | "register";
+  form: any;
+  onChange: (target: { value: any; name: any }) => void;
+  onSubmit: (form: { username: string; password: string }) => void;
+  error: string | null;
+};
+
 const AuthFormBlock = styled.div`
   h3 {
     color: ${palette.gray[6]};
@@ -14,7 +21,6 @@ const AuthFormBlock = styled.div`
   }
 `;
 
-// 스타일링된 input
 const StyledInput = styled.input`
   display: block;
   font-size: 1rem;
@@ -57,7 +63,7 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }: AuthFormProps) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>
@@ -106,7 +112,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
           />
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <ButtonWithMarginTop cyan fullWidth style={{ marginTop: "2rem" }}>
+        <ButtonWithMarginTop cyan fullWidth>
           {text}
         </ButtonWithMarginTop>
       </form>

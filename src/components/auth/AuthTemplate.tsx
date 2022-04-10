@@ -3,9 +3,10 @@ import styled from "styled-components";
 import palette from "../../styles/palette";
 import Logo from "../common/Logo";
 
-// 회원가입 / 로그인 페이지 레이아웃
+type AuthTemplateProps = {
+  children: any;
+};
 
-// 화면 전체
 const AuthTemplateBlock = styled.div`
   position: absolute;
   left: 0;
@@ -42,7 +43,7 @@ const Spacer = styled.div`
   height: 4rem;
 `;
 
-const AuthTemplate = ({ children }) => {
+const AuthTemplate = ({ children }: AuthTemplateProps) => {
   return (
     <>
       <AuthTemplateBlock>

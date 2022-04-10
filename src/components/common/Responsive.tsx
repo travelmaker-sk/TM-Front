@@ -1,5 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+
+type ResponsiveProps = {
+  children: any;
+};
 
 const ResponsiveBlock = styled.div`
   padding-left: 1rem;
@@ -21,7 +25,7 @@ const ResponsiveBlock = styled.div`
   }
 `;
 
-const Responsive = ({ children, ...rest }) => {
+const Responsive = ({ children, ...rest }: ResponsiveProps) => {
   // style, className, onClick, onMouseMove 등의 props를 사용할 수 있도록
   // ...rest를 사용하여 ResponsiveBlock에게 전달
   return <ResponsiveBlock {...rest}>{children}</ResponsiveBlock>;

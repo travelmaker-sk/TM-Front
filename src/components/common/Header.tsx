@@ -1,8 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import Responsive from './Responsive';
-import Button from './Button';
-import Logo from './Logo';
+import React from "react";
+import styled from "styled-components";
+import Responsive from "./Responsive";
+import Button from "./Button";
+import Logo from "./Logo";
+
+type HeaderProps = {
+  user: any;
+  onLogout: () => void;
+};
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -10,7 +15,6 @@ const HeaderBlock = styled.div`
   background: white;
 `;
 
-// Responsive 컴포넌트의 속성에 스타일을 추가해서 새로운 컴포넌트 생성
 const Wrapper = styled(Responsive)`
   height: 5rem;
   display: flex;
@@ -31,7 +35,7 @@ const Spacer = styled.div`
   height: 5rem;
 `;
 
-const Header = ({ user, onLogout }) => {
+const Header = ({ user, onLogout }: HeaderProps) => {
   return (
     <>
       <HeaderBlock>
