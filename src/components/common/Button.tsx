@@ -3,59 +3,50 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 
-type TCommonButtonProps = {
-  fullWidth: boolean;
-  cyan?: boolean;
+type ButtonProps = {
   to: string;
+  cyan?: boolean | number;
 };
 
-const buttonStyle = css`
-  border: 1px solid ${palette.gray[6]};
-  border-radius: 1px;
+const buttonStyle = styled.button`
+  border: none;
+  border-radius: 4px;
   font-size: 1rem;
-  padding: 0.3rem 0.8rem;
+  font-weight: bold;
+  padding: 0.25rem 1rem;
   outline: none;
   cursor: pointer;
-  background: white;
-  color: ${palette.gray[6]};
+
+  color: white;
+  background: ${palette.gray[8]};
   &:hover {
-    color: ${palette.gray[5]};
+    background: ${palette.gray[6]};
   }
-  ${(props: TCommonButtonProps) =>
-    props.fullWidth &&
-    css`
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      width: 100%;
-      font-size: 1.125rem;
-    `}
-  ${(props) =>
+
+  ${(props: ButtonProps) =>
     props.cyan &&
     css`
-      border: none;
-      background: ${palette.cyan[5]};
       color: white;
+      background: ${palette.cyan[5]};
       &:hover {
         background: ${palette.cyan[4]};
-        color: white;
       }
     `}
 `;
 
-const StyledButton = styled.button<TCommonButtonProps>`
+const StyledButton = styled.button<ButtonProps>`
   ${buttonStyle}
 `;
 
-const StyledLink = styled(Link)<TCommonButtonProps>`
+const StyledLink = styled(Link)<ButtonProps>`
   ${buttonStyle}
 `;
 
-const Button = (props: TCommonButtonProps) => {
-  return props.to ? (
-    <StyledLink {...props} cyan={props.cyan} />
-  ) : (
-    <StyledButton {...props} />
-  );
+const Button = (props: ButtonProps) => {
+  if (props.to) {
+    return <StyledLink {...props} cyan={props.cyan ? 1 : 0} />;
+  }
+  return <StyledButton {...props} />;
 };
 
 export default Button;

@@ -18,12 +18,12 @@ export type LoginReqType = {
 export type AuthState = {
   register: object;
   login: object;
-  auth: any | null;
+  auth: string | null;
   authError: string | null;
 };
 
 export type UserState = {
-  user: any | null;
+  user: string | null;
   checkError: string | null;
 };
 

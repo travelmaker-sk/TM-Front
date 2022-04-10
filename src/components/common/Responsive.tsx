@@ -6,21 +6,19 @@ type ResponsiveProps = {
 };
 
 const ResponsiveBlock = styled.div`
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: 1024px;
+  padding: 0 1rem;
   margin: 0 auto;
 
-  // 브라우저 크기 지정
-  // PC
-  @media (min-width: 1280px) {
+  // Desktop
+  @media screen and (min-width: 1280px) {
     width: 1320px;
   }
-  @media (max-width: 1279px) {
+  // Tablet
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
     width: 100%;
   }
   // Mobile
-  @media (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     width: 100%;
   }
 `;

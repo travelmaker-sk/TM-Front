@@ -36,10 +36,6 @@ const StyledInput = styled.input`
   }
 `;
 
-const ButtonWithMarginTop = styled(Button)`
-  margin: 2rem 0;
-`;
-
 const Footer = styled.div`
   text-align: right;
   a {
@@ -112,9 +108,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }: AuthFormProps) => {
           />
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <ButtonWithMarginTop cyan fullWidth>
-          {text}
-        </ButtonWithMarginTop>
+        <Button cyan>{text}</Button>
       </form>
       <Footer>
         {type === "login" ? (
