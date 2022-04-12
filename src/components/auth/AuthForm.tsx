@@ -6,9 +6,14 @@ import Button from "../common/Button";
 
 type AuthFormProps = {
   type: "register" | "login";
-  form: string;
-  onChange: () => void;
-  onSubmit: (form: { username: string; password: string }) => void;
+  form: {
+    nickname?: string;
+    username: string;
+    password: string;
+    passwordConfirm?: string;
+  };
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
 };
 

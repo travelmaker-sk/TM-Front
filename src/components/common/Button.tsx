@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 
 type ButtonProps = {
-  to: string;
+  to?: string;
   cyan?: boolean | number;
+  onClick?: () => void;
+  children: string;
 };
 
 const buttonStyle = styled.button`
@@ -44,7 +46,7 @@ const StyledLink = styled(Link)<ButtonProps>`
 
 const Button = (props: ButtonProps) => {
   if (props.to) {
-    return <StyledLink {...props} cyan={props.cyan ? 1 : 0} />;
+    return <StyledLink {...props} to={props.to} cyan={props.cyan ? 1 : 0} />;
   }
   return <StyledButton {...props} />;
 };
