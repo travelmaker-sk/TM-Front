@@ -19,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
   input, button {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: ${palette.gray[9]};
     background-color: transparent;
     border: none;
     outline: none;
@@ -31,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
   }
   img {
     display: block;
-    // width: 100%;
+    width: 100%;
     height: 100%;
   }
 `;

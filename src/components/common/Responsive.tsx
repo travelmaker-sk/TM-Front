@@ -6,7 +6,6 @@ type ResponsiveProps = {
 };
 
 const ResponsiveBlock = styled.div`
-  padding: 0 1rem;
   margin: 0 auto;
 
   // Desktop

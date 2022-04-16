@@ -70,7 +70,7 @@ const RegisterForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
             type="password"
             onChange={onChange}
           />
-          <Button marginBottom={"26px"} cyan fullWidth>
+          <Button marginBottom={"26px"} fontSize={"18px"} cyan fullWidth>
             회원가입
           </Button>
           {error && alert({ error })}

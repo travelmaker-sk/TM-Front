@@ -122,7 +122,7 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
               로그인 유지
             </label>
           </div>
-          <Button marginBottom={"26px"} cyan fullWidth>
+          <Button marginBottom={"26px"} fontSize={"18px"} cyan fullWidth>
             로그인
           </Button>
           {error && alert({ error })}
@@ -134,11 +134,16 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
       </div>
       <span>또는</span>
       <div className="sns-login">
-        <Button background={"#00BF18"} fullWidth>
+        <Button
+          fontSize={"18px"}
+          color={"#fff"}
+          background={"#00BF18"}
+          fullWidth
+        >
           <img src="./images/naver-icon.png" alt="naver-icon" />
           네이버 로그인
         </Button>
-        <Button color={`${palette.gray[9]}`} background={"#FFEB3B"} fullWidth>
+        <Button fontSize={"18px"} background={"#FFEB3B"} fullWidth>
           <img src="./images/kakao-icon.png" alt="kakao-icon" />
           카카오 로그인
         </Button>

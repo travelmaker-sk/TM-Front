@@ -1,15 +1,18 @@
 import React from "react";
-import HeaderContainer from "../containers/common/HeaderContainer";
+import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
-import MainNavContainer from "../containers/Navigation/MainNavContainer";
+import HeaderContainer from "../containers/common/HeaderContainer";
+
+const Wrapeer = styled(Responsive)``;
 
 const PostListPage = () => {
   return (
-    <div>
-      <MainNavContainer />
+    <Wrapeer>
       <HeaderContainer />
-      <div>POST LIST</div>
-    </div>
+      <div style={{ marginTop: "88.3008px" }}>
+        포<br />스<br />트<br />리<br />스<br />트
+      </div>
+    </Wrapeer>
   );
 };
 
