@@ -11,41 +11,91 @@ type AuthFormProps = {
   error: string | null;
 };
 
-const AuthFormBlock = styled.div`
+const LoginFormBlock = styled.div`
   h3 {
-    color: ${palette.gray[6]};
-    margin-bottom: 4rem;
+    margin-bottom: 52px;
+    font-size: 24px;
     text-align: center;
-    font-size: 1.5rem;
   }
-`;
+  .sub-login {
+    font-size: 14px;
+    color: ${palette.gray[5]};
+  }
+  .sub-login-1 {
+    margin-bottom: 26px;
+    > label:last-child {
+      margin-left: 10px;
+    }
+  }
+  .sub-login-2 {
+    margin-bottom: 52px;
+    display: flex;
+    justify-content: space-between;
+    > a:first-child {
+      &:hover {
+        color: ${palette.gray[4]};
+      }
+    }
+    > a:last-child {
+      color: ${palette.cyan[5]};
+      &:hover {
+        color: ${palette.cyan[4]};
+      }
+    }
+  }
+  .sns-login {
+    display: flex;
+    justify-content: space-between;
+    Button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    Button:last-child {
+      margin-left: 15px;
+    }
+    img{
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+  }
+  > span {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: ${palette.gray[5]};
+    margin-bottom: 26px;
+    &::before,
+    &::after {
+      content: "";
+      flex-grow: 1;
+      background: ${palette.gray[5]};
+      height: 0.5px;
+      font-size: 0px;
+      line-height: 0px;
+  }
+  &::before{
+    margin-right: 15px;
+  }
+  &::after{
+    margin-left: 15px;
+  }
 
-const Footer = styled.span`
-  a {
-    color: ${palette.gray[6]};
-    &:hover {
-      color: ${palette.gray[5]};
+  @media screen and (min-width: 768px) and (max-width: 1279px),
+  @media screen and (max-width: 767px){
+    .sns-login {
+      display: block;
+      Button:last-child {
+        margin-left: 0;
+      }
     }
   }
 `;
 
-// const Button = styled.button`
-//   width: 100%;
-//   padding: 10px;
-//   font-size: 18px;
-//   border-radius: 4px;
-//   cursor: pointer;
-
-//   color: white;
-//   background: ${palette.gray[8]};
-//   &:hover {
-//     background: ${palette.gray[6]};
-//   }
-// `;
-
 const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
   return (
-    <AuthFormBlock>
+    <LoginFormBlock>
       <h3>반갑습니다!</h3>
       <form onSubmit={onSubmit}>
         <>
@@ -62,7 +112,7 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
             type="password"
             onChange={onChange}
           />
-          <div>
+          <div className="sub-login sub-login-1">
             <label>
               <input type="checkbox" name="save-id" id="save-id" />
               아이디 저장
@@ -72,24 +122,28 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
               로그인 유지
             </label>
           </div>
-          <Button cyan fullWitdh>
+          <Button marginBottom={"26px"} cyan fullWidth>
             로그인
           </Button>
           {error && alert({ error })}
         </>
       </form>
-      <div>
+      <div className="sub-login sub-login-2">
         <Link to="/register">비밀번호 찾기</Link>
-        <Footer>
-          <Link to="/register">회원가입</Link>
-        </Footer>
+        <Link to="/register">회원가입</Link>
       </div>
       <span>또는</span>
-      <div>
-        <Button>네이버 로그인</Button>
-        <Button>카카오 로그인</Button>
+      <div className="sns-login">
+        <Button background={"#00BF18"} fullWidth>
+          <img src="./images/naver-icon.png" alt="naver-icon" />
+          네이버 로그인
+        </Button>
+        <Button color={`${palette.gray[9]}`} background={"#FFEB3B"} fullWidth>
+          <img src="./images/kakao-icon.png" alt="kakao-icon" />
+          카카오 로그인
+        </Button>
       </div>
-    </AuthFormBlock>
+    </LoginFormBlock>
   );
 };
 

@@ -3,28 +3,31 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 
-type ButtonProps = {
+export type ButtonProps = {
   to?: string;
+  color?: string;
+  background?: string;
+  hover?: string;
+  marginBottom?: string;
   cyan?: boolean | number;
-  fullWitdh?: boolean;
+  fullWidth?: boolean;
   onClick?: () => void;
-  children: string;
+  children: any;
 };
 
 const ButtonStyle = styled.button`
-  border: none;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 18px;
   border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.25rem 1rem;
-  outline: none;
   cursor: pointer;
 
-  color: white;
-  background: ${palette.gray[8]};
+  color: ${(props) => props.color || "#FFF"};
+  background: ${(props) => props.background || `${palette.gray[8]}`};
   &:hover {
-    background: ${palette.gray[6]};
+    background: ${(props) => props.hover};
   }
+  margin-bottom: ${(props) => props.marginBottom};
 
   ${(props: ButtonProps) =>
     props.cyan &&
@@ -37,18 +40,39 @@ const ButtonStyle = styled.button`
     `}
 
   ${(props: ButtonProps) =>
-    props.fullWitdh &&
+    props.fullWidth &&
     css`
       width: 100%;
     `}
 `;
 
-const StyledButton = styled.button<ButtonProps>`
-  ${ButtonStyle}
-`;
+const StyledButton = styled(ButtonStyle)<ButtonProps>``;
 
 const StyledLink = styled(Link)<ButtonProps>`
-  ${ButtonStyle}
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  color: ${(props) => props.color || "#FFF"};
+  background: ${(props) => props.background || `${palette.gray[8]}`};
+
+  ${(props: ButtonProps) =>
+    props.cyan &&
+    css`
+      color: white;
+      background: ${palette.cyan[5]};
+      &:hover {
+        background: ${palette.cyan[4]};
+      }
+    `}
+
+  ${(props: ButtonProps) =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `}
 `;
 
 const Button = (props: ButtonProps) => {

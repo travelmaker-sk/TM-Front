@@ -8,31 +8,31 @@ type AuthTemplateProps = {
 };
 
 const AuthTemplateBlock = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  background: ${palette.gray[2]};
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: ${palette.gray[2]};
 `;
 
 const AuthLogo = styled(Logo)``;
 
 const WhiteBox = styled.div`
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
-  height: 600px;
-  padding: 2rem;
-  width: 60vw;
+  height: 70%;
+  width: 65%;
+  padding: 0 18%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background: white;
+  align-items: space-between;
+  background: #fff;
   border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
+`;
+
+const Spacer = styled.div`
+  height: 10%;
 `;
 
 const AuthTemplate = ({ children }: AuthTemplateProps) => {
@@ -41,6 +41,7 @@ const AuthTemplate = ({ children }: AuthTemplateProps) => {
       <AuthTemplateBlock>
         <AuthLogo />
         <WhiteBox>{children}</WhiteBox>
+        <Spacer />
       </AuthTemplateBlock>
     </>
   );

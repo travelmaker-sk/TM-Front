@@ -14,14 +14,7 @@ const RegisterFormContainer = () => {
     e.preventDefault();
   };
 
-  return (
-    <RegisterForm
-      type="register"
-      onChange={onChange}
-      onSubmit={onSubmit}
-      error={error}
-    />
-  );
+  return <RegisterForm onChange={onChange} onSubmit={onSubmit} error={error} />;
 };
 
 export default RegisterFormContainer;
