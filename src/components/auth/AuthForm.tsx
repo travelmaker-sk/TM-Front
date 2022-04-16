@@ -6,12 +6,6 @@ import Button from "../common/Button";
 
 type AuthFormProps = {
   type: "register" | "login";
-  form: {
-    nickname?: string;
-    username: string;
-    password: string;
-    passwordConfirm?: string;
-  };
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
@@ -64,7 +58,7 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const AuthForm = ({ type, form, onChange, onSubmit, error }: AuthFormProps) => {
+const AuthForm = ({ type, onChange, onSubmit, error }: AuthFormProps) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>
@@ -84,7 +78,6 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }: AuthFormProps) => {
             name="nickname"
             placeholder="닉네임"
             onChange={onChange}
-            value={form.nickname}
           />
         )}
         <StyledInput
@@ -92,7 +85,6 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }: AuthFormProps) => {
           name="username"
           placeholder="아이디"
           onChange={onChange}
-          value={form.username}
         />
         <StyledInput
           autoComplete="current-password"
@@ -100,7 +92,6 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }: AuthFormProps) => {
           placeholder="비밀번호"
           type="password"
           onChange={onChange}
-          value={form.password}
         />
         {type === "register" && (
           <StyledInput
@@ -109,7 +100,6 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }: AuthFormProps) => {
             placeholder="비밀번호 확인"
             type="password"
             onChange={onChange}
-            value={form.passwordConfirm}
           />
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
