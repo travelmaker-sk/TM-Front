@@ -39,7 +39,7 @@ const LoginFormBlock = styled.div`
     > a:last-child {
       color: ${palette.cyan[5]};
       &:hover {
-        color: ${palette.cyan[4]};
+        color: ${palette.cyan[3]};
       }
     }
   }
@@ -122,7 +122,7 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
               로그인 유지
             </label>
           </div>
-          <Button marginBottom={"26px"} fontSize={"18px"} cyan fullWidth>
+          <Button marginBottom={"26px"} fontSize={"18px"} cyan fullwidth>
             로그인
           </Button>
           {error && alert({ error })}
@@ -130,7 +130,7 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
       </form>
       <div className="sub-login sub-login-2">
         <Link to="/register">비밀번호 찾기</Link>
-        <Link to="/register">회원가입</Link>
+        <Link to="/privacyPolicy">회원가입</Link>
       </div>
       <span>또는</span>
       <div className="sns-login">
@@ -138,12 +138,12 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
           fontSize={"18px"}
           color={"#fff"}
           background={"#00BF18"}
-          fullWidth
+          fullwidth
         >
           <img src="./images/naver-icon.png" alt="naver-icon" />
           네이버 로그인
         </Button>
-        <Button fontSize={"18px"} background={"#FFEB3B"} fullWidth>
+        <Button fontSize={"18px"} background={"#FFEB3B"} fullwidth>
           <img src="./images/kakao-icon.png" alt="kakao-icon" />
           카카오 로그인
         </Button>

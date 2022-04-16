@@ -71,7 +71,7 @@ const Header = ({ user, onLogout }: HeaderProps) => {
           </div>
         ) : (
           <div className="right">
-            <Button hover style={{ textDecoration: "underline" }} to="/login">
+            <Button to="/login" hover style={{ textDecoration: "underline" }}>
               로그인
             </Button>
           </div>

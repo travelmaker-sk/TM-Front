@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import RegisterForm from "../../components/auth/RegisterForm";
+import LoginForm from "../../components/auth/LoginForm";
 
-const RegisterFormContainer = () => {
+const LoginContainer = () => {
   const [error, setError] = useState<string | null>(null);
 
   // 인풋 변경 이벤트 핸들러
@@ -14,7 +14,7 @@ const RegisterFormContainer = () => {
     e.preventDefault();
   };
 
-  return <RegisterForm onChange={onChange} onSubmit={onSubmit} error={error} />;
+  return <LoginForm onChange={onChange} onSubmit={onSubmit} error={error} />;
 };
 
-export default RegisterFormContainer;
+export default LoginContainer;

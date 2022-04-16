@@ -20,13 +20,13 @@ const RegisterFormBlock = styled.div`
       font-weight: 600;
     }
   }
-  .sub-login {
+  .sub-register {
     font-size: 14px;
     text-align: right;
     a {
       color: ${palette.cyan[5]};
       &:hover {
-        color: ${palette.cyan[4]};
+        color: ${palette.cyan[3]};
       }
     }
   }
@@ -70,13 +70,13 @@ const RegisterForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
             type="password"
             onChange={onChange}
           />
-          <Button marginBottom={"26px"} fontSize={"18px"} cyan fullWidth>
+          <Button marginBottom={"26px"} fontSize={"18px"} cyan fullwidth>
             회원가입
           </Button>
           {error && alert({ error })}
         </>
       </form>
-      <div className="sub-login">
+      <div className="sub-register">
         <Link to="/login">로그인</Link>
       </div>
     </RegisterFormBlock>

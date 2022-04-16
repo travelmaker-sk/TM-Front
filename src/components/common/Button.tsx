@@ -10,7 +10,8 @@ export type ButtonProps = {
   color?: string;
   background?: string;
   cyan?: boolean | number;
-  fullWidth?: boolean;
+  gray?: boolean | number;
+  fullwidth?: boolean | number;
   hover?: boolean | number;
   onClick?: () => void;
   style?: any;
@@ -38,7 +39,17 @@ const ButtonStyle = styled.button`
     `}
 
   ${(props: ButtonProps) =>
-    props.fullWidth &&
+    props.gray &&
+    css`
+      color: white;
+      background: ${palette.gray[5]};
+      &:hover {
+        background: ${palette.gray[4]};
+      }
+    `}
+
+  ${(props: ButtonProps) =>
+    props.fullwidth &&
     css`
       width: 100%;
     `}
@@ -75,12 +86,22 @@ const StyledLink = styled(Link)<ButtonProps>`
     `}
 
   ${(props: ButtonProps) =>
-    props.fullWidth &&
+    props.gray &&
+    css`
+      color: white;
+      background: ${palette.gray[5]};
+      &:hover {
+        background: ${palette.gray[4]};
+      }
+    `}
+
+  ${(props: ButtonProps) =>
+    props.fullwidth &&
     css`
       width: 100%;
     `}
 
-  ${(props: ButtonProps) =>
+${(props: ButtonProps) =>
     props.hover &&
     css`
       &:hover {
@@ -88,6 +109,7 @@ const StyledLink = styled(Link)<ButtonProps>`
       }
     `}
 `;
+
 const Button = (props: ButtonProps) => {
   if (props.to) {
     return (
@@ -95,7 +117,9 @@ const Button = (props: ButtonProps) => {
         {...props}
         to={props.to}
         cyan={props.cyan ? 1 : 0}
+        gray={props.gray ? 1 : 0}
         hover={props.hover ? 1 : 0}
+        fullwidth={props.fullwidth ? 1 : 0}
       />
     );
   }
