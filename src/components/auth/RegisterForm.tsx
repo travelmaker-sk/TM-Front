@@ -58,7 +58,7 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const AuthForm = ({ type, onChange, onSubmit, error }: AuthFormProps) => {
+const RegisterForm = ({ type, onChange, onSubmit, error }: AuthFormProps) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>
@@ -103,7 +103,9 @@ const AuthForm = ({ type, onChange, onSubmit, error }: AuthFormProps) => {
           />
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <Button cyan>{text}</Button>
+        <Button cyan fullWitdh>
+          {text}
+        </Button>
       </form>
       <Footer>
         {type === "login" ? (
@@ -116,4 +118,4 @@ const AuthForm = ({ type, onChange, onSubmit, error }: AuthFormProps) => {
   );
 };
 
-export default AuthForm;
+export default RegisterForm;

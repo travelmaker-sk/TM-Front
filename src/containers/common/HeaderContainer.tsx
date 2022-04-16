@@ -6,7 +6,7 @@ const HeaderContainer = () => {
 
   return (
     <Header
-      user={{ nickname: "", username: "", password: "" }}
+      user={{ nickname: "", email: "", password: "" }}
       onLogout={onLogout}
     />
   );

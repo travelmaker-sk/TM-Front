@@ -6,11 +6,12 @@ import palette from "../../styles/palette";
 type ButtonProps = {
   to?: string;
   cyan?: boolean | number;
+  fullWitdh?: boolean;
   onClick?: () => void;
   children: string;
 };
 
-const buttonStyle = styled.button`
+const ButtonStyle = styled.button`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -34,14 +35,20 @@ const buttonStyle = styled.button`
         background: ${palette.cyan[4]};
       }
     `}
+
+  ${(props: ButtonProps) =>
+    props.fullWitdh &&
+    css`
+      width: 100%;
+    `}
 `;
 
 const StyledButton = styled.button<ButtonProps>`
-  ${buttonStyle}
+  ${ButtonStyle}
 `;
 
 const StyledLink = styled(Link)<ButtonProps>`
-  ${buttonStyle}
+  ${ButtonStyle}
 `;
 
 const Button = (props: ButtonProps) => {

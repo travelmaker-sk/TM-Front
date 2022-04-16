@@ -6,9 +6,8 @@ import Button from "./Button";
 type HeaderProps = {
   user: {
     nickname: string;
-    username: string;
+    email: string;
     password: string;
-    // passwordConfirm: string;
   };
   onLogout: () => void;
 };

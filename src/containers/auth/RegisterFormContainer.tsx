@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import AuthForm from "../../components/auth/AuthForm";
+import RegisterForm from "../../components/auth/RegisterForm";
 
-const LoginForm = () => {
+const RegisterFormContainer = () => {
   const [error, setError] = useState<string | null>(null);
 
   // 인풋 변경 이벤트 핸들러
@@ -15,8 +15,8 @@ const LoginForm = () => {
   };
 
   return (
-    <AuthForm
-      type="login"
+    <RegisterForm
+      type="register"
       onChange={onChange}
       onSubmit={onSubmit}
       error={error}
@@ -24,4 +24,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterFormContainer;

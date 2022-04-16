@@ -7,6 +7,9 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+  html, body, #root {
+    height: 100%;
+  }
   body{
     font-family: 'Noto Sans KR', sans-serif;
     color: ${palette.gray[9]};
@@ -28,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
   }
   img {
     display: block;
-    width: 100%;
+    // width: 100%;
     height: 100%;
   }
 `;

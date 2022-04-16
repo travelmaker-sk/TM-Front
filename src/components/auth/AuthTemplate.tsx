@@ -20,11 +20,7 @@ const AuthTemplateBlock = styled.div`
   align-items: center;
 `;
 
-const AuthLogo = styled(Logo)`
-  .logo {
-    color: ${palette.gray[4]};
-  }
-`;
+const AuthLogo = styled(Logo)``;
 
 const WhiteBox = styled.div`
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
@@ -39,16 +35,11 @@ const WhiteBox = styled.div`
   border-radius: 2px;
 `;
 
-const Spacer = styled.div`
-  height: 4rem;
-`;
-
 const AuthTemplate = ({ children }: AuthTemplateProps) => {
   return (
     <>
       <AuthTemplateBlock>
         <AuthLogo />
-        <Spacer />
         <WhiteBox>{children}</WhiteBox>
       </AuthTemplateBlock>
     </>

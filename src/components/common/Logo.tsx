@@ -1,16 +1,21 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-const LogoBlock = styled.div`
+const LogoStyle = styled.div`
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
   .logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.125rem;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
     img {
+      width: 40px;
       margin-right: 12px;
     }
   }
@@ -18,12 +23,12 @@ const LogoBlock = styled.div`
 
 const Logo = () => {
   return (
-    <LogoBlock>
+    <LogoStyle>
       <Link to="/" className="logo">
-        <img src="./images/logo.png" alt="logo" width="45px" />
+        <img src="./images/logo.png" alt="logo" />
         Travel Maker
       </Link>
-    </LogoBlock>
+    </LogoStyle>
   );
 };
 
