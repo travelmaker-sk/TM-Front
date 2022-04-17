@@ -2,9 +2,9 @@ import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
-import Button from "../common/Button";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
+import { CyanButtonStyle, SelectButtonStyle } from "../../styles/ButtonStyle";
 
 type LoginProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -13,7 +13,7 @@ type LoginProps = {
 };
 
 const LoginBlock = styled.div`
-  h3 {
+  h2 {
     margin-bottom: 52px;
     font-size: 24px;
     text-align: center;
@@ -43,6 +43,9 @@ const LoginBlock = styled.div`
         color: ${palette.cyan[3]};
       }
     }
+  }
+  .login-btn {
+    margin-bottom: 26px;
   }
   .sns-login {
     display: flex;
@@ -83,34 +86,39 @@ const LoginBlock = styled.div`
       margin-left: 15px;
     }
   }
-
-  @media screen and (min-width: 768px) and (max-width: 1279px),
-    @media screen and (max-width: 767px) {
-    .sns-login {
-      display: block;
-      Button:last-child {
-        margin-left: 0;
-      }
-    }
+  .sns-btn {
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  .naver-btn {
+    color: #fff;
+    background: #00bf18;
+  }
+  .kakao-btn {
+    background: #ffeb3b;
   }
 `;
 
 const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
   return (
     <LoginBlock>
-      <h3>반갑습니다!</h3>
+      <h2>반갑습니다!</h2>
       <form onSubmit={onSubmit}>
         <Input
-          autoComplete="email"
+          type="email"
           name="username"
+          autoComplete="email"
           placeholder="이메일"
           defaultValue={initialUid.current}
         />
         <Input
-          autoComplete="current-password"
-          name="password"
-          placeholder="비밀번호"
           type="password"
+          name="password"
+          autoComplete="current-password"
+          placeholder="비밀번호"
         />
         <div className="sub-login sub-login-1">
           <label>
@@ -123,29 +131,28 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
           </label>
         </div>
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <Button marginbottom={"26px"} fontSize={"18px"} cyan fullwidth>
-          로그인
-        </Button>
+        <CyanButtonStyle>
+          <button type="submit" className="login-btn">
+            로그인
+          </button>
+        </CyanButtonStyle>
       </form>
       <div className="sub-login sub-login-2">
-        <Link to="/findPwAuth">비밀번호 찾기</Link>
+        <Link to="/findPw">비밀번호 찾기</Link>
         <Link to="/privacyPolicy">회원가입</Link>
       </div>
       <span>또는</span>
       <div className="sns-login">
-        <Button
-          fontSize={"18px"}
-          color={"#fff"}
-          background={"#00BF18"}
-          fullwidth
-        >
-          <img src="./images/naver_icon.png" alt="naver" />
-          네이버 로그인
-        </Button>
-        <Button fontSize={"18px"} background={"#FFEB3B"} fullwidth>
-          <img src="./images/kakao_icon.png" alt="kakao" />
-          카카오 로그인
-        </Button>
+        <SelectButtonStyle>
+          <button className="sns-btn naver-btn">
+            <img src="./images/naver_icon.png" alt="naver" />
+            네이버 로그인
+          </button>
+          <button className="sns-btn kakao-btn">
+            <img src="./images/kakao_icon.png" alt="kakao" />
+            카카오 로그인
+          </button>
+        </SelectButtonStyle>
       </div>
     </LoginBlock>
   );

@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
-import Button from "../common/Button";
 import Input from "../common/Input";
+import { CyanButtonStyle } from "../../styles/ButtonStyle";
 
 type RegisterProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -19,6 +19,9 @@ const RegisterBlock = styled.div`
       font-weight: 600;
     }
   }
+  .register-btn {
+    margin-bottom: 26px;
+  }
   .sub-register {
     font-size: 14px;
     text-align: right;
@@ -28,10 +31,6 @@ const RegisterBlock = styled.div`
         color: ${palette.cyan[3]};
       }
     }
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1279px),
-    @media screen and (max-width: 767px) {
   }
 `;
 
@@ -64,15 +63,11 @@ const Register = ({ onSubmit, error }: RegisterProps) => {
           type="password"
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <Button
-          // to="/registerAuth"
-          marginbottom={"26px"}
-          fontSize={"18px"}
-          cyan
-          fullwidth
-        >
-          회원가입
-        </Button>
+        <CyanButtonStyle>
+          <button type="submit" className="register-btn">
+            회원가입
+          </button>
+        </CyanButtonStyle>
       </form>
       <div className="sub-register">
         <Link to="/login">로그인</Link>

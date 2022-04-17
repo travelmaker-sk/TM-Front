@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import {
+  CyanButtonStyle,
+  GrayButtonStyle,
+  SelectButtonStyle,
+} from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import Button from "../common/Button";
-import { SelectButtonStyle } from "./PrivacyPolicy";
 
 const RegisterFinBlock = styled.div`
   .material-icons {
@@ -30,20 +34,16 @@ const RegisterFin = () => {
         <b>회원가입</b>이 완료되었습니다.
       </h3>
       <SelectButtonStyle>
-        <Button
-          // to="/login"
-          cyan
-          fullwidth
-        >
-          로그인하러 가기
-        </Button>
-        <Button
-          // to="/"
-          gray
-          fullwidth
-        >
-          메인으로
-        </Button>
+        <CyanButtonStyle>
+          <button>
+            <Link to="/login">로그인 페이지로 이동</Link>
+          </button>
+        </CyanButtonStyle>
+        <GrayButtonStyle>
+          <button>
+            <Link to="/">메인 페이지로 이동</Link>
+          </button>
+        </GrayButtonStyle>
       </SelectButtonStyle>
     </RegisterFinBlock>
   );

@@ -2,7 +2,9 @@ import React from "react";
 import Header from "../../components/common/Header";
 
 const HeaderForm = () => {
-  const onLogout = () => {};
+  const onLogout = () => {
+    console.log("로그아웃");
+  };
 
   return (
     <Header

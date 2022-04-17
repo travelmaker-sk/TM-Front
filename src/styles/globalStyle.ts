@@ -15,18 +15,20 @@ const GlobalStyle = createGlobalStyle`
     color: ${palette.gray[9]};
   }
   a {
+    font-family: 'Noto Sans KR', sans-serif;
     color: inherit;
     text-decoration: none;
   }
   input, button {
     font-family: 'Noto Sans KR', sans-serif;
-    color: ${palette.gray[9]};
+    font-size: 16px;
+    color: inherit;
     background-color: transparent;
     border: none;
     outline: none;
   }
-  h1, h2, h3, h4, h5, h6{
-    font-family:'Maven Pro', sans-serif;
+  button{
+    cursor: pointer;
   }
   ol, ul, li {
     list-style: none;

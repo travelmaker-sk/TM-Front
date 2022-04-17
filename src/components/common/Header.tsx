@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
-import Button from "./Button";
 import palette from "../../styles/palette";
+import { Link } from "react-router-dom";
 
 type HeaderProps = {
   user: {
@@ -43,6 +43,9 @@ const HeaderBlock = styled.div`
         height: 30px;
       }
     }
+    .link-btn {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -61,23 +64,15 @@ const Header = ({ user, onLogout }: HeaderProps) => {
               <img src="./images/default_profile.png" alt="profileImage" />
               <UserName>반가워요, {user.nickname} 님!</UserName>
             </span>
-            <Button
-              hover={`${palette.gray[6]}`}
-              style={{ textDecoration: "underline" }}
-              onClick={onLogout}
-            >
+            <button className="link-btn" onClick={onLogout}>
               로그아웃
-            </Button>
+            </button>
           </div>
         ) : (
           <div className="right">
-            <Button
-              // to="/login"
-              hover={`${palette.gray[6]}`}
-              style={{ textDecoration: "underline" }}
-            >
+            <Link to="/login" className="link-btn">
               로그인
-            </Button>
+            </Link>
           </div>
         )}
       </HeaderBlock>

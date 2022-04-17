@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import palette from "../../styles/palette";
-import Button from "../common/Button";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
+import { CyanButtonStyle } from "../../styles/ButtonStyle";
 
 type FindPwProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -10,22 +10,17 @@ type FindPwProps = {
 };
 
 const FindPwBlock = styled.div`
-  h3 {
+  h2 {
     margin-bottom: 26px;
     font-size: 24px;
     text-align: center;
   }
-  span {
+  h3 {
     display: block;
     margin-bottom: 104px;
     text-align: center;
     b {
-      cursor: pointer;
-      font-size: 16px;
       color: ${palette.cyan[5]};
-      &:hover {
-        color: ${palette.cyan[4]};
-      }
     }
   }
   Input {
@@ -36,20 +31,16 @@ const FindPwBlock = styled.div`
 const FindPw = ({ onSubmit, error }: FindPwProps) => {
   return (
     <FindPwBlock>
-      <h3>임시 비밀번호 발급</h3>
-      <span>
+      <h2>임시 비밀번호 발급</h2>
+      <h3>
         가입한 <b>이메일 주소</b>를 입력해주세요.
-      </span>
+      </h3>
       <form onSubmit={onSubmit}>
-        <Input name="email" placeholder="이메일" type="text" />
+        <Input type="email" name="email" placeholder="이메일" />
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <Button
-          // to="/findPwComplete"
-          cyan
-          fullwidth
-        >
-          확인
-        </Button>
+        <CyanButtonStyle>
+          <button type="submit">확인</button>
+        </CyanButtonStyle>
       </form>
     </FindPwBlock>
   );
