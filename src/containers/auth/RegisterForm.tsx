@@ -5,7 +5,7 @@ const RegisterForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   // 폼 등록 이벤트 핸들러
-  const onRegister = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.target as HTMLFormElement;
@@ -34,7 +34,7 @@ const RegisterForm = () => {
     // TODO. API 호출
   }, []);
 
-  return <Register onSubmit={onRegister} error={error} />;
+  return <Register onSubmit={onSubmit} error={error} />;
 };
 
 export default RegisterForm;

@@ -4,7 +4,7 @@ import FindPw from "../../components/auth/FindPw";
 const FindPwForm = () => {
   const [error, setError] = useState<string | null>(null);
 
-  const onFindPw = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
@@ -18,7 +18,7 @@ const FindPwForm = () => {
     }
   });
 
-  return <FindPw onSubmit={onFindPw} error={error} />;
+  return <FindPw onSubmit={onSubmit} error={error} />;
 };
 
 export default FindPwForm;

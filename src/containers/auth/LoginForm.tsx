@@ -7,7 +7,7 @@ const LoginForm = () => {
   const initialUid = useRef(localStorage.getItem("tm-saved-id") ?? "");
 
   // 폼 등록 이벤트 핸들러
-  const onLogin = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.target as HTMLFormElement;
@@ -38,7 +38,7 @@ const LoginForm = () => {
     }
   }, [success]);
 
-  return <Login onSubmit={onLogin} initialUid={initialUid} error={error} />;
+  return <Login onSubmit={onSubmit} initialUid={initialUid} error={error} />;
 };
 
 export default LoginForm;
