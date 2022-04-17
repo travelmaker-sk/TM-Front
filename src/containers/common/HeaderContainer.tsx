@@ -8,7 +8,7 @@ const HeaderContainer = () => {
     <Header
       // user={{
       //   nickname: "닉네임예시",
-      //   email: "email1234@google.com",
+      //   username: "username1234@google.com",
       //   password: "pw1234",
       // }}
       user={null}

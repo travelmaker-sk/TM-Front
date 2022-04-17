@@ -7,7 +7,7 @@ import palette from "../../styles/palette";
 type HeaderProps = {
   user: {
     nickname: string;
-    email: string;
+    username: string;
     password: string;
   } | null;
   onLogout: () => void;

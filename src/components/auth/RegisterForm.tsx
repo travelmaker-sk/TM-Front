@@ -5,8 +5,7 @@ import palette from "../../styles/palette";
 import Button from "../common/Button";
 import Input from "../common/Input";
 
-type AuthFormProps = {
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+type RegisterFormProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
 };
@@ -36,7 +35,7 @@ const RegisterFormBlock = styled.div`
   }
 `;
 
-const RegisterForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
+const RegisterForm = ({ onSubmit, error }: RegisterFormProps) => {
   return (
     <RegisterFormBlock>
       <h3>
@@ -44,33 +43,27 @@ const RegisterForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
       </h3>
       <form onSubmit={onSubmit}>
         <>
-          <Input
-            autoComplete="nickname"
-            name="nickname"
-            placeholder="닉네임"
-            onChange={onChange}
-          />
-          <Input
-            autoComplete="email"
-            name="email"
-            placeholder="이메일"
-            onChange={onChange}
-          />
+          <Input autoComplete="nickname" name="nickname" placeholder="닉네임" />
+          <Input autoComplete="username" name="username" placeholder="이메일" />
           <Input
             autoComplete="new-password"
             name="password"
             placeholder="비밀번호"
             type="password"
-            onChange={onChange}
           />
           <Input
             autoComplete="new-password"
             name="passwordConfirm"
             placeholder="비밀번호 확인"
             type="password"
-            onChange={onChange}
           />
-          <Button marginBottom={"26px"} fontSize={"18px"} cyan fullwidth>
+          <Button
+            to="/registerAuth"
+            marginbottom={"26px"}
+            fontSize={"18px"}
+            cyan
+            fullwidth
+          >
             회원가입
           </Button>
           {error && alert({ error })}

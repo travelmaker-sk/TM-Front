@@ -5,7 +5,7 @@ import palette from "../../styles/palette";
 
 export type ButtonProps = {
   to?: string;
-  marginBottom?: string;
+  marginbottom?: string | number;
   fontSize?: string;
   color?: string;
   background?: string;
@@ -23,7 +23,7 @@ const ButtonStyle = styled.button`
   border-radius: 4px;
   cursor: pointer;
 
-  margin-bottom: ${(props) => props.marginBottom};
+  margin-bottom: ${(props) => props.marginbottom};
   font-size: ${(props) => props.fontSize || "16px"};
   color: ${(props) => props.color};
   background-color: ${(props) => props.background};
@@ -53,14 +53,6 @@ const ButtonStyle = styled.button`
     css`
       width: 100%;
     `}
-
-${(props: ButtonProps) =>
-    props.hover &&
-    css`
-      &:hover {
-        color: ${palette.gray[6]};
-      }
-    `}
 `;
 
 const StyledButton = styled(ButtonStyle)<ButtonProps>``;
@@ -70,7 +62,7 @@ const StyledLink = styled(Link)<ButtonProps>`
   border-radius: 4px;
   cursor: pointer;
 
-  margin-bottom: ${(props) => props.marginBottom};
+  margin-bottom: ${(props) => props.marginbottom};
   font-size: ${(props) => props.fontSize || "16px"};
   color: ${(props) => props.color};
   background-color: ${(props) => props.background};
@@ -120,6 +112,7 @@ const Button = (props: ButtonProps) => {
         gray={props.gray ? 1 : 0}
         hover={props.hover ? 1 : 0}
         fullwidth={props.fullwidth ? 1 : 0}
+        marginbottom={props.marginbottom ? 1 : 0}
       />
     );
   }

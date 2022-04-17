@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PrivacyPolicy from "../../components/auth/PrivacyPolicy";
 
 const PrivacyContainer = () => {

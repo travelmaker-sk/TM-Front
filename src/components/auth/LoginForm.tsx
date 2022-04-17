@@ -1,13 +1,13 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 import Button from "../common/Button";
 import Input from "../common/Input";
 
-type AuthFormProps = {
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+type LoginFormProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
+  initialUid: MutableRefObject<string>;
   error: string | null;
 };
 
@@ -46,7 +46,7 @@ const LoginFormBlock = styled.div`
   .sns-login {
     display: flex;
     justify-content: space-between;
-    Button{
+    Button {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -54,7 +54,7 @@ const LoginFormBlock = styled.div`
     Button:last-child {
       margin-left: 15px;
     }
-    img{
+    img {
       width: 20px;
       height: 20px;
       margin-right: 10px;
@@ -74,16 +74,17 @@ const LoginFormBlock = styled.div`
       height: 0.5px;
       font-size: 0px;
       line-height: 0px;
-  }
-  &::before{
-    margin-right: 15px;
-  }
-  &::after{
-    margin-left: 15px;
+    }
+    &::before {
+      margin-right: 15px;
+    }
+    &::after {
+      margin-left: 15px;
+    }
   }
 
   @media screen and (min-width: 768px) and (max-width: 1279px),
-  @media screen and (max-width: 767px){
+    @media screen and (max-width: 767px) {
     .sns-login {
       display: block;
       Button:last-child {
@@ -93,7 +94,7 @@ const LoginFormBlock = styled.div`
   }
 `;
 
-const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
+const LoginForm = ({ onSubmit, initialUid, error }: LoginFormProps) => {
   return (
     <LoginFormBlock>
       <h3>반갑습니다!</h3>
@@ -101,16 +102,15 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
         <>
           <Input
             autoComplete="email"
-            name="email"
+            name="username"
             placeholder="이메일"
-            onChange={onChange}
+            defaultValue={initialUid.current}
           />
           <Input
             autoComplete="current-password"
             name="password"
             placeholder="비밀번호"
             type="password"
-            onChange={onChange}
           />
           <div className="sub-login sub-login-1">
             <label>
@@ -122,14 +122,14 @@ const LoginForm = ({ onChange, onSubmit, error }: AuthFormProps) => {
               로그인 유지
             </label>
           </div>
-          <Button marginBottom={"26px"} fontSize={"18px"} cyan fullwidth>
+          <Button marginbottom={"26px"} fontSize={"18px"} cyan fullwidth>
             로그인
           </Button>
           {error && alert({ error })}
         </>
       </form>
       <div className="sub-login sub-login-2">
-        <Link to="/register">비밀번호 찾기</Link>
+        <Link to="/findPwAuth">비밀번호 찾기</Link>
         <Link to="/privacyPolicy">회원가입</Link>
       </div>
       <span>또는</span>

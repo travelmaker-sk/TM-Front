@@ -5,7 +5,7 @@ const InputStyle = styled.input`
   display: block;
   width: 100%;
   margin-bottom: 26px;
-  padding-bottom: 13px;
+  padding: 0 16px 13px;
   border-bottom: 1px solid ${palette.gray[6]};
   &:focus {
     border-bottom: 1px solid ${palette.cyan[5]};

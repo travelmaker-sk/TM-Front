@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import RegisterForm from "../../components/auth/RegisterForm";
 
 const RegisterContainer = () => {
   const [error, setError] = useState<string | null>(null);
 
-  // 인풋 변경 이벤트 핸들러
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-  };
-
   // 폼 등록 이벤트 핸들러
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onRegister = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  };
 
-  return <RegisterForm onChange={onChange} onSubmit={onSubmit} error={error} />;
+    const form = e.target as HTMLFormElement;
+    const $inputs = Array.from(form.querySelectorAll("input"));
+
+    const [inputNickname, inputUsername, inputPw, inputPwConfirm] = $inputs.map(
+      ($input) => $input.value
+    );
+    console.log("nickname:", inputNickname);
+    console.log("username:", inputUsername);
+    console.log("password:", inputPw);
+    console.log("passwordConfirm:", inputPwConfirm);
+
+    // TODO. API 호출
+  }, []);
+
+  return <RegisterForm onSubmit={onRegister} error={error} />;
 };
 
 export default RegisterContainer;
