@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import LoginForm from "../../components/auth/LoginForm";
 
 const LoginContainer = () => {
@@ -27,6 +27,16 @@ const LoginContainer = () => {
       localStorage.setItem("tm-saved-id", inputUsername as string);
     if (checkKeepLogin) localStorage.setItem("tm-token", "some_token");
   }, []);
+
+  let success = true;
+  useEffect(() => {
+    if (success === false) {
+      setError("아이디나 비밀번호가 일치하지 않습니다.");
+      return;
+    } else {
+      setError("");
+    }
+  }, [success]);
 
   return <LoginForm onSubmit={onLogin} initialUid={initialUid} error={error} />;
 };

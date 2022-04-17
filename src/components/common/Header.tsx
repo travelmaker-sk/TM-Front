@@ -58,11 +58,11 @@ const Header = ({ user, onLogout }: HeaderProps) => {
         {user ? (
           <div className="right">
             <span className="user-info">
-              <img src="./images/profileImage-ex.jpg" alt="profileImage" />
+              <img src="./images/default_profile.png" alt="profileImage" />
               <UserName>반가워요, {user.nickname} 님!</UserName>
             </span>
             <Button
-              hover
+              hover={`${palette.gray[6]}`}
               style={{ textDecoration: "underline" }}
               onClick={onLogout}
             >
@@ -71,7 +71,11 @@ const Header = ({ user, onLogout }: HeaderProps) => {
           </div>
         ) : (
           <div className="right">
-            <Button to="/login" hover style={{ textDecoration: "underline" }}>
+            <Button
+              // to="/login"
+              hover={`${palette.gray[6]}`}
+              style={{ textDecoration: "underline" }}
+            >
               로그인
             </Button>
           </div>

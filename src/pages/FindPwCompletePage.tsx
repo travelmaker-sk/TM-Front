@@ -1,11 +1,11 @@
 import React from "react";
 import AuthTemplate from "../components/auth/AuthTemplate";
-import FindPwComplete from "../components/auth/FindPwComplete";
+import FindPwCompleteContainer from "../containers/auth/FindPwCompleteContainer";
 
 const FindPwCompletePage = () => {
   return (
     <AuthTemplate>
-      <FindPwComplete />
+      <FindPwCompleteContainer />
     </AuthTemplate>
   );
 };

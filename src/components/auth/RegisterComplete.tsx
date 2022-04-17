@@ -9,7 +9,7 @@ const RegisterCompleteBlock = styled.div`
     margin-bottom: 52px;
     font-size: 32px;
     text-align: center;
-    color: ${palette.gray[6]};
+    color: ${palette.gray[5]};
     font-weight: 900;
   }
   h3 {
@@ -30,10 +30,18 @@ const RegisterComplete = () => {
         <b>회원가입</b>이 완료되었습니다.
       </h3>
       <SelectButtonStyle>
-        <Button to="/login" cyan fullwidth>
+        <Button
+          // to="/login"
+          cyan
+          fullwidth
+        >
           로그인하러 가기
         </Button>
-        <Button to="/" gray fullwidth>
+        <Button
+          // to="/"
+          gray
+          fullwidth
+        >
           메인으로
         </Button>
       </SelectButtonStyle>

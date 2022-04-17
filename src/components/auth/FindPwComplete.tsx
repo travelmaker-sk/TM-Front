@@ -1,8 +1,13 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { SelectButtonStyle } from "./PrivacyPolicy";
+
+type FindPwCompleteProps = {
+  reSubmit: React.FormEventHandler<HTMLFormElement>;
+};
 
 const FindPwCompleteBlock = styled.div`
   .material-icons {
@@ -10,7 +15,7 @@ const FindPwCompleteBlock = styled.div`
     margin-bottom: 52px;
     font-size: 32px;
     text-align: center;
-    color: ${palette.gray[6]};
+    color: ${palette.gray[5]};
   }
   h3 {
     margin-bottom: 26px;
@@ -25,7 +30,7 @@ const FindPwCompleteBlock = styled.div`
     margin-bottom: 104px;
     text-align: center;
     button {
-      margin: 0 0 0 10px;
+      margin: 0 0 0 5px;
       padding: 0;
       cursor: pointer;
       font-size: 16px;
@@ -37,7 +42,7 @@ const FindPwCompleteBlock = styled.div`
   }
 `;
 
-const FindPwComplete = () => {
+const FindPwComplete = ({ reSubmit }: FindPwCompleteProps) => {
   return (
     <FindPwCompleteBlock>
       <div className="material-icons">mail_outline</div>
@@ -46,13 +51,26 @@ const FindPwComplete = () => {
       </h3>
       <span>
         이메일이 도착하지 않았나요?
-        <button>재전송</button>
+        <Link
+          to="/findPwComplete"
+          // onClick={reSubmit}
+        >
+          재전송
+        </Link>
       </span>
       <SelectButtonStyle>
-        <Button to="/login" cyan fullwidth>
+        <Button
+          // to="/login"
+          cyan
+          fullwidth
+        >
           로그인하러 가기
         </Button>
-        <Button to="/" gray fullwidth>
+        <Button
+          // to="/"
+          gray
+          fullwidth
+        >
           메인으로
         </Button>
       </SelectButtonStyle>

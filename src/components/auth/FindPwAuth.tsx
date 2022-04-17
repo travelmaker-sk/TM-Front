@@ -2,6 +2,12 @@ import styled from "styled-components";
 import palette from "../../styles/palette";
 import Button from "../common/Button";
 import Input from "../common/Input";
+import { ErrorMessage } from "./RegisterForm";
+
+type FindPwProps = {
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  error: string | null;
+};
 
 const FindPwAuthBlock = styled.div`
   h3 {
@@ -23,21 +29,28 @@ const FindPwAuthBlock = styled.div`
     }
   }
   Input {
-    margin-bottom: 104px;
+    margin-bottom: 52px;
   }
 `;
 
-const FindPwAuth = () => {
+const FindPwAuth = ({ onSubmit, error }: FindPwProps) => {
   return (
     <FindPwAuthBlock>
       <h3>임시 비밀번호 발급</h3>
       <span>
         가입한 <b>이메일 주소</b>를 입력해주세요.
       </span>
-      <Input name="emailAuthCode" placeholder="이메일" type="text" />
-      <Button to="/findPwComplete" cyan fullwidth>
-        확인
-      </Button>
+      <form onSubmit={onSubmit}>
+        <Input name="email" placeholder="이메일" type="text" />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <Button
+          // to="/findPwComplete"
+          cyan
+          fullwidth
+        >
+          확인
+        </Button>
+      </form>
     </FindPwAuthBlock>
   );
 };

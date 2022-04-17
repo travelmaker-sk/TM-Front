@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 import Button from "../common/Button";
 import Input from "../common/Input";
+import { ErrorMessage } from "./RegisterForm";
 
 type LoginFormProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -99,34 +100,32 @@ const LoginForm = ({ onSubmit, initialUid, error }: LoginFormProps) => {
     <LoginFormBlock>
       <h3>반갑습니다!</h3>
       <form onSubmit={onSubmit}>
-        <>
-          <Input
-            autoComplete="email"
-            name="username"
-            placeholder="이메일"
-            defaultValue={initialUid.current}
-          />
-          <Input
-            autoComplete="current-password"
-            name="password"
-            placeholder="비밀번호"
-            type="password"
-          />
-          <div className="sub-login sub-login-1">
-            <label>
-              <input type="checkbox" name="save-id" id="save-id" />
-              아이디 저장
-            </label>
-            <label>
-              <input type="checkbox" name="save-id" id="keep-login" />
-              로그인 유지
-            </label>
-          </div>
-          <Button marginbottom={"26px"} fontSize={"18px"} cyan fullwidth>
-            로그인
-          </Button>
-          {error && alert({ error })}
-        </>
+        <Input
+          autoComplete="email"
+          name="username"
+          placeholder="이메일"
+          defaultValue={initialUid.current}
+        />
+        <Input
+          autoComplete="current-password"
+          name="password"
+          placeholder="비밀번호"
+          type="password"
+        />
+        <div className="sub-login sub-login-1">
+          <label>
+            <input type="checkbox" name="save-id" id="save-id" />
+            아이디 저장
+          </label>
+          <label>
+            <input type="checkbox" name="save-id" id="keep-login" />
+            로그인 유지
+          </label>
+        </div>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <Button marginbottom={"26px"} fontSize={"18px"} cyan fullwidth>
+          로그인
+        </Button>
       </form>
       <div className="sub-login sub-login-2">
         <Link to="/findPwAuth">비밀번호 찾기</Link>
@@ -140,11 +139,11 @@ const LoginForm = ({ onSubmit, initialUid, error }: LoginFormProps) => {
           background={"#00BF18"}
           fullwidth
         >
-          <img src="./images/naver-icon.png" alt="naver-icon" />
+          <img src="./images/naver_icon.png" alt="naver" />
           네이버 로그인
         </Button>
         <Button fontSize={"18px"} background={"#FFEB3B"} fullwidth>
-          <img src="./images/kakao-icon.png" alt="kakao-icon" />
+          <img src="./images/kakao_icon.png" alt="kakao" />
           카카오 로그인
         </Button>
       </div>

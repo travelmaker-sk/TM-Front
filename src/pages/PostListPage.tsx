@@ -9,9 +9,8 @@ const PostListPage = () => {
   return (
     <Wrapeer>
       <HeaderContainer />
-      <div style={{ marginTop: "88.3008px" }}>
-        포<br />스<br />트<br />리<br />스<br />트
-      </div>
+      <img src="./images/bg_1.png" alt="bg" />
+      <img src="./images/bg_2.png" alt="bg" />
     </Wrapeer>
   );
 };

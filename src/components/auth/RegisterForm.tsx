@@ -35,6 +35,13 @@ const RegisterFormBlock = styled.div`
   }
 `;
 
+export const ErrorMessage = styled.div`
+  margin-bottom: 26px;
+  color: red;
+  text-align: center;
+  font-size: 14px;
+`;
+
 const RegisterForm = ({ onSubmit, error }: RegisterFormProps) => {
   return (
     <RegisterFormBlock>
@@ -42,32 +49,30 @@ const RegisterForm = ({ onSubmit, error }: RegisterFormProps) => {
         <b>트레블메이커</b>와 함께 하세요!
       </h3>
       <form onSubmit={onSubmit}>
-        <>
-          <Input autoComplete="nickname" name="nickname" placeholder="닉네임" />
-          <Input autoComplete="username" name="username" placeholder="이메일" />
-          <Input
-            autoComplete="new-password"
-            name="password"
-            placeholder="비밀번호"
-            type="password"
-          />
-          <Input
-            autoComplete="new-password"
-            name="passwordConfirm"
-            placeholder="비밀번호 확인"
-            type="password"
-          />
-          <Button
-            to="/registerAuth"
-            marginbottom={"26px"}
-            fontSize={"18px"}
-            cyan
-            fullwidth
-          >
-            회원가입
-          </Button>
-          {error && alert({ error })}
-        </>
+        <Input autoComplete="nickname" name="nickname" placeholder="닉네임" />
+        <Input autoComplete="username" name="username" placeholder="이메일" />
+        <Input
+          autoComplete="new-password"
+          name="password"
+          placeholder="비밀번호"
+          type="password"
+        />
+        <Input
+          autoComplete="new-password"
+          name="passwordConfirm"
+          placeholder="비밀번호 확인"
+          type="password"
+        />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <Button
+          // to="/registerAuth"
+          marginbottom={"26px"}
+          fontSize={"18px"}
+          cyan
+          fullwidth
+        >
+          회원가입
+        </Button>
       </form>
       <div className="sub-register">
         <Link to="/login">로그인</Link>

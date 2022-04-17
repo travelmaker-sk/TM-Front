@@ -48,10 +48,18 @@ const PrivacyPolicy = () => {
         다<br />
       </div>
       <SelectButtonStyle>
-        <Button to="/register" cyan fullwidth>
+        <Button
+          // to="/register"
+          cyan
+          fullwidth
+        >
           ✓ 동의
         </Button>
-        <Button to="/" gray fullwidth>
+        <Button
+          // to="/"
+          gray
+          fullwidth
+        >
           취소
         </Button>
       </SelectButtonStyle>

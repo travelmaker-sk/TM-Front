@@ -19,6 +19,18 @@ const RegisterContainer = () => {
     console.log("password:", inputPw);
     console.log("passwordConfirm:", inputPwConfirm);
 
+    if ([inputNickname, inputUsername, inputPw, inputPwConfirm].includes("")) {
+      console.log("에러 발생");
+      setError("빈 칸을 모두 입력하세요.");
+      return;
+    } else if (inputPw !== inputPwConfirm) {
+      console.log("에러 발생");
+      setError("비밀번호가 일치하지 않습니다.");
+      return;
+    } else {
+      setError(null);
+    }
+
     // TODO. API 호출
   }, []);
 
