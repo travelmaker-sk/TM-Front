@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 import Button from "../common/Button";
 import Input from "../common/Input";
-import { ErrorMessage } from "./RegisterForm";
+import { ErrorMessage } from "./Register";
 
-type LoginFormProps = {
+type LoginProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   initialUid: MutableRefObject<string>;
   error: string | null;
 };
 
-const LoginFormBlock = styled.div`
+const LoginBlock = styled.div`
   h3 {
     margin-bottom: 52px;
     font-size: 24px;
@@ -95,9 +95,9 @@ const LoginFormBlock = styled.div`
   }
 `;
 
-const LoginForm = ({ onSubmit, initialUid, error }: LoginFormProps) => {
+const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
   return (
-    <LoginFormBlock>
+    <LoginBlock>
       <h3>반갑습니다!</h3>
       <form onSubmit={onSubmit}>
         <Input
@@ -147,8 +147,8 @@ const LoginForm = ({ onSubmit, initialUid, error }: LoginFormProps) => {
           카카오 로그인
         </Button>
       </div>
-    </LoginFormBlock>
+    </LoginBlock>
   );
 };
 
-export default LoginForm;
+export default Login;

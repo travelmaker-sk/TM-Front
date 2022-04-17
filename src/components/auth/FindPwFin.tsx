@@ -5,11 +5,11 @@ import Button from "../common/Button";
 import Input from "../common/Input";
 import { SelectButtonStyle } from "./PrivacyPolicy";
 
-type FindPwCompleteProps = {
+type FindPwFinProps = {
   reSubmit: React.FormEventHandler<HTMLFormElement>;
 };
 
-const FindPwCompleteBlock = styled.div`
+const FindPwFinBlock = styled.div`
   .material-icons {
     display: block;
     margin-bottom: 52px;
@@ -42,9 +42,9 @@ const FindPwCompleteBlock = styled.div`
   }
 `;
 
-const FindPwComplete = ({ reSubmit }: FindPwCompleteProps) => {
+const FindPwFin = ({ reSubmit }: FindPwFinProps) => {
   return (
-    <FindPwCompleteBlock>
+    <FindPwFinBlock>
       <div className="material-icons">mail_outline</div>
       <h3>
         <b>이메일 인증 코드</b>가 발송되었습니다.
@@ -52,7 +52,7 @@ const FindPwComplete = ({ reSubmit }: FindPwCompleteProps) => {
       <span>
         이메일이 도착하지 않았나요?
         <Link
-          to="/findPwComplete"
+          to="/findPwFin"
           // onClick={reSubmit}
         >
           재전송
@@ -74,8 +74,8 @@ const FindPwComplete = ({ reSubmit }: FindPwCompleteProps) => {
           메인으로
         </Button>
       </SelectButtonStyle>
-    </FindPwCompleteBlock>
+    </FindPwFinBlock>
   );
 };
 
-export default FindPwComplete;
+export default FindPwFin;

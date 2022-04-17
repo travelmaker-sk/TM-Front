@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/common/Header";
 
-const HeaderContainer = () => {
+const HeaderForm = () => {
   const onLogout = () => {};
 
   return (
@@ -17,4 +17,4 @@ const HeaderContainer = () => {
   );
 };
 
-export default HeaderContainer;
+export default HeaderForm;

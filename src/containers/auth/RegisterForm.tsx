@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
-import RegisterForm from "../../components/auth/RegisterForm";
+import Register from "../../components/auth/Register";
 
-const RegisterContainer = () => {
+const RegisterForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   // 폼 등록 이벤트 핸들러
@@ -34,7 +34,7 @@ const RegisterContainer = () => {
     // TODO. API 호출
   }, []);
 
-  return <RegisterForm onSubmit={onRegister} error={error} />;
+  return <Register onSubmit={onRegister} error={error} />;
 };
 
-export default RegisterContainer;
+export default RegisterForm;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RegisterAuth from "../../components/auth/RegisterAuth";
 
-const RegisterAuthContainer = () => {
+const RegisterAuthForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   const onRegisterAuth = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,4 +21,4 @@ const RegisterAuthContainer = () => {
   );
 };
 
-export default RegisterAuthContainer;
+export default RegisterAuthForm;

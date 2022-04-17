@@ -16,8 +16,6 @@ const AuthTemplateBlock = styled.div`
   background: ${palette.gray[2]};
 `;
 
-const AuthLogo = styled(Logo)``;
-
 const WhiteBox = styled.div`
   height: 70%;
   width: 65%;
@@ -39,7 +37,7 @@ const AuthTemplate = ({ children }: AuthTemplateProps) => {
   return (
     <>
       <AuthTemplateBlock>
-        <AuthLogo />
+        <Logo />
         <WhiteBox>{children}</WhiteBox>
         <Spacer />
       </AuthTemplateBlock>

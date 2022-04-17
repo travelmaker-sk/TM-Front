@@ -3,7 +3,7 @@ import palette from "../../styles/palette";
 import Button from "../common/Button";
 import { SelectButtonStyle } from "./PrivacyPolicy";
 
-const RegisterCompleteBlock = styled.div`
+const RegisterFinBlock = styled.div`
   .material-icons {
     display: block;
     margin-bottom: 52px;
@@ -22,9 +22,9 @@ const RegisterCompleteBlock = styled.div`
   }
 `;
 
-const RegisterComplete = () => {
+const RegisterFin = () => {
   return (
-    <RegisterCompleteBlock>
+    <RegisterFinBlock>
       <div className="material-icons">done</div>
       <h3>
         <b>회원가입</b>이 완료되었습니다.
@@ -45,8 +45,8 @@ const RegisterComplete = () => {
           메인으로
         </Button>
       </SelectButtonStyle>
-    </RegisterCompleteBlock>
+    </RegisterFinBlock>
   );
 };
 
-export default RegisterComplete;
+export default RegisterFin;

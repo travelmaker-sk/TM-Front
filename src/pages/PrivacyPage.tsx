@@ -1,11 +1,11 @@
 import React from "react";
 import AuthTemplate from "../components/auth/AuthTemplate";
-import PrivacyContainer from "../containers/auth/PrivacyContainer";
+import PrivacyForm from "../containers/auth/PrivacyForm";
 
 const PrivacyPage = () => {
   return (
     <AuthTemplate>
-      <PrivacyContainer />
+      <PrivacyForm />
     </AuthTemplate>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import FindPwAuth from "../../components/auth/FindPwAuth";
+import FindPw from "../../components/auth/FindPw";
 
-const FindPwContainer = () => {
+const FindPwForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   const onFindPw = (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,7 +18,7 @@ const FindPwContainer = () => {
     }
   });
 
-  return <FindPwAuth onSubmit={onFindPw} error={error} />;
+  return <FindPw onSubmit={onFindPw} error={error} />;
 };
 
-export default FindPwContainer;
+export default FindPwForm;

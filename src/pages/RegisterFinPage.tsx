@@ -1,11 +1,11 @@
 import React from "react";
 import AuthTemplate from "../components/auth/AuthTemplate";
-import RegisterComplete from "../components/auth/RegisterComplete";
+import RegisterFin from "../components/auth/RegisterFin";
 
 const RegisterCompletePage = () => {
   return (
     <AuthTemplate>
-      <RegisterComplete />
+      <RegisterFin />
     </AuthTemplate>
   );
 };

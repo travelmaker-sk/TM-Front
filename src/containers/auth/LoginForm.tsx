@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import LoginForm from "../../components/auth/LoginForm";
+import Login from "../../components/auth/Login";
 
-const LoginContainer = () => {
+const LoginForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   const initialUid = useRef(localStorage.getItem("tm-saved-id") ?? "");
@@ -38,7 +38,7 @@ const LoginContainer = () => {
     }
   }, [success]);
 
-  return <LoginForm onSubmit={onLogin} initialUid={initialUid} error={error} />;
+  return <Login onSubmit={onLogin} initialUid={initialUid} error={error} />;
 };
 
-export default LoginContainer;
+export default LoginForm;

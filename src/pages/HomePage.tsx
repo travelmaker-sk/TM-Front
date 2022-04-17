@@ -1,14 +1,14 @@
 import React from "react";
 import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
-import HeaderContainer from "../containers/common/HeaderContainer";
+import HeaderForm from "../containers/common/HeaderForm";
 
 const Wrapeer = styled(Responsive)``;
 
 const PostListPage = () => {
   return (
     <Wrapeer>
-      <HeaderContainer />
+      <HeaderForm />
       <img src="./images/bg_1.png" alt="bg" />
       <img src="./images/bg_2.png" alt="bg" />
     </Wrapeer>

@@ -5,12 +5,12 @@ import palette from "../../styles/palette";
 import Button from "../common/Button";
 import Input from "../common/Input";
 
-type RegisterFormProps = {
+type RegisterProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
 };
 
-const RegisterFormBlock = styled.div`
+const RegisterBlock = styled.div`
   h3 {
     margin-bottom: 52px;
     font-size: 24px;
@@ -42,9 +42,9 @@ export const ErrorMessage = styled.div`
   font-size: 14px;
 `;
 
-const RegisterForm = ({ onSubmit, error }: RegisterFormProps) => {
+const Register = ({ onSubmit, error }: RegisterProps) => {
   return (
-    <RegisterFormBlock>
+    <RegisterBlock>
       <h3>
         <b>트레블메이커</b>와 함께 하세요!
       </h3>
@@ -77,8 +77,8 @@ const RegisterForm = ({ onSubmit, error }: RegisterFormProps) => {
       <div className="sub-register">
         <Link to="/login">로그인</Link>
       </div>
-    </RegisterFormBlock>
+    </RegisterBlock>
   );
 };
 
-export default RegisterForm;
+export default Register;

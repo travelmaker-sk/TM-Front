@@ -3,7 +3,7 @@ import styled from "styled-components";
 import palette from "../../styles/palette";
 import Button from "../common/Button";
 import Input from "../common/Input";
-import { ErrorMessage } from "./RegisterForm";
+import { ErrorMessage } from "./Register";
 
 type RegisterAuthProps = {
   reSubmit: React.FormEventHandler<HTMLFormElement>;
