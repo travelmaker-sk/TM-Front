@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
+import { Link } from "react-router-dom";
 
 type RegisterProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;

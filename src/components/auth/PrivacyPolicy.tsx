@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
   CyanButtonStyle,
   GrayButtonStyle,
+  LinkButton,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
@@ -51,12 +51,12 @@ const PrivacyPolicy = () => {
       <SelectButtonStyle>
         <CyanButtonStyle>
           <button>
-            <Link to="/register">✓ 동의</Link>
+            <LinkButton to="/register">✓ 동의</LinkButton>
           </button>
         </CyanButtonStyle>
         <GrayButtonStyle>
           <button>
-            <Link to="/">취소</Link>
+            <LinkButton to="/">취소</LinkButton>
           </button>
         </GrayButtonStyle>
       </SelectButtonStyle>

@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import {
   CyanButtonStyle,
   GrayButtonStyle,
+  LinkButton,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
+import { Link } from "react-router-dom";
 
 type FindPwAuthProps = {
   reSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -67,12 +68,12 @@ const FindPwAuth = ({ reSubmit }: FindPwAuthProps) => {
       <SelectButtonStyle>
         <CyanButtonStyle>
           <button>
-            <Link to="/login">로그인 페이지로 이동</Link>
+            <LinkButton to="/login">로그인 페이지로 이동</LinkButton>
           </button>
         </CyanButtonStyle>
         <GrayButtonStyle>
           <button>
-            <Link to="/">메인 페이지로 이동</Link>
+            <LinkButton to="/">메인 페이지로 이동</LinkButton>
           </button>
         </GrayButtonStyle>
       </SelectButtonStyle>

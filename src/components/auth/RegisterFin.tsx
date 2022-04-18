@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
   CyanButtonStyle,
   GrayButtonStyle,
+  LinkButton,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
@@ -36,12 +36,12 @@ const RegisterFin = () => {
       <SelectButtonStyle>
         <CyanButtonStyle>
           <button>
-            <Link to="/login">로그인 페이지로 이동</Link>
+            <LinkButton to="/login">로그인 페이지로 이동</LinkButton>
           </button>
         </CyanButtonStyle>
         <GrayButtonStyle>
           <button>
-            <Link to="/">메인 페이지로 이동</Link>
+            <LinkButton to="/">메인 페이지로 이동</LinkButton>
           </button>
         </GrayButtonStyle>
       </SelectButtonStyle>

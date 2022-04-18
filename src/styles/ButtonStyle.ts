@@ -1,6 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import palette from "./palette";
+
+export const LinkButton = styled(Link)`
+  display: block;
+  width: 100%;
+`;
 
 export const GlobalButtonStyle = styled.div`
   > button {

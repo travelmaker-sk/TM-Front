@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { LinkButton } from "../../styles/ButtonStyle";
 
 const LogoStyle = styled.div`
   height: 20%;
@@ -35,10 +35,10 @@ const LogoStyle = styled.div`
 const Logo = () => {
   return (
     <LogoStyle>
-      <Link to="/" className="logo">
+      <LinkButton to="/" className="logo">
         <img src="./images/logo.png" alt="logo" />
         Travel Maker
-      </Link>
+      </LinkButton>
     </LogoStyle>
   );
 };

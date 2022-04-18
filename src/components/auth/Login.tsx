@@ -1,10 +1,10 @@
 import React, { MutableRefObject } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
 import { CyanButtonStyle, SelectButtonStyle } from "../../styles/ButtonStyle";
+import { Link } from "react-router-dom";
 
 type LoginProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
