@@ -26,6 +26,10 @@ const PrivacyBlock = styled.div`
     height: 300px;
     margin-bottom: 52px;
     overflow-y: scroll;
+    // Mobile
+    @media screen and (max-width: 767px) {
+      height: 130px;
+    }
   }
 `;
 

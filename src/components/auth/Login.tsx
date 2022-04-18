@@ -99,6 +99,7 @@ const LoginBlock = styled.div`
   }
   .kakao-btn {
     background: #ffeb3b;
+    margin-left: 0 !important;
   }
 `;
 

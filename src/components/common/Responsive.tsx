@@ -15,10 +15,12 @@ const ResponsiveBlock = styled.div`
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     width: 100%;
+    padding: 0 5%;
   }
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
+    padding: 0 5%;
   }
 `;
 

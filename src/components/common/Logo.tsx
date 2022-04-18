@@ -19,6 +19,17 @@ const LogoStyle = styled.div`
       margin-right: 12px;
     }
   }
+
+  // Mobile
+  @media screen and (max-width: 767px) {
+    height: 15%;
+    // font-size: 16px; // HeaderLogo
+    .logo {
+      img {
+        width: 30px;
+      }
+    }
+  }
 `;
 
 const Logo = () => {

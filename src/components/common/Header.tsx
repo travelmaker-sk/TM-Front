@@ -38,19 +38,41 @@ const HeaderBlock = styled.div`
       justify-content: center;
       align-items: center;
       margin-right: 15px;
+      // Mobile
+      @media screen and (max-width: 767px) {
+        margin-right: 10px;
+      }
       img {
         width: 30px;
-        height: 30px;
+        // Mobile
+        @media screen and (max-width: 767px) {
+          width: 20px;
+        }
       }
     }
     .link-btn {
       text-decoration: underline;
     }
   }
+
+  // Tablet
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    width: 100%;
+    padding: 20px 5%;
+  }
+  // Mobile
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    padding: 10px 5%;
+  }
 `;
 
 const UserName = styled.div`
   margin-left: 10px;
+  // Mobile
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 
 const Header = ({ user, onLogout }: HeaderProps) => {

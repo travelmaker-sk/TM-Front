@@ -16,7 +16,7 @@ const RegisterFinBlock = styled.div`
     color: ${palette.gray[5]};
     font-weight: 900;
   }
-  h3 {
+  h2 {
     margin-bottom: 104px;
     font-size: 24px;
     text-align: center;
@@ -30,9 +30,9 @@ const RegisterFin = () => {
   return (
     <RegisterFinBlock>
       <div className="material-icons">done</div>
-      <h3>
+      <h2>
         <b>회원가입</b>이 완료되었습니다.
-      </h3>
+      </h2>
       <SelectButtonStyle>
         <CyanButtonStyle>
           <button>

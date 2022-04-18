@@ -22,6 +22,16 @@ export const SelectButtonStyle = styled.div`
   > *:last-child {
     margin-left: 15px;
   }
+  // Mobile
+  @media screen and (max-width: 767px) {
+    display: block;
+    > *:first-child {
+      margin-bottom: 13px;
+    }
+    > *:last-child {
+      margin-left: 0;
+    }
+  }
 `;
 
 export const CyanButtonStyle = styled(GlobalButtonStyle)`

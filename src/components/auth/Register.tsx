@@ -11,7 +11,7 @@ type RegisterProps = {
 };
 
 const RegisterBlock = styled.div`
-  h3 {
+  h2 {
     margin-bottom: 52px;
     font-size: 24px;
     text-align: center;
@@ -44,9 +44,9 @@ export const ErrorMessage = styled.div`
 const Register = ({ onSubmit, error }: RegisterProps) => {
   return (
     <RegisterBlock>
-      <h3>
+      <h2>
         <b>트레블메이커</b>와 함께 하세요!
-      </h3>
+      </h2>
       <form onSubmit={onSubmit}>
         <Input autoComplete="nickname" name="nickname" placeholder="닉네임" />
         <Input autoComplete="username" name="username" placeholder="이메일" />
