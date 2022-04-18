@@ -99,7 +99,10 @@ const LoginBlock = styled.div`
   }
   .kakao-btn {
     background: #ffeb3b;
-    margin-left: 0 !important;
+    // Mobile
+    @media screen and (max-width: 767px) {
+      margin-left: 0 !important;
+    }
   }
 `;
 
