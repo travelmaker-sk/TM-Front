@@ -36,7 +36,12 @@ const FindPw = ({ onSubmit, error }: FindPwProps) => {
         가입한 <b>이메일 주소</b>를 입력해주세요.
       </h3>
       <form onSubmit={onSubmit}>
-        <Input type="email" name="email" placeholder="이메일" />
+        <Input
+          type="email"
+          name="email"
+          autoComplete="email"
+          placeholder="이메일"
+        />
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <CyanButtonStyle>
           <button type="submit">확인</button>

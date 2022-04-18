@@ -7,7 +7,6 @@ import {
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import Button from "../common/Button";
 
 const PrivacyBlock = styled.div`
   h2 {

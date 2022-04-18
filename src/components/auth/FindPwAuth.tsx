@@ -7,11 +7,11 @@ import {
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 
-type FindPwFinProps = {
+type FindPwAuthProps = {
   reSubmit: React.FormEventHandler<HTMLFormElement>;
 };
 
-const FindPwFinBlock = styled.div`
+const FindPwAuthBlock = styled.div`
   .material-icons {
     display: block;
     margin-bottom: 52px;
@@ -46,9 +46,9 @@ const FindPwFinBlock = styled.div`
   }
 `;
 
-const FindPwFin = ({ reSubmit }: FindPwFinProps) => {
+const FindPwAuth = ({ reSubmit }: FindPwAuthProps) => {
   return (
-    <FindPwFinBlock>
+    <FindPwAuthBlock>
       <div className="material-icons">mail_outline</div>
       <h2>
         <b>이메일 인증 코드</b>가 발송되었습니다.
@@ -57,7 +57,7 @@ const FindPwFin = ({ reSubmit }: FindPwFinProps) => {
         이메일이 도착하지 않았나요?
         <button className="resubmit-btn">
           <Link
-            to="/findPwFin"
+            to="/findPwAuth"
             // onClick={reSubmit}
           >
             재전송
@@ -76,8 +76,8 @@ const FindPwFin = ({ reSubmit }: FindPwFinProps) => {
           </button>
         </GrayButtonStyle>
       </SelectButtonStyle>
-    </FindPwFinBlock>
+    </FindPwAuthBlock>
   );
 };
 
-export default FindPwFin;
+export default FindPwAuth;

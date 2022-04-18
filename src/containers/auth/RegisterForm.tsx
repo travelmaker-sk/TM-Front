@@ -1,7 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router";
 import Register from "../../components/auth/Register";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+
   const [error, setError] = useState<string | null>(null);
 
   // 폼 등록 이벤트 핸들러
@@ -33,6 +36,17 @@ const RegisterForm = () => {
 
     // TODO. API 호출
   }, []);
+
+  let success = false;
+  useEffect(() => {
+    if (success === false) {
+      setError("?");
+      return;
+    } else {
+      setError("");
+      navigate("/registerAuth");
+    }
+  }, [success, navigate]);
 
   return <Register onSubmit={onSubmit} error={error} />;
 };

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import Button from "../common/Button";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
 
@@ -55,7 +54,7 @@ const RegisterAuth = ({ onSubmit, reSubmit, error }: RegisterAuthProps) => {
     <RegisterAuthBlock>
       <div className="material-icons">mail_outline</div>
       <h2>
-        <b>이메일 주소 인증 코드</b>가 발송되었습니다.
+        <b>이메일 인증 코드</b>가 발송되었습니다.
       </h2>
       <h3>
         이메일이 도착하지 않았나요?

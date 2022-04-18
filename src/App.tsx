@@ -9,7 +9,7 @@ import PrivacyPage from "./pages/PrivacyPage";
 import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
 import FindPwPage from "./pages/FindPwPage";
-import FindPwFinPage from "./pages/FindPwFinPage";
+import FindPwAuthPage from "./pages/FindPwAuthPage";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
       <Route path="/registerFin" element={<RegisterFinPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/findPw" element={<FindPwPage />} />
-      <Route path="/findPwFin" element={<FindPwFinPage />} />
+      <Route path="/findPwAuth" element={<FindPwAuthPage />} />
 
       <Route path="/*" element={<NotFoundPage />} />
     </Routes>
