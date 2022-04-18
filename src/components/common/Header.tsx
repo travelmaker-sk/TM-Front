@@ -79,7 +79,7 @@ const Header = ({ user, onLogout }: HeaderProps) => {
   return (
     <Wrapper>
       <HeaderBlock>
-        <Logo />
+        <Logo fontsize="16px" />
         {user ? (
           <div className="right">
             <span className="user-info">

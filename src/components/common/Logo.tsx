@@ -1,5 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { LinkButton } from "../../styles/ButtonStyle";
+
+type LogoProps = {
+  fontsize?: string;
+};
 
 const LogoStyle = styled.div`
   height: 20%;
@@ -7,7 +11,6 @@ const LogoStyle = styled.div`
   flex-direction: column;
   justify-content: center;
   font-family: "Roboto", sans-serif;
-  font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.05rem;
   .logo {
@@ -20,10 +23,11 @@ const LogoStyle = styled.div`
     }
   }
 
+  font-size: ${(props: LogoProps) => props.fontsize || "20px"};
+
   // Mobile
   @media screen and (max-width: 767px) {
     height: 15%;
-    // font-size: 16px; // HeaderLogo
     .logo {
       img {
         width: 30px;
@@ -32,9 +36,9 @@ const LogoStyle = styled.div`
   }
 `;
 
-const Logo = () => {
+const Logo = (props: LogoProps) => {
   return (
-    <LogoStyle>
+    <LogoStyle {...props}>
       <LinkButton to="/" className="logo">
         <img src="./images/logo.png" alt="logo" />
         Travel Maker

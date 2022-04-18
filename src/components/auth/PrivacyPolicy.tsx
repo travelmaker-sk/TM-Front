@@ -23,9 +23,9 @@ const PrivacyBlock = styled.div`
     color: ${palette.gray[5]};
   }
   .textarea {
-    height: 300px;
+    height: 200px;
     margin-bottom: 52px;
-    overflow-y: scroll;
+    overflow: auto;
     // Mobile
     @media screen and (max-width: 767px) {
       height: 130px;
