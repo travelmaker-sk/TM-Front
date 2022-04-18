@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 const HeaderBlock = styled.div`
   max-width: 1320px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 20px 3%;
   display: flex;
   justify-content: space-between;
   align-items: center;
