@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 type RegisterProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -42,6 +42,11 @@ export const ErrorMessage = styled.div`
 `;
 
 const Register = ({ onSubmit, error }: RegisterProps) => {
+  const { state } = useLocation();
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
   return (
     <RegisterBlock>
       <h2>

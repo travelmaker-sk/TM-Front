@@ -51,7 +51,9 @@ const PrivacyPolicy = () => {
       <SelectButtonStyle>
         <CyanButtonStyle>
           <button>
-            <LinkButton to="/register">✓ 동의</LinkButton>
+            <LinkButton to="/register" state={{ check: true }}>
+              ✓ 동의
+            </LinkButton>
           </button>
         </CyanButtonStyle>
         <GrayButtonStyle>
