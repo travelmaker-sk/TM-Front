@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 type HeaderProps = {
   user: {
     nickname: string;
-    username: string;
+    email: string;
     password: string;
   } | null;
   onLogout: () => void;

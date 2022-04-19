@@ -113,7 +113,7 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
       <form onSubmit={onSubmit}>
         <Input
           type="email"
-          name="username"
+          name="email"
           autoComplete="email"
           placeholder="이메일"
           defaultValue={initialUid.current}

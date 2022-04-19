@@ -10,7 +10,7 @@ const HeaderForm = () => {
     <Header
       // user={{
       //   nickname: "닉네임예시",
-      //   username: "username1234@google.com",
+      //   email: "email1234@google.com",
       //   password: "pw1234",
       // }}
       user={null}

@@ -24,9 +24,6 @@ const FindPwAuthBlock = styled.div`
     margin-bottom: 26px;
     font-size: 24px;
     text-align: center;
-    b {
-      font-weight: 600;
-    }
   }
   h3 {
     display: block;
@@ -51,9 +48,7 @@ const FindPwAuth = ({ reSubmit }: FindPwAuthProps) => {
   return (
     <FindPwAuthBlock>
       <div className="material-icons">mail_outline</div>
-      <h2>
-        <b>이메일 인증 코드</b>가 발송되었습니다.
-      </h2>
+      <h2>이메일이 발송되었습니다.</h2>
       <h3>
         이메일이 도착하지 않았나요?
         <button className="resubmit-btn">

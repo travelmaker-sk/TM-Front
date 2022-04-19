@@ -48,19 +48,24 @@ const Register = ({ onSubmit, error }: RegisterProps) => {
         <b>트레블메이커</b>와 함께 하세요!
       </h2>
       <form onSubmit={onSubmit}>
-        <Input autoComplete="nickname" name="nickname" placeholder="닉네임" />
-        <Input autoComplete="username" name="username" placeholder="이메일" />
+        <Input name="nickname" autoComplete="nickname" placeholder="닉네임" />
         <Input
-          autoComplete="new-password"
-          name="password"
-          placeholder="비밀번호"
-          type="password"
+          type="email"
+          name="email"
+          autoComplete="email"
+          placeholder="이메일"
         />
         <Input
-          autoComplete="new-password"
-          name="passwordConfirm"
-          placeholder="비밀번호 확인"
           type="password"
+          name="password"
+          autoComplete="new-password"
+          placeholder="비밀번호"
+        />
+        <Input
+          type="password"
+          name="passwordConfirm"
+          autoComplete="new-password"
+          placeholder="비밀번호 확인"
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <CyanButtonStyle>
