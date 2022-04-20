@@ -46,5 +46,5 @@ export const findPw = async (email: string) => {
 
   // return res.data;
 
-  return "";
+  return "sampleEmail";
 };

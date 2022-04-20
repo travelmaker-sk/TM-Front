@@ -2,11 +2,21 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Register from "../../components/auth/Register";
 import { register } from "../../lib/api/auth";
+import { useLocation } from "react-router-dom";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
+
+  const { state } = useLocation();
+  useEffect(() => {
+    console.log(state);
+    if (!state) {
+      alert("회원가입을 위해 서비스 이용 약관 동의가 필요합니다.");
+      navigate("/privacyPolicy");
+    }
+  }, [state, navigate]);
 
   // 폼 등록 이벤트 핸들러
   const onSubmit = useCallback(

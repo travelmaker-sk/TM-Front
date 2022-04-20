@@ -42,10 +42,10 @@ export const ErrorMessage = styled.div`
 `;
 
 const Register = ({ onSubmit, error }: RegisterProps) => {
-  const { state } = useLocation();
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  // const { state } = useLocation();
+  // useEffect(() => {
+  //   console.log(state);
+  // }, [state]);
 
   return (
     <RegisterBlock>
