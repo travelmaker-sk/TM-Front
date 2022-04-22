@@ -5,10 +5,10 @@ import Input from "../common/Input";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
 import { Link } from "react-router-dom";
 
-type RegisterProps = {
+interface RegisterProps {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
-};
+}
 
 const RegisterBlock = styled.div`
   h2 {

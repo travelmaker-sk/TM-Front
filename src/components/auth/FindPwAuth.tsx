@@ -8,9 +8,9 @@ import {
 } from "../../styles/ButtonStyle";
 import { Link } from "react-router-dom";
 
-type FindPwAuthProps = {
+interface FindPwAuthProps {
   reSubmit: React.FormEventHandler<HTMLFormElement>;
-};
+}
 
 const FindPwAuthBlock = styled.div`
   .material-icons {

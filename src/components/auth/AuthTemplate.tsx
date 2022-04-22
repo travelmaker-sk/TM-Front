@@ -3,9 +3,9 @@ import styled from "styled-components";
 import palette from "../../styles/palette";
 import Logo from "../common/Logo";
 
-type AuthTemplateProps = {
+interface AuthTemplateProps {
   children: any;
-};
+}
 
 const AuthTemplateBlock = styled.div`
   height: 100%;

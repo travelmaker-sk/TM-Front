@@ -6,11 +6,11 @@ import { ErrorMessage } from "./Register";
 import { CyanButtonStyle, SelectButtonStyle } from "../../styles/ButtonStyle";
 import { Link } from "react-router-dom";
 
-type LoginProps = {
+interface LoginProps {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   initialUid: MutableRefObject<string>;
   error: string | null;
-};
+}
 
 const LoginBlock = styled.div`
   h2 {

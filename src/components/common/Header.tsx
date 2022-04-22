@@ -4,14 +4,14 @@ import Logo from "./Logo";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
 
-type HeaderProps = {
+interface HeaderProps {
   user: {
     nickname: string;
     email: string;
     password: string;
   } | null;
   onLogout: () => void;
-};
+}
 
 const Wrapper = styled.div`
   width: 100%;

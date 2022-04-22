@@ -5,11 +5,11 @@ import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
 
-type RegisterAuthProps = {
+interface RegisterAuthProps {
   reSubmit: React.FormEventHandler<HTMLFormElement>;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
-};
+}
 
 const RegisterAuthBlock = styled.div`
   .material-icons {

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-type ResponsiveProps = {
+interface ResponsiveProps {
   children: any;
-};
+}
 
 const ResponsiveBlock = styled.div`
   margin: 0 auto;

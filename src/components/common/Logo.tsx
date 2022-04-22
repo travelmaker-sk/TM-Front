@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import { LinkButton } from "../../styles/ButtonStyle";
 
-type LogoProps = {
+interface LogoProps {
   fontsize?: string;
-};
+}
 
 const LogoStyle = styled.div`
   height: 20%;

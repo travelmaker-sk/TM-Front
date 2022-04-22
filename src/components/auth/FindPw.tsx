@@ -4,10 +4,10 @@ import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
 
-type FindPwProps = {
+interface FindPwProps {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
-};
+}
 
 const FindPwBlock = styled.div`
   h2 {
