@@ -53,7 +53,7 @@ const RegisterForm = () => {
         password: inputPw,
       }).then((registerResult) => {
         if (!registerResult) {
-          setError("회원가입 실패");
+          setError("회원가입 실패"); // 닉네임 중복 or 이메일 중복 or 비밀번호 형식 미충족
           return;
         } else {
           setError("");

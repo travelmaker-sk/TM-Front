@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
 import RegisterAuth from "../../components/auth/RegisterAuth";
 import { registerAuth } from "../../lib/api/auth";
+import { useLocation } from "react-router-dom";
 
 const RegisterAuthForm = () => {
   const navigate = useNavigate();
@@ -15,20 +16,19 @@ const RegisterAuthForm = () => {
       const form = e.target as HTMLFormElement;
       const $inputs = Array.from(form.querySelectorAll("input"));
 
-      const [inputVerification] = $inputs.map(($input) => $input.value);
-      console.log("Verification:", inputVerification);
+      const [inputAuthCode] = $inputs.map(($input) => $input.value);
+      console.log("AuthCode:", inputAuthCode);
 
-      if ([inputVerification].includes("")) {
+      if ([inputAuthCode].includes("")) {
         console.log("에러 발생");
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {
         setError(null);
       }
-
       // API 호출
-      registerAuth(inputVerification as string).then((sampleVerification) => {
-        if (!sampleVerification) {
+      registerAuth(inputAuthCode as string).then((registerAuthResult) => {
+        if (!registerAuthResult) {
           setError("인증번호가 일치하지 않습니다.");
           return;
         } else {

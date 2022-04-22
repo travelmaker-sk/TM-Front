@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { useNavigate } from "react-router";
 import Login from "../../components/auth/Login";
 import { login } from "../../lib/api/auth";

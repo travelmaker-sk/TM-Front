@@ -32,19 +32,18 @@ export const register = async (
   return "registerResult";
 };
 
-export const registerAuth = async (emailVerification: string) => {
-  // const res = await axios.get(`${baseUrl}/emailVerification`, emailVerification);
+export const registerAuth = async (authCode: string) => {
+  // const res = await axios.post(`${baseUrl}/emailVerification`, authCode);
 
-  // const response = res.data;
-  // return response.token;
+  // return res.token;
 
-  return "sampleVerification";
+  return true;
 };
 
 export const findPw = async (email: string) => {
-  // const res = await axios.get(`${baseUrl}/findPassword`, email);
+  // const res = await axios.post(`${baseUrl}/findPassword`, email);
 
   // return res.data;
 
-  return "sampleEmail";
+  return true;
 };
