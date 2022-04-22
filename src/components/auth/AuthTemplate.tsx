@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Logo from "../common/Logo";
@@ -22,7 +22,10 @@ const WhiteBox = styled.div`
   padding: 52px 15%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  &.childScrollable {
+    justify-content: flex-start;
+  }
   align-items: space-between;
   background: #fff;
   border-radius: 2px;
@@ -46,11 +49,31 @@ const WhiteBox = styled.div`
 `;
 
 const AuthTemplate = ({ children }: AuthTemplateProps) => {
+  const [childScrollable, setChildScrollable] = useState(false);
   return (
     <>
       <AuthTemplateBlock>
         <Logo />
-        <WhiteBox>{children}</WhiteBox>
+        <WhiteBox
+          onLoad={(e) => {
+            const whiteBox = e.currentTarget;
+            const child = whiteBox.children[0];
+
+            const whiteBoxPadding = window.getComputedStyle(whiteBox).padding;
+            const whiteBoxPaddingVertical = Number(
+              whiteBoxPadding.split(" ")[0].split("px")[0]
+            );
+
+            if (
+              whiteBox.clientHeight - whiteBoxPaddingVertical * 2 <
+              child.clientHeight
+            )
+              setChildScrollable(true);
+          }}
+          className={childScrollable ? "childScrollable" : ""}
+        >
+          {children}
+        </WhiteBox>
       </AuthTemplateBlock>
     </>
   );
