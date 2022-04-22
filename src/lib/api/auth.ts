@@ -25,7 +25,7 @@ export const login = async (params: ILoginParams): Promise<string | null> => {
 export const register = async (
   params: IRegisterParams
 ): Promise<string | null> => {
-  // const res = await axios.post(`${baseUrl}/register`, params);
+  // const res = await axios.post(`${baseUrl}/account/join`, params);
 
   // return res.data;
 
