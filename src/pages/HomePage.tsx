@@ -5,7 +5,7 @@ import HeaderForm from "../containers/common/HeaderForm";
 
 const Wrapeer = styled(Responsive)``;
 
-const Spacer = styled.div`
+const MarginBottom = styled.div`
   // Desktop
   @media screen and (min-width: 1280px) {
     height: 80px;
@@ -24,7 +24,7 @@ const PostListPage = () => {
   return (
     <Wrapeer>
       <HeaderForm />
-      <Spacer />
+      <MarginBottom />
       <img src="./images/bg_1.png" alt="bg" />
       <img src="./images/bg_2.png" alt="bg" />
     </Wrapeer>

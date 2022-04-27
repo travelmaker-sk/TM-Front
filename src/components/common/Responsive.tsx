@@ -11,7 +11,7 @@ const ResponsiveBlock = styled.div`
   // Desktop
   @media screen and (min-width: 1280px) {
     width: 1320px;
-    padding: 0 5%;
+    padding: 0 3%;
   }
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
