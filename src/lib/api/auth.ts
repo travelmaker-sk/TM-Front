@@ -29,19 +29,20 @@ export const register = async (
 
   // return res.data;
 
-  return "registerResult";
+  // return "registerResult";
+  return "";
 };
 
-export const registerAuth = async (authCode: string) => {
-  // const res = await axios.post(`${baseUrl}/emailVerification`, authCode);
+export const registerAuth = async (email: string, authCode: string) => {
+  // const res = await axios.post(`${baseUrl}/check-email-token`, {email, authCode});
 
-  // return res.token;
+  // return res.data;
 
   return true;
 };
 
 export const findPw = async (email: string) => {
-  // const res = await axios.post(`${baseUrl}/findPassword`, email);
+  // const res = await axios.post(`${baseUrl}/account/findpassword`, email);
 
   // return res.data;
 

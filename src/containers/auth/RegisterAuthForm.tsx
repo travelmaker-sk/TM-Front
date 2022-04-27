@@ -9,6 +9,10 @@ const RegisterAuthForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
+  const location = useLocation();
+  const email = location.state;
+  console.log(email);
+
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -27,15 +31,17 @@ const RegisterAuthForm = () => {
         setError(null);
       }
       // API 호출
-      registerAuth(inputAuthCode as string).then((registerAuthResult) => {
-        if (!registerAuthResult) {
-          setError("인증번호가 일치하지 않습니다.");
-          return;
-        } else {
-          setError("");
-          navigate("/registerFin");
+      registerAuth(email as string, inputAuthCode as string).then(
+        (registerAuthResult) => {
+          if (!registerAuthResult) {
+            setError("인증번호가 일치하지 않습니다.");
+            return;
+          } else {
+            setError("");
+            navigate("/registerFin");
+          }
         }
-      });
+      );
     },
     [navigate]
   );
