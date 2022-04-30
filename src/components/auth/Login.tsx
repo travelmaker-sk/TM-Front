@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from "react";
+import React, { MutableRefObject, useEffect, useRef } from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
@@ -92,10 +92,14 @@ const LoginBlock = styled.div`
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    // max-height: 45.833px;
+  }
+  #naver_id_login {
+    display: none;
   }
   .naver-btn {
     color: #fff;
-    background: #00bf18;
+    background: #03c75a;
   }
   .kakao-btn {
     background: #ffeb3b;
@@ -107,6 +111,40 @@ const LoginBlock = styled.div`
 `;
 
 const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
+  const naverRef = useRef<any>();
+  const handleclick = () => {
+    naverRef.current.children[0].click();
+  };
+
+  useEffect(() => {
+    // @ts-ignore
+    const naver_id_login = new window.naver_id_login(
+      "YOUR_CLIENT_ID",
+      "YOUR_CALLBACK_URL"
+    );
+    const state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 2, 40);
+    naver_id_login.setDomain("YOUR_SERVICE_URL");
+    naver_id_login.setState(state);
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+
+    // setInterval(() => {
+    //   const accessToken = naver_id_login.oauthParams.access_token;
+    //   console.log("accessToken: ", accessToken);
+    //   if (!accessToken) return;
+
+    //   // 네이버 사용자 프로필 조회
+    //   naver_id_login.get_naver_userprofile("naverSignInCallback()");
+    //   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    //   function naverSignInCallback() {
+    //     alert(naver_id_login.getProfileData("email"));
+    //     alert(naver_id_login.getProfileData("nickname"));
+    //     alert(naver_id_login.getProfileData("age"));
+    //   }
+    // }, 3000);
+  }, []);
+
   return (
     <LoginBlock>
       <h2>반갑습니다!</h2>
@@ -148,7 +186,8 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
       <span>또는</span>
       <div className="sns-login">
         <SelectButtonStyle>
-          <button className="sns-btn naver-btn">
+          <div id="naver_id_login" ref={naverRef}></div>
+          <button className="sns-btn naver-btn" onClick={handleclick}>
             <img src="./images/naver_icon.png" alt="naver" />
             네이버 로그인
           </button>

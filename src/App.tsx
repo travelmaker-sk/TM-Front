@@ -10,6 +10,7 @@ import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
 import FindPwPage from "./pages/FindPwPage";
 import FindPwAuthPage from "./pages/FindPwAuthPage";
+import NaverLoginPage from "./pages/NaverLogin";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/registerAuth" element={<RegisterAuthPage />} />
       <Route path="/registerFin" element={<RegisterFinPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/naver" element={<NaverLoginPage />} />
       <Route path="/findPw" element={<FindPwPage />} />
       <Route path="/findPwAuth" element={<FindPwAuthPage />} />
 
