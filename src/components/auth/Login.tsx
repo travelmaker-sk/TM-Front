@@ -101,8 +101,11 @@ const LoginBlock = styled.div`
     color: #fff;
     background: #03c75a;
   }
+  #custom-login-btn {
+    display: none;
+  }
   .kakao-btn {
-    background: #ffeb3b;
+    background: #fddc3f;
     // Mobile
     @media screen and (max-width: 767px) {
       margin-left: 0 !important;
@@ -112,38 +115,13 @@ const LoginBlock = styled.div`
 
 const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
   const naverRef = useRef<any>();
-  const handleclick = () => {
+  const kakaoRef = useRef<any>();
+  const onNaver = () => {
     naverRef.current.children[0].click();
   };
-
-  useEffect(() => {
-    // @ts-ignore
-    const naver_id_login = new window.naver_id_login(
-      "YOUR_CLIENT_ID",
-      "YOUR_CALLBACK_URL"
-    );
-    const state = naver_id_login.getUniqState();
-    naver_id_login.setButton("white", 2, 40);
-    naver_id_login.setDomain("YOUR_SERVICE_URL");
-    naver_id_login.setState(state);
-    naver_id_login.setPopup();
-    naver_id_login.init_naver_id_login();
-
-    // setInterval(() => {
-    //   const accessToken = naver_id_login.oauthParams.access_token;
-    //   console.log("accessToken: ", accessToken);
-    //   if (!accessToken) return;
-
-    //   // 네이버 사용자 프로필 조회
-    //   naver_id_login.get_naver_userprofile("naverSignInCallback()");
-    //   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-    //   function naverSignInCallback() {
-    //     alert(naver_id_login.getProfileData("email"));
-    //     alert(naver_id_login.getProfileData("nickname"));
-    //     alert(naver_id_login.getProfileData("age"));
-    //   }
-    // }, 3000);
-  }, []);
+  const onKakao = () => {
+    kakaoRef.current.children[0].click();
+  };
 
   return (
     <LoginBlock>
@@ -187,11 +165,12 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
       <div className="sns-login">
         <SelectButtonStyle>
           <div id="naver_id_login" ref={naverRef}></div>
-          <button className="sns-btn naver-btn" onClick={handleclick}>
+          <button className="sns-btn naver-btn" onClick={onNaver}>
             <img src="./images/naver_icon.png" alt="naver" />
             네이버 로그인
           </button>
-          <button className="sns-btn kakao-btn">
+          <a id="custom-login-btn" href="#" ref={kakaoRef}></a>
+          <button className="sns-btn kakao-btn" onClick={onKakao}>
             <img src="./images/kakao_icon.png" alt="kakao" />
             카카오 로그인
           </button>
