@@ -70,10 +70,15 @@ const LoginBlock = styled.div`
     }
   }
   .sns-login {
-    button {
+    display: flex;
+    justify-content: space-between;
+    Button {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    Button:last-child {
+      margin-left: 15px;
     }
     img {
       width: 20px;
@@ -88,17 +93,16 @@ const LoginBlock = styled.div`
     width: 100%;
     font-size: 18px;
   }
-  .google-btn {
-    margin-bottom: 13px;
-    border: 1px solid ${palette.gray[5]};
-  }
   .naver-btn {
-    margin-bottom: 13px;
     color: #fff;
     background: #00bf18;
   }
   .kakao-btn {
     background: #ffeb3b;
+    // Mobile
+    @media screen and (max-width: 767px) {
+      margin-left: 0 !important;
+    }
   }
 `;
 
@@ -143,18 +147,16 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
       </div>
       <span>또는</span>
       <div className="sns-login">
-        <button className="sns-btn google-btn">
-          <img src="./images/google_icon.png" alt="google" />
-          구글 로그인
-        </button>
-        <button className="sns-btn naver-btn">
-          <img src="./images/naver_icon.png" alt="naver" />
-          네이버 로그인
-        </button>
-        <button className="sns-btn kakao-btn">
-          <img src="./images/kakao_icon.png" alt="kakao" />
-          카카오 로그인
-        </button>
+        <SelectButtonStyle>
+          <button className="sns-btn naver-btn">
+            <img src="./images/naver_icon.png" alt="naver" />
+            네이버 로그인
+          </button>
+          <button className="sns-btn kakao-btn">
+            <img src="./images/kakao_icon.png" alt="kakao" />
+            카카오 로그인
+          </button>
+        </SelectButtonStyle>
       </div>
     </LoginBlock>
   );
