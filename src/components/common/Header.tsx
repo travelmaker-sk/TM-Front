@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
+import HeaderMenu from "./HeaderMenu";
 
 interface HeaderProps {
   user: {
@@ -20,6 +21,7 @@ const Wrapper = styled.div`
   left: 0;
   background-color: #fff;
   border-bottom: 1px solid ${palette.gray[2]};
+  z-index: 9999;
 `;
 
 const HeaderBlock = styled.div`
@@ -43,7 +45,8 @@ const HeaderBlock = styled.div`
         margin-right: 10px;
       }
       img {
-        width: 30px;
+        width: 24px;
+        height: 24px;
         // Mobile
         @media screen and (max-width: 767px) {
           width: 20px;
@@ -63,7 +66,8 @@ const HeaderBlock = styled.div`
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
-    padding: 10px 5%;
+    padding: 10px 5%;: 3%;
+    }
   }
 `;
 
@@ -86,9 +90,7 @@ const Header = ({ user, onLogout }: HeaderProps) => {
               <img src="./images/default_profile.png" alt="profileImage" />
               <UserName>반가워요, {user.nickname} 님!</UserName>
             </span>
-            <button className="link-btn" onClick={onLogout}>
-              로그아웃
-            </button>
+            <HeaderMenu onLogout={onLogout} />
           </div>
         ) : (
           <div className="right">

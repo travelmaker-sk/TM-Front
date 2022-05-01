@@ -32,7 +32,7 @@ const RegisterForm = () => {
       console.log("nickname:", inputNickname);
       console.log("email:", inputEmail);
       console.log("password:", inputPw);
-      console.log("passwordConfirm:", inputPwConfirm);
+      console.log("confirm-password:", inputPwConfirm);
 
       if ([inputNickname, inputEmail, inputPw, inputPwConfirm].includes("")) {
         console.log("에러 발생");
