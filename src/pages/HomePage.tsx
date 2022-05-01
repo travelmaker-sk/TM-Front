@@ -3,20 +3,20 @@ import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
 import HeaderForm from "../containers/common/HeaderForm";
 
-const Wrapeer = styled(Responsive)``;
+export const Wrapeer = styled(Responsive)``;
 
-const MarginBottom = styled.div`
+export const MarginBottom = styled.div`
   // Desktop
   @media screen and (min-width: 1280px) {
-    height: 80px;
+    height: 130px;
   }
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    height: 80px;
+    height: 130px;
   }
   // Mobile
   @media screen and (max-width: 767px) {
-    height: 50px;
+    height: 100px;
   }
 `;
 

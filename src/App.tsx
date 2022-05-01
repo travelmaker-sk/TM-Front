@@ -10,6 +10,13 @@ import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
 import FindPwPage from "./pages/FindPwPage";
 import FindPwAuthPage from "./pages/FindPwAuthPage";
+import NaverLoginPage from "./pages/NaverLogin";
+import CPhotoCardPage from "./pages/CPhotoCardPage";
+import BookMarksListPage from "./pages/BookMarksListPage";
+import NoticePage from "./pages/NoticePage";
+import MyPagePage from "./pages/MyPage";
+import SetProfilePage from "./pages/SetProfilePage";
+import SetProfileFinPage from "./pages/SetProfileFinPage";
 
 function App() {
   return (
@@ -21,8 +28,16 @@ function App() {
       <Route path="/registerAuth" element={<RegisterAuthPage />} />
       <Route path="/registerFin" element={<RegisterFinPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/naver" element={<NaverLoginPage />} />
       <Route path="/findPw" element={<FindPwPage />} />
       <Route path="/findPwAuth" element={<FindPwAuthPage />} />
+
+      <Route path="/mypage" element={<MyPagePage />} />
+      <Route path="/set-profile" element={<SetProfilePage />} />
+      <Route path="/set-profile-fin" element={<SetProfileFinPage />} />
+      <Route path="/create-photocard" element={<CPhotoCardPage />} />
+      <Route path="/bookmarks" element={<BookMarksListPage />} />
+      <Route path="/notice" element={<NoticePage />} />
 
       <Route path="/*" element={<NotFoundPage />} />
     </Routes>

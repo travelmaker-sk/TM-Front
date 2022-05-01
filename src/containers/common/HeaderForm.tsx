@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 
 const HeaderForm = () => {
   const navigate = useNavigate();
-
   const onLogout = () => {
     console.log("로그아웃");
     localStorage.removeItem("tm-token");
@@ -13,12 +12,12 @@ const HeaderForm = () => {
 
   return (
     <Header
-      // user={{
-      //   nickname: "닉네임예시",
-      //   email: "email1234@google.com",
-      //   password: "pw1234",
-      // }}
-      user={null}
+      user={{
+        nickname: "닉네임예시",
+        email: "email1234@google.com",
+        password: "pw1234",
+      }}
+      // user={null}
       onLogout={onLogout}
     />
   );

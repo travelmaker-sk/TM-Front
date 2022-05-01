@@ -49,6 +49,9 @@ export const CyanButtonStyle = styled(GlobalButtonStyle)`
     &:hover {
       background: ${palette.cyan[4]};
     }
+    &:active {
+      background: ${palette.cyan[6]};
+    }
   }
 `;
 
@@ -60,6 +63,9 @@ export const GrayButtonStyle = styled(GlobalButtonStyle)`
     background: ${palette.gray[5]};
     &:hover {
       background: ${palette.gray[4]};
+    }
+    &:active {
+      background: ${palette.gray[6]};
     }
   }
 `;

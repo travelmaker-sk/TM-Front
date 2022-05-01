@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from "react";
+import React, { MutableRefObject, useEffect, useRef } from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
@@ -92,13 +92,20 @@ const LoginBlock = styled.div`
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    // max-height: 45.833px;
+  }
+  #naver_id_login {
+    display: none;
   }
   .naver-btn {
     color: #fff;
-    background: #00bf18;
+    background: #03c75a;
+  }
+  #custom-login-btn {
+    display: none;
   }
   .kakao-btn {
-    background: #ffeb3b;
+    background: #fddc3f;
     // Mobile
     @media screen and (max-width: 767px) {
       margin-left: 0 !important;
@@ -107,6 +114,15 @@ const LoginBlock = styled.div`
 `;
 
 const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
+  const naverRef = useRef<any>();
+  const kakaoRef = useRef<any>();
+  const onNaver = () => {
+    naverRef.current.children[0].click();
+  };
+  const onKakao = () => {
+    kakaoRef.current.children[0].click();
+  };
+
   return (
     <LoginBlock>
       <h2>반갑습니다!</h2>
@@ -148,11 +164,13 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
       <span>또는</span>
       <div className="sns-login">
         <SelectButtonStyle>
-          <button className="sns-btn naver-btn">
+          <div id="naver_id_login" ref={naverRef}></div>
+          <button className="sns-btn naver-btn" onClick={onNaver}>
             <img src="./images/naver_icon.png" alt="naver" />
             네이버 로그인
           </button>
-          <button className="sns-btn kakao-btn">
+          <a id="custom-login-btn" href="#" ref={kakaoRef}></a>
+          <button className="sns-btn kakao-btn" onClick={onKakao}>
             <img src="./images/kakao_icon.png" alt="kakao" />
             카카오 로그인
           </button>
