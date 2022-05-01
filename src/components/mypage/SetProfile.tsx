@@ -57,10 +57,6 @@ const SetProfileBlock = styled.div`
 `;
 
 const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
-  const [newNickname, setNewNickname] = useState(user.nickname);
-  const onChange = (e: any) => {
-    setNewNickname(e.target.value);
-  };
   return (
     <SetProfileBlock>
       <h2>회원정보 변경</h2>
@@ -68,11 +64,7 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
         <li>
           <h3>프로필 사진 변경</h3>
           <div className="thumbnail-upload">
-            <input
-              value="첨부파일"
-              placeholder="첨부파일"
-              className="thumbnail-name"
-            />
+            <input placeholder="첨부파일" className="thumbnail-name" readOnly />
             <label htmlFor="thumbnail">파일 선택</label>
             <input type="file" id="thumbnail" />
           </div>
@@ -92,8 +84,7 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
             name="nickname"
             autoComplete="nickname"
             placeholder="닉네임"
-            defaultValue={newNickname}
-            onChange={onChange}
+            defaultValue={user.nickname}
           />
           {error && <ErrorMessage>{error}</ErrorMessage>}
           <CyanButtonStyle>
