@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
   CyanButtonStyle,
   GrayButtonStyle,
+  LinkButton,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
@@ -59,6 +60,23 @@ const SetProfileBlock = styled.div`
     input[type="file"] {
       display: none;
     }
+  }
+`;
+
+const QuitLinkButton = styled(LinkButton)`
+  position: fixed;
+  bottom: 5%;
+  right: 17.7%;
+  text-align: right;
+  text-decoration: underline;
+  color: ${palette.gray[5]};
+  // Tablet
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    right: 15.2%;
+  }
+  // Mobile
+  @media screen and (max-width: 767px) {
+    right: 7.7%;
   }
 `;
 
@@ -160,6 +178,7 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
           </CyanButtonStyle>
         </li>
       </form>
+      <QuitLinkButton to="/quit">탈퇴하기</QuitLinkButton>
     </SetProfileBlock>
   );
 };

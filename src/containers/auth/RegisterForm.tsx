@@ -14,7 +14,7 @@ const RegisterForm = () => {
     console.log(state);
     if (!state) {
       alert("회원가입을 위해 서비스 이용 약관 동의가 필요합니다.");
-      navigate("/privacyPolicy");
+      navigate("/privacy-policy");
     }
   }, [state, navigate]);
 
@@ -57,7 +57,7 @@ const RegisterForm = () => {
           return;
         } else {
           setError("");
-          navigate("/registerAuth", { state: inputEmail });
+          navigate("/register-auth", { state: inputEmail });
         }
       });
     },

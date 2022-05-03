@@ -33,7 +33,7 @@ const FindPwForm = () => {
           return;
         } else {
           setError("");
-          navigate("/findPwAuth");
+          navigate("/findpw-auth");
         }
       });
     },

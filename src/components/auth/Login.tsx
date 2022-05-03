@@ -158,8 +158,8 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
         </CyanButtonStyle>
       </form>
       <div className="sub-login sub-login-2">
-        <Link to="/findPw">비밀번호 찾기</Link>
-        <Link to="/privacyPolicy">회원가입</Link>
+        <Link to="/findpw">비밀번호 찾기</Link>
+        <Link to="/privacy-policy">회원가입</Link>
       </div>
       <span>또는</span>
       <div className="sns-login">
