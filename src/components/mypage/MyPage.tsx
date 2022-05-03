@@ -104,7 +104,7 @@ const MyPage = ({ user }: MyPageProps) => {
     <>
       <MyPageTopBlock>
         <div className="left-area">
-          <img src="./images/default_profile.png" alt="profileImage" />
+          <img src="./images/default-profile.png" alt="profileImage" />
           <ul>
             <li>
               <span>{user.nickname}</span> 님 안녕하세요!

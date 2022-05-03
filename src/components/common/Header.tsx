@@ -87,7 +87,7 @@ const Header = ({ user, onLogout }: HeaderProps) => {
         {user ? (
           <div className="right">
             <span className="user-info">
-              <img src="./images/default_profile.png" alt="profileImage" />
+              <img src="./images/default-profile.png" alt="profileImage" />
               <UserName>반가워요, {user.nickname} 님!</UserName>
             </span>
             <HeaderMenu onLogout={onLogout} />

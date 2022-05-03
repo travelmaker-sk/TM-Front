@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
   CyanButtonStyle,
   GrayButtonStyle,
-  LinkButton,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
@@ -27,17 +26,24 @@ const SetProfileBlock = styled.div`
   }
   h3 {
     margin: 52px 0 26px;
+    font-weight: 600;
   }
-  .thumbnail-upload {
+  img {
+    margin: 0 auto 26px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  .profileImage-upload {
     margin-bottom: 26px;
     display: flex;
-    .thumbnail-name,
+    .profileImage-name,
     label {
       height: 46.667px;
       padding: 10px 15px;
       border-radius: 4px;
     }
-    .thumbnail-name {
+    .profileImage-name {
       width: 75%;
       border: 1px solid ${palette.gray[4]};
       color: ${palette.gray[4]};
@@ -45,7 +51,7 @@ const SetProfileBlock = styled.div`
     label {
       margin-left: 15px;
       width: 25%;
-      border: 1px solid ${palette.gray[5]};
+      border: 1px solid ${palette.gray[4]};
       cursor: pointer;
       text-align: center;
       line-height: 24px;
@@ -57,20 +63,57 @@ const SetProfileBlock = styled.div`
 `;
 
 const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
+  const [image, setImage] = useState({
+    profileImageFile: "",
+    profileImageUrl: "./images/default-profile.png",
+  });
+  const profileImageChange = (e: any) => {
+    e.preventDefault();
+    const fileReader = new FileReader();
+    if (e.target.files[0]) {
+      fileReader.readAsDataURL(e.target.files[0]);
+    }
+    fileReader.onload = () => {
+      setImage({
+        profileImageFile: e.target.files[0],
+        //@ts-ignore
+        profileImageUrl: fileReader.result,
+      });
+    };
+  };
+  const profileImageDel = () => {
+    setImage({
+      profileImageFile: "",
+      profileImageUrl: "./images/default-profile.png",
+    });
+  };
+
   return (
     <SetProfileBlock>
       <h2>회원정보 변경</h2>
       <form onSubmit={onSubmit}>
         <li>
           <h3>프로필 사진 변경</h3>
-          <div className="thumbnail-upload">
-            <input placeholder="첨부파일" className="thumbnail-name" readOnly />
-            <label htmlFor="thumbnail">파일 선택</label>
-            <input type="file" id="thumbnail" />
+          <img src={image.profileImageUrl} alt="프로필 이미지" />
+          <div className="profileImage-upload">
+            <input
+              placeholder={
+                image.profileImageFile ? image.profileImageFile : "첨부파일"
+              }
+              className="profileImage-name"
+              readOnly
+            />
+            <label htmlFor="profileImage">파일 선택</label>
+            <input
+              type="file"
+              id="profileImage"
+              accept="image/*"
+              onChange={profileImageChange}
+            />
           </div>
           <SelectButtonStyle>
             <GrayButtonStyle>
-              <button type="submit">파일 삭제</button>
+              <button onClick={profileImageDel}>삭제</button>
             </GrayButtonStyle>
             <CyanButtonStyle>
               <button type="submit">저장</button>

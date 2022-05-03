@@ -166,12 +166,12 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
         <SelectButtonStyle>
           <div id="naver_id_login" ref={naverRef}></div>
           <button className="sns-btn naver-btn" onClick={onNaver}>
-            <img src="./images/naver_icon.png" alt="naver" />
+            <img src="./images/naver-icon.png" alt="naver" />
             네이버 로그인
           </button>
           <a id="custom-login-btn" href="#" ref={kakaoRef}></a>
           <button className="sns-btn kakao-btn" onClick={onKakao}>
-            <img src="./images/kakao_icon.png" alt="kakao" />
+            <img src="./images/kakao-icon.png" alt="kakao" />
             카카오 로그인
           </button>
         </SelectButtonStyle>

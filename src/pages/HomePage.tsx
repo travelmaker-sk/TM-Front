@@ -25,8 +25,8 @@ const PostListPage = () => {
     <Wrapeer>
       <HeaderForm />
       <MarginBottom />
-      <img src="./images/bg_1.png" alt="bg" />
-      <img src="./images/bg_2.png" alt="bg" />
+      <img src="./images/bg1.png" alt="bg" />
+      <img src="./images/bg2.png" alt="bg" />
     </Wrapeer>
   );
 };
