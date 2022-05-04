@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
 import RegisterAuth from "../../components/auth/RegisterAuth";
-import { registerAuth } from "../../lib/api/auth";
+import { registerAuth } from "../../api/auth";
 import { useLocation } from "react-router-dom";
 
 const RegisterAuthForm = () => {
@@ -31,8 +31,8 @@ const RegisterAuthForm = () => {
         setError(null);
       }
       // API 호출
-      registerAuth(email as string, inputAuthCode as string).then(
-        (registerAuthResult) => {
+      registerAuth(email as string, inputAuthCode as string)
+        .then((registerAuthResult) => {
           if (!registerAuthResult) {
             setError("인증번호가 일치하지 않습니다.");
             return;
@@ -40,10 +40,12 @@ const RegisterAuthForm = () => {
             setError("");
             navigate("/register-fin");
           }
-        }
-      );
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
-    [navigate]
+    [email, navigate]
   );
 
   const reSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {

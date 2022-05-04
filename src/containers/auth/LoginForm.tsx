@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Login from "../../components/auth/Login";
-import { login } from "../../lib/api/auth";
+import { login } from "../../api/auth";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -35,22 +35,23 @@ const LoginForm = () => {
       }
 
       // API 호출
-      login({
-        email: inputEmail as string,
-        password: inputPw as string,
-      }).then((token) => {
-        if (checkSaveId)
-          localStorage.setItem("tm-saved-id", inputEmail as string);
-        if (checkKeepLogin) localStorage.setItem("tm-token", token as string);
+      login(inputEmail as string, inputPw as string)
+        .then((token) => {
+          if (checkSaveId)
+            localStorage.setItem("tm-saved-id", inputEmail as string);
+          if (checkKeepLogin) localStorage.setItem("tm-token", token as string);
 
-        if (!token) {
-          setError("아이디나 비밀번호가 일치하지 않습니다.");
-          return;
-        } else {
-          setError("");
-          navigate("/");
-        }
-      });
+          if (!token) {
+            setError("아이디나 비밀번호가 일치하지 않습니다.");
+            return;
+          } else {
+            setError("");
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
     [navigate]
   );

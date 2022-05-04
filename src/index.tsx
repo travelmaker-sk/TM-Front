@@ -2,9 +2,11 @@ import React from "react";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./styles/globalStyle";
-
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { createStore } from "redux";
+import rootReducer from "./redux";
+import { Provider } from "react-redux";
 
 // React 17
 // ReactDOM.render(
@@ -16,12 +18,16 @@ import { BrowserRouter } from "react-router-dom";
 
 const rootNode = document.getElementById("root")!;
 
+const store = createStore(rootReducer);
+
 ReactDOM.createRoot(rootNode).render(
   <>
     <GlobalStyle />
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </>
 );
 

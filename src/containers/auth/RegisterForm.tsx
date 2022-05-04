@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Register from "../../components/auth/Register";
-import { register } from "../../lib/api/auth";
+import { register } from "../../api/auth";
 import { useLocation } from "react-router-dom";
 
 const RegisterForm = () => {
@@ -47,19 +47,21 @@ const RegisterForm = () => {
       }
 
       // API 호출
-      register({
-        nickname: inputNickname,
-        email: inputEmail,
-        password: inputPw,
-      }).then((registerResult) => {
-        if (registerResult) {
-          setError(registerResult); // 닉네임 중복 or 이메일 중복 or 비밀번호 형식 미충족
-          return;
-        } else {
-          setError("");
-          navigate("/register-auth", { state: inputEmail });
-        }
-      });
+      register(inputNickname, inputEmail, inputPw)
+        .then((registerResult) => {
+          if (registerResult) {
+            console.log("#####", registerResult, typeof registerResult);
+
+            setError(registerResult); // 닉네임 중복 or 이메일 중복 or 비밀번호 형식 미충족
+            return;
+          } else {
+            setError("");
+            navigate("/register-auth", { state: inputEmail });
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
     [navigate]
   );

@@ -11,13 +11,10 @@ import {
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "../auth/Register";
+import { UserType } from "../../type";
 
 interface QuitProps {
-  user: {
-    nickname: string;
-    email: string;
-    password: string;
-  };
+  user: UserType;
 }
 
 const QuitBlock = styled.div`

@@ -7,15 +7,12 @@ import {
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
+import { UserType } from "../../type";
 import { ErrorMessage } from "../auth/Register";
 import Input from "../common/Input";
 
 interface SetProfileProps {
-  user: {
-    nickname: string;
-    email: string;
-    password: string;
-  };
+  user: UserType;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
 }
@@ -81,9 +78,10 @@ const QuitLinkButton = styled(LinkButton)`
 `;
 
 const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
+  // 프로필 사진 미리보기
   const [image, setImage] = useState({
     profileImageFile: "",
-    profileImageUrl: "./images/default-profile.png",
+    profileImageUrl: user.profileImage,
   });
   const profileImageChange = (e: any) => {
     e.preventDefault();
@@ -105,6 +103,8 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
       profileImageUrl: "./images/default-profile.png",
     });
   };
+
+  const [newNickname, setNewNickname] = useState(user.nickname);
 
   return (
     <SetProfileBlock>
@@ -145,7 +145,10 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
             name="nickname"
             autoComplete="nickname"
             placeholder="닉네임"
-            defaultValue={user.nickname}
+            defaultValue={newNickname}
+            onChange={(e) => {
+              setNewNickname(e.target.value);
+            }}
           />
           {error && <ErrorMessage>{error}</ErrorMessage>}
           <CyanButtonStyle>

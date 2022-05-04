@@ -9,7 +9,7 @@ import PrivacyPage from "./pages/PrivacyPage";
 import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
 import FindPwPage from "./pages/FindPwPage";
-import FindPwAuthPage from "./pages/FindPwAuthPage";
+import FindPwFinPage from "./pages/FindPwFinPage";
 import NaverLoginPage from "./pages/NaverLogin";
 import CPhotoCardPage from "./pages/CPhotoCardPage";
 import BookMarksListPage from "./pages/BookMarksListPage";
@@ -31,7 +31,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/naver" element={<NaverLoginPage />} />
       <Route path="/findpw" element={<FindPwPage />} />
-      <Route path="/findpw-auth" element={<FindPwAuthPage />} />
+      <Route path="/findpw-fin" element={<FindPwFinPage />} />
 
       <Route path="/mypage" element={<MyPagePage />} />
       <Route path="/set-profile" element={<SetProfilePage />} />

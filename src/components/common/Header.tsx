@@ -4,13 +4,10 @@ import Logo from "./Logo";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
 import HeaderMenu from "./HeaderMenu";
+import { UserType } from "../../type";
 
 interface HeaderProps {
-  user: {
-    nickname: string;
-    email: string;
-    password: string;
-  } | null;
+  user: UserType;
   onLogout: () => void;
 }
 
@@ -39,7 +36,7 @@ const HeaderBlock = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 15px;
+      margin-right: 20px;
       // Mobile
       @media screen and (max-width: 767px) {
         margin-right: 10px;
@@ -47,6 +44,7 @@ const HeaderBlock = styled.div`
       img {
         width: 24px;
         height: 24px;
+        border-radius: 50%;
         // Mobile
         @media screen and (max-width: 767px) {
           width: 20px;
@@ -87,7 +85,7 @@ const Header = ({ user, onLogout }: HeaderProps) => {
         {user ? (
           <div className="right">
             <span className="user-info">
-              <img src="./images/default-profile.png" alt="profileImage" />
+              <img src={user.profileImage} alt="profileImage" />
               <UserName>반가워요, {user.nickname} 님!</UserName>
             </span>
             <HeaderMenu onLogout={onLogout} />

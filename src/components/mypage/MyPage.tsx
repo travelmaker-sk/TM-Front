@@ -1,16 +1,10 @@
 import styled from "styled-components";
 import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
+import { UserType } from "../../type";
 
 interface MyPageProps {
-  user: {
-    nickname: string;
-    email: string;
-    password: string;
-    postCount: number;
-    followers: number;
-    followings: number;
-  };
+  user: UserType;
 }
 
 const MyPageTopBlock = styled.div`
@@ -18,10 +12,18 @@ const MyPageTopBlock = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 50px;
+  // Mobile
+  @media screen and (max-width: 767px) {
+    display: block;
+    margin-bottom: 35px;
+  }
+
   .left-area {
     display: flex;
+    justify-content: center;
     img {
       width: 120px;
+      border-radius: 50%;
     }
     ul {
       margin-left: 30px;
@@ -47,6 +49,7 @@ const MyPageTopBlock = styled.div`
       }
     }
   }
+
   .right-area ul {
     display: flex;
     justify-content: center;
@@ -64,11 +67,6 @@ const MyPageTopBlock = styled.div`
   .right-area ul li span {
     margin-bottom: 8px;
     font-size: 20px;
-  }
-  // Mobile
-  @media screen and (max-width: 767px) {
-    display: block;
-    margin-bottom: 35px;
   }
 `;
 
@@ -104,7 +102,7 @@ const MyPage = ({ user }: MyPageProps) => {
     <>
       <MyPageTopBlock>
         <div className="left-area">
-          <img src="./images/default-profile.png" alt="profileImage" />
+          <img src={user.profileImage} alt="profileImage" />
           <ul>
             <li>
               <span>{user.nickname}</span> 님 안녕하세요!
