@@ -102,7 +102,14 @@ const MyPage = ({ user }: MyPageProps) => {
     <>
       <MyPageTopBlock>
         <div className="left-area">
-          <img src={user.profileImage} alt="profileImage" />
+          <img
+            src={
+              user.profileImage
+                ? user.profileImage
+                : "./images/default-profile.png"
+            }
+            alt="profileImage"
+          />
           <ul>
             <li>
               <span>{user.nickname}</span> 님 안녕하세요!

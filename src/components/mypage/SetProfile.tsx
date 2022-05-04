@@ -81,7 +81,9 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
   // 프로필 사진 미리보기
   const [image, setImage] = useState({
     profileImageFile: "",
-    profileImageUrl: user.profileImage,
+    profileImageUrl: user.profileImage
+      ? user.profileImage
+      : "./images/default-profile.png",
   });
   const profileImageChange = (e: any) => {
     e.preventDefault();

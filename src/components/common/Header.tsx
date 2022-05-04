@@ -7,7 +7,7 @@ import HeaderMenu from "./HeaderMenu";
 import { UserType } from "../../type";
 
 interface HeaderProps {
-  user: UserType;
+  user: UserType | null;
   onLogout: () => void;
 }
 
@@ -85,7 +85,14 @@ const Header = ({ user, onLogout }: HeaderProps) => {
         {user ? (
           <div className="right">
             <span className="user-info">
-              <img src={user.profileImage} alt="profileImage" />
+              <img
+                src={
+                  user.profileImage
+                    ? user.profileImage
+                    : "./images/default-profile.png"
+                }
+                alt="profileImage"
+              />
               <UserName>반가워요, {user.nickname} 님!</UserName>
             </span>
             <HeaderMenu onLogout={onLogout} />
