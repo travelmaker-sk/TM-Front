@@ -18,7 +18,6 @@ const SetProfileForm = () => {
   );
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
-  console.log("user: ", user);
 
   return <SetProfile user={user} onSubmit={onSubmit} error={error} />;
 };

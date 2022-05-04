@@ -6,7 +6,6 @@ import { MarginBottom, Wrapeer } from "./HomePage";
 
 const MyPagePage = () => {
   const { user } = useSelector((state: RootStateOrAny) => state.user);
-  console.log("user: ", user);
 
   return (
     <Wrapeer>

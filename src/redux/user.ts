@@ -6,6 +6,9 @@ type UserState = {
 
 type UserActionType = "OVERRIDE" | "LOGOUT";
 
+export const override = () => ({ type: "OVERRIDE" });
+export const logout = () => ({ type: "LOGOUT" });
+
 const initialState: UserState = {
   user: {
     nickname: "asdf",

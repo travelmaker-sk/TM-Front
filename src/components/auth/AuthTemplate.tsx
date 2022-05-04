@@ -51,6 +51,7 @@ const WhiteBox = styled.div`
 
 const AuthTemplate = ({ children }: AuthTemplateProps) => {
   const [childScrollable, setChildScrollable] = useState(false);
+
   return (
     <>
       <AuthTemplateBlock>

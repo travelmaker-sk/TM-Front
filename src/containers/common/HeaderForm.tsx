@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Header from "../../components/common/Header";
 import { useNavigate } from "react-router";
-import { RootStateOrAny, useSelector } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/user";
 
 const HeaderForm = () => {
   const navigate = useNavigate();
-  const onLogout = () => {
+  const dispatch = useDispatch();
+
+  const onLogout = useCallback(() => {
+    dispatch(logout());
     console.log("로그아웃");
     navigate("/");
-  };
+  }, [dispatch, navigate]);
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
   console.log("user: ", user);

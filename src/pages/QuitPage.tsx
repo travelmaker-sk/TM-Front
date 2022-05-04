@@ -5,7 +5,6 @@ import Quit from "../components/mypage/Quit";
 
 const QuitPage = () => {
   const { user } = useSelector((state: RootStateOrAny) => state.user);
-  console.log("user: ", user);
 
   return (
     <AuthTemplate>
