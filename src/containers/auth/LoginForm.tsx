@@ -2,11 +2,14 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Login from "../../components/auth/Login";
 import { login } from "../../api/auth";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 const LoginForm = () => {
   const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
+
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
 
   const initialUid = useRef(localStorage.getItem("tm-saved-id") ?? "");
 
@@ -21,13 +24,8 @@ const LoginForm = () => {
       const [inputEmail, inputPw, checkSaveId, checkKeepLogin] = $inputs.map(
         ($input) => ($input.type === "checkbox" ? $input.checked : $input.value)
       );
-      console.log("email:", inputEmail);
-      console.log("password:", inputPw);
-      console.log("save:", checkSaveId);
-      console.log("login:", checkKeepLogin);
 
       if ([inputEmail, inputPw].includes("")) {
-        console.log("에러 발생");
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {
@@ -39,8 +37,8 @@ const LoginForm = () => {
         .then((token) => {
           if (checkSaveId)
             localStorage.setItem("tm-saved-id", inputEmail as string);
-          if (checkKeepLogin) localStorage.setItem("tm-token", token as string);
-
+          // if (checkKeepLogin) localStorage.setItem("tm-token", token as string);
+          localStorage.setItem("tm-token", token as string);
           if (!token) {
             setError("아이디나 비밀번호가 일치하지 않습니다.");
             return;
@@ -56,36 +54,42 @@ const LoginForm = () => {
     [navigate]
   );
 
+  const onKakaoLogin = () => {
+    const { REACT_APP_KAKAO_REST_API_KEY, REACT_APP_BASE_URL } = process.env;
+    const redirectUri = `${REACT_APP_BASE_URL}/kakaoLogin`;
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${redirectUri}&response_type=code`;
+    window.location.href = kakaoAuthUrl;
+  };
+
   useEffect(() => {
+    const { REACT_APP_NAVER_CLIENT_ID, REACT_APP_BASE_URL } = process.env;
+
     // @ts-ignore
-    const naver_id_login = new window.naver_id_login(
-      "A8OGfsF4jp5_bVHTQdfd",
-      "http://localhost:3000/naver"
+    let naver_id_login = new window.naver_id_login(
+      REACT_APP_NAVER_CLIENT_ID,
+      `${REACT_APP_BASE_URL}/naverLogin`
     );
+
     const state = naver_id_login.getUniqState();
     naver_id_login.setButton("white", 2, 40);
-    naver_id_login.setDomain("http://localhost:3000");
+    naver_id_login.setDomain(REACT_APP_BASE_URL);
     naver_id_login.setState(state);
-    naver_id_login.setPopup();
+    // naver_id_login.setPopup();
     naver_id_login.init_naver_id_login();
-
-    setInterval(() => {
-      const accessToken = naver_id_login.oauthParams.access_token;
-      console.log("accessToken: ", accessToken);
-      if (!accessToken) return;
-
-      // 네이버 사용자 프로필 조회
-      naver_id_login.get_naver_userprofile("naverSignInCallback()");
-      // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-      function naverSignInCallback() {
-        alert(naver_id_login.getProfileData("email"));
-        alert(naver_id_login.getProfileData("nickname"));
-        alert(naver_id_login.getProfileData("age"));
-      }
-    }, 3000);
   }, []);
 
-  return <Login onSubmit={onSubmit} initialUid={initialUid} error={error} />;
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user, navigate]);
+
+  return (
+    <Login
+      onSubmit={onSubmit}
+      initialUid={initialUid}
+      onKakaoLogin={onKakaoLogin}
+      error={error}
+    />
+  );
 };
 
 export default LoginForm;

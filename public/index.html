@@ -11,6 +11,7 @@
     />
     <title>트레블 메이커 TM</title>
 
+    <!-- GOOGLE FONTS, ICONS -->
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet"
@@ -20,6 +21,7 @@
       rel="stylesheet"
     />
 
+    <!-- NAVER SNS LOGIN -->
     <script
       type="text/javascript"
       src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
@@ -29,7 +31,12 @@
       type="text/javascript"
       src="http://code.jquery.com/jquery-1.11.3.min.js"
     ></script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+    <!-- KAKAO SNS LOGIN -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+      Kakao.init("90d10e65c8d549d7a54350271cece252");
+    </script>
   </head>
   <body>
     <div id="root"></div>

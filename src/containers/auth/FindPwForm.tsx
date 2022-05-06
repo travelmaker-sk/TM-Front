@@ -16,10 +16,8 @@ const FindPwForm = () => {
       const $inputs = Array.from(form.querySelectorAll("input"));
 
       const [inputEmail] = $inputs.map(($input) => $input.value);
-      console.log("email:", inputEmail);
 
       if ([inputEmail].includes("")) {
-        console.log("에러 발생");
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {

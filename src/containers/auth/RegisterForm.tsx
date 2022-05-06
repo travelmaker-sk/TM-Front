@@ -11,7 +11,7 @@ const RegisterForm = () => {
 
   const { state } = useLocation();
   useEffect(() => {
-    console.log(state);
+    console.log("state", state);
     if (!state) {
       alert("회원가입을 위해 서비스 이용 약관 동의가 필요합니다.");
       navigate("/privacy-policy");
@@ -29,17 +29,11 @@ const RegisterForm = () => {
       const [inputNickname, inputEmail, inputPw, inputPwConfirm] = $inputs.map(
         ($input) => $input.value
       );
-      console.log("nickname:", inputNickname);
-      console.log("email:", inputEmail);
-      console.log("password:", inputPw);
-      console.log("confirm-password:", inputPwConfirm);
 
       if ([inputNickname, inputEmail, inputPw, inputPwConfirm].includes("")) {
-        console.log("에러 발생");
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else if (inputPw !== inputPwConfirm) {
-        console.log("에러 발생");
         setError("비밀번호가 일치하지 않습니다.");
         return;
       } else {
@@ -50,8 +44,6 @@ const RegisterForm = () => {
       register(inputNickname, inputEmail, inputPw)
         .then((registerResult) => {
           if (registerResult) {
-            console.log("#####", registerResult, typeof registerResult);
-
             setError(registerResult); // 닉네임 중복 or 이메일 중복 or 비밀번호 형식 미충족
             return;
           } else {

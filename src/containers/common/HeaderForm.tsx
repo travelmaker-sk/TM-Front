@@ -10,12 +10,11 @@ const HeaderForm = () => {
 
   const onLogout = useCallback(() => {
     dispatch(logout());
-    console.log("로그아웃");
+    localStorage.removeItem("tm-token");
     navigate("/");
   }, [dispatch, navigate]);
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
-  console.log("user: ", user);
 
   return <Header user={user} onLogout={onLogout} />;
 };

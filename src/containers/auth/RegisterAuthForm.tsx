@@ -11,7 +11,7 @@ const RegisterAuthForm = () => {
 
   const location = useLocation();
   const email = location.state;
-  console.log(email);
+  console.log("email: ", email);
 
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,10 +21,8 @@ const RegisterAuthForm = () => {
       const $inputs = Array.from(form.querySelectorAll("input"));
 
       const [inputAuthCode] = $inputs.map(($input) => $input.value);
-      console.log("AuthCode:", inputAuthCode);
 
       if ([inputAuthCode].includes("")) {
-        console.log("에러 발생");
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {
@@ -50,6 +48,7 @@ const RegisterAuthForm = () => {
 
   const reSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("이메일 인증 코드 재전송");
   }, []);
 
   return <RegisterAuth onSubmit={onSubmit} reSubmit={reSubmit} error={error} />;

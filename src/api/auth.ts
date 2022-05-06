@@ -1,25 +1,25 @@
 import axios from "axios";
 
-// const baseUrl = "https://localhost:3000";
-const baseUrl = "https://tm-back-sample.herokuapp.com";
+const baseUrl = "https://localhost:8080";
 
 export const login = async (email: string, password: string) => {
   const response = await axios.post(`${baseUrl}/user/login`, {
     email,
     password,
   });
+
   return response.data.token;
 };
 
-export const logout = async (token: string) => {
-  await axios.get(`${baseUrl}/user/logout`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+export const naverLogin = async (accessToken: string) => {
+  const response = await axios.post(`${baseUrl}/naverLogin`, {
+    accessToken,
   });
+
+  return response.data.token;
 };
 
-export const userInfo = async (token: string) => {
+export const myInfo = async (token: string | null) => {
   const response = await axios.get(`${baseUrl}/user/me`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -39,7 +39,6 @@ export const register = async (
     email,
     password,
   });
-  console.log("#1", response.data);
 
   if (response.data.code === 0) return null;
 
