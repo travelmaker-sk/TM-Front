@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
   }
   html, body, #root {
     height: 100%;
+    display: relative;
   }
   body{
     font-family: 'Noto Sans KR', sans-serif;

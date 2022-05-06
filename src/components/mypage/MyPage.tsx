@@ -139,7 +139,6 @@ const MyPage = ({ user }: MyPageProps) => {
       <MyPageBottomBlock>
         <div>
           <h3>공개된 여행</h3>
-          <h3>비공개된 여행</h3>
         </div>
       </MyPageBottomBlock>
     </>

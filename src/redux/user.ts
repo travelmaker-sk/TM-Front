@@ -22,7 +22,7 @@ const initialState: UserState = {
 };
 
 const token = localStorage.getItem("tm-token");
-const userInfo = myInfo(token);
+// const userInfo = myInfo(token);
 
 // const initialState: UserState = {
 //   user: {

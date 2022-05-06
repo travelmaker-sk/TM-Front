@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 
-interface HeaderMenuProps {
+interface HeaderNavProps {
   onLogout: () => void;
 }
 
-const HeaderMenuStyle = styled.div`
+const HeaderNavStyle = styled.div`
   nav {
     positin: relative;
     cursor: pointer;
@@ -73,14 +73,14 @@ const HeaderMenuStyle = styled.div`
   }
 `;
 
-const HeaderMenu = ({ onLogout }: HeaderMenuProps) => {
+const HeaderNav = ({ onLogout }: HeaderNavProps) => {
   const [isToggle, setToggle] = useState(false);
   const onToggle = () => {
     setToggle(!isToggle);
   };
 
   return (
-    <HeaderMenuStyle>
+    <HeaderNavStyle>
       <nav className="material-icons apps-bar" onClick={onToggle}>
         apps
         <ul className={isToggle ? "open" : ""}>
@@ -117,8 +117,8 @@ const HeaderMenu = ({ onLogout }: HeaderMenuProps) => {
           </button>
         </ul>
       </nav>
-    </HeaderMenuStyle>
+    </HeaderNavStyle>
   );
 };
 
-export default HeaderMenu;
+export default HeaderNav;

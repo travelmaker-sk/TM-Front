@@ -2,32 +2,25 @@ import React from "react";
 import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
 import HeaderForm from "../containers/common/HeaderForm";
+import SearchBar from "../components/mainpage/SearchBar";
 
-export const Wrapeer = styled(Responsive)``;
-export const Wrapeer2 = styled.div``;
-
-export const HeaderBottom = styled.div`
-  // Desktop
-  @media screen and (min-width: 1280px) {
-    height: 80px;
-  }
-  // Tablet
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    height: 80px;
-  }
-  // Mobile
-  @media screen and (max-width: 767px) {
-    height: 65px;
+export const Wrapper = styled(Responsive)`
+  .post-list {
+    font-size: 20px;
+    // Mobile
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+    }
   }
 `;
 
 const PostListPage = () => {
   return (
-    <Wrapeer2>
+    <Wrapper>
       <HeaderForm />
-      <HeaderBottom />
-      <img src="./images/bg1.png" alt="bg" />
-    </Wrapeer2>
+      <SearchBar />
+      <div className="post-list">다른 사람들의 여행을 둘러보세요</div>
+    </Wrapper>
   );
 };
 
