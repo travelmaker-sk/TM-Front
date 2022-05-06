@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { RootStateOrAny, useSelector } from "react-redux";
+import styled from "styled-components";
 import MyPage from "../components/mypage/MyPage";
 import HeaderForm from "../containers/common/HeaderForm";
-import { MarginBottom, Wrapeer } from "./HomePage";
+import { HeaderBottom, Wrapeer } from "./HomePage";
+
+export const HeaderBottomPlus = styled.div`
+  height: 40px;
+`;
 
 const MyPagePage = () => {
   const { user } = useSelector((state: RootStateOrAny) => state.user);
@@ -10,7 +15,8 @@ const MyPagePage = () => {
   return (
     <Wrapeer>
       <HeaderForm />
-      <MarginBottom />
+      <HeaderBottom />
+      <HeaderBottomPlus />
       <MyPage user={user} />
     </Wrapeer>
   );

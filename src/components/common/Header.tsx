@@ -48,6 +48,7 @@ const HeaderBlock = styled.div`
         // Mobile
         @media screen and (max-width: 767px) {
           width: 20px;
+          height: 20px;
         }
       }
     }

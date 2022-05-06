@@ -3,10 +3,10 @@ import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
 import HeaderForm from "../containers/common/HeaderForm";
 
-// export const Wrapeer = styled(Responsive)``;
-export const Wrapeer = styled.div``;
+export const Wrapeer = styled(Responsive)``;
+export const Wrapeer2 = styled.div``;
 
-export const MarginBottom = styled.div`
+export const HeaderBottom = styled.div`
   // Desktop
   @media screen and (min-width: 1280px) {
     height: 80px;
@@ -23,11 +23,11 @@ export const MarginBottom = styled.div`
 
 const PostListPage = () => {
   return (
-    <Wrapeer>
+    <Wrapeer2>
       <HeaderForm />
-      <MarginBottom />
+      <HeaderBottom />
       <img src="./images/bg1.png" alt="bg" />
-    </Wrapeer>
+    </Wrapeer2>
   );
 };
 
