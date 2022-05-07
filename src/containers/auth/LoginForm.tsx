@@ -9,8 +9,8 @@ const LoginForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const [username, setUsername] = useState<string | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
+  // const [username, setUsername] = useState<string | null>(null);
+  // const [email, setEmail] = useState<string | null>(null);
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
 
@@ -66,13 +66,13 @@ const LoginForm = () => {
       //   .catch((err) => {
       //     console.warn(err);
       //   });
-      setUsername("test");
-      setEmail("test@test.com");
+      // setUsername("test");
+      // setEmail("test@test.com");
 
-      user.nickname = username;
-      user.email = email;
+      // user.nickname = username;
+      // user.email = email;
     },
-    [navigate, user, username, email]
+    [navigate]
   );
 
   const onKakaoLogin = () => {

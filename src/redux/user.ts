@@ -6,9 +6,9 @@ type UserState = {
   user: UserType | null;
 };
 
-type UserActionType = "OVERRIDE" | "LOGOUT";
+type UserActionType = "SET_USER" | "LOGOUT";
 
-export const override = () => ({ type: "OVERRIDE" });
+export const setUser = () => ({ type: "SET_USER" });
 export const logout = () => ({ type: "LOGOUT" });
 
 const initialState: UserState = {
@@ -23,8 +23,8 @@ const user = (
   }
 ) => {
   switch (action.type) {
-    case "OVERRIDE":
-      return { ...state, ...action.payload };
+    case "SET_USER":
+      return { ...state, user: action.payload.user };
     case "LOGOUT":
       return { ...state, user: null };
     default:
