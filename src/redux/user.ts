@@ -21,20 +21,6 @@ const initialState: UserState = {
   },
 };
 
-const token = localStorage.getItem("tm-token");
-// const userInfo = myInfo(token);
-
-// const initialState: UserState = {
-//   user: {
-//     nickname: userInfo.nickname,
-//     email: userInfo.email,
-//     profileImage: userInfo.profileImage,
-//     postCount: userInfo.postCount,
-//     followers: userInfo.followers,
-//     followings: userInfo.followings,
-//   },
-// };
-
 const user = (
   state = initialState,
   action: {
