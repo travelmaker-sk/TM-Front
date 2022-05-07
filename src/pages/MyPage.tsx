@@ -1,24 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { RootStateOrAny, useSelector } from "react-redux";
+import styled from "styled-components";
 import MyPage from "../components/mypage/MyPage";
 import HeaderForm from "../containers/common/HeaderForm";
-import { MarginBottom, Wrapeer } from "./HomePage";
+import { Wrapper } from "./HomePage";
+
+export const HeaderBottomPlus = styled.div`
+  height: 50px;
+`;
 
 const MyPagePage = () => {
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
+
   return (
-    <Wrapeer>
+    <Wrapper>
       <HeaderForm />
-      <MarginBottom />
-      <MyPage
-        user={{
-          nickname: "닉네임예시",
-          email: "email1234@google.com",
-          password: "pw1234",
-          postCount: 0,
-          followers: 0,
-          followings: 0,
-        }}
-      />
-    </Wrapeer>
+      <HeaderBottomPlus />
+      <MyPage user={user} />
+    </Wrapper>
   );
 };
 

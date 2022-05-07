@@ -1,13 +1,13 @@
 import React from "react";
 import AuthTemplate from "../components/auth/AuthTemplate";
-import FindPwForm from "../containers/auth/FindPwForm";
+import QuitFin from "../components/mypage/QuitFin";
 
-const FindPwPage = () => {
+const QuitFinPage = () => {
   return (
     <AuthTemplate>
-      <FindPwForm />
+      <QuitFin />
     </AuthTemplate>
   );
 };
 
-export default FindPwPage;
+export default QuitFinPage;

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 interface LoginProps {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   initialUid: MutableRefObject<string>;
+  onKakaoLogin: () => void;
   error: string | null;
 }
 
@@ -113,14 +114,10 @@ const LoginBlock = styled.div`
   }
 `;
 
-const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
+const Login = ({ onSubmit, initialUid, onKakaoLogin, error }: LoginProps) => {
   const naverRef = useRef<any>();
-  const kakaoRef = useRef<any>();
-  const onNaver = () => {
+  const onNaverLogin = () => {
     naverRef.current.children[0].click();
-  };
-  const onKakao = () => {
-    kakaoRef.current.children[0].click();
   };
 
   return (
@@ -165,13 +162,12 @@ const Login = ({ onSubmit, initialUid, error }: LoginProps) => {
       <div className="sns-login">
         <SelectButtonStyle>
           <div id="naver_id_login" ref={naverRef}></div>
-          <button className="sns-btn naver-btn" onClick={onNaver}>
-            <img src="./images/naver_icon.png" alt="naver" />
+          <button className="sns-btn naver-btn" onClick={onNaverLogin}>
+            <img src="./images/naver-icon.png" alt="naver" />
             네이버 로그인
           </button>
-          <a id="custom-login-btn" href="#" ref={kakaoRef}></a>
-          <button className="sns-btn kakao-btn" onClick={onKakao}>
-            <img src="./images/kakao_icon.png" alt="kakao" />
+          <button className="sns-btn kakao-btn" onClick={onKakaoLogin}>
+            <img src="./images/kakao-icon.png" alt="kakao" />
             카카오 로그인
           </button>
         </SelectButtonStyle>

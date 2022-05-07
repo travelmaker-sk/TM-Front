@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   CyanButtonStyle,
@@ -7,6 +7,8 @@ import {
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
+import { RootStateOrAny, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 const PrivacyBlock = styled.div`
   h2 {
@@ -34,6 +36,12 @@ const PrivacyBlock = styled.div`
 `;
 
 const PrivacyPolicy = () => {
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user, navigate]);
+
   return (
     <PrivacyBlock>
       <h2>

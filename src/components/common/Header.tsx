@@ -3,14 +3,11 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
-import HeaderMenu from "./HeaderMenu";
+import HeaderNav from "./HeaderNav";
+import { UserType } from "../../type";
 
 interface HeaderProps {
-  user: {
-    nickname: string;
-    email: string;
-    password: string;
-  } | null;
+  user: UserType | null;
   onLogout: () => void;
 }
 
@@ -39,7 +36,7 @@ const HeaderBlock = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 15px;
+      margin-right: 20px;
       // Mobile
       @media screen and (max-width: 767px) {
         margin-right: 10px;
@@ -47,9 +44,11 @@ const HeaderBlock = styled.div`
       img {
         width: 24px;
         height: 24px;
+        border-radius: 50%;
         // Mobile
         @media screen and (max-width: 767px) {
           width: 20px;
+          height: 20px;
         }
       }
     }
@@ -79,28 +78,53 @@ const UserName = styled.div`
   }
 `;
 
+export const HeaderBottom = styled.div`
+  // Desktop
+  @media screen and (min-width: 1280px) {
+    height: 80px;
+  }
+  // Tablet
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    height: 80px;
+  }
+  // Mobile
+  @media screen and (max-width: 767px) {
+    height: 65px;
+  }
+`;
+
 const Header = ({ user, onLogout }: HeaderProps) => {
   return (
-    <Wrapper>
-      <HeaderBlock>
-        <Logo fontsize="16px" />
-        {user ? (
-          <div className="right">
-            <span className="user-info">
-              <img src="./images/default_profile.png" alt="profileImage" />
-              <UserName>반가워요, {user.nickname} 님!</UserName>
-            </span>
-            <HeaderMenu onLogout={onLogout} />
-          </div>
-        ) : (
-          <div className="right">
-            <Link to="/login" className="link-btn">
-              로그인
-            </Link>
-          </div>
-        )}
-      </HeaderBlock>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <HeaderBlock>
+          <Logo fontsize="16px" />
+          {user ? (
+            <div className="right">
+              <span className="user-info">
+                <img
+                  src={
+                    user.profileImage
+                      ? user.profileImage
+                      : "./images/default-profile.png"
+                  }
+                  alt="profileImage"
+                />
+                <UserName>반가워요, {user.nickname} 님!</UserName>
+              </span>
+              <HeaderNav onLogout={onLogout} />
+            </div>
+          ) : (
+            <div className="right">
+              <Link to="/login" className="link-btn">
+                로그인
+              </Link>
+            </div>
+          )}
+        </HeaderBlock>
+      </Wrapper>
+      <HeaderBottom />
+    </>
   );
 };
 

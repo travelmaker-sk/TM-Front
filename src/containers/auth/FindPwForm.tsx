@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
 import FindPw from "../../components/auth/FindPw";
-import { findPw } from "../../lib/api/auth";
+import { findPw } from "../../api/auth";
 
 const FindPwForm = () => {
   const navigate = useNavigate();
@@ -16,10 +16,8 @@ const FindPwForm = () => {
       const $inputs = Array.from(form.querySelectorAll("input"));
 
       const [inputEmail] = $inputs.map(($input) => $input.value);
-      console.log("email:", inputEmail);
 
       if ([inputEmail].includes("")) {
-        console.log("에러 발생");
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {
@@ -27,15 +25,19 @@ const FindPwForm = () => {
       }
 
       // API 호출
-      findPw(inputEmail as string).then((findPwResult) => {
-        if (!findPwResult) {
-          setError("가입하지 않은 회원입니다.");
-          return;
-        } else {
-          setError("");
-          navigate("/findPwAuth");
-        }
-      });
+      findPw(inputEmail as string)
+        .then((findPwResult) => {
+          if (!findPwResult) {
+            setError("가입하지 않은 회원입니다.");
+            return;
+          } else {
+            setError("");
+            navigate("/findPw-auth");
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
     [navigate]
   );

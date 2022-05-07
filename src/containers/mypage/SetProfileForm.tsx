@@ -1,16 +1,9 @@
 import React, { useCallback, useState } from "react";
+import { RootStateOrAny, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import SetProfile from "../../components/mypage/SetProfile";
 
-interface SetProfileFromProps {
-  user: {
-    nickname: string;
-    email: string;
-    password: string;
-  };
-}
-
-const SetProfileForm = ({ user }: SetProfileFromProps) => {
+const SetProfileForm = () => {
   const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
@@ -19,13 +12,12 @@ const SetProfileForm = ({ user }: SetProfileFromProps) => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const form = e.target as HTMLFormElement;
-      const $inputs = Array.from(form.querySelectorAll("input"));
-
-      // API 호출
+      // TODO. API 호출
     },
     [navigate]
   );
+
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
 
   return <SetProfile user={user} onSubmit={onSubmit} error={error} />;
 };
