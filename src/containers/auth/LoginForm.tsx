@@ -34,11 +34,12 @@ const LoginForm = () => {
 
       // API 호출
       login(inputEmail as string, inputPw as string)
-        .then((token) => {
+        .then((res) => {
+          let token = localStorage.getItem("Authorization");
+          console.log("token: ", token);
           if (checkSaveId)
             localStorage.setItem("tm-saved-id", inputEmail as string);
           // if (checkKeepLogin) localStorage.setItem("tm-token", token as string);
-          localStorage.setItem("tm-token", token as string);
           if (!token) {
             setError("아이디나 비밀번호가 일치하지 않습니다.");
             return;

@@ -31,7 +31,7 @@ const RegisterAuthForm = () => {
       // API 호출
       registerAuth(email as string, inputAuthCode as string)
         .then((registerAuthResult) => {
-          if (!registerAuthResult) {
+          if (registerAuthResult) {
             setError("인증번호가 일치하지 않습니다.");
             return;
           } else {

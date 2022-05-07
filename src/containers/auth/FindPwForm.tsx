@@ -27,12 +27,12 @@ const FindPwForm = () => {
       // API 호출
       findPw(inputEmail as string)
         .then((findPwResult) => {
-          if (!findPwResult) {
+          if (findPwResult) {
             setError("가입하지 않은 회원입니다.");
             return;
           } else {
             setError("");
-            navigate("/findPw-auth");
+            navigate("/findPwFin");
           }
         })
         .catch((err) => {

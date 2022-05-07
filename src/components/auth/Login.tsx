@@ -125,10 +125,10 @@ const Login = ({ onSubmit, initialUid, onKakaoLogin, error }: LoginProps) => {
       <h2>반갑습니다!</h2>
       <form onSubmit={onSubmit}>
         <Input
-          type="email"
-          name="email"
-          autoComplete="email"
-          placeholder="이메일"
+          type="text"
+          name="id"
+          autoComplete="username"
+          placeholder="아이디"
           defaultValue={initialUid.current}
         />
         <Input

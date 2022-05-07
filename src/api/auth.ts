@@ -1,18 +1,22 @@
 import axios from "axios";
 
-const baseUrl = "https://localhost:8080";
+// const baseUrl = "http://localhost:8080";
 
-export const login = async (email: string, password: string) => {
-  const response = await axios.post(`${baseUrl}/login`, {
-    email,
+export const login = async (username: string, password: string) => {
+  const response = await axios.post("/login", {
+    username,
     password,
   });
 
-  return response.data.token;
+  // @ts-ignore
+  let jwtToken = response.headers.get("Authorization");
+  localStorage.setItem("Authorization", jwtToken);
+
+  return response.data;
 };
 
 export const naverLogin = async (accessToken: string) => {
-  const response = await axios.post(`${baseUrl}/naverLogin`, {
+  const response = await axios.post("/naverLogin", {
     accessToken,
   });
 
@@ -20,7 +24,7 @@ export const naverLogin = async (accessToken: string) => {
 };
 
 export const myInfo = async (token: string | null) => {
-  const response = await axios.get(`${baseUrl}/user/me`, {
+  const response = await axios.get("/user/me", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -30,12 +34,12 @@ export const myInfo = async (token: string | null) => {
 };
 
 export const register = async (
-  nickname: string,
+  username: string,
   email: string,
   password: string
 ) => {
-  const response = await axios.post(`${baseUrl}/account/join`, {
-    nickname,
+  const response = await axios.post("/account/join", {
+    username,
     email,
     password,
   });
@@ -45,17 +49,17 @@ export const register = async (
   return response.data;
 };
 
-export const registerAuth = async (email: string, authCode: string) => {
-  const response = await axios.post(`${baseUrl}/check-email-token`, {
+export const registerAuth = async (email: string, token: string) => {
+  const response = await axios.post("/check-email-token", {
     email,
-    authCode,
+    token,
   });
 
   return response.data;
 };
 
 export const findPw = async (email: string) => {
-  const response = await axios.post(`${baseUrl}/findPw`, email);
+  const response = await axios.post("/account/findpassword", email);
 
   return response.data;
 };
