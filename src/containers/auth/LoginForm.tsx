@@ -9,6 +9,9 @@ const LoginForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
+  const [username, setUsername] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+
   const { user } = useSelector((state: RootStateOrAny) => state.user);
 
   const initialUid = useRef(localStorage.getItem("tm-saved-id") ?? "");
@@ -52,8 +55,24 @@ const LoginForm = () => {
         .catch((err) => {
           console.warn(err);
         });
+
+      // let token = localStorage.getItem("Authorization");
+      // // API 호출
+      // myInfo(token as string)
+      //   .then((res) => {
+      //     setUsername(res.username);
+      //     setEmail(res.email);
+      //   })
+      //   .catch((err) => {
+      //     console.warn(err);
+      //   });
+      setUsername("test");
+      setEmail("test@test.com");
+
+      user.nickname = username;
+      user.email = email;
     },
-    [navigate]
+    [navigate, user, username, email]
   );
 
   const onKakaoLogin = () => {

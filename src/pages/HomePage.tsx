@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
 import HeaderForm from "../containers/common/HeaderForm";
 import SearchBar from "../components/mainpage/SearchBar";
+import { myInfo } from "../api/auth";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 export const Wrapper = styled(Responsive)`
   .post-list {

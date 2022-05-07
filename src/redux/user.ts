@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { myInfo } from "../api/auth";
 import { UserType } from "../type";
 
@@ -11,14 +12,7 @@ export const override = () => ({ type: "OVERRIDE" });
 export const logout = () => ({ type: "LOGOUT" });
 
 const initialState: UserState = {
-  user: {
-    nickname: "asdf",
-    email: "a@c.com",
-    profileImage: "./images/loopy-profile.jpg",
-    postCount: 0,
-    followers: 0,
-    followings: 0,
-  },
+  user: null,
 };
 
 const user = (

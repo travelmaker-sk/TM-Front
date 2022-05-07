@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { myInfo } from "../../api/auth";
 import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import { UserType } from "../../type";
@@ -98,6 +100,22 @@ const MyPageBottomBlock = styled.div`
 `;
 
 const MyPage = ({ user }: MyPageProps) => {
+  // const [username, setUsername] = useState<string | null>(null);
+  // const [email, setEmail] = useState<string | null>(null);
+
+  // useEffect(() => {
+  //   let token = localStorage.getItem("Authorization");
+  //   // API 호출
+  //   myInfo(token as string)
+  //     .then((res) => {
+  //       setUsername(res.username);
+  //       setEmail(res.email);
+  //     })
+  //     .catch((err) => {
+  //       console.warn(err);
+  //     });
+  // });
+
   return (
     <>
       <MyPageTopBlock>

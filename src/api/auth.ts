@@ -23,8 +23,18 @@ export const naverLogin = async (accessToken: string) => {
   return response.data.token;
 };
 
-export const myInfo = async (token: string | null) => {
-  const response = await axios.get("/user/me", {
+export const myInfo = async (token: string) => {
+  const response = await axios.get("/", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
+
+export const quit = async (token: string) => {
+  const response = await axios.delete("/", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
