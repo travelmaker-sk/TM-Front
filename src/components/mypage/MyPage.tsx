@@ -117,7 +117,7 @@ const MyPage = ({ user }: MyPageProps) => {
             <li>{user.email}</li>
             <CyanButtonStyle>
               <button>
-                <LinkButton to="/set-profile">회원정보 변경</LinkButton>
+                <LinkButton to="/setProfile">회원정보 변경</LinkButton>
               </button>
             </CyanButtonStyle>
           </ul>

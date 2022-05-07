@@ -91,7 +91,7 @@ const HeaderNav = ({ onLogout }: HeaderNavProps) => {
             </Link>
           </li>
           <li>
-            <Link to="/create-photocard">
+            <Link to="/createPhotocard">
               <span className="material-symbols-outlined">
                 add_photo_alternate
               </span>

@@ -60,7 +60,7 @@ const RegisterAuth = ({ onSubmit, reSubmit, error }: RegisterAuthProps) => {
         이메일이 도착하지 않았나요?
         <button className="resubmit-btn">
           <Link
-            to="/register-auth"
+            to="/registerAuth"
             // onClick={reSubmit}
           >
             재전송

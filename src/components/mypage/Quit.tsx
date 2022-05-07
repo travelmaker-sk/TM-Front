@@ -82,7 +82,7 @@ const Quit = ({ user }: QuitProps) => {
           ) : (
             <GrayButtonStyle>
               <button>
-                <LinkButton to="/set-profile">취소</LinkButton>
+                <LinkButton to="/setProfile">취소</LinkButton>
               </button>
             </GrayButtonStyle>
           )}

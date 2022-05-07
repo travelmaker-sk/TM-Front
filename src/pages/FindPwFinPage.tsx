@@ -1,6 +1,6 @@
 import React from "react";
 import AuthTemplate from "../components/auth/AuthTemplate";
-import FindPwFin from "../components/auth/FindPwFin";
+import FindPwFin from "../components/auth/findPwFin";
 
 const FindPwFinPage = () => {
   return (

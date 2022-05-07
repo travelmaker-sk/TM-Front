@@ -36,7 +36,7 @@ const RegisterAuthForm = () => {
             return;
           } else {
             setError("");
-            navigate("/register-fin");
+            navigate("/registerFin");
           }
         })
         .catch((err) => {

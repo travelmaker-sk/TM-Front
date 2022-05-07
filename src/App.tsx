@@ -8,8 +8,8 @@ import RegisterPage from "./pages/RegisterPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
-import FindPwPage from "./pages/FindPwPage";
-import FindPwFinPage from "./pages/FindPwFinPage";
+import FindPwPage from "./pages/findPwPage";
+import FindPwFinPage from "./pages/findPwFinPage";
 import CPhotoCardPage from "./pages/CPhotoCardPage";
 import BookMarksListPage from "./pages/BookMarksListPage";
 import NoticePage from "./pages/NoticePage";
@@ -26,20 +26,20 @@ function App() {
       <Route path="/" element={<HomePage />} />
 
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/privacy-policy" element={<PrivacyPage />} />
-      <Route path="/register-auth" element={<RegisterAuthPage />} />
-      <Route path="/register-fin" element={<RegisterFinPage />} />
+      <Route path="/privacyPolicy" element={<PrivacyPage />} />
+      <Route path="/registerAuth" element={<RegisterAuthPage />} />
+      <Route path="/registerFin" element={<RegisterFinPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/naverLogin" element={<NaverCallback />} />
       <Route path="/kakaoLogin" element={<KakaoCallback />} />
-      <Route path="/findpw" element={<FindPwPage />} />
-      <Route path="/findpw-fin" element={<FindPwFinPage />} />
+      <Route path="/findPw" element={<FindPwPage />} />
+      <Route path="/findPwFin" element={<FindPwFinPage />} />
 
       <Route path="/mypage" element={<MyPagePage />} />
-      <Route path="/set-profile" element={<SetProfilePage />} />
+      <Route path="/setProfile" element={<SetProfilePage />} />
       <Route path="/quit" element={<QuitPage />} />
-      <Route path="/quit-fin" element={<QuitFinPage />} />
-      <Route path="/create-photocard" element={<CPhotoCardPage />} />
+      <Route path="/quitFin" element={<QuitFinPage />} />
+      <Route path="/createPhotocard" element={<CPhotoCardPage />} />
       <Route path="/bookmarks" element={<BookMarksListPage />} />
       <Route path="/notice" element={<NoticePage />} />
 

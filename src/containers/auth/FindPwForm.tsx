@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
-import FindPw from "../../components/auth/FindPw";
+import FindPw from "../../components/auth/findPw";
 import { findPw } from "../../api/auth";
 
 const FindPwForm = () => {
@@ -32,7 +32,7 @@ const FindPwForm = () => {
             return;
           } else {
             setError("");
-            navigate("/findpw-auth");
+            navigate("/findPw-auth");
           }
         })
         .catch((err) => {

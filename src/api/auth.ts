@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl = "https://localhost:8080";
 
 export const login = async (email: string, password: string) => {
-  const response = await axios.post(`${baseUrl}/user/login`, {
+  const response = await axios.post(`${baseUrl}/login`, {
     email,
     password,
   });
@@ -34,7 +34,7 @@ export const register = async (
   email: string,
   password: string
 ) => {
-  const response = await axios.post(`${baseUrl}/user/register`, {
+  const response = await axios.post(`${baseUrl}/account/join`, {
     nickname,
     email,
     password,
@@ -46,7 +46,7 @@ export const register = async (
 };
 
 export const registerAuth = async (email: string, authCode: string) => {
-  const response = await axios.post(`${baseUrl}/emailAuth`, {
+  const response = await axios.post(`${baseUrl}/check-email-token`, {
     email,
     authCode,
   });
@@ -55,7 +55,7 @@ export const registerAuth = async (email: string, authCode: string) => {
 };
 
 export const findPw = async (email: string) => {
-  const response = await axios.post(`${baseUrl}/findPW`, email);
+  const response = await axios.post(`${baseUrl}/findPw`, email);
 
   return response.data;
 };
