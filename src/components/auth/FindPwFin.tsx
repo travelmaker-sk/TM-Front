@@ -74,7 +74,7 @@ const FindPwFin = () => {
           </button>
         </GrayButtonStyle>
       </SelectButtonStyle>
-    </findPwFinBlock>
+    </FindPwFinBlock>
   );
 };
 

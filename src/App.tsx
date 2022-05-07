@@ -8,8 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
-import FindPwPage from "./pages/findPwPage";
-import FindPwFinPage from "./pages/findPwFinPage";
+
 import CPhotoCardPage from "./pages/CPhotoCardPage";
 import BookMarksListPage from "./pages/BookMarksListPage";
 import NoticePage from "./pages/NoticePage";
@@ -19,6 +18,8 @@ import QuitPage from "./pages/QuitPage";
 import QuitFinPage from "./pages/QuitFinPage";
 import NaverCallback from "./pages/NaverCallback";
 import KakaoCallback from "./pages/KaKaoCallback";
+import FindPwPage from "./pages/FindPwPage";
+import FindPwFinPage from "./pages/FindPwFinPage";
 
 function App() {
   return (

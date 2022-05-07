@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
-import FindPw from "../../components/auth/findPw";
+import FindPw from "../../components/auth/FindPw";
 import { findPw } from "../../api/auth";
 
 const FindPwForm = () => {

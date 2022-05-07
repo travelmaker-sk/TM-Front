@@ -47,7 +47,7 @@ const FindPw = ({ onSubmit, error }: FindPwProps) => {
           <button type="submit">확인</button>
         </CyanButtonStyle>
       </form>
-    </findPwBlock>
+    </FindPwBlock>
   );
 };
 
