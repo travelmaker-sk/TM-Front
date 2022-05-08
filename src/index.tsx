@@ -8,7 +8,7 @@ import { createStore } from "redux";
 import rootReducer from "./redux";
 import { Provider } from "react-redux";
 import { myInfo } from "./api/auth";
-import { loadSetUser, override } from "./redux/user";
+import { setUser } from "./redux/user";
 
 // React 17
 // ReactDOM.render(
@@ -31,7 +31,7 @@ function loadUser() {
   myInfo(token as string)
     .then((res) => {
       // @ts-ignore
-      store.dispatch(setUser(res));
+      store.dispatch(setUser({ user: res }));
     })
     .catch((err) => {
       console.warn(err);
