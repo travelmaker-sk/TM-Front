@@ -50,9 +50,9 @@ const Register = ({ onSubmit, error }: RegisterProps) => {
       <form onSubmit={onSubmit}>
         <Input
           type="text"
-          name="nickname"
-          autoComplete="nickname"
-          placeholder="닉네임"
+          name="id"
+          autoComplete="username"
+          placeholder="아이디"
         />
         <Input
           type="email"

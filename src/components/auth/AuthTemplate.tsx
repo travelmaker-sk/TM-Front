@@ -22,8 +22,7 @@ const WhiteBox = styled.div`
   padding: 52px 15%;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  justify-content: flex-start;
+  justify-content: center;
   &.childScrollable {
     justify-content: flex-start;
   }

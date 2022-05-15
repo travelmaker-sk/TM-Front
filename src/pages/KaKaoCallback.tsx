@@ -32,7 +32,7 @@ const KakaoCallback = () => {
         });
       })
       .then((user) => {
-        const { id, account_email, profile_nickname } = user;
+        const { id, account_email, profile_username } = user;
         // TODO: 백엔드에 위 필드들을 보내며 로그인 요청
       })
       .then((jwtToken) => {

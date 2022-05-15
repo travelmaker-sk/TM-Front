@@ -1,5 +1,5 @@
 export type UserType = {
-  nickname: string;
+  username: string;
   email: string;
   profileImage?: string;
   postCount?: number;

@@ -55,7 +55,7 @@ const FindPwFin = () => {
         이메일이 도착하지 않았나요?
         <button className="resubmit-btn">
           <Link
-            to="/findPw-auth"
+            to="/findPwFin"
             // onClick={reSubmit}
           >
             재전송

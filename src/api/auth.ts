@@ -1,28 +1,47 @@
 import axios from "axios";
+import { useNavigate } from "react-router";
 
-const baseUrl = "https://localhost:8080";
+// const baseUrl = "http://localhost:8080";
 
-export const login = async (email: string, password: string) => {
-  const response = await axios.post(`${baseUrl}/login`, {
-    email,
+export const login = async (username: string, password: string) => {
+  const response = await axios.post("/login", {
+    username,
     password,
   });
 
-  return response.data.token;
+  let jwtToken = response.headers.authorization;
+
+  localStorage.setItem("tm-token", jwtToken);
+
+  return response.data;
 };
 
 export const naverLogin = async (accessToken: string) => {
-  const response = await axios.post(`${baseUrl}/naverLogin`, {
+  const response = await axios.post("/naverLogin", {
     accessToken,
   });
 
   return response.data.token;
 };
 
-export const myInfo = async (token: string | null) => {
-  const response = await axios.get(`${baseUrl}/user/me`, {
+export const userInfo = async (token: string) => {
+  const response = await axios.get("/account/mypage", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `${token}`,
+    },
+  });
+
+  // const idxDirty = response.data.indexOf("}{");
+  // if (idxDirty === -1) return JSON.parse(response.data);
+
+  // return JSON.parse(response.data.substring(0, idxDirty + 1));
+  return response.data;
+};
+
+export const quit = async (token: string) => {
+  const response = await axios.delete("/account/delete", {
+    headers: {
+      Authorization: `${token}`,
     },
   });
 
@@ -30,12 +49,12 @@ export const myInfo = async (token: string | null) => {
 };
 
 export const register = async (
-  nickname: string,
+  username: string,
   email: string,
   password: string
 ) => {
-  const response = await axios.post(`${baseUrl}/account/join`, {
-    nickname,
+  const response = await axios.post("/account/join", {
+    username,
     email,
     password,
   });
@@ -45,17 +64,17 @@ export const register = async (
   return response.data;
 };
 
-export const registerAuth = async (email: string, authCode: string) => {
-  const response = await axios.post(`${baseUrl}/check-email-token`, {
+export const registerAuth = async (email: string, token: string) => {
+  const response = await axios.post("/check-email-token", {
     email,
-    authCode,
+    token,
   });
 
   return response.data;
 };
 
 export const findPw = async (email: string) => {
-  const response = await axios.post(`${baseUrl}/findPw`, email);
+  const response = await axios.post("/account/findpassword", { email });
 
   return response.data;
 };

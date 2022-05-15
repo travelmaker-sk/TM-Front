@@ -1,39 +1,17 @@
-import { myInfo } from "../api/auth";
 import { UserType } from "../type";
 
 type UserState = {
   user: UserType | null;
 };
 
-type UserActionType = "OVERRIDE" | "LOGOUT";
+type UserActionType = "SET_USER" | "LOGOUT";
 
-export const override = () => ({ type: "OVERRIDE" });
+export const setUser = (payload: any) => ({ type: "SET_USER", payload });
 export const logout = () => ({ type: "LOGOUT" });
 
 const initialState: UserState = {
-  user: {
-    nickname: "asdf",
-    email: "a@c.com",
-    profileImage: "./images/loopy-profile.jpg",
-    postCount: 0,
-    followers: 0,
-    followings: 0,
-  },
+  user: null,
 };
-
-const token = localStorage.getItem("tm-token");
-// const userInfo = myInfo(token);
-
-// const initialState: UserState = {
-//   user: {
-//     nickname: userInfo.nickname,
-//     email: userInfo.email,
-//     profileImage: userInfo.profileImage,
-//     postCount: userInfo.postCount,
-//     followers: userInfo.followers,
-//     followings: userInfo.followings,
-//   },
-// };
 
 const user = (
   state = initialState,
@@ -43,8 +21,8 @@ const user = (
   }
 ) => {
   switch (action.type) {
-    case "OVERRIDE":
-      return { ...state, ...action.payload };
+    case "SET_USER":
+      return { ...state, user: action.payload.user };
     case "LOGOUT":
       return { ...state, user: null };
     default:

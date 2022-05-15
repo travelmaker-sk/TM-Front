@@ -12,6 +12,9 @@ import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "../auth/Register";
 import { UserType } from "../../type";
+import { quit } from "../../api/auth";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/user";
 
 interface QuitProps {
   user: UserType;
@@ -45,6 +48,7 @@ const QuitBlock = styled.div`
 
 const Quit = ({ user }: QuitProps) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [error, setError] = useState<string | null>(null);
   const [quitEmail, setQuitEamil] = useState<string | null>(null);
 
@@ -52,7 +56,23 @@ const Quit = ({ user }: QuitProps) => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      // TODO. API 호출
+      let token = localStorage.getItem("tm-token");
+      // API 호출
+      quit(token as string)
+        .then((res) => {
+          if (res) {
+            setError("탈퇴하기 실패");
+            return;
+          } else {
+            setError("");
+            dispatch(logout());
+            localStorage.removeItem("tm-token");
+            navigate("/quitFin");
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
     [navigate]
   );
