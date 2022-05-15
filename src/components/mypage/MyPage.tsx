@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { myInfo } from "../../api/auth";
 import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import { UserType } from "../../type";
@@ -100,22 +98,6 @@ const MyPageBottomBlock = styled.div`
 `;
 
 const MyPage = ({ user }: MyPageProps) => {
-  // const [username, setUsername] = useState<string | null>(null);
-  // const [email, setEmail] = useState<string | null>(null);
-
-  // useEffect(() => {
-  //   let token = localStorage.getItem("Authorization");
-  //   // API 호출
-  //   myInfo(token as string)
-  //     .then((res) => {
-  //       setUsername(res.username);
-  //       setEmail(res.email);
-  //     })
-  //     .catch((err) => {
-  //       console.warn(err);
-  //     });
-  // });
-
   return (
     <>
       <MyPageTopBlock>
@@ -130,7 +112,7 @@ const MyPage = ({ user }: MyPageProps) => {
           />
           <ul>
             <li>
-              <span>{user.nickname}</span> 님 안녕하세요!
+              <span>{user.username}</span> 님 안녕하세요!
             </li>
             <li>{user.email}</li>
             <CyanButtonStyle>
@@ -143,13 +125,13 @@ const MyPage = ({ user }: MyPageProps) => {
         <div className="right-area">
           <ul>
             <li className="first-li">
-              <span>{user.postCount}</span>게시물
+              <span>{user.postCount ? user.postCount : 0}</span>게시물
             </li>
             <li>
-              <span>{user.followers}</span>팔로워
+              <span>{user.followers ? user.followers : 0}</span>팔로워
             </li>
             <li>
-              <span>{user.followings}</span>팔로잉
+              <span>{user.followings ? user.followings : 0}</span>팔로잉
             </li>
           </ul>
         </div>

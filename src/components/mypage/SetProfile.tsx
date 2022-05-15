@@ -106,7 +106,7 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
     });
   };
 
-  const [newNickname, setNewNickname] = useState(user.nickname);
+  const [newNickname, setNewNickname] = useState(user.username);
 
   return (
     <SetProfileBlock>
@@ -144,8 +144,8 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
           <h3>닉네임 변경</h3>
           <Input
             type="text"
-            name="nickname"
-            autoComplete="nickname"
+            name="username"
+            autoComplete="username"
             placeholder="닉네임"
             defaultValue={newNickname}
             onChange={(e) => {

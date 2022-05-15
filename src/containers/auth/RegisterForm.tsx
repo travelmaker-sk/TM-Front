@@ -11,7 +11,6 @@ const RegisterForm = () => {
 
   const { state } = useLocation();
   useEffect(() => {
-    console.log("state", state);
     if (!state) {
       alert("회원가입을 위해 서비스 이용 약관 동의가 필요합니다.");
       navigate("/privacyPolicy");
@@ -42,9 +41,9 @@ const RegisterForm = () => {
 
       // API 호출
       register(inputNickname, inputEmail, inputPw)
-        .then((registerResult) => {
-          if (registerResult) {
-            setError(registerResult); // 닉네임 중복 or 이메일 중복 or 비밀번호 형식 미충족
+        .then((res) => {
+          if (res) {
+            setError("이미 사용중인 아이디입니다."); // 닉네임 중복 or 이메일 중복 or 비밀번호 형식 미충족
             return;
           } else {
             setError("");

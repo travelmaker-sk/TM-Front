@@ -110,7 +110,7 @@ const Header = ({ user, onLogout }: HeaderProps) => {
                   }
                   alt="profileImage"
                 />
-                <UserName>반가워요, {user.nickname} 님!</UserName>
+                <UserName>반가워요, {user.username} 님!</UserName>
               </span>
               <HeaderNav onLogout={onLogout} />
             </div>

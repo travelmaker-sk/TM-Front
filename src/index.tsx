@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
 import rootReducer from "./redux";
 import { Provider } from "react-redux";
-import { myInfo } from "./api/auth";
+import { userInfo } from "./api/auth";
 import { setUser } from "./redux/user";
 
 // React 17
@@ -21,23 +21,6 @@ import { setUser } from "./redux/user";
 const rootNode = document.getElementById("root")!;
 
 const store = createStore(rootReducer);
-
-function loadUser() {
-  let token = localStorage.getItem("Authorization");
-
-  if (!token) return;
-
-  // API 호출
-  myInfo(token as string)
-    .then((res) => {
-      // @ts-ignore
-      store.dispatch(setUser({ user: res }));
-    })
-    .catch((err) => {
-      console.warn(err);
-    });
-}
-loadUser();
 
 ReactDOM.createRoot(rootNode).render(
   <>

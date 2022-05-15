@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { myInfo } from "../api/auth";
 import { UserType } from "../type";
 
 type UserState = {
@@ -8,7 +6,7 @@ type UserState = {
 
 type UserActionType = "SET_USER" | "LOGOUT";
 
-export const setUser = () => ({ type: "SET_USER" });
+export const setUser = (payload: any) => ({ type: "SET_USER", payload });
 export const logout = () => ({ type: "LOGOUT" });
 
 const initialState: UserState = {

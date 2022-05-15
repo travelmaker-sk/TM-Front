@@ -101,6 +101,10 @@ const LoginBlock = styled.div`
   .naver-btn {
     color: #fff;
     background: #03c75a;
+    // Mobile
+    @media screen and (max-width: 767px) {
+      margin-bottom: 16px !important;
+    }
   }
   #custom-login-btn {
     display: none;

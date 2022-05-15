@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 // const baseUrl = "http://localhost:8080";
 
@@ -8,9 +9,9 @@ export const login = async (username: string, password: string) => {
     password,
   });
 
-  // @ts-ignore
-  let jwtToken = response.headers.get("Authorization");
-  localStorage.setItem("Authorization", jwtToken);
+  let jwtToken = response.headers.authorization;
+
+  localStorage.setItem("tm-token", jwtToken);
 
   return response.data;
 };
@@ -23,20 +24,24 @@ export const naverLogin = async (accessToken: string) => {
   return response.data.token;
 };
 
-export const myInfo = async (token: string) => {
-  const response = await axios.get("/", {
+export const userInfo = async (token: string) => {
+  const response = await axios.get("/account/mypage", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `${token}`,
     },
   });
 
+  // const idxDirty = response.data.indexOf("}{");
+  // if (idxDirty === -1) return JSON.parse(response.data);
+
+  // return JSON.parse(response.data.substring(0, idxDirty + 1));
   return response.data;
 };
 
 export const quit = async (token: string) => {
-  const response = await axios.delete("/", {
+  const response = await axios.delete("/account/delete", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `${token}`,
     },
   });
 
@@ -69,7 +74,7 @@ export const registerAuth = async (email: string, token: string) => {
 };
 
 export const findPw = async (email: string) => {
-  const response = await axios.post("/account/findpassword", email);
+  const response = await axios.post("/account/findpassword", { email });
 
   return response.data;
 };

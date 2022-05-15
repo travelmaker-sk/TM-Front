@@ -13,7 +13,7 @@ import Input from "../common/Input";
 import { ErrorMessage } from "../auth/Register";
 import { UserType } from "../../type";
 import { quit } from "../../api/auth";
-import { useDispatch } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user";
 
 interface QuitProps {
@@ -56,17 +56,17 @@ const Quit = ({ user }: QuitProps) => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      let token = localStorage.getItem("Authorization");
+      let token = localStorage.getItem("tm-token");
       // API 호출
       quit(token as string)
-        .then((quitResult) => {
-          if (quitResult) {
+        .then((res) => {
+          if (res) {
             setError("탈퇴하기 실패");
             return;
           } else {
             setError("");
             dispatch(logout());
-            localStorage.removeItem("Authorization");
+            localStorage.removeItem("tm-token");
             navigate("/quitFin");
           }
         })

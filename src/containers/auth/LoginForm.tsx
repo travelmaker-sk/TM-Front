@@ -9,9 +9,6 @@ const LoginForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  // const [username, setUsername] = useState<string | null>(null);
-  // const [email, setEmail] = useState<string | null>(null);
-
   const { user } = useSelector((state: RootStateOrAny) => state.user);
 
   const initialUid = useRef(localStorage.getItem("tm-saved-id") ?? "");
@@ -38,13 +35,13 @@ const LoginForm = () => {
       // API 호출
       login(inputEmail as string, inputPw as string)
         .then((res) => {
-          let token = localStorage.getItem("Authorization");
-          console.log("token: ", token);
+          let token = localStorage.getItem("tm-token");
+
           if (checkSaveId)
             localStorage.setItem("tm-saved-id", inputEmail as string);
-          if (checkKeepLogin)
-            localStorage.setItem("Authorization", token as string);
-          if (!token) {
+          if (checkKeepLogin) localStorage.setItem("tm-token", token as string);
+
+          if (token === "undefined") {
             setError("아이디나 비밀번호가 일치하지 않습니다.");
             return;
           } else {
@@ -55,22 +52,6 @@ const LoginForm = () => {
         .catch((err) => {
           console.warn(err);
         });
-
-      // let token = localStorage.getItem("Authorization");
-      // // API 호출
-      // myInfo(token as string)
-      //   .then((res) => {
-      //     setUsername(res.username);
-      //     setEmail(res.email);
-      //   })
-      //   .catch((err) => {
-      //     console.warn(err);
-      //   });
-      // setUsername("test");
-      // setEmail("test@test.com");
-
-      // user.nickname = username;
-      // user.email = email;
     },
     [navigate]
   );

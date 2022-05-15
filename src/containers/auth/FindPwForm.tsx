@@ -25,9 +25,9 @@ const FindPwForm = () => {
       }
 
       // API 호출
-      findPw(inputEmail as string)
-        .then((findPwResult) => {
-          if (findPwResult) {
+      findPw(inputEmail)
+        .then((res) => {
+          if (res) {
             setError("가입하지 않은 회원입니다.");
             return;
           } else {

@@ -10,7 +10,7 @@ const HeaderForm = () => {
 
   const onLogout = useCallback(() => {
     dispatch(logout());
-    localStorage.removeItem("Authorization");
+    localStorage.removeItem("tm-token");
     navigate("/");
   }, [dispatch, navigate]);
 
