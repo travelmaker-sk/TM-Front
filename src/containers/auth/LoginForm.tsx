@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Login from "../../components/auth/Login";
-import { login } from "../../api/auth";
+import { login } from "../../lib/api/auth";
 import { RootStateOrAny, useSelector } from "react-redux";
 
 const LoginForm = () => {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import { UserType } from "../../type";
+import { UserType } from "../../lib/type";
 
 interface MyPageProps {
   user: UserType;

@@ -11,8 +11,8 @@ import {
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "../auth/Register";
-import { UserType } from "../../type";
-import { quit } from "../../api/auth";
+import { UserType } from "../../lib/type";
+import { quit } from "../../lib/api/auth";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user";
 

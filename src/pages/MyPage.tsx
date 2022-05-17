@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { RootStateOrAny, useSelector } from "react-redux";
 import styled from "styled-components";
 import MyPage from "../components/mypage/MyPage";
-import HeaderForm from "../containers/common/HeaderForm";
 import { Wrapper } from "./HomePage";
+import Header from "../components/common/Header";
 
 export const HeaderBottomPlus = styled.div`
   height: 50px;
@@ -14,7 +14,7 @@ const MyPagePage = () => {
 
   return (
     <Wrapper>
-      <HeaderForm />
+      <Header />
       <HeaderBottomPlus />
       <MyPage user={user} />
     </Wrapper>

@@ -1,8 +1,8 @@
-import { UserType } from "../type";
+import { UserType } from "../lib/type";
 
-type UserState = {
+interface UserState {
   user: UserType | null;
-};
+}
 
 type UserActionType = "SET_USER" | "LOGOUT";
 

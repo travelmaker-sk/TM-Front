@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Register from "../../components/auth/Register";
-import { register } from "../../api/auth";
+import { register } from "../../lib/api/auth";
 import { useLocation } from "react-router-dom";
 
 const RegisterForm = () => {

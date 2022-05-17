@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
 import rootReducer from "./redux";
 import { Provider } from "react-redux";
-import { userInfo } from "./api/auth";
+import { userInfo } from "./lib/api/auth";
 import { setUser } from "./redux/user";
 
 // React 17
