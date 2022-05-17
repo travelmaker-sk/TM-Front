@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
-import HeaderNav from "./HeaderNav";
-import { UserType } from "../../type";
-
-interface HeaderProps {
-  user: UserType | null;
-  onLogout: () => void;
-}
+import HeaderNav from "./HeaderMenu";
+import { UserType } from "../../lib/type";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/user";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -89,11 +87,22 @@ export const HeaderBottom = styled.div`
   }
   // Mobile
   @media screen and (max-width: 767px) {
-    height: 65px;
+    height: 52px;
   }
 `;
 
-const Header = ({ user, onLogout }: HeaderProps) => {
+const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onLogout = useCallback(() => {
+    dispatch(logout());
+    localStorage.removeItem("tm-token");
+    navigate("/");
+  }, [dispatch, navigate]);
+
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
+
   return (
     <>
       <Wrapper>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
-import HeaderForm from "../containers/common/HeaderForm";
-import SearchBar from "../components/mainpage/SearchBar";
-import { userInfo } from "../api/auth";
+import SearchBar from "../components/home/SearchMenu";
+import { userInfo } from "../lib/api/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/user";
+import Header from "../components/common/Header";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -39,7 +39,7 @@ const PostListPage = () => {
 
   return (
     <Wrapper>
-      <HeaderForm />
+      <Header />
       <SearchBar />
       <div className="post-list">다른 사람들의 여행을 둘러보세요</div>
     </Wrapper>

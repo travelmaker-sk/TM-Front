@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { naverLogin } from "../api/auth";
+import { naverLogin } from "../lib/api/auth";
 import { useNavigate } from "react-router";
 import { LoadingStyle } from "./KaKaoCallback";
 

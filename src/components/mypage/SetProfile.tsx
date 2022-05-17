@@ -7,7 +7,7 @@ import {
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import { UserType } from "../../type";
+import { UserType } from "../../lib/type";
 import { ErrorMessage } from "../auth/Register";
 import Input from "../common/Input";
 
