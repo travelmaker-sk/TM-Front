@@ -6,7 +6,7 @@ import { ErrorMessage } from "./Register";
 import { CyanButtonStyle, SelectButtonStyle } from "../../styles/ButtonStyle";
 import { Link } from "react-router-dom";
 
-interface LoginProps {
+interface LoginType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   initialUid: MutableRefObject<string>;
   onKakaoLogin: () => void;
@@ -118,7 +118,7 @@ const LoginBlock = styled.div`
   }
 `;
 
-const Login = ({ onSubmit, initialUid, onKakaoLogin, error }: LoginProps) => {
+const Login = ({ onSubmit, initialUid, onKakaoLogin, error }: LoginType) => {
   const naverRef = useRef<any>();
   const onNaverLogin = () => {
     naverRef.current.children[0].click();

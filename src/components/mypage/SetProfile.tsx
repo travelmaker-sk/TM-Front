@@ -11,7 +11,7 @@ import { UserType } from "../../lib/type";
 import { ErrorMessage } from "../auth/Register";
 import Input from "../common/Input";
 
-interface SetProfileProps {
+interface SetProfileType {
   user: UserType;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
@@ -77,7 +77,7 @@ const QuitLinkButton = styled(LinkButton)`
   }
 `;
 
-const SetProfile = ({ user, onSubmit, error }: SetProfileProps) => {
+const SetProfile = ({ user, onSubmit, error }: SetProfileType) => {
   // 프로필 사진 미리보기
   const [image, setImage] = useState({
     profileImageFile: "",

@@ -20,6 +20,7 @@ import NaverCallback from "./pages/NaverCallback";
 import KakaoCallback from "./pages/KaKaoCallback";
 import FindPwPage from "./pages/FindPwPage";
 import FindPwFinPage from "./pages/FindPwFinPage";
+import PostPage from "./pages/PostPage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       <Route path="/findPw" element={<FindPwPage />} />
       <Route path="/findPwFin" element={<FindPwFinPage />} />
 
+      <Route path="/posts" element={<PostPage />} />
       <Route path="/mypage" element={<MyPagePage />} />
       <Route path="/setProfile" element={<SetProfilePage />} />
       <Route path="/quit" element={<QuitPage />} />

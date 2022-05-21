@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
-import HeaderNav from "./HeaderMenu";
+import HeaderMenu from "./HeaderMenu";
 import { UserType } from "../../lib/type";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user";
@@ -34,11 +34,7 @@ const HeaderBlock = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 20px;
-      // Mobile
-      @media screen and (max-width: 767px) {
-        margin-right: 10px;
-      }
+      // margin-right: 20px;
       img {
         width: 24px;
         height: 24px;
@@ -77,17 +73,10 @@ const UserName = styled.div`
 `;
 
 export const HeaderBottom = styled.div`
-  // Desktop
-  @media screen and (min-width: 1280px) {
-    height: 80px;
-  }
-  // Tablet
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    height: 80px;
-  }
+  height: 80px;
   // Mobile
   @media screen and (max-width: 767px) {
-    height: 52px;
+    height: 64.838px;
   }
 `;
 
@@ -121,7 +110,7 @@ const Header = () => {
                 />
                 <UserName>반가워요, {user.username} 님!</UserName>
               </span>
-              <HeaderNav onLogout={onLogout} />
+              <HeaderMenu onLogout={onLogout} />
             </div>
           ) : (
             <div className="right">

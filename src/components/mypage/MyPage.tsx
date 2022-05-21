@@ -3,7 +3,7 @@ import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import { UserType } from "../../lib/type";
 
-interface MyPageProps {
+interface MyPageType {
   user: UserType;
 }
 
@@ -97,7 +97,7 @@ const MyPageBottomBlock = styled.div`
   }
 `;
 
-const MyPage = ({ user }: MyPageProps) => {
+const MyPage = ({ user }: MyPageType) => {
   return (
     <>
       <MyPageTopBlock>

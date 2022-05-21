@@ -1,22 +1,28 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 
-interface HeaderNavProps {
+interface HeaderMenuProps {
   onLogout: () => void;
 }
 
-const HeaderNavStyle = styled.div`
+const HeaderMenuStyle = styled.div`
   nav {
-    positin: relative;
+    position: relative;
     cursor: pointer;
+    padding-left: 20px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   nav ul {
     display: none;
     position: absolute;
-    top: 70px;
-    right: 3%;
+    top: 150%;
+    right: 0;
     background: white;
     padding: 30px;
     font-size: 16px;
@@ -31,6 +37,7 @@ const HeaderNavStyle = styled.div`
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+    transition: 0.1s;
   }
   nav ul li:hover * {
     color: ${palette.cyan[4]};
@@ -60,12 +67,6 @@ const HeaderNavStyle = styled.div`
   nav ul button span {
     margin-right: 10px;
   }
-  // Tablet
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    nav ul {
-      right: 3%;
-    }
-  }
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
@@ -73,14 +74,14 @@ const HeaderNavStyle = styled.div`
   }
 `;
 
-const HeaderNav = ({ onLogout }: HeaderNavProps) => {
+const HeaderMenu = ({ onLogout }: HeaderMenuProps) => {
   const [isToggle, setToggle] = useState(false);
-  const onToggle = () => {
+  const onToggle = useCallback(() => {
     setToggle(!isToggle);
-  };
+  }, [isToggle]);
 
   return (
-    <HeaderNavStyle>
+    <HeaderMenuStyle>
       <nav className="material-icons apps-bar" onClick={onToggle}>
         apps
         <ul className={isToggle ? "open" : ""}>
@@ -117,8 +118,8 @@ const HeaderNav = ({ onLogout }: HeaderNavProps) => {
           </button>
         </ul>
       </nav>
-    </HeaderNavStyle>
+    </HeaderMenuStyle>
   );
 };
 
-export default HeaderNav;
+export default HeaderMenu;

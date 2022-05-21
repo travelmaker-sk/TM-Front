@@ -5,7 +5,7 @@ import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
 
-interface RegisterAuthProps {
+interface RegisterAuthType {
   reSubmit: React.FormEventHandler<HTMLFormElement>;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
@@ -49,7 +49,7 @@ const RegisterAuthBlock = styled.div`
   }
 `;
 
-const RegisterAuth = ({ onSubmit, reSubmit, error }: RegisterAuthProps) => {
+const RegisterAuth = ({ onSubmit, reSubmit, error }: RegisterAuthType) => {
   return (
     <RegisterAuthBlock>
       <div className="material-icons">mail_outline</div>

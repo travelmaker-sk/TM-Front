@@ -6,3 +6,36 @@ export interface UserType {
   followers?: number;
   followings?: number;
 }
+
+export interface CardType {
+  id: number;
+  name: string;
+  location: string;
+  memo: string;
+  tag: Array<string>;
+  filename: string;
+  filepath: string;
+  score: number;
+  date: string;
+  liked: number;
+  writer: {
+    username: string;
+    profileImage?: string;
+  };
+}
+
+export interface PlaceCardType extends CardType {
+  category: "place";
+  weather: string;
+}
+
+export interface RestCardType extends CardType {
+  category: "restaurant";
+  menu: string;
+  price: number;
+}
+
+export interface AccomCardType extends CardType {
+  category: "accommodation";
+  price: number;
+}

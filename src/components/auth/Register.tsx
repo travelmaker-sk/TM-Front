@@ -5,7 +5,7 @@ import Input from "../common/Input";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
 import { Link } from "react-router-dom";
 
-interface RegisterProps {
+interface RegisterType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
 }
@@ -38,10 +38,9 @@ export const ErrorMessage = styled.div`
   margin-bottom: 26px;
   color: red;
   text-align: center;
-  font-size: 14px;
 `;
 
-const Register = ({ onSubmit, error }: RegisterProps) => {
+const Register = ({ onSubmit, error }: RegisterType) => {
   return (
     <RegisterBlock>
       <h2>

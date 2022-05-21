@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
-import SearchBar from "../components/home/SearchMenu";
+import Search from "../components/home/Search";
 import { userInfo } from "../lib/api/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/user";
 import Header from "../components/common/Header";
+import { CardType } from "../lib/type";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -17,7 +18,7 @@ export const Wrapper = styled(Responsive)`
   }
 `;
 
-const PostListPage = () => {
+const HomePage = () => {
   const dispatch = useDispatch();
   const loadUser = () => {
     let token = localStorage.getItem("tm-token");
@@ -40,10 +41,10 @@ const PostListPage = () => {
   return (
     <Wrapper>
       <Header />
-      <SearchBar />
+      <Search />
       <div className="post-list">다른 사람들의 여행을 둘러보세요</div>
     </Wrapper>
   );
 };
 
-export default PostListPage;
+export default HomePage;

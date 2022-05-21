@@ -4,7 +4,7 @@ import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
 
-interface FindPwProps {
+interface FindPwType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
 }
@@ -28,7 +28,7 @@ const FindPwBlock = styled.div`
   }
 `;
 
-const FindPw = ({ onSubmit, error }: FindPwProps) => {
+const FindPw = ({ onSubmit, error }: FindPwType) => {
   return (
     <FindPwBlock>
       <h2>임시 비밀번호 발급</h2>

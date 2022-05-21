@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { LinkButton } from "../../styles/ButtonStyle";
 
-interface LogoProps {
+interface LogoType {
   fontsize?: string;
 }
 
@@ -23,7 +23,7 @@ const LogoStyle = styled.div`
     }
   }
 
-  font-size: ${(props: LogoProps) => props.fontsize || "20px"};
+  font-size: ${(Type: LogoType) => Type.fontsize || "20px"};
 
   // Mobile
   @media screen and (max-width: 767px) {
@@ -36,9 +36,9 @@ const LogoStyle = styled.div`
   }
 `;
 
-const Logo = (props: LogoProps) => {
+const Logo = (Type: LogoType) => {
   return (
-    <LogoStyle {...props}>
+    <LogoStyle {...Type}>
       <LinkButton to="/" className="logo">
         <img src="./images/logo.png" alt="logo" />
         Travel Maker

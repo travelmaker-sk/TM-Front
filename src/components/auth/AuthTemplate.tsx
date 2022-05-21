@@ -3,7 +3,7 @@ import styled from "styled-components";
 import palette from "../../styles/palette";
 import Logo from "../common/Logo";
 
-interface AuthTemplateProps {
+interface AuthTemplateType {
   children: any;
 }
 
@@ -48,7 +48,7 @@ const WhiteBox = styled.div`
   }
 `;
 
-const AuthTemplate = ({ children }: AuthTemplateProps) => {
+const AuthTemplate = ({ children }: AuthTemplateType) => {
   const [childScrollable, setChildScrollable] = useState(false);
 
   return (

@@ -16,7 +16,7 @@ import { quit } from "../../lib/api/auth";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user";
 
-interface QuitProps {
+interface QuitType {
   user: UserType;
 }
 
@@ -46,7 +46,7 @@ const QuitBlock = styled.div`
   }
 `;
 
-const Quit = ({ user }: QuitProps) => {
+const Quit = ({ user }: QuitType) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState<string | null>(null);
