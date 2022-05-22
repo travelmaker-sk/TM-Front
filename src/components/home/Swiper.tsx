@@ -11,22 +11,28 @@ SwiperCore.use([Navigation, Pagination, Autoplay]);
 const SwiperBlock = styled.div`
   margin-bottom: 32px;
   img {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
   }
-  .swiper-slide {
-    position: relative;
+  .swiper-button-prev {
+    background: url(/images/swiper-prev.png) no-repeat;
+    background-size: 100% auto;
+    width: 40px;
+    height: 40px;
+    background-position: center;
   }
-  .swiper-button-prev,
-  .swiper-button-prev:after,
-  .swiper-button-next,
-  .swiper-button-next:after {
-    color: ${palette.gray[5]};
-    font-size: 20px;
+  .swiper-button-next {
+    background: url(/images/swiper-next.png) no-repeat;
+    background-size: 100% auto;
+    width: 40px;
+    height: 40px;
+    background-position: center;
   }
-  .swiper-pagination {
-    position: absolute;
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    display: none;
   }
+
   .swiper-pagination-bullet {
     background: ${palette.gray[6]};
   }
