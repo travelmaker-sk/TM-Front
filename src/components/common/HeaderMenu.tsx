@@ -62,7 +62,7 @@ const HeaderMenuStyle = styled.div`
     text-align: right;
   }
   nav ul button:hover {
-    color: ${palette.gray[6]};
+    color: ${palette.gray[5]};
   }
   nav ul button span {
     margin-right: 10px;

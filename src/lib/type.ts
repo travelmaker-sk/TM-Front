@@ -9,12 +9,12 @@ export interface UserType {
 
 export interface CardType {
   id: number;
-  name: string;
+  title: string;
   location: string;
-  memo: string;
-  tag: Array<string>;
-  filename: string;
-  filepath: string;
+  memo?: string;
+  tag?: Array<string>;
+  filename?: string;
+  filepath?: string;
   score: number;
   date: string;
   liked: number;

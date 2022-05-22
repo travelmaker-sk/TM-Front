@@ -13,7 +13,7 @@ const initialState: UserState = {
   user: {
     username: "김트메",
     email: "tm@a.com",
-    profileImage: undefined,
+    profileImage: "",
     postCount: 0,
     followers: 0,
     followings: 0,

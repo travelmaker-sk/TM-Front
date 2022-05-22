@@ -40,6 +40,12 @@ const SearchBlock = styled.div`
       background-color: white;
       border: 1px solid ${palette.gray[4]};
       z-index: 9999;
+      h4{
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color:${palette.gray[3]};
+        margin: 0;
+      }
       li{
         padding: 15px 20px;
         cursor: pointer;
@@ -138,7 +144,7 @@ const Search = () => {
     setTimeout(() => {
       if (!refWhereArea.current) return;
       refWhereArea.current.style.display = "none";
-    }, 210);
+    }, 130);
   };
 
   const onClickWhereList = useCallback((e: React.MouseEvent<HTMLLIElement>) => {
@@ -201,6 +207,7 @@ const Search = () => {
                   onChange={onInputWhere}
                 />
                 <ul ref={refWhereArea}>
+                  <h4>인기 여행지 TOP7</h4>
                   {popularArea.areaList.map((item) => (
                     <li key={item.id} onClick={onClickWhereList}>
                       {item.areaName}

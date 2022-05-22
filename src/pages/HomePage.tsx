@@ -6,7 +6,8 @@ import { userInfo } from "../lib/api/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/user";
 import Header from "../components/common/Header";
-import { CardType } from "../lib/type";
+import SwiperC from "../components/home/Swiper";
+import PostList from "../components/post/PostList";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -20,6 +21,7 @@ export const Wrapper = styled(Responsive)`
 
 const HomePage = () => {
   const dispatch = useDispatch();
+
   const loadUser = () => {
     let token = localStorage.getItem("tm-token");
 
@@ -42,7 +44,8 @@ const HomePage = () => {
     <Wrapper>
       <Header />
       <Search />
-      <div className="post-list">다른 사람들의 여행을 둘러보세요</div>
+      <SwiperC />
+      <PostList />
     </Wrapper>
   );
 };
