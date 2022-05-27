@@ -20,8 +20,8 @@ const PostListBlock = styled.div`
 export const PostBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
-  > *:not(last-of-type) {
-    margin-right: 1%;
+  > * {
+    margin-right: 1.5%;
   }
   // Mobile
   @media screen and (max-width: 767px) {

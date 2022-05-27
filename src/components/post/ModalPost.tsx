@@ -1,6 +1,7 @@
+import { useRef } from "react";
 import styled from "styled-components";
 import { CardType } from "../../lib/type";
-
+import Card from "./Card";
 interface ModalType {
   post: CardType | null;
   open: boolean;
@@ -29,7 +30,7 @@ const ModalPost = ({ post, open, close }: ModalType) => {
     <ModalBlock className={open ? "open" : ""}>
       {open ? (
         <div>
-          모달
+          <Card post={post} />
           <button onClick={close}>닫기</button>
         </div>
       ) : null}
