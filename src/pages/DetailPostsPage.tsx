@@ -1,11 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Footer from "../components/common/Footer";
+import Header from "../components/common/Header";
+import Search from "../components/home/Search";
+import Post from "../components/post/Post";
+import { PostBlock } from "../components/post/PostList";
 import { detailPosts } from "../lib/api/posts";
+import { Wrapper } from "./HomePage";
 
 const DetailPostsPage = () => {
   const location = useLocation();
 
-  const [list, setList] = useState<any[]>([]);
+  const [posts, setPosts] = useState<any[]>([]);
 
   const [totalPage, setTotalPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,12 +23,13 @@ const DetailPostsPage = () => {
     const from = (currentPage - 1) * itemPerPage;
 
     // API 호출
-    //@ts-ignore
+    // @ts-ignore
     detailPosts(from, itemPerPage, location.state.category).then(
+      // @ts-ignore
       ({ totalCount, list }) => {
         const totalPageCount = Math.ceil(totalCount / itemPerPage);
         setTotalPage(totalPageCount);
-        setList(list);
+        setPosts(list);
       }
     );
     // @ts-ignore
@@ -33,16 +40,22 @@ const DetailPostsPage = () => {
   }, [totalPage]);
 
   return (
-    <div>
-      {list.map((post) => (
-        <div key={post.id}>포토카드</div>
-      ))}
+    <Wrapper>
+      <Header />
+      <Search />
+      <PostBlock>
+        {posts.map((post) => (
+          //@ts-ignore
+          <Post post={post} key={post?.id} />
+        ))}
+      </PostBlock>
       {Array.from({ length: totalPage }, (x, i) => i + 1).map((pageNumber) => (
         <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)}>
           {pageNumber}
         </button>
       ))}
-    </div>
+      <Footer />
+    </Wrapper>
   );
 };
 

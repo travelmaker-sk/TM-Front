@@ -107,7 +107,7 @@ const AllPostsPage = (props: any) => {
   const query = queryString.parse(searchParams);
   console.log(query);
 
-  const [searchPosts, setSearchPosts] = useState<AllPostsType>({
+  const [posts, setposts] = useState<AllPostsType>({
     popular: [],
     recent: [],
     place: [],
@@ -120,9 +120,9 @@ const AllPostsPage = (props: any) => {
     const loadPosts = () => {
       // API 호출
       allPosts(4, query.where as string, query.what as string)
-        .then((res) => {
+        .then((list) => {
           // @ts-ignore
-          setSearchPosts(res);
+          setposts(list);
         })
         .catch((err) => {
           console.warn(err);
@@ -144,11 +144,11 @@ const AllPostsPage = (props: any) => {
           {query.what ? query.what : "전체"}
         </h3>
       </SearchTitle>
-      <PostList list={searchPosts.popular} category="popular" />
-      <PostList list={searchPosts.recent} category="recent" />
-      <PostList list={searchPosts.place} category="place" />
-      <PostList list={searchPosts.restaurant} category="restaurant" />
-      <PostList list={searchPosts.accommodation} category="accommodation" />
+      <PostList list={posts.popular} category="popular" />
+      <PostList list={posts.recent} category="recent" />
+      <PostList list={posts.place} category="place" />
+      <PostList list={posts.restaurant} category="restaurant" />
+      <PostList list={posts.accommodation} category="accommodation" />
       <Footer />
     </Wrapper>
   );

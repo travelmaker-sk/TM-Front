@@ -17,7 +17,7 @@ const PostListBlock = styled.div`
   }
 `;
 
-const PostBlock = styled.div`
+export const PostBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
   > *:not(last-of-type) {
