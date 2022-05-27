@@ -11,6 +11,7 @@ import { AllPostsType } from "../lib/type";
 import AllPosts from "../components/post/PostList";
 import { allPosts } from "../lib/api/posts";
 import PostList from "../components/post/PostList";
+import Footer from "../components/common/Footer";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -36,9 +37,14 @@ const HomePage = () => {
   useEffect(() => {
     const loadHomePosts = () => {
       // API 호출
-      allPosts(4).then((list) => {
-        setHomePosts(list);
-      });
+      allPosts(4)
+        .then((res) => {
+          // @ts-ignore
+          setHomePosts(res);
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     };
 
     const loadUser = () => {
@@ -69,6 +75,7 @@ const HomePage = () => {
       <PostList list={homePosts.place} category="place" />
       <PostList list={homePosts.restaurant} category="restaurant" />
       <PostList list={homePosts.accommodation} category="accommodation" />
+      <Footer />
     </Wrapper>
   );
 };

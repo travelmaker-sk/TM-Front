@@ -40,10 +40,10 @@ const HeaderMenuStyle = styled.div`
     transition: 0.1s;
   }
   nav ul li:hover * {
-    color: ${palette.cyan[4]};
+    color: ${palette.cyan[6]};
   }
   nav ul li:active * {
-    color: ${palette.cyan[6]};
+    color: ${palette.cyan[7]};
   }
   nav ul li span {
     font-family: "Material Icons";
@@ -62,7 +62,7 @@ const HeaderMenuStyle = styled.div`
     text-align: right;
   }
   nav ul button:hover {
-    color: ${palette.gray[5]};
+    color: ${palette.gray[6]};
   }
   nav ul button span {
     margin-right: 10px;

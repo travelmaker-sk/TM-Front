@@ -1,7 +1,7 @@
-import { AccomCardType, PlaceCardType, RestCardType } from "../lib/type";
+import { CardType } from "../lib/type";
 
 export interface PostsType {
-  posts: PlaceCardType[] | RestCardType[] | AccomCardType[] | null;
+  posts: CardType[] | null;
 }
 
 type PostsActionType = "GET_POSTS";

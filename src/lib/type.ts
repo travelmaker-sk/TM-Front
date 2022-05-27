@@ -22,22 +22,10 @@ export interface CardType {
     username: string;
     profileImage?: string;
   };
-}
-
-export interface PlaceCardType extends CardType {
-  category: "place";
-  weather: string;
-}
-
-export interface RestCardType extends CardType {
-  category: "restaurant";
-  menu: string;
-  price: number;
-}
-
-export interface AccomCardType extends CardType {
-  category: "accommodation";
-  price: number;
+  category: "place" | "restaurant" | "accommodation";
+  weather?: string;
+  menu?: string;
+  price?: number;
 }
 
 export interface AllPostsType {
