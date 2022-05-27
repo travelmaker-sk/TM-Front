@@ -39,3 +39,11 @@ export interface AccomCardType extends CardType {
   category: "accommodation";
   price: number;
 }
+
+export interface AllPostsType {
+  popular: CardType[];
+  recent: CardType[];
+  place: CardType[];
+  restaurant: CardType[];
+  accommodation: CardType[];
+}

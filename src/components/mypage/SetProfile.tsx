@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import {
   CyanButtonStyle,
@@ -10,6 +10,8 @@ import palette from "../../styles/palette";
 import { UserType } from "../../lib/type";
 import { ErrorMessage } from "../auth/Register";
 import Input from "../common/Input";
+import { RootStateOrAny, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 interface SetProfileType {
   user: UserType;
@@ -77,7 +79,15 @@ const QuitLinkButton = styled(LinkButton)`
   }
 `;
 
-const SetProfile = ({ user, onSubmit, error }: SetProfileType) => {
+const SetProfile = () => {
+  const navigate = useNavigate();
+
+  const [error, setError] = useState<string | null>(null);
+
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
+
+  const [newNickname, setNewNickname] = useState(user.username);
+
   // 프로필 사진 미리보기
   const [image, setImage] = useState({
     profileImageFile: "",
@@ -106,7 +116,14 @@ const SetProfile = ({ user, onSubmit, error }: SetProfileType) => {
     });
   };
 
-  const [newNickname, setNewNickname] = useState(user.username);
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      // TODO. API 호출
+    },
+    [navigate]
+  );
 
   return (
     <SetProfileBlock>

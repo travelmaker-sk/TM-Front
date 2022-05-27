@@ -4,6 +4,10 @@ import { CyanButtonStyle } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
+import { useNavigate } from "react-router";
+import { useCallback, useState } from "react";
+import { registerAuth } from "../../lib/api/auth";
+import { useLocation } from "react-router-dom";
 
 interface RegisterAuthType {
   reSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -49,7 +53,51 @@ const RegisterAuthBlock = styled.div`
   }
 `;
 
-const RegisterAuth = ({ onSubmit, reSubmit, error }: RegisterAuthType) => {
+const RegisterAuth = () => {
+  const navigate = useNavigate();
+
+  const [error, setError] = useState<string | null>(null);
+
+  const location = useLocation();
+  const email = location.state;
+
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      const form = e.target as HTMLFormElement;
+      const $inputs = Array.from(form.querySelectorAll("input"));
+
+      const [inputAuthCode] = $inputs.map(($input) => $input.value);
+
+      if ([inputAuthCode].includes("")) {
+        setError("빈 칸을 모두 입력하세요.");
+        return;
+      } else {
+        setError(null);
+      }
+      // API 호출
+      registerAuth(email as string, inputAuthCode as string)
+        .then((res) => {
+          if (res) {
+            setError("인증번호가 일치하지 않습니다.");
+          } else {
+            setError("");
+            navigate("/registerFin");
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
+    },
+    [email, navigate]
+  );
+
+  const reSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("이메일 인증 코드 재전송");
+  }, []);
+
   return (
     <RegisterAuthBlock>
       <div className="material-icons">mail_outline</div>

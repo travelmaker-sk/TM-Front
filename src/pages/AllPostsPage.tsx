@@ -3,9 +3,9 @@ import queryString from "query-string";
 import { useEffect } from "react";
 import { getPosts } from "../redux/posts";
 import { useDispatch } from "react-redux";
-import { postList } from "../lib/api/posts";
+import { allPosts } from "../lib/api/posts";
 
-const PostPage = (props: any) => {
+const AllPostsPage = (props: any) => {
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -16,7 +16,7 @@ const PostPage = (props: any) => {
   // API 호출
   const loadPosts = () => {
     // API 호출
-    postList(query.where as string, query.what as string)
+    allPosts(4, query.where as string, query.what as string)
       .then((res) => {
         dispatch(getPosts({ posts: res }));
       })
@@ -39,4 +39,4 @@ const PostPage = (props: any) => {
   );
 };
 
-export default PostPage;
+export default AllPostsPage;

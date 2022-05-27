@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Wrapper } from "../../pages/HomePage";
 import palette from "../../styles/palette";
-import popularArea from "../popularArea.json";
+import popularArea from "../../lib/json/popularArea.json";
 import { useNavigate } from "react-router";
 
 const SearchBlock = styled.div`

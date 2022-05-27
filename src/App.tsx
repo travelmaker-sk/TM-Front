@@ -9,7 +9,7 @@ import PrivacyPage from "./pages/PrivacyPage";
 import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
 
-import CPhotoCardPage from "./pages/CPhotoCardPage";
+import CPhotoCardPage from "./pages/CreateCardPage";
 import BookMarksListPage from "./pages/BookMarksListPage";
 import NoticePage from "./pages/NoticePage";
 import MyPagePage from "./pages/MyPage";
@@ -20,7 +20,8 @@ import NaverCallback from "./pages/NaverCallback";
 import KakaoCallback from "./pages/KaKaoCallback";
 import FindPwPage from "./pages/FindPwPage";
 import FindPwFinPage from "./pages/FindPwFinPage";
-import PostPage from "./pages/PostPage";
+import AllPostsPage from "./pages/AllPostsPage";
+import DetailPostsPage from "./pages/DetailPostsPage";
 
 function App() {
   return (
@@ -37,7 +38,8 @@ function App() {
       <Route path="/findPw" element={<FindPwPage />} />
       <Route path="/findPwFin" element={<FindPwFinPage />} />
 
-      <Route path="/posts" element={<PostPage />} />
+      <Route path="/allPosts" element={<AllPostsPage />} />
+      <Route path="/detailPosts" element={<DetailPostsPage />} />
       <Route path="/mypage" element={<MyPagePage />} />
       <Route path="/setProfile" element={<SetProfilePage />} />
       <Route path="/quit" element={<QuitPage />} />

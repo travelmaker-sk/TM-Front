@@ -1,24 +1,22 @@
-import { RootStateOrAny, useSelector } from "react-redux";
-import { PlaceCardType, RestCardType, AccomCardType } from "../../lib/type";
 import Post from "./Post";
 import PostListTitle from "./PostListTitle";
-import postsData from "../postsData.json";
+import { LinkButton } from "../../styles/ButtonStyle";
 
-const PostList = () => {
-  const { posts } = useSelector((state: RootStateOrAny) => state.posts);
-
+interface PostListType {
+  list: any[];
+  category: string;
+}
+const PostList = ({ list, category }: PostListType) => {
   return (
     <>
       <PostListTitle />
-      {/* {posts.map(
-        (post: PlaceCardType | RestCardType | AccomCardType | null) => (
-          <Post post={post} key={post?.id} />
-        )
-      )} */}
-      {postsData.postList.map((post) => (
+      {list.map((post) => (
         //@ts-ignore
         <Post post={post} key={post?.id} />
       ))}
+      <LinkButton to="/detailPosts" state={{ category }}>
+        더보기
+      </LinkButton>
     </>
   );
 };

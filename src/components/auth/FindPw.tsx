@@ -3,6 +3,9 @@ import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
+import { useCallback, useState } from "react";
+import { useNavigate } from "react-router";
+import { findPw } from "../../lib/api/auth";
 
 interface FindPwType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -28,7 +31,45 @@ const FindPwBlock = styled.div`
   }
 `;
 
-const FindPw = ({ onSubmit, error }: FindPwType) => {
+const FindPw = () => {
+  const navigate = useNavigate();
+
+  const [error, setError] = useState<string | null>(null);
+
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      const form = e.target as HTMLFormElement;
+      const $inputs = Array.from(form.querySelectorAll("input"));
+
+      const [inputEmail] = $inputs.map(($input) => $input.value);
+
+      if ([inputEmail].includes("")) {
+        setError("빈 칸을 모두 입력하세요.");
+        return;
+      } else {
+        setError(null);
+      }
+
+      // API 호출
+      findPw(inputEmail)
+        .then((res) => {
+          if (res) {
+            setError("가입하지 않은 회원입니다.");
+            return;
+          } else {
+            setError("");
+            navigate("/findPwFin");
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
+    },
+    [navigate]
+  );
+
   return (
     <FindPwBlock>
       <h2>임시 비밀번호 발급</h2>

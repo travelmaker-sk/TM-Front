@@ -39,12 +39,6 @@ const SwiperBlock = styled.div`
   .swiper-pagination-bullet-active {
     background: ${palette.gray[7]};
   }
-  // Mobile
-  @media screen and (max-width: 767px) {
-    img {
-      width: 70%;
-    }
-  }
 `;
 
 const SwiperC = () => {
