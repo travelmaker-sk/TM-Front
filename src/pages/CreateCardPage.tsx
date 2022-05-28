@@ -1,8 +1,8 @@
 import React from "react";
-import CPhotoCard from "../components/write/CPhotoCard";
+import CreateCard from "../components/write/CreateCard";
 
-const CPhotoCardPage = () => {
-  return <CPhotoCard />;
+const CreateCardPage = () => {
+  return <CreateCard />;
 };
 
-export default CPhotoCardPage;
+export default CreateCardPage;

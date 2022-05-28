@@ -87,7 +87,7 @@ const ModalBlock = styled.div`
   }
 `;
 
-const ModalPost = ({ post, open, close }: ModalType) => {
+const PostModal = ({ post, open, close }: ModalType) => {
   return (
     <ModalBlock className={open ? "open" : ""}>
       <div className="container">
@@ -107,4 +107,4 @@ const ModalPost = ({ post, open, close }: ModalType) => {
   );
 };
 
-export default ModalPost;
+export default PostModal;

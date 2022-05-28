@@ -46,8 +46,7 @@ const HeaderMenuStyle = styled.div`
     color: ${palette.cyan[7]};
   }
   nav ul li span {
-    font-family: "Material Icons";
-    margin-right: 10px;
+    margin-right: 12px;
     font-size: 18px;
   }
   nav ul hr {
@@ -87,28 +86,26 @@ const HeaderMenu = ({ onLogout }: HeaderMenuProps) => {
         <ul className={isToggle ? "open" : ""}>
           <li>
             <Link to="/mypage">
-              <span className="material-symbols-outlined">account_circle</span>
+              <span className="material-icons">account_circle</span>
               마이페이지
             </Link>
           </li>
           <li>
             <Link to="/createPhotocard">
-              <span className="material-symbols-outlined">
-                add_photo_alternate
-              </span>
+              <span className="material-icons">add_photo_alternate</span>
               포토카드 만들기
             </Link>
           </li>
           <li>
             <Link to="/bookmarks">
-              <span className="material-symbols-outlined">bookmarks</span>
+              <span className="material-icons">bookmarks</span>
               북마크
             </Link>
           </li>
           <li>
-            <Link to="/notice">
-              <span className="material-symbols-outlined">campaign</span>
-              공지사항
+            <Link to="/setProfile">
+              <span className="material-icons">manage_accounts</span>
+              회원정보 설정
             </Link>
           </li>
           <hr />

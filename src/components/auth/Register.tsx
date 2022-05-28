@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { register } from "../../lib/api/auth";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
 interface RegisterType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -51,7 +52,11 @@ const Register = () => {
   const { state } = useLocation();
   useEffect(() => {
     if (!state) {
-      alert("회원가입을 위해 서비스 이용 약관 동의가 필요합니다.");
+      Swal.fire(
+        "",
+        "회원가입을 위해 서비스 이용 약관 동의가 필요합니다",
+        "warning"
+      );
       navigate("/privacyPolicy");
     }
   }, [state, navigate]);

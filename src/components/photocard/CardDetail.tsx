@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { addLike, delLike, patchLike } from "../../lib/api/posts";
+import { addLike, delLike, patchLike } from "../../lib/api/post";
 import { CardType } from "../../lib/type";
 import palette from "../../styles/palette";
 

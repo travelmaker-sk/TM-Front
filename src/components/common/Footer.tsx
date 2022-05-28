@@ -2,7 +2,7 @@ import styled from "styled-components";
 import palette from "../../styles/palette";
 
 const FooterStyle = styled.div`
-  padding: 50px;
+  padding: 64px;
   text-align: center;
   color: ${palette.gray[5]};
 `;

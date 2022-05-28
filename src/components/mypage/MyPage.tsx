@@ -31,6 +31,7 @@ const MyPageTopBlock = styled.div`
     ul > li:nth-child(1) {
       font-size: 20px;
       margin-bottom: 13px;
+      font-weight: 600;
     }
     ul > li:nth-child(1) span {
       color: ${palette.cyan[5]};
@@ -117,7 +118,7 @@ const MyPage = ({ user }: MyPageType) => {
             <li>{user.email}</li>
             <CyanButtonStyle>
               <button>
-                <LinkButton to="/setProfile">회원정보 변경</LinkButton>
+                <LinkButton to="/setProfile">회원정보 설정</LinkButton>
               </button>
             </CyanButtonStyle>
           </ul>

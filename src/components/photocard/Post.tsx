@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CardType } from "../../lib/type";
 import Card from "./Card";
-import ModalCard from "./ModalPost";
+import PostModal from "./PostModal";
 
 export interface PostType {
   post: CardType | null;
@@ -20,7 +20,7 @@ const Post = ({ post }: PostType) => {
   return (
     <>
       <Card post={post} onOpenModal={onOpenModal} />
-      <ModalCard post={post} open={openModal} close={onCloseModal} />
+      <PostModal post={post} open={openModal} close={onCloseModal} />
     </>
   );
 };

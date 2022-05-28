@@ -3,9 +3,9 @@ import { useLocation } from "react-router-dom";
 import Footer from "../components/common/Footer";
 import Header from "../components/common/Header";
 import Search from "../components/home/Search";
-import Post from "../components/post/Post";
-import { PostBlock } from "../components/post/PostList";
-import { detailPosts } from "../lib/api/posts";
+import Post from "../components/photocard/Post";
+import { PostBlock } from "../components/photocard/PostList";
+import { detailPosts } from "../lib/api/post";
 import { Wrapper } from "./HomePage";
 
 const DetailPostsPage = () => {

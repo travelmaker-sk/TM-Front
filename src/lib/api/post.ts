@@ -1,5 +1,5 @@
 import axios from "axios";
-import postsData from "../../lib/json/posts.json";
+import postsData from "../json/posts.json";
 
 // 전체 포스트 페이지
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소

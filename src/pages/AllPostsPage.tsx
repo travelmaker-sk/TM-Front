@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
-import { allPosts } from "../lib/api/posts";
+import { allPosts } from "../lib/api/post";
 import { AllPostsType } from "../lib/type";
-import PostList from "../components/post/PostList";
+import PostList from "../components/photocard/PostList";
 import { Wrapper } from "./HomePage";
 import Header from "../components/common/Header";
 import Search from "../components/home/Search";

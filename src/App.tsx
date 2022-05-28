@@ -11,7 +11,6 @@ import RegisterFinPage from "./pages/RegisterFinPage";
 
 import CPhotoCardPage from "./pages/CreateCardPage";
 import BookMarksListPage from "./pages/BookMarksListPage";
-import NoticePage from "./pages/NoticePage";
 import MyPagePage from "./pages/MyPage";
 import SetProfilePage from "./pages/SetProfilePage";
 import QuitPage from "./pages/QuitPage";
@@ -22,6 +21,7 @@ import FindPwPage from "./pages/FindPwPage";
 import FindPwFinPage from "./pages/FindPwFinPage";
 import AllPostsPage from "./pages/AllPostsPage";
 import DetailPostsPage from "./pages/DetailPostsPage";
+import CreateCardPage from "./pages/CreateCardPage";
 
 function App() {
   return (
@@ -44,9 +44,8 @@ function App() {
       <Route path="/setProfile" element={<SetProfilePage />} />
       <Route path="/quit" element={<QuitPage />} />
       <Route path="/quitFin" element={<QuitFinPage />} />
-      <Route path="/createPhotocard" element={<CPhotoCardPage />} />
+      <Route path="/createPhotocard" element={<CreateCardPage />} />
       <Route path="/bookmarks" element={<BookMarksListPage />} />
-      <Route path="/notice" element={<NoticePage />} />
 
       <Route path="/*" element={<NotFoundPage />} />
     </Routes>

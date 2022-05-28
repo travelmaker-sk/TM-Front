@@ -127,7 +127,7 @@ const SetProfile = () => {
 
   return (
     <SetProfileBlock>
-      <h2>회원정보 변경</h2>
+      <h2>회원정보 설정</h2>
       <form onSubmit={onSubmit}>
         <li>
           <h3>프로필 사진 변경</h3>

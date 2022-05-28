@@ -8,9 +8,9 @@ import { setUser } from "../redux/user";
 import Header from "../components/common/Header";
 import Swiper from "../components/home/Swiper";
 import { AllPostsType } from "../lib/type";
-import AllPosts from "../components/post/PostList";
-import { allPosts } from "../lib/api/posts";
-import PostList from "../components/post/PostList";
+import AllPosts from "../components/photocard/PostList";
+import { allPosts } from "../lib/api/post";
+import PostList from "../components/photocard/PostList";
 import Footer from "../components/common/Footer";
 
 export const Wrapper = styled(Responsive)`
