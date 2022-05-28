@@ -20,8 +20,21 @@ const PostListBlock = styled.div`
 export const PostBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
-  > * {
+  > *:nth-of-type(odd) {
     margin-right: 1.5%;
+    transition: 0.5s;
+  }
+  > *:nth-of-type(odd):hover {
+    transform: translateY(-15px);
+  }
+  > *:nth-of-type(7) {
+    margin-right: 0;
+  }
+  // Tablet
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    > *:nth-of-type(5) {
+      margin-right: 0;
+    }
   }
   // Mobile
   @media screen and (max-width: 767px) {

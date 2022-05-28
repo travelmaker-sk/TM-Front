@@ -1,18 +1,12 @@
 import { CardType } from "../../lib/type";
 
-interface ICard {
+interface CardDetailType {
   post: CardType | null;
 }
 
-const Card = ({ post }: ICard) => {
+const CardDetail = ({ post }: CardDetailType) => {
   return (
-    <>
-      <li>
-        <img
-          src={post?.filepath ? post.filepath : "./images/default-photo.png"}
-          alt={post?.filename}
-        />
-      </li>
+    <div>
       <li>
         <span>이름</span>
         {post?.title}
@@ -58,8 +52,8 @@ const Card = ({ post }: ICard) => {
         {post?.memo}
       </li>
       <li className="tag">{post?.tag?.map((item) => `#${item} `)}</li>
-    </>
+    </div>
   );
 };
 
-export default Card;
+export default CardDetail;
