@@ -38,19 +38,31 @@ const CardDetailStyle = styled.div`
       display: flex;
       justify-content: flex-end;
       align-items: flex-start;
-      button {
-        span {
-          font-size: 32px;
-          color: ${palette.gray[6]};
-        }
+      span {
+        font-size: 28px;
+        color: ${palette.gray[6]};
       }
-      .like {
-        margin-right: 5px;
+      .like-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        span:nth-of-type(2) {
+        > span {
           font-size: 16px;
+        }
+      }
+      button {
+        &.like-btn {
+          span.not-like,
+          span.like {
+            transition: transform 300ms ease;
+          }
+          span.not-like:hover,
+          span.like:hover {
+            transform: scale(1.1);
+          }
+          span.like {
+            color: #f06595;
+          }
         }
       }
     }
@@ -152,11 +164,19 @@ const CardDetail = ({ post }: CardDetailType) => {
         </li>
         <hr />
         <li>
-          <button title="좋아요" onClick={onToggleLike} className="like">
-            <span className="material-icons">favorite_outline</span>
+          <div className="like-container">
+            <button title="좋아요" onClick={onToggleLike} className="like-btn">
+              {like ? (
+                <span className="material-icons not-like">
+                  favorite_outline
+                </span>
+              ) : (
+                <span className="material-icons like">favorite</span>
+              )}
+            </button>
             <span>{post?.liked ? post?.liked : 0}</span>
-          </button>
-          <button title="북마크 추가" className="bookmark">
+          </div>
+          <button title="북마크 추가" className="bookmark-btn">
             <span className="material-icons">bookmark_outline</span>
           </button>
         </li>

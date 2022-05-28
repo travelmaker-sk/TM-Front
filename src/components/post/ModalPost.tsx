@@ -59,21 +59,30 @@ const ModalBlock = styled.div`
         font-weight: 600;
       }
       span:hover {
-        color: #e03131;
+        color: ${palette.cyan[8]};
       }
     }
   }
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .white-box {
-      width: 70%;
+      width: 80%;
     }
   }
   // Mobile
   @media screen and (max-width: 767px) {
     .white-box {
-      height: 75%;
-      width: 85%;
+      width: 80%;
+      height: 90%;
+      display: block;
+      padding: 25px 7%;
+      overflow: scroll;
+      > li {
+        width: 100%;
+      }
+      > li:first-child {
+        margin-right: 0;
+      }
     }
   }
 `;
