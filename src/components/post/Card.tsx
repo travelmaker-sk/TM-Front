@@ -1,12 +1,57 @@
 import { CardType } from "../../lib/type";
+import styled from "styled-components";
+import palette from "../../styles/palette";
+import { useRef } from "react";
 
 interface ICard {
   post: CardType | null;
+  onOpenModal?: () => void;
 }
 
-const Card = ({ post }: ICard) => {
+export const CardStyle = styled.div`
+  width: 23.875%;
+  min-width: 238px;
+  padding: 16px;
+  margin-bottom: 32px;
+  border: 1.5px solid ${palette.gray[3]};
+  cursor: pointer;
+  font-size: 14px;
+  li {
+    display: flex;
+    line-height: 1.2em;
+    margin-bottom: 10px;
+    img {
+      margin-bottom: 16px;
+    }
+    span {
+      width: 40px;
+      color: ${palette.cyan[6]};
+    }
+  }
+  .tag {
+    margin-top: 32.333px;
+    color: ${palette.gray[6]};
+  }
+  // Tablet
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    width: 30%;
+  }
+  // Mobile
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+`;
+
+const Card = ({ post, onOpenModal }: ICard) => {
+  const refCard = useRef<HTMLDivElement>(null);
+  const cardWidth = refCard.current?.offsetWidth;
+
   return (
-    <>
+    <CardStyle
+      ref={refCard}
+      style={{ height: `calc(${cardWidth}*86/54)px` }}
+      onClick={onOpenModal}
+    >
       <li>
         <img
           src={post?.filepath ? post.filepath : "./images/default-photo.png"}
@@ -58,7 +103,7 @@ const Card = ({ post }: ICard) => {
         {post?.memo}
       </li>
       <li className="tag">{post?.tag?.map((item) => `#${item} `)}</li>
-    </>
+    </CardStyle>
   );
 };
 

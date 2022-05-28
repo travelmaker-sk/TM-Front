@@ -98,3 +98,42 @@ export const detailPosts = async (
     list: result,
   };
 };
+
+// 좋아요
+export const patchLike = async (postId: number) => {
+  const response = await axios.get("/like");
+
+  // return response.data;
+  return false;
+};
+export const addLike = async (postId: number) => {
+  const response = await axios.post("/like", {
+    postId,
+  });
+
+  return response.data;
+};
+export const delLike = async (postId: number) => {
+  const response = await axios.delete("/like");
+
+  return response.data;
+};
+
+// 북마크
+export const checkBookmark = async (postId: number) => {
+  const response = await axios.get("/bookmark");
+
+  return response.data;
+};
+export const addBookmark = async (postId: number) => {
+  const response = await axios.post("/bookmark", {
+    postId,
+  });
+
+  return response.data;
+};
+export const delBookmark = async (postId: number) => {
+  const response = await axios.delete("/bookmark");
+
+  return response.data;
+};

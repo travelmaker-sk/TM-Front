@@ -36,72 +36,63 @@ const ModalBlock = styled.div`
     width: 65%;
     height: 70%;
     padding: 0 5%;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #fff;
     > li {
-      width: 42.5%;
+      width: 40%;
     }
     > li:first-child {
-      margin-right: 5%;
+      margin-right: 10%;
+      > * {
+        width: 100%;
+      }
     }
-  }
-`;
-
-export const ModalCardStyle = styled.div`
-  width: 100%;
-  padding: 16px;
-  margin: 0;
-  border: 1.5px solid ${palette.gray[3]};
-  cursor: pointer;
-  li {
-    display: flex;
-    line-height: 1.2em;
-    margin-bottom: 10px;
-    img {
-      margin-bottom: 16px;
+    > button {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      span {
+        font-size: 32px;
+        font-weight: 600;
+      }
+      span:hover {
+        color: #e03131;
+      }
     }
-    span {
-      width: 40px;
-      color: ${palette.cyan[6]};
-    }
-  }
-  .tag {
-    margin-top: 32px;
-    color: ${palette.gray[6]};
   }
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    width: 32.333%;
+    .white-box {
+      width: 70%;
+    }
   }
   // Mobile
   @media screen and (max-width: 767px) {
-    width: 100%;
+    .white-box {
+      height: 75%;
+      width: 85%;
+    }
   }
 `;
 
 const ModalPost = ({ post, open, close }: ModalType) => {
-  const refCard = useRef<HTMLDivElement>(null);
-  const cardWidth = refCard.current?.offsetWidth;
-  console.log("cardWidth", cardWidth);
   return (
     <ModalBlock className={open ? "open" : ""}>
       <div className="container">
         <ul className="white-box">
           <li>
-            <ModalCardStyle
-              ref={refCard}
-              style={{ height: `calc(${cardWidth}*86/54)px` }}
-            >
-              <Card post={post} />
-            </ModalCardStyle>
+            <Card post={post} />
           </li>
           <li>
             <CardDetail post={post} />
           </li>
+          <button onClick={close} title="닫기">
+            <span className="material-icons">close</span>
+          </button>
         </ul>
-        <button onClick={close}>닫기</button>
       </div>
     </ModalBlock>
   );

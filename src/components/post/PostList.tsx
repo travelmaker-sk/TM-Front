@@ -27,12 +27,17 @@ export const PostBlock = styled.div`
   > *:nth-of-type(odd):hover {
     transform: translateY(-15px);
   }
-  > *:nth-of-type(7) {
+  // 7, 15 ...
+  > *:nth-of-type(8n-1) {
     margin-right: 0;
   }
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    > *:nth-of-type(5) {
+    > *:nth-of-type(8n-1) {
+      margin-right: 1.5%;
+    }
+    // 5, 11 ...
+    > *:nth-of-type(6n-1) {
       margin-right: 0;
     }
   }
