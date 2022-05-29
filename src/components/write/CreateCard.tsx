@@ -15,7 +15,7 @@ import {
 } from "../../styles/ButtonStyle";
 
 export const SelectCategory = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 64px;
   .select {
     width: 180px;
     padding: 7px 10px;
@@ -41,27 +41,78 @@ const CreateCardBlock = styled.div`
   }
 `;
 
-const CreateCardStyle = styled(CardStyle)`
+const CreateCardStyle = styled.div`
+  position: relative;
   width: 400px;
   height: 637px;
-  font-size: 16px;
-  cursor: auto;
-  // Tablet
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    width: 400px;
+  padding: 16px;
+  margin-bottom: 32px;
+  border: 1.5px solid ${palette.gray[3]};
+  > label {
+    display: flex;
+    line-height: 1.2em;
+    margin-bottom: 16px;
+    span {
+      width: 40px;
+      color: ${palette.cyan[6]};
+    }
   }
-  // Mobile
-  @media screen and (max-width: 767px) {
-    width: 400px;
+  img {
+    width: 365px;
+    height: 273.75px;
+    margin-bottom: 16px;
+  }
+  .cardPhoto-upload {
+    position: absolute;
+    top: -50px;
+    left: 9px;
+    margin-bottom: 13px;
+    display: flex;
+    .cardPhoto-name,
+    .add-photo,
+    .del-photo {
+      padding: 5px 15px;
+      border-radius: 4px;
+    }
+    .cardPhoto-name {
+      width: 60%;
+      border: 1px solid ${palette.gray[4]};
+      color: ${palette.gray[4]};
+    }
+    .add-photo,
+    .del-photo {
+      margin-left: 5px;
+      width: 20%;
+      // border: 1px solid ${palette.gray[4]};
+      cursor: pointer;
+      text-align: center;
+      line-height: 24px;
+      color: white;
+    }
+    .add-photo {
+      background-color: ${palette.cyan[5]};
+    }
+    .del-photo {
+      background-color: ${palette.gray[5]};
+    }
+    input[type="file"] {
+      display: none;
+    }
+  }
+  .tag {
+    margin-top: 32.333px;
+    color: ${palette.gray[6]};
   }
 `;
 
 const CreateCard = () => {
-  // Swal.fire(
-  //   "카테고리를 먼저 선택해주세요",
-  //   "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
-  //   "info"
-  // );
+  // useEffect(() => {
+  //   Swal.fire(
+  //     "카테고리를 먼저 선택해주세요",
+  //     "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
+  //     "info"
+  //   );
+  // }, []);
 
   const refForm = useRef<HTMLFormElement>(null);
 
@@ -73,8 +124,6 @@ const CreateCard = () => {
 
   const onSelected = useCallback(
     (e: any) => {
-      e.preventDefault();
-
       if (!refForm.current) return;
       refForm.current.style.display = "block";
 
@@ -100,6 +149,31 @@ const CreateCard = () => {
   );
   console.log("selected: ", selected);
 
+  const [image, setImage] = useState({
+    cardPhotoFile: "",
+    cardPhotoUrl: "./images/add-photo.png",
+  });
+  const cardPhotoChange = (e: any) => {
+    e.preventDefault();
+    const fileReader = new FileReader();
+    if (e.target.files[0]) {
+      fileReader.readAsDataURL(e.target.files[0]);
+    }
+    fileReader.onload = () => {
+      setImage({
+        cardPhotoFile: e.target.files[0].name,
+        //@ts-ignore
+        cardPhotoUrl: fileReader.result,
+      });
+    };
+  };
+  const cardPhotoDel = () => {
+    setImage({
+      cardPhotoFile: "",
+      cardPhotoUrl: "./images/add-photo.png",
+    });
+  };
+
   return (
     <Wrapper>
       <Header />
@@ -122,46 +196,67 @@ const CreateCard = () => {
       <CreateCardBlock>
         <form ref={refForm}>
           <CreateCardStyle>
-            <li>
-              <img src="" alt="" />
-            </li>
-            <li>
+            <label>
+              <img src={image.cardPhotoUrl} alt="Photo" />
+              <div className="cardPhoto-upload">
+                <input
+                  placeholder={
+                    image.cardPhotoFile ? image.cardPhotoFile : "첨부파일"
+                  }
+                  className="cardPhoto-name"
+                  readOnly
+                />
+                <label htmlFor="cardPhoto" className="add-photo">
+                  선택
+                </label>
+                <input
+                  type="file"
+                  id="cardPhoto"
+                  accept="image/*"
+                  onChange={cardPhotoChange}
+                />
+                <button onClick={cardPhotoDel} className="del-photo">
+                  삭제
+                </button>
+              </div>
+            </label>
+            <label>
               <span>이름</span>
-            </li>
-            <li>
+            </label>
+            <label>
               <span>위치</span>
-            </li>
-            <li>
+            </label>
+            <label>
               <span>날짜</span>
-            </li>
+            </label>
             {selectedPlace ? (
-              <li>
+              <label>
                 <span>날씨</span>
-              </li>
+              </label>
             ) : (
               ""
             )}
             {selectedRest ? (
-              <li>
+              <label>
                 <span>메뉴</span>
-              </li>
+              </label>
             ) : (
               ""
             )}
             {selectedRest || selectedAccom ? (
-              <li>
+              <label>
                 <span>가격</span>
-              </li>
+              </label>
             ) : (
               ""
             )}
-            <li>
+            <label>
               <span>평점</span>
-            </li>
-            <li>
+            </label>
+            <label>
               <span>메모</span>
-            </li>
-            <li className="tag"></li>
+            </label>
+            <label className="tag"></label>
           </CreateCardStyle>
           <SelectButtonStyle>
             <CyanButtonStyle>
