@@ -211,41 +211,44 @@ const CreateCard = () => {
   console.log("category ", category);
 
   // 카테고리 선택
-  const onSelectedCategory = (e: any) => {
-    if (!refForm.current) return;
-    refForm.current.style.display = "block";
+  const onSelectedCategory = useCallback(
+    (e: any) => {
+      if (!refForm.current) return;
+      refForm.current.style.display = "block";
 
-    setSelectedCategory(e.target.value);
+      setSelectedCategory(e.target.value);
 
-    if (selectedCategory === "") {
-      Swal.fire(
-        "카테고리를 먼저 선택해주세요",
-        "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
-        "info"
-      );
-    }
-    if (selectedCategory === "place") {
-      setSelectedPlace(true);
-      setSelectedRest(false);
-      setSelectedAccom(false);
+      if (selectedCategory === "") {
+        Swal.fire(
+          "카테고리를 먼저 선택해주세요",
+          "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
+          "info"
+        );
+      }
+      if (selectedCategory === "place") {
+        setSelectedPlace(true);
+        setSelectedRest(false);
+        setSelectedAccom(false);
 
-      setCategory("place");
-    }
-    if (selectedCategory === "restaurant") {
-      setSelectedPlace(false);
-      setSelectedRest(true);
-      setSelectedAccom(false);
+        setCategory("place");
+      }
+      if (selectedCategory === "restaurant") {
+        setSelectedPlace(false);
+        setSelectedRest(true);
+        setSelectedAccom(false);
 
-      setCategory("restaurant");
-    }
-    if (selectedCategory === "accommodation") {
-      setSelectedPlace(false);
-      setSelectedRest(false);
-      setSelectedAccom(true);
+        setCategory("restaurant");
+      }
+      if (selectedCategory === "accommodation") {
+        setSelectedPlace(false);
+        setSelectedRest(false);
+        setSelectedAccom(true);
 
-      setCategory("accommodation");
-    }
-  };
+        setCategory("accommodation");
+      }
+    },
+    [selectedCategory]
+  );
 
   // 포토카드 이미지 업로드
   const [image, setImage] = useState({

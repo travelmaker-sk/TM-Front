@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../components/common/Footer";
@@ -8,12 +8,28 @@ import Post from "../components/photocard/Post";
 import { PostBlock } from "../components/photocard/PostList";
 import { SelectCategory } from "../components/write/CreateCard";
 import { detailPosts } from "../lib/api/post";
+import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";
 
 const SelectSort = styled(SelectCategory)`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 32px;
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  > span {
+    margin: 0 5px;
+    color: ${palette.gray[4]};
+  }
+  > button {
+    padding: 0 5px;
+    margin: 0 5px;
+  }
 `;
 
 const DetailPostsPage = () => {
@@ -28,19 +44,22 @@ const DetailPostsPage = () => {
   console.log("sort", sort);
 
   // 정렬 선택
-  const onSelectedSort = (e: any) => {
-    setSelectedSort(e.target.value);
+  const onSelectedSort = useCallback(
+    (e: any) => {
+      setSelectedSort(e.target.value);
 
-    if (selectedSort === "new") {
-      setSort("new");
-    }
-    if (selectedSort === "old") {
-      setSort("old");
-    }
-    if (selectedSort === "popular") {
-      setSort("popular");
-    }
-  };
+      if (selectedSort === "new") {
+        setSort("new");
+      }
+      if (selectedSort === "old") {
+        setSort("old");
+      }
+      if (selectedSort === "popular") {
+        setSort("popular");
+      }
+    },
+    [selectedSort]
+  );
 
   // 페이지네이션
   const [totalPage, setTotalPage] = useState(1);
@@ -92,11 +111,23 @@ const DetailPostsPage = () => {
           <Post post={post} key={post?.id} />
         ))}
       </PostBlock>
-      {Array.from({ length: totalPage }, (x, i) => i + 1).map((pageNumber) => (
-        <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)}>
-          {pageNumber}
-        </button>
-      ))}
+      <Pagination>
+        <span className="material-icons">chevron_left</span>
+        {Array.from({ length: totalPage }, (x, i) => i + 1).map(
+          (pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => {
+                setCurrentPage(pageNumber);
+                console.log(pageNumber);
+              }}
+            >
+              {pageNumber}
+            </button>
+          )
+        )}
+        <span className="material-icons">chevron_right</span>
+      </Pagination>
       <Footer />
     </Wrapper>
   );
