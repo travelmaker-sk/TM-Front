@@ -18,8 +18,8 @@ import { useNavigate } from "react-router";
 export const SelectCategory = styled.div`
   margin-bottom: 64px;
   .select {
-    width: 180px;
-    padding: 7px 10px;
+    width: 150px;
+    padding: 5px;
     border: 1.4px solid ${palette.cyan[6]};
     border-radius: 4px;
     outline: 0 none;
@@ -37,13 +37,13 @@ const CreateCardBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  form {
+  > div {
     display: none;
+    position: relative;
   }
 `;
 
 const CreateCardStyle = styled.div`
-  position: relative;
   width: 400px;
   height: 637px;
   padding: 15px;
@@ -130,13 +130,14 @@ const TagInput = styled.input`
 
 const TagList = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const TagItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-right: 5px;
+  margin: 0 5px 5px 0;
   padding: 5px;
   background-color: ${palette.cyan[8]};
   border-radius: 5px;
@@ -160,13 +161,13 @@ const TagItem = styled.div`
 `;
 
 const CreateCard = () => {
-  useEffect(() => {
-    Swal.fire(
-      "카테고리를 먼저 선택해주세요",
-      "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
-      "info"
-    );
-  }, []);
+  // useEffect(() => {
+  //   Swal.fire(
+  //     "카테고리를 먼저 선택해주세요",
+  //     "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
+  //     "info"
+  //   );
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -198,7 +199,6 @@ const CreateCard = () => {
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
   const [filepath, setFilepath] = useState("");
-  console.log("category ", category);
   console.log("price ", price);
   console.log("tagList", tagList);
 
@@ -206,34 +206,39 @@ const CreateCard = () => {
   const [selectedRest, setSelectedRest] = useState(false);
   const [selectedAccom, setSelectedAccom] = useState(false);
 
-  const [selected, setSelected] = useState("");
-  console.log("selected ", selected);
-  console.log("selectedPlace ", selectedPlace);
-  console.log("selectedRest ", selectedRest);
-  console.log("selectedAccom ", selectedAccom);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  console.log("selectedCategory ", selectedCategory);
+  console.log("category ", category);
 
   // 카테고리 선택
-  const onSelected = (e: any) => {
+  const onSelectedCategory = (e: any) => {
     if (!refForm.current) return;
     refForm.current.style.display = "block";
 
-    setSelected(e.target.value);
+    setSelectedCategory(e.target.value);
 
-    if (selected === "place") {
+    if (selectedCategory === "") {
+      Swal.fire(
+        "카테고리를 먼저 선택해주세요",
+        "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
+        "info"
+      );
+    }
+    if (selectedCategory === "place") {
       setSelectedPlace(true);
       setSelectedRest(false);
       setSelectedAccom(false);
 
       setCategory("place");
     }
-    if (selected === "restaurant") {
+    if (selectedCategory === "restaurant") {
       setSelectedPlace(false);
       setSelectedRest(true);
       setSelectedAccom(false);
 
       setCategory("restaurant");
     }
-    if (selected === "accommodation") {
+    if (selectedCategory === "accommodation") {
       setSelectedPlace(false);
       setSelectedRest(false);
       setSelectedAccom(true);
@@ -289,7 +294,20 @@ const CreateCard = () => {
     setTagList(filteredTagList);
   };
 
-  // 폼 등록 이벤트 핸들러
+  // 초기화 버튼
+  const onInit = () => {
+    setTitle("");
+    setLocation("");
+    setDate("");
+    setWeather("");
+    setMenu("");
+    setPrice("");
+    setScore("");
+    setMemo("");
+    setTagList([]);
+  };
+
+  // 업로드 버튼
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -342,9 +360,9 @@ const CreateCard = () => {
       <HeaderBottomPlus />
       <SelectCategory>
         <select
-          name="fruits"
+          name="category"
           className="select"
-          onChange={onSelected}
+          onChange={onSelectedCategory}
           defaultValue="default"
         >
           <option value="default" disabled>
@@ -525,7 +543,7 @@ const CreateCard = () => {
               </button>
             </CyanButtonStyle>
             <GrayButtonStyle>
-              <button>초기화</button>
+              <button onClick={onInit}>초기화</button>
             </GrayButtonStyle>
           </SelectButtonStyle>
         </div>

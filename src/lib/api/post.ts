@@ -47,8 +47,8 @@ export const allPosts = async (
 export const detailPosts = async (
   from: number,
   limit: number,
-  category: "popular" | "recent" | "place" | "restaurant" | "accommodation",
-  sort: "new" | "old" | "popular" = "new",
+  category: string,
+  sort: string,
   keywordWhere?: string,
   keywordWhat?: string
 ) => {
