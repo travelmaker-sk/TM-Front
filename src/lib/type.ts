@@ -18,6 +18,7 @@ export interface CardType {
   score: number;
   date: string;
   liked: number;
+  uploadDate: string;
   writer: {
     username: string;
     profileImage?: string;

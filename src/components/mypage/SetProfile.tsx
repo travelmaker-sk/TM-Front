@@ -103,7 +103,7 @@ const SetProfile = () => {
     }
     fileReader.onload = () => {
       setImage({
-        profileImageFile: e.target.files[0],
+        profileImageFile: e.target.files[0].name,
         //@ts-ignore
         profileImageUrl: fileReader.result,
       });

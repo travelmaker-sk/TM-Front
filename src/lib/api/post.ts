@@ -101,7 +101,11 @@ export const detailPosts = async (
 
 // 좋아요
 export const patchLike = async (postId: number) => {
-  const response = await axios.get("/like");
+  const response = await axios.get("/like", {
+    params: {
+      postId,
+    },
+  });
 
   // return response.data;
   return false;
@@ -114,14 +118,22 @@ export const addLike = async (postId: number) => {
   return response.data;
 };
 export const delLike = async (postId: number) => {
-  const response = await axios.delete("/like");
+  const response = await axios.delete("/like", {
+    params: {
+      postId,
+    },
+  });
 
   return response.data;
 };
 
 // 북마크
 export const checkBookmark = async (postId: number) => {
-  const response = await axios.get("/bookmark");
+  const response = await axios.get("/bookmark", {
+    params: {
+      postId,
+    },
+  });
 
   return response.data;
 };
@@ -133,7 +145,11 @@ export const addBookmark = async (postId: number) => {
   return response.data;
 };
 export const delBookmark = async (postId: number) => {
-  const response = await axios.delete("/bookmark");
+  const response = await axios.delete("/bookmark", {
+    params: {
+      postId,
+    },
+  });
 
   return response.data;
 };
