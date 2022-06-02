@@ -19,7 +19,7 @@ export const allPosts = async (
   // return response.data;
 
   const popularList = postsData.postList
-    .sort((a, b) => a.liked - b.liked)
+    .sort((a, b) => a.like.likeNum - b.like.likeNum)
     .slice(0, 4);
   const recentList = postsData.postList
     .sort((a, b) => (a.date <= b.date ? -1 : 1))
@@ -68,7 +68,7 @@ export const detailPosts = async (
   switch (category) {
     case "popular":
       result = postsData.postList
-        .sort((a, b) => a.liked - b.liked)
+        .sort((a, b) => a.like.likeNum - b.like.likeNum)
         .slice(0, 16);
       break;
     case "recent":

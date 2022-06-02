@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { CardType } from "../../lib/type";
+import { GetPostType } from "../../lib/type";
 import Card from "./Card";
 import PostModal from "./PostModal";
 
 export interface PostType {
-  post: CardType | null;
+  post: GetPostType | null;
 }
 
 const Post = ({ post }: PostType) => {

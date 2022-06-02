@@ -173,20 +173,6 @@ const CreateCard = () => {
 
   const refForm = useRef<HTMLDivElement>(null);
 
-  // category: "place" | "restaurant" | "accommodation",
-  // title: string,
-  // location: string,
-  // date: string,
-  // weather?: string,
-  // menu?: string,
-  // price?: number,
-  // // @ts-ignore
-  // score: number,
-  // memo?: string,
-  // tag?: Array<string>,
-  // filepath?: string
-  // }
-
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -198,7 +184,7 @@ const CreateCard = () => {
   const [memo, setMemo] = useState("");
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
-  const [filepath, setFilepath] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   console.log("price ", price);
   console.log("tagList", tagList);
 
@@ -322,17 +308,17 @@ const CreateCard = () => {
 
       // API 호출
       addPost(
-        category as string,
+        category,
         title,
         location,
         date,
+        score,
         weather,
         menu,
         price,
-        score,
         memo,
         tagList,
-        filepath
+        imageUrl
       ).then((res) => {
         if (res) {
           alert("에러 발생");
@@ -345,7 +331,7 @@ const CreateCard = () => {
     [
       category,
       date,
-      filepath,
+      imageUrl,
       location,
       memo,
       menu,

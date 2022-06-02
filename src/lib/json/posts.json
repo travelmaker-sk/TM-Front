@@ -5,13 +5,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -24,13 +27,16 @@
       "title": "제주식당",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -44,13 +50,16 @@
       "title": "제주호텔",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -63,13 +72,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -82,13 +94,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -101,13 +116,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -120,13 +138,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -139,13 +160,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -158,13 +182,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -177,13 +204,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -196,13 +226,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -215,13 +248,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -234,13 +270,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -253,13 +292,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -272,13 +314,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -291,13 +336,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -310,13 +358,16 @@
       "title": "성산일출봉",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -329,13 +380,16 @@
       "title": "제주식당",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -349,13 +403,16 @@
       "title": "제주식당",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -369,13 +426,16 @@
       "title": "제주식당",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""
@@ -389,13 +449,16 @@
       "title": "제주식당",
       "location": "제주",
       "memo": "이십글자이십글자이십글자이십글자이십글자",
-      "tag": ["제주도", "성산일출봉", "성산"],
-      "filename": "",
-      "filepath": "",
+      "tagList": ["제주도", "성산일출봉", "성산"],
+      "imageUrl": "",
       "score": 4.5,
       "date": "2022-05-18",
       "uploadDate": "2022-05-18T09:41:17.295+00:00",
-      "liked": 20,
+      "like": {
+        "likeNum": 20,
+        "likeCheck": false
+      },
+      "bookmarkCheck": false,
       "writer": {
         "username": "작성자",
         "profileImage": ""

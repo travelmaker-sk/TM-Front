@@ -7,32 +7,58 @@ export interface UserType {
   followings?: number;
 }
 
-export interface CardType {
+export interface AllPostsType {
+  popular: GetPostType[];
+  recent: GetPostType[];
+  place: GetPostType[];
+  restaurant: GetPostType[];
+  accommodation: GetPostType[];
+}
+
+export type AllPostsCategoryType =
+  | "popular"
+  | "recent"
+  | "place"
+  | "restaurant"
+  | "accommodation";
+
+export type CategoryType = "place" | "restaurant" | "accomodation";
+
+export interface GetPostType {
   id: number;
+  category: CategoryType;
   title: string;
   location: string;
-  memo?: string;
-  tag?: Array<string>;
-  filename?: string;
-  filepath?: string;
-  score: number;
   date: string;
-  liked: number;
+  score: number;
+  weather?: string;
+  menu?: string;
+  price?: number;
+  memo?: string;
+  tagList?: Array<string>;
+  imageUrl?: string;
+  like: {
+    likeNum: number;
+    likeCheck: boolean;
+  };
+  bookmarkCheck: boolean;
   uploadDate: string;
   writer: {
     username: string;
     profileImage?: string;
   };
-  category: "place" | "restaurant" | "accommodation";
+}
+
+export interface AddPostType {
+  category: CategoryType;
+  title: string;
+  location: string;
+  date: string;
+  score: number;
   weather?: string;
   menu?: string;
   price?: number;
-}
-
-export interface AllPostsType {
-  popular: CardType[];
-  recent: CardType[];
-  place: CardType[];
-  restaurant: CardType[];
-  accommodation: CardType[];
+  memo?: string;
+  tagList?: Array<string>;
+  imageUrl?: string;
 }

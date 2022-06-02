@@ -1,10 +1,10 @@
-import { CardType } from "../../lib/type";
+import { GetPostType } from "../../lib/type";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import { useRef } from "react";
 
 interface ICard {
-  post: CardType | null;
+  post: GetPostType | null;
   onOpenModal?: () => void;
 }
 
@@ -54,8 +54,8 @@ const Card = ({ post, onOpenModal }: ICard) => {
     >
       <li>
         <img
-          src={post?.filepath ? post.filepath : "./images/default-photo.png"}
-          alt={post?.filename}
+          src={post?.imageUrl ? post.imageUrl : "./images/default-photo.png"}
+          alt="Photocard Image"
         />
       </li>
       <li>
@@ -102,7 +102,7 @@ const Card = ({ post, onOpenModal }: ICard) => {
         <span>메모</span>
         {post?.memo}
       </li>
-      <li className="tag">{post?.tag?.map((item) => `#${item} `)}</li>
+      <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
     </CardStyle>
   );
 };

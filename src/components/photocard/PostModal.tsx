@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import { CardType } from "../../lib/type";
+import { GetPostType } from "../../lib/type";
 import palette from "../../styles/palette";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
 
 interface ModalType {
-  post: CardType | null;
+  post: GetPostType | null;
   open: boolean;
   close: () => void;
 }

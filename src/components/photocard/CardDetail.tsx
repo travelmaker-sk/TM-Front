@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { addLike, delLike, patchLike } from "../../lib/api/post";
-import { CardType } from "../../lib/type";
+import { GetPostType } from "../../lib/type";
 import palette from "../../styles/palette";
 
 interface CardDetailType {
-  post: CardType | null;
+  post: GetPostType | null;
 }
 
 const CardDetailStyle = styled.div`
@@ -160,7 +160,7 @@ const CardDetail = ({ post }: CardDetailType) => {
             <span>메모</span>
             {post?.memo}
           </li>
-          <li className="tag">{post?.tag?.map((item) => `#${item} `)}</li>
+          <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
         </li>
         <hr />
         <li>
@@ -174,7 +174,7 @@ const CardDetail = ({ post }: CardDetailType) => {
                 <span className="material-icons like">favorite</span>
               )}
             </button>
-            <span>{post?.liked ? post?.liked : 0}</span>
+            <span>{post?.like.likeNum ? post?.like.likeNum : 0}</span>
           </div>
           <button title="북마크 추가" className="bookmark-btn">
             <span className="material-icons">bookmark_outline</span>

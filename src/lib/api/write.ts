@@ -1,76 +1,46 @@
 import axios from "axios";
+import { AddPostType } from "../type";
 
-export const addPost = async (
-  category: string,
-  title: string,
-  location: string,
-  date: string,
-  weather?: string,
-  menu?: string,
-  price?: string,
-  score?: string,
-  memo?: string,
-  tag?: Array<string>,
-  filepath?: string
-) => {
-  const response = await axios.post("/post/new", {
-    category,
-    title,
-    location,
-    date,
-    weather,
-    menu,
-    price,
-    score,
-    memo,
-    tag,
-    filepath,
-  });
+export const addPost = async (data: AddPostType) => {
+  const response = await axios.post("/post/new", data);
 
   // return response.data;
   return false;
 };
 
 export const editPost = async (
-  postId: string,
-  category: string,
+  id: number,
+  category: "place" | "restaurant" | "accomodation",
   title: string,
   location: string,
   date: string,
+  score: number,
   weather?: string,
   menu?: string,
   price?: string,
-  score?: string,
   memo?: string,
-  tag?: Array<string>,
-  filepath?: string
+  tagList?: Array<string>,
+  imageUrl?: string
 ) => {
-  const response = await axios.post("/post/update", {
-    params: {
-      postId,
-    },
+  const response = await axios.post(`/post/update/${id}`, {
     category,
     title,
     location,
     date,
+    score,
     weather,
     menu,
     price,
-    score,
     memo,
-    tag,
-    filepath,
+    tagList,
+    imageUrl,
   });
 
   return response.data;
 };
 
-export const deletePost = async (postId: number) => {
-  const response = await axios.delete("/post/delete", {
-    params: {
-      postId,
-    },
-  });
+export const deletePost = async (id: number) => {
+  const response = await axios.delete(`/post/delete/${id}`);
 
   return response.data;
 };
