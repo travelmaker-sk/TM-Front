@@ -100,56 +100,27 @@ export const detailPosts = async (
 };
 
 // 좋아요
-export const patchLike = async (postId: number) => {
-  const response = await axios.get("/like", {
-    params: {
-      postId,
-    },
-  });
-
-  // return response.data;
-  return false;
-};
-export const addLike = async (postId: number) => {
-  const response = await axios.post("/like", {
-    postId,
-  });
+export const addLike = async (id: number) => {
+  const response = await axios.post(`/like/add/${id}`);
 
   return response.data;
 };
-export const delLike = async (postId: number) => {
-  const response = await axios.delete("/like", {
-    params: {
-      postId,
-    },
-  });
+export const delLike = async (id: number) => {
+  const response = await axios.delete(`/like/delete/${id}`);
 
   return response.data;
 };
 
 // 북마크
-export const checkBookmark = async (postId: number) => {
-  const response = await axios.get("/bookmark", {
-    params: {
-      postId,
-    },
-  });
+export const addBookmark = async (id: number) => {
+  const response = await axios.post(`/bookmark/add/${id}`);
 
-  return response.data;
+  // return response.data;
+  return true;
 };
-export const addBookmark = async (postId: number) => {
-  const response = await axios.post("/bookmark", {
-    postId,
-  });
+export const delBookmark = async (id: number) => {
+  const response = await axios.delete(`/bookmark/delete/${id}`);
 
-  return response.data;
-};
-export const delBookmark = async (postId: number) => {
-  const response = await axios.delete("/bookmark", {
-    params: {
-      postId,
-    },
-  });
-
-  return response.data;
+  // return response.data;
+  return true;
 };

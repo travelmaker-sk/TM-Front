@@ -49,6 +49,10 @@ export interface GetPostType {
   };
 }
 
+export interface PostType {
+  post: GetPostType | null;
+}
+
 export interface AddPostType {
   category: CategoryType;
   title: string;

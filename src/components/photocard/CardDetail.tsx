@@ -1,12 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { addLike, delLike, patchLike } from "../../lib/api/post";
-import { GetPostType } from "../../lib/type";
+import { addLike, delLike } from "../../lib/api/post";
 import palette from "../../styles/palette";
-
-interface CardDetailType {
-  post: GetPostType | null;
-}
+import { PostType } from "./Post";
 
 const CardDetailStyle = styled.div`
   ul {
@@ -75,26 +71,21 @@ const CardDetailStyle = styled.div`
   }
 `;
 
-const CardDetail = ({ post }: CardDetailType) => {
-  const [like, setLike] = useState(false);
-
-  useEffect(() => {
-    const loadLike = () => {
-      patchLike(post?.id as number).then((res) => {
-        if (res) setLike(true);
-      });
-    };
-
-    loadLike();
-  }, [post?.id]);
+const CardDetail = ({ post }: PostType) => {
+  const [like, setLike] = useState(post?.like.likeCheck);
+  const [cntLike, setCntLike] = useState(post?.like.likeNum ?? 0);
 
   const onToggleLike = useCallback(() => {
     if (like) {
-      addLike(post?.id as number).then((res) => {});
-      console.log("addLike");
-    } else {
-      delLike(post?.id as number).then((res) => {});
+      delLike(post?.id as number).then((res) => {
+        setCntLike((cnt) => cnt - 1);
+      });
       console.log("delLike");
+    } else {
+      addLike(post?.id as number).then((res) => {
+        setCntLike((cnt) => cnt + 1);
+      });
+      console.log("addLike");
     }
 
     setLike(!like);
@@ -167,14 +158,14 @@ const CardDetail = ({ post }: CardDetailType) => {
           <div className="like-container">
             <button title="좋아요" onClick={onToggleLike} className="like-btn">
               {like ? (
+                <span className="material-icons like">favorite</span>
+              ) : (
                 <span className="material-icons not-like">
                   favorite_outline
                 </span>
-              ) : (
-                <span className="material-icons like">favorite</span>
               )}
             </button>
-            <span>{post?.like.likeNum ? post?.like.likeNum : 0}</span>
+            <span>{cntLike}</span>
           </div>
           <button title="북마크 추가" className="bookmark-btn">
             <span className="material-icons">bookmark_outline</span>
