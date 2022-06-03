@@ -3,16 +3,11 @@ import postsData from "../json/posts.json";
 
 // 전체 포스트 페이지
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
-export const allPosts = async (
-  limit: number,
-  keywordWhere?: string,
-  keywordWhat?: string
-) => {
+export const allPosts = async (where?: string, what?: string) => {
   // const response = await axios.get("/allPosts", {
   //   params: {
-  //     limit,
-  //     where: keywordWhere,
-  //     what: keywordWhat,
+  //     where,
+  //     what,
   //   },
   // });
 
@@ -45,20 +40,19 @@ export const allPosts = async (
 
 // 더보기 포스트 페이지
 export const detailPosts = async (
-  from: number,
-  limit: number,
   category: string,
   sort: string,
-  keywordWhere?: string,
-  keywordWhat?: string
+  currentPage: number,
+  where?: string,
+  what?: string
 ) => {
   // const response = await axios.get("/datailPosts", {
   //   params: {
-  //     from,
-  //     limit,
+  //     category,
   //     sort,
-  //     where: keywordWhere,
-  //     what: keywordWhat,
+  //     currentPage,
+  //     where,
+  //     what,
   //   },
   // });
 

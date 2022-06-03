@@ -37,7 +37,7 @@ const HomePage = () => {
   useEffect(() => {
     const loadHomePosts = () => {
       // API 호출
-      allPosts(4)
+      allPosts()
         .then((res) => {
           // @ts-ignore
           setHomePosts(res);

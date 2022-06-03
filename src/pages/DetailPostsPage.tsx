@@ -73,7 +73,7 @@ const DetailPostsPage = () => {
 
     // API 호출
     //@ts-ignore
-    detailPosts(from, itemPerPage, location.state.category, sort).then(
+    detailPosts(location.state.category, sort, currentPage).then(
       ({ totalCount, list }) => {
         const totalPageCount = Math.ceil(totalCount / itemPerPage);
         setTotalPage(totalPageCount);

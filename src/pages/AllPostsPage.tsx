@@ -89,7 +89,7 @@ const AllPostsPage = (props: any) => {
     // API 호출
     const loadPosts = () => {
       // API 호출
-      allPosts(4, query.where as string, query.what as string)
+      allPosts(query.where as string, query.what as string)
         .then((list) => {
           // @ts-ignore
           setposts(list);
