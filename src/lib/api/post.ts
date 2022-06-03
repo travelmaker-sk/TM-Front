@@ -4,7 +4,7 @@ import postsData from "../json/posts.json";
 // 전체 포스트 페이지
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
 export const allPosts = async (where?: string, what?: string) => {
-  // const response = await axios.get("/allPosts", {
+  // const response = await axios.get("/search", {
   //   params: {
   //     where,
   //     what,
@@ -48,11 +48,11 @@ export const detailPosts = async (
 ) => {
   // const response = await axios.get("/datailPosts", {
   //   params: {
-  //     category,
-  //     sort,
-  //     currentPage,
   //     where,
   //     what,
+  //     category,
+  //     sort,
+  //     page: currentPage,
   //   },
   // });
 

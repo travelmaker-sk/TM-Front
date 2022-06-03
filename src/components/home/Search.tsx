@@ -184,7 +184,7 @@ const Search = () => {
       가져올 아이템 갯수 (limit) = 16
       몇번째 데이터부터 받을건지 (from)
     */
-    navigate(`/allPosts?where=${keywordWhere}&what=${keywordWhat}`);
+    navigate(`/search?where=${keywordWhere}&what=${keywordWhat}`);
   };
 
   return (

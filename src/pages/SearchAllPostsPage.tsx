@@ -3,13 +3,13 @@ import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { allPosts } from "../lib/api/post";
 import { AllPostsType } from "../lib/type";
-import PostList from "../components/photocard/PostList";
 import { Wrapper } from "./HomePage";
 import Header from "../components/common/Header";
 import Search from "../components/home/Search";
 import styled from "styled-components";
 import palette from "../styles/palette";
 import Footer from "../components/common/Footer";
+import SearchPostList from "../components/photocard/SearchPostList";
 
 const SearchTitle = styled.div`
   h2 {
@@ -71,11 +71,10 @@ const SearchTitle = styled.div`
   }
 `;
 
-const AllPostsPage = (props: any) => {
+const SearchAllPostsPage = (props: any) => {
   const location = useLocation();
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
-  console.log(query);
 
   const [posts, setposts] = useState<AllPostsType>({
     popular: [],
@@ -114,14 +113,39 @@ const AllPostsPage = (props: any) => {
           {query.what ? query.what : "전체"}
         </h3>
       </SearchTitle>
-      <PostList list={posts.popular} category="popular" />
-      <PostList list={posts.recent} category="recent" />
-      <PostList list={posts.place} category="place" />
-      <PostList list={posts.restaurant} category="restaurant" />
-      <PostList list={posts.accommodation} category="accommodation" />
+      <SearchPostList
+        list={posts.popular}
+        category="popular"
+        where={query.where}
+        what={query.what}
+      />
+      <SearchPostList
+        list={posts.recent}
+        category="recent"
+        where={query.where}
+        what={query.what}
+      />
+      <SearchPostList
+        list={posts.place}
+        category="place"
+        where={query.where}
+        what={query.what}
+      />
+      <SearchPostList
+        list={posts.restaurant}
+        category="restaurant"
+        where={query.where}
+        what={query.what}
+      />
+      <SearchPostList
+        list={posts.accommodation}
+        category="accommodation"
+        where={query.where}
+        what={query.what}
+      />
       <Footer />
     </Wrapper>
   );
 };
 
-export default AllPostsPage;
+export default SearchAllPostsPage;

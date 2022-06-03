@@ -5,11 +5,12 @@ import Footer from "../components/common/Footer";
 import Header from "../components/common/Header";
 import Search from "../components/home/Search";
 import Post from "../components/photocard/Post";
-import { PostBlock } from "../components/photocard/PostList";
+import { PostBlock } from "../components/photocard/SearchPostList";
 import { SelectCategory } from "../components/write/CreateCard";
 import { detailPosts } from "../lib/api/post";
 import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";
+import queryString from "query-string";
 
 const SelectSort = styled(SelectCategory)`
   display: flex;
@@ -32,56 +33,55 @@ const Pagination = styled.div`
   }
 `;
 
-const DetailPostsPage = () => {
+const HomeMorePostsPage = () => {
   const location = useLocation();
+  const searchParams = location.search;
+  const query = queryString.parse(searchParams);
 
   const [posts, setPosts] = useState<any[]>([]);
 
   // 정렬 select
-  const [sort, setSort] = useState("");
-  const [selectedSort, setSelectedSort] = useState("");
-  console.log("selected ", selectedSort);
-  console.log("sort", sort);
+  const [sort, setSort] = useState(query.sort);
+
+  useEffect(() => {
+    if (sort === "new") {
+      setSort("new");
+    }
+    if (sort === "old") {
+      setSort("old");
+    }
+    if (sort === "popular") {
+      setSort("popular");
+    }
+  }, [sort]);
 
   // 정렬 선택
-  const onSelectedSort = useCallback(
-    (e: any) => {
-      setSelectedSort(e.target.value);
-
-      if (selectedSort === "new") {
-        setSort("new");
-      }
-      if (selectedSort === "old") {
-        setSort("old");
-      }
-      if (selectedSort === "popular") {
-        setSort("popular");
-      }
-    },
-    [selectedSort]
-  );
+  const onSelectedSort = useCallback((e: any) => {
+    setSort(e.target.value);
+  }, []);
 
   // 페이지네이션
+  const numCurrentPage = Number(query.page);
+
   const [totalPage, setTotalPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(numCurrentPage);
 
   const itemPerPage = useMemo(() => 16, []);
 
   useEffect(() => {
     // 0~15 16~31 ...
-    const from = (currentPage - 1) * itemPerPage;
+    // const from = (currentPage - 1) * itemPerPage;
 
     // API 호출
-    //@ts-ignore
-    detailPosts(location.state.category, sort, currentPage).then(
+    detailPosts(query.category as string, sort as string, currentPage).then(
       ({ totalCount, list }) => {
         const totalPageCount = Math.ceil(totalCount / itemPerPage);
         setTotalPage(totalPageCount);
         setPosts(list);
       }
     );
-    // @ts-ignore
-  }, [currentPage, itemPerPage, location.state.category, sort]);
+    console.log(sort, currentPage);
+  }, [currentPage, itemPerPage, query.category, sort]);
 
   useEffect(() => {
     // render
@@ -133,4 +133,4 @@ const DetailPostsPage = () => {
   );
 };
 
-export default DetailPostsPage;
+export default HomeMorePostsPage;

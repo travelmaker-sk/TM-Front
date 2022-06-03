@@ -5,12 +5,14 @@ import palette from "../../styles/palette";
 import { AllPostsCategoryType } from "../../lib/type";
 import { useNavigate } from "react-router";
 
-interface PostListType {
+export interface PostListType {
   list: any[];
   category: AllPostsCategoryType;
+  where?: any;
+  what?: any;
 }
 
-const PostListBlock = styled.div`
+export const PostListBlock = styled.div`
   margin-bottom: 64px;
   .more-btn-div {
     display: flex;
@@ -50,7 +52,7 @@ export const PostBlock = styled.div`
   }
 `;
 
-const MoreButton = styled.button`
+export const MoreButton = styled.button`
   padding: 8px 25px;
   color: #fff;
   background: ${palette.cyan[7]};
@@ -64,10 +66,12 @@ const MoreButton = styled.button`
   cursor: pointer;
 `;
 
-const PostList = ({ list, category }: PostListType) => {
+const SearchPostList = ({ list, category, where, what }: PostListType) => {
   const navigate = useNavigate();
-  const onMore = () => {
-    navigate(`/detailPosts?category=${category}`);
+  const onDetailMore = () => {
+    navigate(
+      `/morePosts?where=${where}&what=${what}&category=${category}&sort=new&page=1`
+    );
   };
   return (
     <PostListBlock>
@@ -79,13 +83,10 @@ const PostList = ({ list, category }: PostListType) => {
         ))}
       </PostBlock>
       <div className="more-btn-div">
-        <MoreButton onClick={onMore}>더보기</MoreButton>
-        {/* <MoreButton to="/detailPosts" state={{ category }}>
-          <button>더보기</button>
-        </MoreButton> */}
+        <MoreButton onClick={onDetailMore}>더보기</MoreButton>
       </div>
     </PostListBlock>
   );
 };
 
-export default PostList;
+export default SearchPostList;

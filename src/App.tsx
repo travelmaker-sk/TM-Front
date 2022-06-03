@@ -19,9 +19,9 @@ import NaverCallback from "./pages/NaverCallback";
 import KakaoCallback from "./pages/KaKaoCallback";
 import FindPwPage from "./pages/FindPwPage";
 import FindPwFinPage from "./pages/FindPwFinPage";
-import AllPostsPage from "./pages/AllPostsPage";
-import DetailPostsPage from "./pages/DetailPostsPage";
+import DetailPostsPage from "./pages/SearchMorePostsPage";
 import CreateCardPage from "./pages/CreateCardPage";
+import SearchAllPostsPage from "./pages/SearchAllPostsPage";
 
 function App() {
   return (
@@ -38,8 +38,8 @@ function App() {
       <Route path="/findPw" element={<FindPwPage />} />
       <Route path="/findPwFin" element={<FindPwFinPage />} />
 
-      <Route path="/allPosts" element={<AllPostsPage />} />
-      <Route path="/detailPosts" element={<DetailPostsPage />} />
+      <Route path="/search" element={<SearchAllPostsPage />} />
+      <Route path="/morePosts" element={<DetailPostsPage />} />
       <Route path="/mypage" element={<MyPagePage />} />
       <Route path="/setProfile" element={<SetProfilePage />} />
       <Route path="/quit" element={<QuitPage />} />

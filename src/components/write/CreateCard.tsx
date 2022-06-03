@@ -183,32 +183,30 @@ const CreateCard = () => {
   const [selectedRest, setSelectedRest] = useState(false);
   const [selectedAccom, setSelectedAccom] = useState(false);
 
-  const [selectedCategory, setSelectedCategory] = useState("");
-
   useEffect(() => {
-    if (selectedCategory === "") {
+    if (category === "") {
       Swal.fire(
         "카테고리를 먼저 선택해주세요",
         "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
         "info"
       );
     }
-    if (selectedCategory === "place") {
+    if (category === "place") {
       setSelectedPlace(true);
       setSelectedRest(false);
       setSelectedAccom(false);
     }
-    if (selectedCategory === "restaurant") {
+    if (category === "restaurant") {
       setSelectedPlace(false);
       setSelectedRest(true);
       setSelectedAccom(false);
     }
-    if (selectedCategory === "accommodation") {
+    if (category === "accommodation") {
       setSelectedPlace(false);
       setSelectedRest(false);
       setSelectedAccom(true);
     }
-  }, [selectedCategory]);
+  }, [category]);
 
   // 카테고리 선택
   const onSelectedCategory = useCallback((e: any) => {
@@ -216,7 +214,7 @@ const CreateCard = () => {
     refForm.current.style.display = "block";
 
     onInit();
-    setSelectedCategory(e.target.value);
+    setCategory(e.target.value);
   }, []);
 
   // 포토카드 이미지 업로드
@@ -284,7 +282,7 @@ const CreateCard = () => {
       const numberScore = Number(score);
 
       let validationItems: string[] = [];
-      switch (selectedCategory) {
+      switch (category) {
         case "place":
           validationItems = [title, location, date, score];
           break;
@@ -331,13 +329,12 @@ const CreateCard = () => {
       location,
       memo,
       menu,
+      navigate,
       price,
       score,
-      selectedCategory,
       tagList,
       title,
       weather,
-      navigate,
     ]
   );
 

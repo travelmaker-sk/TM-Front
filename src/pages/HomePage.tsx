@@ -8,10 +8,11 @@ import { setUser } from "../redux/user";
 import Header from "../components/common/Header";
 import Swiper from "../components/home/Swiper";
 import { AllPostsType } from "../lib/type";
-import AllPosts from "../components/photocard/PostList";
+import AllPosts from "../components/photocard/SearchPostList";
 import { allPosts } from "../lib/api/post";
-import PostList from "../components/photocard/PostList";
+import PostList from "../components/photocard/SearchPostList";
 import Footer from "../components/common/Footer";
+import HomePostList from "../components/photocard/HomePostList";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -70,11 +71,11 @@ const HomePage = () => {
       <Header />
       <Search />
       <Swiper />
-      <PostList list={homePosts.popular} category="popular" />
-      <PostList list={homePosts.recent} category="recent" />
-      <PostList list={homePosts.place} category="place" />
-      <PostList list={homePosts.restaurant} category="restaurant" />
-      <PostList list={homePosts.accommodation} category="accommodation" />
+      <HomePostList list={homePosts.popular} category="popular" />
+      <HomePostList list={homePosts.recent} category="recent" />
+      <HomePostList list={homePosts.place} category="place" />
+      <HomePostList list={homePosts.restaurant} category="restaurant" />
+      <HomePostList list={homePosts.accommodation} category="accommodation" />
       <Footer />
     </Wrapper>
   );
