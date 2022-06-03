@@ -22,7 +22,7 @@ export type AllPostsCategoryType =
   | "restaurant"
   | "accommodation";
 
-export type CategoryType = "place" | "restaurant" | "accomodation";
+export type CategoryType = "place" | "restaurant" | "accomodation" | string;
 
 export interface GetPostType {
   id: number;
@@ -43,6 +43,7 @@ export interface GetPostType {
   };
   bookmarkCheck: boolean;
   uploadDate: string;
+  view: number;
   writer: {
     username: string;
     profileImage?: string;

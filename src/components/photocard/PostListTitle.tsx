@@ -1,18 +1,18 @@
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import styled from "styled-components";
-import { AllPostsType } from "../../lib/type";
+import { AllPostsCategoryType } from "../../lib/type";
 import palette from "../../styles/palette";
 
-export interface CategoryType {
-  category: string;
+export interface PostListTitleType {
+  category: AllPostsCategoryType;
 }
 
 const PostListTitleStyle = styled.div`
   margin-bottom: 32px;
   span {
-    font-size: 20px;
     display: block;
     margin-bottom: 32px;
+    font-size: 20px;
   }
   hr {
     border: none;
@@ -21,36 +21,22 @@ const PostListTitleStyle = styled.div`
   }
 `;
 
-const PostListTitle = ({ category }: CategoryType) => {
-  const refListTitle = useRef<HTMLSpanElement>(null);
-
-  // switch (category) {
-  //   case "popular":
-  //     if (!refListTitle.current) return;
-  //     refListTitle.current.innerHTML = "인기 포토카드";
-  //     break;
-  //   case "recent":
-  //     if (!refListTitle.current) return;
-  //     refListTitle.current.innerHTML = "최신 포토카드";
-  //     break;
-  //   case "place":
-  //     if (!refListTitle.current) return;
-  //     refListTitle.current.innerHTML = "가볼 만한 곳";
-  //     break;
-  //   case "restaurant":
-  //     if (!refListTitle.current) return;
-  //     refListTitle.current.innerHTML = "맛집";
-  //     break;
-  //   case "accommodation":
-  //     if (!refListTitle.current) return;
-  //     refListTitle.current.innerHTML = "숙소";
-  //     break;
-  // }
+const PostListTitle = ({ category }: PostListTitleType) => {
+  const dictCategory = useMemo(
+    () => ({
+      popular: "인기 포토카드",
+      recent: "최신 포토카드",
+      place: "가볼 만한 곳",
+      restaurant: "맛집",
+      accommodation: "숙소",
+    }),
+    []
+  );
 
   return (
     <>
       <PostListTitleStyle>
-        <span ref={refListTitle}>{category}</span>
+        <span>{dictCategory[category]}</span>
         <hr />
       </PostListTitleStyle>
     </>

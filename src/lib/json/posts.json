@@ -19,6 +19,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -41,6 +42,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "restaurant",
       "menu": "은갈치구이",
       "price": 20000
@@ -64,6 +66,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "accommodation",
       "price": 150000
     },
@@ -86,6 +89,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -108,6 +112,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -130,6 +135,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -152,6 +158,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -174,6 +181,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -196,6 +204,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -218,6 +227,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -240,6 +250,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -262,6 +273,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -284,6 +296,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -306,6 +319,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -328,6 +342,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -350,6 +365,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -372,6 +388,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "place",
       "weather": "맑음"
     },
@@ -394,6 +411,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "restaurant",
       "menu": "은갈치구이",
       "price": 20000
@@ -417,6 +435,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "restaurant",
       "menu": "은갈치구이",
       "price": 20000
@@ -440,6 +459,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "restaurant",
       "menu": "은갈치구이",
       "price": 20000
@@ -463,6 +483,7 @@
         "username": "작성자",
         "profileImage": ""
       },
+      "view": 30,
       "category": "restaurant",
       "menu": "은갈치구이",
       "price": 20000

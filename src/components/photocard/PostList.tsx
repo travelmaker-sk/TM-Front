@@ -3,10 +3,11 @@ import PostListTitle from "./PostListTitle";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
+import { AllPostsCategoryType } from "../../lib/type";
 
 interface PostListType {
   list: any[];
-  category: string;
+  category: AllPostsCategoryType;
 }
 
 const PostListBlock = styled.div`

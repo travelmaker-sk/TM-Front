@@ -161,17 +161,10 @@ const TagItem = styled.div`
 `;
 
 const CreateCard = () => {
-  // useEffect(() => {
-  //   Swal.fire(
-  //     "카테고리를 먼저 선택해주세요",
-  //     "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
-  //     "info"
-  //   );
-  // }, []);
-
   const navigate = useNavigate();
 
   const refForm = useRef<HTMLDivElement>(null);
+  const refInputFile = useRef<HTMLInputElement>(null);
 
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
@@ -185,56 +178,46 @@ const CreateCard = () => {
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
-  console.log("price ", price);
-  console.log("tagList", tagList);
 
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedRest, setSelectedRest] = useState(false);
   const [selectedAccom, setSelectedAccom] = useState(false);
 
   const [selectedCategory, setSelectedCategory] = useState("");
-  console.log("selectedCategory ", selectedCategory);
-  console.log("category ", category);
+
+  useEffect(() => {
+    if (selectedCategory === "") {
+      Swal.fire(
+        "카테고리를 먼저 선택해주세요",
+        "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
+        "info"
+      );
+    }
+    if (selectedCategory === "place") {
+      setSelectedPlace(true);
+      setSelectedRest(false);
+      setSelectedAccom(false);
+    }
+    if (selectedCategory === "restaurant") {
+      setSelectedPlace(false);
+      setSelectedRest(true);
+      setSelectedAccom(false);
+    }
+    if (selectedCategory === "accommodation") {
+      setSelectedPlace(false);
+      setSelectedRest(false);
+      setSelectedAccom(true);
+    }
+  }, [selectedCategory]);
 
   // 카테고리 선택
-  const onSelectedCategory = useCallback(
-    (e: any) => {
-      if (!refForm.current) return;
-      refForm.current.style.display = "block";
+  const onSelectedCategory = useCallback((e: any) => {
+    if (!refForm.current) return;
+    refForm.current.style.display = "block";
 
-      setSelectedCategory(e.target.value);
-
-      if (selectedCategory === "") {
-        Swal.fire(
-          "카테고리를 먼저 선택해주세요",
-          "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
-          "info"
-        );
-      }
-      if (selectedCategory === "place") {
-        setSelectedPlace(true);
-        setSelectedRest(false);
-        setSelectedAccom(false);
-
-        setCategory("place");
-      }
-      if (selectedCategory === "restaurant") {
-        setSelectedPlace(false);
-        setSelectedRest(true);
-        setSelectedAccom(false);
-
-        setCategory("restaurant");
-      }
-      if (selectedCategory === "accommodation") {
-        setSelectedPlace(false);
-        setSelectedRest(false);
-        setSelectedAccom(true);
-
-        setCategory("accommodation");
-      }
-    },
-    [selectedCategory]
-  );
+    onInit();
+    setSelectedCategory(e.target.value);
+  }, []);
 
   // 포토카드 이미지 업로드
   const [image, setImage] = useState({
@@ -243,19 +226,15 @@ const CreateCard = () => {
   });
   const cardPhotoChange = (e: any) => {
     e.preventDefault();
-    const fileReader = new FileReader();
-    if (e.target.files[0]) {
-      fileReader.readAsDataURL(e.target.files[0]);
-    }
-    fileReader.onload = () => {
-      setImage({
-        cardPhotoFile: e.target.files[0].name,
-        //@ts-ignore
-        cardPhotoUrl: fileReader.result,
-      });
-    };
+
+    if (!e.target.files.length) return;
+    const url = URL.createObjectURL(e.target.files[0]);
+    setImageUrl(url);
+    setImage({ cardPhotoFile: e.target.files[0].name, cardPhotoUrl: url });
   };
   const cardPhotoDel = () => {
+    if (refInputFile.current) refInputFile.current.value = "";
+    setImageUrl("");
     setImage({
       cardPhotoFile: "",
       cardPhotoUrl: "./images/add-photo.png",
@@ -301,30 +280,47 @@ const CreateCard = () => {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
-      if ([category, title, location, date, score].includes("")) {
+      const numberPrice = Number(price);
+      const numberScore = Number(score);
+
+      let validationItems: string[] = [];
+      switch (selectedCategory) {
+        case "place":
+          validationItems = [title, location, date, score];
+          break;
+        case "restaurant":
+          validationItems = [title, location, date, menu, price, score];
+          break;
+        case "accommodation":
+          validationItems = [title, location, date, price, score];
+          break;
+      }
+
+      if (validationItems.includes("")) {
         Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
         return;
       }
 
       // API 호출
-      addPost(
+      addPost({
         category,
         title,
         location,
         date,
-        score,
-        weather,
-        menu,
-        price,
-        memo,
-        tagList,
-        imageUrl
-      ).then((res) => {
+        score: numberScore,
+        weather: weather || undefined,
+        menu: menu || undefined,
+        price: numberPrice || undefined,
+        memo: memo || undefined,
+        tagList: tagList.length ? tagList : undefined,
+        imageUrl: imageUrl || undefined,
+      }).then((res) => {
         if (res) {
-          alert("에러 발생");
+          console.log("에러 발생");
+          return;
         } else {
-          alert("성공");
-          // navigate("/");
+          Swal.fire("포토카드 생성 완료!", "success");
+          navigate("/");
         }
       });
     },
@@ -337,9 +333,11 @@ const CreateCard = () => {
       menu,
       price,
       score,
+      selectedCategory,
       tagList,
       title,
       weather,
+      navigate,
     ]
   );
 
@@ -366,7 +364,7 @@ const CreateCard = () => {
         <div ref={refForm}>
           <CreateCardStyle>
             <label>
-              <img src={image.cardPhotoUrl} alt="Photo" />
+              <img src={image.cardPhotoUrl} alt="Photocard Image" />
               <div className="cardPhoto-upload">
                 <input
                   placeholder={
@@ -383,6 +381,7 @@ const CreateCard = () => {
                   id="cardPhoto"
                   accept="image/*"
                   onChange={cardPhotoChange}
+                  ref={refInputFile}
                 />
                 <button onClick={cardPhotoDel} className="del-photo">
                   삭제
@@ -461,7 +460,7 @@ const CreateCard = () => {
               <label>
                 <span>가격*</span>
                 <input
-                  type="text"
+                  type="number"
                   name="price"
                   placeholder="ex) 25000"
                   value={price}
@@ -478,7 +477,7 @@ const CreateCard = () => {
             <label>
               <span>평점*</span>
               <input
-                type="text"
+                type="number"
                 name="score"
                 placeholder="ex) 4"
                 value={score}
@@ -528,7 +527,7 @@ const CreateCard = () => {
           <SelectButtonStyle>
             <CyanButtonStyle>
               <button type="submit" onClick={onSubmit}>
-                <LinkButton to="/">업로드</LinkButton>
+                업로드
               </button>
             </CyanButtonStyle>
             <GrayButtonStyle>
