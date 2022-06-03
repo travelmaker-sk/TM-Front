@@ -18,76 +18,46 @@ const SearchTitle = styled.div`
     font-weight: 700;
     margin: 32px 0;
     position: relative;
-    -moz-animation: bounce 0.6s infinite linear;
-    -o-animation: bounce 0.6s infinite linear;
-    -webkit-animation: bounce 0.6s infinite linear;
-    animation: bounce 0.6s infinite linear;
+    animation: txtup 0.5s infinite;
+    -webkit-animation: txtup 1s infinite;
+    -ms-animation: txtup 0.5s infinite;
+    -moz-animation: txtup 0.5s infinite;
 
-    @-webkit-keyframes bounce {
+    @-webkit-keyframes txtup {
       0% {
         top: 0;
       }
-      50% {
-        top: -0.05em;
+      20% {
+        top: -0.2rem;
       }
-      70% {
-        top: -0.1em;
+      40% {
+        top: 0;
+      }
+      60% {
+        top: 0;
+      }
+      80% {
+        top: 0;
       }
       100% {
         top: 0;
       }
     }
-    @-moz-keyframes bounce {
+    @keyframes txtup {
       0% {
         top: 0;
       }
-      50% {
-        top: -0.05em;
+      20% {
+        top: -0.2rem;
       }
-      70% {
-        top: -0.1em;
-      }
-      100% {
+      40% {
         top: 0;
       }
-    }
-    @-o-keyframes bounce {
-      0% {
+      60% {
         top: 0;
       }
-      50% {
-        top: -0.05em;
-      }
-      70% {
-        top: -0.1em;
-      }
-      100% {
+      80% {
         top: 0;
-      }
-    }
-    @-ms-keyframes bounce {
-      0% {
-        top: 0;
-      }
-      50% {
-        top: -0.05em;
-      }
-      70% {
-        top: -0.1em;
-      }
-      100% {
-        top: 0;
-      }
-    }
-    @keyframes bounce {
-      0% {
-        top: 0;
-      }
-      50% {
-        top: -0.05em;
-      }
-      70% {
-        top: -0.1em;
       }
       100% {
         top: 0;
