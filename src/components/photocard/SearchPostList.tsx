@@ -70,7 +70,7 @@ const SearchPostList = ({ list, category, where, what }: PostListType) => {
   const navigate = useNavigate();
   const onDetailMore = () => {
     navigate(
-      `/morePosts?where=${where}&what=${what}&category=${category}&sort=new&page=1`
+      `/more?where=${where}&what=${what}&category=${category}&sort=new&page=1`
     );
   };
   return (

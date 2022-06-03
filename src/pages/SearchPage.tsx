@@ -71,7 +71,7 @@ const SearchTitle = styled.div`
   }
 `;
 
-const SearchAllPostsPage = (props: any) => {
+const SearchPage = (props: any) => {
   const location = useLocation();
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
@@ -148,4 +148,4 @@ const SearchAllPostsPage = (props: any) => {
   );
 };
 
-export default SearchAllPostsPage;
+export default SearchPage;

@@ -33,7 +33,7 @@ const Pagination = styled.div`
   }
 `;
 
-const SearchMorePostsPage = () => {
+const SearchMorePage = () => {
   const location = useLocation();
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
@@ -138,4 +138,4 @@ const SearchMorePostsPage = () => {
   );
 };
 
-export default SearchMorePostsPage;
+export default SearchMorePage;

@@ -11,7 +11,7 @@ import {
 const HomePostList = ({ list, category }: PostListType) => {
   const navigate = useNavigate();
   const onHomeMore = () => {
-    navigate(`/morePosts?category=${category}&sort=new&page=1`);
+    navigate(`/more?category=${category}&sort=new&page=1`);
   };
   return (
     <PostListBlock>
