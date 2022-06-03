@@ -2,8 +2,8 @@ import Post from "./Post";
 import PostListTitle from "./PostListTitle";
 import styled from "styled-components";
 import palette from "../../styles/palette";
-import { Link } from "react-router-dom";
 import { AllPostsCategoryType } from "../../lib/type";
+import { useNavigate } from "react-router";
 
 interface PostListType {
   list: any[];
@@ -50,23 +50,25 @@ export const PostBlock = styled.div`
   }
 `;
 
-const MoreButton = styled(Link)`
-  > button {
-    padding: 8px 25px;
-    color: #fff;
-    background: ${palette.cyan[7]};
-    &:hover {
-      background: ${palette.cyan[6]};
-    }
-    &:active {
-      background: ${palette.cyan[8]};
-    }
-    border-radius: 3px;
-    cursor: pointer;
+const MoreButton = styled.button`
+  padding: 8px 25px;
+  color: #fff;
+  background: ${palette.cyan[7]};
+  &:hover {
+    background: ${palette.cyan[6]};
   }
+  &:active {
+    background: ${palette.cyan[8]};
+  }
+  border-radius: 3px;
+  cursor: pointer;
 `;
 
 const PostList = ({ list, category }: PostListType) => {
+  const navigate = useNavigate();
+  const onMore = () => {
+    navigate(`/detailPosts?category=${category}`);
+  };
   return (
     <PostListBlock>
       <PostListTitle category={category} />
@@ -77,9 +79,10 @@ const PostList = ({ list, category }: PostListType) => {
         ))}
       </PostBlock>
       <div className="more-btn-div">
-        <MoreButton to="/detailPosts" state={{ category }}>
+        <MoreButton onClick={onMore}>더보기</MoreButton>
+        {/* <MoreButton to="/detailPosts" state={{ category }}>
           <button>더보기</button>
-        </MoreButton>
+        </MoreButton> */}
       </div>
     </PostListBlock>
   );
