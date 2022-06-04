@@ -14,6 +14,7 @@ import {
 } from "../../styles/ButtonStyle";
 import { addPost } from "../../lib/api/write";
 import { useNavigate } from "react-router";
+import areaData from "../../lib/json/areaData.json";
 
 export const SelectCategory = styled.div`
   margin-bottom: 64px;
@@ -118,6 +119,39 @@ export const CreateCardStyle = styled.div`
       display: none;
     }
   }
+  .location {
+    position: relative;
+    ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 307.25px;
+      margin-left: 42.083px;
+      margin-top: 2px;
+      background-color: ${palette.gray[1]};
+      border: 1px solid ${palette.gray[4]};
+      border-radius: 4px;
+      z-index: 1111;
+      h4 {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: ${palette.gray[3]};
+        margin: 0;
+      }
+      li {
+        padding: 15px 20px;
+        cursor: pointer;
+        transition: 0.1s;
+      }
+      li:not(.last) {
+        border-bottom: 1px solid ${palette.gray[4]};
+      }
+      li:hover {
+        background-color: ${palette.gray[2]};
+      }
+    }
+  }
   .tag {
     color: ${palette.gray[6]};
   }
@@ -160,11 +194,16 @@ export const TagItem = styled.div`
   }
 `;
 
+let timer: NodeJS.Timeout | null = null;
+
 const CreateCard = () => {
   const navigate = useNavigate();
 
   const refForm = useRef<HTMLDivElement>(null);
   const refInputFile = useRef<HTMLInputElement>(null);
+
+  const refWhereArea = useRef<HTMLUListElement>(null);
+  const refWhereInput = useRef<HTMLInputElement>(null);
 
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
@@ -237,6 +276,42 @@ const CreateCard = () => {
       cardPhotoFile: "",
       cardPhotoUrl: "./images/add-photo.png",
     });
+  };
+
+  // 포스트 위치
+  const onFocusWhereArea = () => {
+    if (!refWhereArea.current) return;
+    refWhereArea.current.style.display = "block";
+  };
+  const onBlurWhereArea = () => {
+    setTimeout(() => {
+      if (!refWhereArea.current) return;
+      refWhereArea.current.style.display = "none";
+    }, 130);
+  };
+
+  const onClickWhereList = useCallback((e: React.MouseEvent<HTMLLIElement>) => {
+    if (!refWhereInput.current) return;
+    //@ts-ignore
+    refWhereInput.current.value = e.target.innerHTML;
+    console.log(
+      "input:",
+      refWhereInput.current.value,
+      "list:",
+      //@ts-ignore
+      e.target.innerHTML
+    );
+  }, []);
+
+  const onLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (timer) clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      setLocation(e.target.value);
+      console.log("location: ", location);
+
+      // TODO: 지역명 검색 API 호출
+    }, 200);
   };
 
   // 포토카드 태그 업로드
@@ -395,17 +470,39 @@ const CreateCard = () => {
                 }}
               />
             </label>
-            <label>
+            <label
+              className="location"
+              onFocus={onFocusWhereArea}
+              onBlur={onBlurWhereArea}
+            >
               <span>위치*</span>
               <input
                 type="text"
                 name="location"
                 placeholder="ex) 제주, 부산, 속초"
-                value={location}
-                onChange={(e) => {
-                  setLocation(e.target.value);
-                }}
+                // value={location}
+                ref={refWhereInput}
+                onChange={onLocation}
               />
+              <ul ref={refWhereArea}>
+                {areaData.areaList
+                  .filter((area) => {
+                    if (location === "") {
+                      return area;
+                    } else if (
+                      area.areaName
+                        .toLowerCase()
+                        .includes(location.toLowerCase())
+                    ) {
+                      return area;
+                    }
+                  })
+                  .map((area) => (
+                    <li key={area.id} onClick={onClickWhereList}>
+                      {area.areaName}
+                    </li>
+                  ))}
+              </ul>
             </label>
             <label>
               <span>날짜*</span>
