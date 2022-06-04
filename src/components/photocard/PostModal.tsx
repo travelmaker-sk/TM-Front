@@ -29,7 +29,7 @@ const ModalBlock = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: 8888;
   background-color: rgba(0, 0, 0, 0.6);
   &.open {
     display: block;
@@ -119,8 +119,6 @@ const MyButton = styled.div`
 `;
 
 const PostModal = ({ post, open, close, my }: ModalType) => {
-  console.log("my", my);
-
   const navigate = useNavigate();
 
   // 수정 버튼

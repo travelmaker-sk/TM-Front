@@ -87,7 +87,6 @@ const MorePage = () => {
     });
     console.log("search", sort, currentPage);
   }, [currentPage, itemPerPage, query.category, query.what, query.where, sort]);
-  console.log(posts);
 
   useEffect(() => {
     // render

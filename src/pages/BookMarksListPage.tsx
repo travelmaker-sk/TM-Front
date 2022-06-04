@@ -1,5 +1,5 @@
 import React from "react";
-import BookmarksList from "../components/bookmarks/BookmarksList";
+import BookmarksList from "../components/bookmark/BookmarksList";
 
 const BookMarksListPage = () => {
   return <BookmarksList />;

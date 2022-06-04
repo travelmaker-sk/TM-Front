@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   left: 0;
   background-color: #fff;
   border-bottom: 1px solid ${palette.gray[2]};
-  z-index: 9999;
+  z-index: 7777;
 `;
 
 const HeaderBlock = styled.div`

@@ -39,7 +39,7 @@ const SearchBlock = styled.div`
       margin-top: 1px;
       background-color: white;
       border: 1px solid ${palette.gray[4]};
-      z-index: 9999;
+      z-index: 1111;
       h4{
         padding: 10px 20px;
         font-size: 16px;

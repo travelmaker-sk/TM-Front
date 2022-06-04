@@ -122,7 +122,6 @@ const MyPage = ({ user }: MyPageType) => {
     // API 호출
     myPosts().then(({ list }) => {
       setPosts(list);
-      console.log(list);
     });
   }, []);
 

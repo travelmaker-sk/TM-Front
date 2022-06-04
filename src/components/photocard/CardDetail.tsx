@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { addLike, delLike } from "../../lib/api/post";
+import Swal from "sweetalert2";
+import { addBookmark, addLike, delBookmark, delLike } from "../../lib/api/post";
 import palette from "../../styles/palette";
 import { PostType } from "./Post";
 
@@ -48,16 +49,27 @@ const CardDetailStyle = styled.div`
       }
       button {
         &.like-btn {
-          span.not-like,
+          span.cancel-like,
           span.like {
             transition: transform 300ms ease;
           }
-          span.not-like:hover,
+          span.cancel-like:hover,
           span.like:hover {
             transform: scale(1.1);
           }
           span.like {
             color: #f06595;
+          }
+        }
+        &.bookmark-btn {
+          span {
+            transition: transform 300ms ease;
+          }
+          span:hover {
+            transform: scale(1.1);
+          }
+          span.bookmark {
+            color: ${palette.cyan[5]};
           }
         }
       }
@@ -76,8 +88,13 @@ const CardDetailStyle = styled.div`
 `;
 
 const CardDetail = ({ post }: PostType) => {
+  const refBookmark = useRef<HTMLSpanElement>(null);
+  const refCancelBookmark = useRef<HTMLSpanElement>(null);
+
   const [like, setLike] = useState(post?.like.likeCheck);
   const [cntLike, setCntLike] = useState(post?.like.likeNum ?? 0);
+
+  const [bookmark, setBookmark] = useState(post?.bookmarkCheck);
 
   const onToggleLike = useCallback(() => {
     if (like) {
@@ -94,6 +111,48 @@ const CardDetail = ({ post }: PostType) => {
 
     setLike(!like);
   }, [like, post?.id]);
+
+  const onToggleBookmark = useCallback(() => {
+    if (bookmark) {
+      Swal.fire({
+        title: "북마크를 삭제하시겠습니까?",
+        text: "",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: palette.cyan[5],
+        cancelButtonColor: palette.gray[5],
+        confirmButtonText: "확인",
+        cancelButtonText: "취소",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("북마크 삭제 완료!", "", "success");
+
+          delBookmark(post?.id as number).then((res) => {});
+          setBookmark(!bookmark);
+          console.log("delBookmark");
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "북마크를 추가하시겠습니까?",
+        text: "",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: palette.cyan[5],
+        cancelButtonColor: palette.gray[5],
+        confirmButtonText: "확인",
+        cancelButtonText: "취소",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("북마크 추가 완료!", "", "success");
+
+          addBookmark(post?.id as number).then((res) => {});
+          setBookmark(!bookmark);
+          console.log("addBookmark");
+        }
+      });
+    }
+  }, [bookmark, post?.id]);
 
   return (
     <>
@@ -169,15 +228,27 @@ const CardDetail = ({ post }: PostType) => {
                 {like ? (
                   <span className="material-icons like">favorite</span>
                 ) : (
-                  <span className="material-icons not-like">
+                  <span className="material-icons cancel-like">
                     favorite_outline
                   </span>
                 )}
               </button>
               <span>{cntLike}</span>
             </div>
-            <button title="북마크 추가" className="bookmark-btn">
-              <span className="material-icons">bookmark_outline</span>
+            <button
+              title="북마크"
+              onClick={onToggleBookmark}
+              className="bookmark-btn"
+            >
+              {bookmark ? (
+                <span className="material-icons bookmark" ref={refBookmark}>
+                  bookmark
+                </span>
+              ) : (
+                <span className="material-icons" ref={refCancelBookmark}>
+                  bookmark_outline
+                </span>
+              )}
             </button>
           </li>
         </ul>
