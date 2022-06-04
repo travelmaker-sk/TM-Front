@@ -1,6 +1,7 @@
 import axios from "axios";
 import postsData from "../json/posts.json";
 import mypostsData from "../json/myposts.json";
+import popularWhere from "../json/popularWhere.json";
 
 // 전체 포스트
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
@@ -101,6 +102,19 @@ export const myPosts = async () => {
   // return response.data;
 
   const list = mypostsData.postList;
+
+  return {
+    list,
+  };
+};
+
+// 인기 여행지 TOP7
+export const popularArea = async () => {
+  // const response = await axios.get("/popularWhere");
+
+  // return response.data;
+
+  const list = popularWhere.areaList;
 
   return {
     list,

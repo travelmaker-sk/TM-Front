@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Wrapper } from "../../pages/HomePage";
 import palette from "../../styles/palette";
-import popularArea from "../../lib/json/popularArea.json";
 import { useNavigate } from "react-router";
+import { popularArea } from "../../lib/api/post";
 
 const SearchBlock = styled.div`
   width: 100%;
@@ -132,6 +132,8 @@ let timer: NodeJS.Timeout | null = null;
 const Search = () => {
   const navigate = useNavigate();
 
+  const [popularWhere, setPopularWhere] = useState<any[]>([]);
+
   const refWhereArea = useRef<HTMLUListElement>(null);
   const refWhereInput = useRef<HTMLInputElement>(null);
   const refWhatInput = useRef<HTMLInputElement>(null);
@@ -187,6 +189,13 @@ const Search = () => {
     navigate(`/search?where=${keywordWhere}&what=${keywordWhat}`);
   };
 
+  useEffect(() => {
+    // API 호출
+    popularArea().then(({ list }) => {
+      setPopularWhere(list);
+    });
+  }, []);
+
   return (
     <>
       <SearchBlock>
@@ -208,7 +217,7 @@ const Search = () => {
                 />
                 <ul ref={refWhereArea}>
                   <h4>인기 여행지 TOP7</h4>
-                  {popularArea.areaList.map((item) => (
+                  {popularWhere.map((item) => (
                     <li key={item.id} onClick={onClickWhereList}>
                       {item.areaName}
                     </li>

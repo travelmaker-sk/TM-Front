@@ -93,7 +93,7 @@ export const MyPageBottomBlock = styled.div`
     padding: 50px 3%;
     h2{
       font-size: 20px;
-      // font-weight: 600;
+      font-weight: 600;
       padding: 32px 0;
     }
     h3{
