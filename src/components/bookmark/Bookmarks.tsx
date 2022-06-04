@@ -40,7 +40,7 @@ const Bookmarks = ({ user }: BookmarkType) => {
         > */}
               {list.posts.map((post: GetPostType | null) => (
                 // <SwiperSlide>
-                <Post post={post} key={post?.id} my={true} />
+                <Post post={post} key={post?.id} bookmark={true} />
                 // </SwiperSlide>
               ))}
               {/* </Swiper> */}

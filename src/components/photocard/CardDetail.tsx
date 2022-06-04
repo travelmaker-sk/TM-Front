@@ -115,7 +115,7 @@ const CardDetail = ({ post }: PostType) => {
   const onToggleBookmark = useCallback(() => {
     if (bookmark) {
       Swal.fire({
-        title: "북마크를 삭제하시겠습니까?",
+        title: "북마크를 취소하시겠습니까?",
         text: "",
         icon: "question",
         showCancelButton: true,
@@ -126,7 +126,7 @@ const CardDetail = ({ post }: PostType) => {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
-            title: "북마크 삭제 완료!",
+            title: "북마크 취소 완료!",
             icon: "success",
             confirmButtonColor: palette.cyan[5],
             confirmButtonText: "확인",

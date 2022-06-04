@@ -6,9 +6,10 @@ import PostModal from "./PostModal";
 export interface PostType {
   post: GetPostType | null;
   my?: boolean;
+  bookmark?: boolean;
 }
 
-const Post = ({ post, my }: PostType) => {
+const Post = ({ post, my, bookmark }: PostType) => {
   const [openModal, setOpenModal] = useState(false);
   const onOpenModal = () => {
     console.log("click modal");
@@ -21,7 +22,13 @@ const Post = ({ post, my }: PostType) => {
   return (
     <>
       <Card post={post} onOpenModal={onOpenModal} />
-      <PostModal post={post} open={openModal} close={onCloseModal} my={my} />
+      <PostModal
+        post={post}
+        open={openModal}
+        close={onCloseModal}
+        my={my}
+        bookmark={bookmark}
+      />
     </>
   );
 };

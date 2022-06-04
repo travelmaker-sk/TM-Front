@@ -3,11 +3,7 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import { deletePost } from "../../lib/api/write";
 import { GetPostType } from "../../lib/type";
-import {
-  CyanButtonStyle,
-  GrayButtonStyle,
-  SelectButtonStyle,
-} from "../../styles/ButtonStyle";
+import { CyanButtonStyle, GrayButtonStyle } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
@@ -18,6 +14,7 @@ interface ModalType {
   open: boolean;
   close: () => void;
   my?: boolean;
+  bookmark?: boolean;
 }
 
 const ModalBlock = styled.div`
@@ -105,6 +102,11 @@ const MyButton = styled.div`
     margin-left: 15px;
     width: 150px;
   }
+  .print-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
@@ -118,7 +120,28 @@ const MyButton = styled.div`
   }
 `;
 
-const PostModal = ({ post, open, close, my }: ModalType) => {
+const BookmarkButton = styled.div`
+  position: absolute;
+  bottom: -62px;
+  right: 0;
+  > * {
+    width: 150px;
+  }
+  .print-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  // Mobile
+  @media screen and (max-width: 767px) {
+    position: static;
+    > * {
+      width: 100%;
+    }
+  }
+`;
+
+const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
   const navigate = useNavigate();
 
   // 수정 버튼
@@ -159,7 +182,7 @@ const PostModal = ({ post, open, close, my }: ModalType) => {
             <Card post={post} />
           </li>
           <li>
-            <CardDetail post={post} my={my} />
+            <CardDetail post={post} />
           </li>
           <button onClick={close} title="닫기">
             <span className="material-icons">close</span>
@@ -167,7 +190,9 @@ const PostModal = ({ post, open, close, my }: ModalType) => {
           {my ? (
             <MyButton>
               <CyanButtonStyle>
-                <button>인쇄</button>
+                <button className="print-btn">
+                  <span className="material-icons">print</span> &nbsp; 인쇄
+                </button>
               </CyanButtonStyle>
               <CyanButtonStyle>
                 <button onClick={onEdit}>수정</button>
@@ -176,6 +201,17 @@ const PostModal = ({ post, open, close, my }: ModalType) => {
                 <button onClick={onDelete}>삭제</button>
               </GrayButtonStyle>
             </MyButton>
+          ) : (
+            ""
+          )}
+          {bookmark ? (
+            <BookmarkButton>
+              <CyanButtonStyle>
+                <button className="print-btn">
+                  <span className="material-icons">print</span> &nbsp; 인쇄
+                </button>
+              </CyanButtonStyle>
+            </BookmarkButton>
           ) : (
             ""
           )}

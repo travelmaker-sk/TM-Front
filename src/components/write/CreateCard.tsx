@@ -362,7 +362,9 @@ const CreateCard = () => {
               <img src={image.cardPhotoUrl} alt="PhotocardImage" />
               <div className="cardPhoto-upload">
                 <input
-                  placeholder={image.cardPhotoFile ?? "첨부파일"}
+                  placeholder={
+                    image.cardPhotoFile ? image.cardPhotoFile : "첨부파일"
+                  }
                   className="cardPhoto-name"
                   readOnly
                 />
