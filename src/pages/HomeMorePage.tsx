@@ -11,6 +11,7 @@ import { detailPosts } from "../lib/api/post";
 import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";
 import queryString from "query-string";
+import { useNavigate } from "react-router";
 
 const SelectSort = styled(SelectCategory)`
   display: flex;
@@ -34,6 +35,8 @@ const Pagination = styled.div`
 `;
 
 const HomeMorePage = () => {
+  const navigate = useNavigate();
+
   const location = useLocation();
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
@@ -81,7 +84,7 @@ const HomeMorePage = () => {
       }
     );
     console.log(sort, currentPage);
-  }, [currentPage, itemPerPage, query.category, sort]);
+  }, [currentPage, itemPerPage, navigate, query.category, sort]);
 
   useEffect(() => {
     // render

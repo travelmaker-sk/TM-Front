@@ -21,33 +21,36 @@ import FindPwFinPage from "./pages/FindPwFinPage";
 import CreateCardPage from "./pages/CreateCardPage";
 import SearchPage from "./pages/SearchPage";
 import SearchMorePage from "./pages/SearchMorePage";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
+    <ScrollToTop>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
 
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/privacyPolicy" element={<PrivacyPage />} />
-      <Route path="/registerAuth" element={<RegisterAuthPage />} />
-      <Route path="/registerFin" element={<RegisterFinPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/naverLogin" element={<NaverCallback />} />
-      <Route path="/kakaoLogin" element={<KakaoCallback />} />
-      <Route path="/findPw" element={<FindPwPage />} />
-      <Route path="/findPwFin" element={<FindPwFinPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/privacyPolicy" element={<PrivacyPage />} />
+        <Route path="/registerAuth" element={<RegisterAuthPage />} />
+        <Route path="/registerFin" element={<RegisterFinPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/naverLogin" element={<NaverCallback />} />
+        <Route path="/kakaoLogin" element={<KakaoCallback />} />
+        <Route path="/findPw" element={<FindPwPage />} />
+        <Route path="/findPwFin" element={<FindPwFinPage />} />
 
-      <Route path="/search" element={<SearchPage />} />
-      <Route path="/more" element={<SearchMorePage />} />
-      <Route path="/mypage" element={<MyPagePage />} />
-      <Route path="/setProfile" element={<SetProfilePage />} />
-      <Route path="/quit" element={<QuitPage />} />
-      <Route path="/quitFin" element={<QuitFinPage />} />
-      <Route path="/createPhotocard" element={<CreateCardPage />} />
-      <Route path="/bookmarks" element={<BookMarksListPage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/more" element={<SearchMorePage />} />
+        <Route path="/mypage" element={<MyPagePage />} />
+        <Route path="/setProfile" element={<SetProfilePage />} />
+        <Route path="/quit" element={<QuitPage />} />
+        <Route path="/quitFin" element={<QuitFinPage />} />
+        <Route path="/createPhotocard" element={<CreateCardPage />} />
+        <Route path="/bookmarks" element={<BookMarksListPage />} />
 
-      <Route path="/*" element={<NotFoundPage />} />
-    </Routes>
+        <Route path="/*" element={<NotFoundPage />} />
+      </Routes>
+    </ScrollToTop>
   );
 }
 

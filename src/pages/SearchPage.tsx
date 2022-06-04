@@ -10,6 +10,7 @@ import styled from "styled-components";
 import palette from "../styles/palette";
 import Footer from "../components/common/Footer";
 import SearchPostList from "../components/photocard/SearchPostList";
+import { useNavigate } from "react-router";
 
 const SearchTitle = styled.div`
   h2 {
@@ -72,6 +73,8 @@ const SearchTitle = styled.div`
 `;
 
 const SearchPage = (props: any) => {
+  const navigate = useNavigate();
+
   const location = useLocation();
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
@@ -99,7 +102,7 @@ const SearchPage = (props: any) => {
     };
 
     loadPosts();
-  }, [query.what, query.where]);
+  }, [navigate, query.what, query.where]);
 
   return (
     <Wrapper>
