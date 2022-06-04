@@ -106,7 +106,7 @@ const Header = () => {
                       ? user.profileImage
                       : "./images/default-profile.png"
                   }
-                  alt="profileImage"
+                  alt="ProfileImage"
                 />
                 <UserName>반가워요, {user.username} 님!</UserName>
               </span>

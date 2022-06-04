@@ -194,6 +194,7 @@
     {
       "id": 1,
       "location": "부산",
+      "postsNum": 5,
       "posts": [
         {
           "id": 8,

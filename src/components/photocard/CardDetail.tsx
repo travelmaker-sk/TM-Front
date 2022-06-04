@@ -106,7 +106,7 @@ const CardDetail = ({ post }: PostType) => {
                   ? post?.writer.profileImage
                   : "./images/default-profile.png"
               }
-              alt="profileImage"
+              alt="ProfileImage"
             />
             <span>{post?.writer.username}</span>
           </li>

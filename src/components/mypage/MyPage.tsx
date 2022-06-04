@@ -93,12 +93,13 @@ const MyPageBottomBlock = styled.div`
     padding: 50px 3%;
     h2{
       font-size: 20px;
-      margin-bottom: 32px;
+      padding: 32px 0;
     }
     h3{
       font-size: 20px;
       color: ${palette.cyan[5]};
-      margin-bottom: 16px;
+      margin-top: 32px;
+      margin-bottom: 32px;
     }
     // Tablet
     @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -135,7 +136,7 @@ const MyPage = ({ user }: MyPageType) => {
                 ? user.profileImage
                 : "./images/default-profile.png"
             }
-            alt="profileImage"
+            alt="ProfileImage"
           />
           <ul>
             <li>
@@ -152,13 +153,13 @@ const MyPage = ({ user }: MyPageType) => {
         <div className="right-area">
           <ul>
             <li className="first-li">
-              <span>{user.postCount ? user.postCount : 0}</span>게시물
+              <span>{user.postCount ?? 0}</span>게시물
             </li>
             <li>
-              <span>{user.followers ? user.followers : 0}</span>팔로워
+              <span>{user.followers ?? 0}</span>팔로워
             </li>
             <li>
-              <span>{user.followings ? user.followings : 0}</span>팔로잉
+              <span>{user.followings ?? 0}</span>팔로잉
             </li>
           </ul>
         </div>
@@ -168,7 +169,9 @@ const MyPage = ({ user }: MyPageType) => {
           <h2>{user.username}님의 포토카드 ✈️</h2>
           {posts.map((list) => (
             <div key={list.id}>
-              <h3>{list.location}</h3>
+              <h3>
+                {list.location} ({list.posts.length})
+              </h3>
               <PostBlock>
                 {/* <Swiper
                   spaceBetween={50}

@@ -13,6 +13,7 @@ export const CardStyle = styled.div`
   min-width: 238px;
   padding: 16px;
   margin-bottom: 32px;
+  background-color: white;
   border: 1.5px solid ${palette.gray[3]};
   cursor: pointer;
   font-size: 14px;
@@ -54,8 +55,8 @@ const Card = ({ post, onOpenModal }: ICard) => {
     >
       <li>
         <img
-          src={post?.imageUrl ? post.imageUrl : "./images/default-photo.png"}
-          alt="Photocard Image"
+          src={post?.imageUrl ? post?.imageUrl : "./images/default-photo.png"}
+          alt="PhotocardImage"
         />
       </li>
       <li>

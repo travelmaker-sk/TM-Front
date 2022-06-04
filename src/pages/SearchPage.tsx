@@ -106,9 +106,9 @@ const SearchPage = (props: any) => {
       <SearchTitle>
         <h2 className="bounce">{query.where}</h2>
         <h3>
-          {query.where ? query.where : "전 지역"}
+          {query.where ?? "전 지역"}
           &nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;
-          {query.what ? query.what : "전체"}
+          {query.what ?? "전체"}
         </h3>
       </SearchTitle>
       <SearchPostList

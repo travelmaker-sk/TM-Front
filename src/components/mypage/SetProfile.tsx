@@ -91,9 +91,7 @@ const SetProfile = () => {
   // 프로필 사진 미리보기
   const [image, setImage] = useState({
     profileImageFile: "",
-    profileImageUrl: user.profileImage
-      ? user.profileImage
-      : "./images/default-profile.png",
+    profileImageUrl: user.profileImage ?? "./images/default-profile.png",
   });
   const profileImageChange = (e: any) => {
     e.preventDefault();
@@ -116,14 +114,11 @@ const SetProfile = () => {
     });
   };
 
-  const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      // TODO. API 호출
-    },
-    [navigate]
-  );
+    // TODO. API 호출
+  }, []);
 
   return (
     <SetProfileBlock>
@@ -134,9 +129,7 @@ const SetProfile = () => {
           <img src={image.profileImageUrl} alt="프로필 이미지" />
           <div className="profileImage-upload">
             <input
-              placeholder={
-                image.profileImageFile ? image.profileImageFile : "첨부파일"
-              }
+              placeholder={image.profileImageFile ?? "첨부파일"}
               className="profileImage-name"
               readOnly
             />

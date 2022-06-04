@@ -97,14 +97,24 @@ const ModalBlock = styled.div`
 `;
 
 const MyButton = styled.div`
-  width: 300px;
+  display: flex;
   position: absolute;
   bottom: -62px;
   right: 0;
+  > * {
+    margin-left: 15px;
+    width: 150px;
+  }
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
     position: static;
+    > * {
+      margin-left: 10px;
+    }
+    > *:first-child {
+      margin-left: 0;
+    }
   }
 `;
 
@@ -158,14 +168,15 @@ const PostModal = ({ post, open, close, my }: ModalType) => {
           </button>
           {my ? (
             <MyButton>
-              <SelectButtonStyle>
-                <CyanButtonStyle>
-                  <button onClick={onEdit}>수정</button>
-                </CyanButtonStyle>
-                <GrayButtonStyle>
-                  <button onClick={onDelete}>삭제</button>
-                </GrayButtonStyle>
-              </SelectButtonStyle>
+              <CyanButtonStyle>
+                <button>인쇄</button>
+              </CyanButtonStyle>
+              <CyanButtonStyle>
+                <button onClick={onEdit}>수정</button>
+              </CyanButtonStyle>
+              <GrayButtonStyle>
+                <button onClick={onDelete}>삭제</button>
+              </GrayButtonStyle>
             </MyButton>
           ) : (
             ""
