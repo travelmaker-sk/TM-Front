@@ -120,6 +120,17 @@ export const delLike = async (id: number) => {
 };
 
 // 북마크
+export const myBookmarks = async () => {
+  // const response = await axios.get("/myBookmarks");
+
+  // return response.data;
+
+  const list = mypostsData.postList;
+
+  return {
+    list,
+  };
+};
 export const addBookmark = async (id: number) => {
   const response = await axios.post(`/bookmark/add/${id}`);
 

@@ -339,9 +339,7 @@ const CreateCard = () => {
   );
 
   return (
-    <Wrapper>
-      <Header />
-      <HeaderBottomPlus />
+    <>
       <SelectCategory>
         <select
           name="category"
@@ -531,8 +529,7 @@ const CreateCard = () => {
           </SelectButtonStyle>
         </div>
       </CreateCardBlock>
-      <Footer />
-    </Wrapper>
+    </>
   );
 };
 

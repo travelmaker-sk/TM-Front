@@ -9,7 +9,6 @@ import PrivacyPage from "./pages/PrivacyPage";
 import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
 
-import BookMarksListPage from "./pages/BookMarksListPage";
 import MyPagePage from "./pages/MyPage";
 import SetProfilePage from "./pages/SetProfilePage";
 import QuitPage from "./pages/QuitPage";
@@ -23,6 +22,7 @@ import SearchPage from "./pages/SearchPage";
 import ScrollToTop from "./components/common/ScrollToTop";
 import MorePage from "./pages/MorePage";
 import EditCardPage from "./pages/EditCardPage";
+import BookMarksPage from "./pages/BookMarksPage";
 
 function App() {
   return (
@@ -48,7 +48,7 @@ function App() {
         <Route path="/quitFin" element={<QuitFinPage />} />
         <Route path="/createPhotocard" element={<CreateCardPage />} />
         <Route path="/editPhotocard" element={<EditCardPage />} />
-        <Route path="/bookmarks" element={<BookMarksListPage />} />
+        <Route path="/bookmarks" element={<BookMarksPage />} />
 
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>

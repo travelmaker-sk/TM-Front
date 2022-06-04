@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { addBookmark, addLike, delBookmark, delLike } from "../../lib/api/post";
 import palette from "../../styles/palette";
 import { PostType } from "./Post";
+import { useNavigate } from "react-router";
 
 const CardDetailStyle = styled.div`
   ul {
@@ -88,8 +89,7 @@ const CardDetailStyle = styled.div`
 `;
 
 const CardDetail = ({ post }: PostType) => {
-  const refBookmark = useRef<HTMLSpanElement>(null);
-  const refCancelBookmark = useRef<HTMLSpanElement>(null);
+  const navigate = useNavigate();
 
   const [like, setLike] = useState(post?.like.likeCheck);
   const [cntLike, setCntLike] = useState(post?.like.likeNum ?? 0);
@@ -125,7 +125,12 @@ const CardDetail = ({ post }: PostType) => {
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("북마크 삭제 완료!", "", "success");
+          Swal.fire({
+            title: "북마크 삭제 완료!",
+            icon: "success",
+            confirmButtonColor: palette.cyan[5],
+            confirmButtonText: "확인",
+          });
 
           delBookmark(post?.id as number).then((res) => {});
           setBookmark(!bookmark);
@@ -135,7 +140,6 @@ const CardDetail = ({ post }: PostType) => {
     } else {
       Swal.fire({
         title: "북마크를 추가하시겠습니까?",
-        text: "",
         icon: "question",
         showCancelButton: true,
         confirmButtonColor: palette.cyan[5],
@@ -144,7 +148,20 @@ const CardDetail = ({ post }: PostType) => {
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("북마크 추가 완료!", "", "success");
+          Swal.fire({
+            title: "북마크 추가 완료!",
+            text: "",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonColor: palette.cyan[5],
+            cancelButtonColor: palette.gray[5],
+            confirmButtonText: "내 북마크로 이동",
+            cancelButtonText: "취소",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/bookmarks");
+            }
+          });
 
           addBookmark(post?.id as number).then((res) => {});
           setBookmark(!bookmark);
@@ -152,7 +169,7 @@ const CardDetail = ({ post }: PostType) => {
         }
       });
     }
-  }, [bookmark, post?.id]);
+  }, [bookmark, navigate, post?.id]);
 
   return (
     <>
@@ -241,13 +258,9 @@ const CardDetail = ({ post }: PostType) => {
               className="bookmark-btn"
             >
               {bookmark ? (
-                <span className="material-icons bookmark" ref={refBookmark}>
-                  bookmark
-                </span>
+                <span className="material-icons bookmark">bookmark</span>
               ) : (
-                <span className="material-icons" ref={refCancelBookmark}>
-                  bookmark_outline
-                </span>
+                <span className="material-icons">bookmark_outline</span>
               )}
             </button>
           </li>
