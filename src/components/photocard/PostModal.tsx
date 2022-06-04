@@ -51,8 +51,9 @@ const ModalBlock = styled.div`
     > li {
       width: 40%;
     }
-    > li:first-child {
+    > li:first-of-type {
       > * {
+        margin-bottom: 0;
         width: 100%;
       }
     }
@@ -90,6 +91,7 @@ const ModalBlock = styled.div`
         width: 100%;
       }
       > li:last-of-type {
+        margin-top: 32px;
         margin-left: 0;
       }
     }
