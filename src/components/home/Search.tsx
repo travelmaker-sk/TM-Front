@@ -4,6 +4,7 @@ import { Wrapper } from "../../pages/HomePage";
 import palette from "../../styles/palette";
 import { useNavigate } from "react-router";
 import { popularArea } from "../../lib/api/post";
+import areaData from "../../lib/json/areaData.json";
 
 const SearchBlock = styled.div`
   width: 100%;
@@ -133,6 +134,7 @@ const Search = () => {
   const navigate = useNavigate();
 
   const [popularWhere, setPopularWhere] = useState<any[]>([]);
+  const [inputWhere, seInputWhere] = useState("");
 
   const refWhereArea = useRef<HTMLUListElement>(null);
   const refWhereInput = useRef<HTMLInputElement>(null);
@@ -166,8 +168,8 @@ const Search = () => {
     if (timer) clearTimeout(timer);
 
     timer = setTimeout(() => {
-      const keyword = e.target.value;
-      console.log("keyword: ", keyword);
+      seInputWhere(e.target.value);
+      console.log("inputWhere: ", inputWhere);
 
       // TODO: 지역명 검색 API 호출
     }, 200);
@@ -215,14 +217,36 @@ const Search = () => {
                   ref={refWhereInput}
                   onChange={onInputWhere}
                 />
-                <ul ref={refWhereArea}>
-                  <h4>인기 여행지 TOP7</h4>
-                  {popularWhere.map((item) => (
-                    <li key={item.id} onClick={onClickWhereList}>
-                      {item.areaName}
-                    </li>
-                  ))}
-                </ul>
+                {inputWhere ? (
+                  <ul ref={refWhereArea}>
+                    {areaData.areaList
+                      .filter((area) => {
+                        if (inputWhere === "") {
+                          return area;
+                        } else if (
+                          area.areaName
+                            .toLowerCase()
+                            .includes(inputWhere.toLowerCase())
+                        ) {
+                          return area;
+                        }
+                      })
+                      .map((area) => (
+                        <li key={area.id} onClick={onClickWhereList}>
+                          {area.areaName}
+                        </li>
+                      ))}
+                  </ul>
+                ) : (
+                  <ul ref={refWhereArea}>
+                    <h4>인기 여행지 TOP7</h4>
+                    {popularWhere.map((item) => (
+                      <li key={item.id} onClick={onClickWhereList}>
+                        {item.areaName}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
               <div className="what-area">
                 <span className="material-icons">sms</span>

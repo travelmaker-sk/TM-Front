@@ -1,0 +1,8 @@
+{
+  "areaList": [
+    { "id": 0, "areaName": "제주" },
+    { "id": 1, "areaName": "주제" },
+    { "id": 2, "areaName": "제" },
+    { "id": 3, "areaName": "주제주" }
+  ]
+}
