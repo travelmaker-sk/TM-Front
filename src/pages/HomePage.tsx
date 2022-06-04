@@ -8,8 +8,7 @@ import { setUser } from "../redux/user";
 import Header from "../components/common/Header";
 import Swiper from "../components/home/Swiper";
 import { AllPostsType } from "../lib/type";
-import AllPosts from "../components/photocard/SearchPostList";
-import { allPosts } from "../lib/api/post";
+import { listPosts } from "../lib/api/post";
 import PostList from "../components/photocard/SearchPostList";
 import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
@@ -38,7 +37,7 @@ const HomePage = () => {
   useEffect(() => {
     const loadHomePosts = () => {
       // API 호출
-      allPosts()
+      listPosts()
         .then((res) => {
           // @ts-ignore
           setHomePosts(res);

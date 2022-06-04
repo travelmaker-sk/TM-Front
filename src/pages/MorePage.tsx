@@ -7,11 +7,10 @@ import Search from "../components/home/Search";
 import Post from "../components/photocard/Post";
 import { PostBlock } from "../components/photocard/SearchPostList";
 import { SelectCategory } from "../components/write/CreateCard";
-import { detailPosts } from "../lib/api/post";
+import { morePosts } from "../lib/api/post";
 import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";
 import queryString from "query-string";
-import { useNavigate } from "react-router";
 
 const SelectSort = styled(SelectCategory)`
   display: flex;
@@ -34,9 +33,7 @@ const Pagination = styled.div`
   }
 `;
 
-const HomeMorePage = () => {
-  const navigate = useNavigate();
-
+const MorePage = () => {
   const location = useLocation();
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
@@ -76,15 +73,21 @@ const HomeMorePage = () => {
     // const from = (currentPage - 1) * itemPerPage;
 
     // API 호출
-    detailPosts(query.category as string, sort as string, currentPage).then(
-      ({ totalCount, list }) => {
-        const totalPageCount = Math.ceil(totalCount / itemPerPage);
-        setTotalPage(totalPageCount);
-        setPosts(list);
-      }
-    );
-    console.log(sort, currentPage);
-  }, [currentPage, itemPerPage, navigate, query.category, sort]);
+    //@ts-ignore
+    morePosts(
+      query.category as string,
+      sort as string,
+      currentPage,
+      query.where as string,
+      query.what as string
+    ).then(({ totalCount, list }) => {
+      const totalPageCount = Math.ceil(totalCount / itemPerPage);
+      setTotalPage(totalPageCount);
+      setPosts(list);
+    });
+    console.log("search", sort, currentPage);
+  }, [currentPage, itemPerPage, query.category, query.what, query.where, sort]);
+  console.log(posts);
 
   useEffect(() => {
     // render
@@ -136,4 +139,4 @@ const HomeMorePage = () => {
   );
 };
 
-export default HomeMorePage;
+export default MorePage;

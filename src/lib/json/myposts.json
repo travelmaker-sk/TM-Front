@@ -1,0 +1,385 @@
+{
+  "postList": [
+    {
+      "id": 0,
+      "location": "제주",
+      "posts": [
+        {
+          "id": 0,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 1,
+          "title": "제주식당",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "restaurant",
+          "menu": "은갈치구이",
+          "price": 20000
+        },
+        {
+          "id": 2,
+          "title": "제주호텔",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "accommodation",
+          "price": 150000
+        },
+        {
+          "id": 3,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 4,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 5,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 6,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 7,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "location": "부산",
+      "posts": [
+        {
+          "id": 8,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 9,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 10,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 11,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 12,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 13,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 14,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        },
+        {
+          "id": 15,
+          "title": "성산일출봉",
+          "location": "제주",
+          "memo": "이십글자이십글자이십글자이십글자이십글자",
+          "tagList": ["제주도", "성산일출봉", "성산"],
+          "imageUrl": "",
+          "score": 4.5,
+          "date": "2022-05-18",
+          "uploadDate": "2022-05-18T09:41:17.295+00:00",
+          "like": {
+            "likeNum": 20,
+            "likeCheck": false
+          },
+          "bookmarkCheck": false,
+          "writer": {
+            "username": "작성자",
+            "profileImage": ""
+          },
+          "view": 30,
+          "category": "place",
+          "weather": "맑음"
+        }
+      ]
+    }
+  ]
+}

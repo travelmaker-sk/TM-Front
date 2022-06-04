@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import { UserType } from "../../lib/type";
+import { GetPostType, UserType } from "../../lib/type";
+import { useEffect, useState } from "react";
+import { myPosts } from "../../lib/api/post";
+import Post from "../photocard/Post";
+import { PostBlock } from "../photocard/SearchPostList";
 
 interface MyPageType {
   user: UserType;
@@ -73,7 +77,6 @@ const MyPageTopBlock = styled.div`
 
 const MyPageBottomBlock = styled.div`
   width: 100%;
-  height: 100%;
   position: absolute;
   left: 0;
   background-color: ${palette.gray[1]};
@@ -81,8 +84,14 @@ const MyPageBottomBlock = styled.div`
     max-width: 1320px;
     margin: 0 auto;
     padding: 50px 3%;
+    h2{
+      font-size: 20px;
+      margin-bottom: 32px;
+    }
     h3{
       font-size: 20px;
+      color: ${palette.cyan[5]};
+      margin-bottom: 16px;
     }
     // Tablet
     @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -99,6 +108,16 @@ const MyPageBottomBlock = styled.div`
 `;
 
 const MyPage = ({ user }: MyPageType) => {
+  const [posts, setPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    // API 호출
+    myPosts().then(({ list }) => {
+      setPosts(list);
+      console.log(list);
+    });
+  }, []);
+
   return (
     <>
       <MyPageTopBlock>
@@ -139,7 +158,18 @@ const MyPage = ({ user }: MyPageType) => {
       </MyPageTopBlock>
       <MyPageBottomBlock>
         <div>
-          <h3>공개된 여행</h3>
+          <h2>{user.username}님의 포토카드 ✈️</h2>
+          {posts.map((list) => (
+            <div key={list.id}>
+              <h3>{list.location}</h3>
+              <PostBlock>
+                {list.posts.map((post: GetPostType | null) => (
+                  //@ts-ignore
+                  <Post post={post} key={post?.id} />
+                ))}
+              </PostBlock>
+            </div>
+          ))}
         </div>
       </MyPageBottomBlock>
     </>

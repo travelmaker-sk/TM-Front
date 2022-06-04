@@ -20,8 +20,8 @@ import FindPwPage from "./pages/FindPwPage";
 import FindPwFinPage from "./pages/FindPwFinPage";
 import CreateCardPage from "./pages/CreateCardPage";
 import SearchPage from "./pages/SearchPage";
-import SearchMorePage from "./pages/SearchMorePage";
 import ScrollToTop from "./components/common/ScrollToTop";
+import MorePage from "./pages/MorePage";
 
 function App() {
   return (
@@ -40,7 +40,7 @@ function App() {
         <Route path="/findPwFin" element={<FindPwFinPage />} />
 
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/more" element={<SearchMorePage />} />
+        <Route path="/more" element={<MorePage />} />
         <Route path="/mypage" element={<MyPagePage />} />
         <Route path="/setProfile" element={<SetProfilePage />} />
         <Route path="/quit" element={<QuitPage />} />

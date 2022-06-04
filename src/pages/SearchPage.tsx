@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
-import { allPosts } from "../lib/api/post";
+import { listPosts } from "../lib/api/post";
 import { AllPostsType } from "../lib/type";
 import { Wrapper } from "./HomePage";
 import Header from "../components/common/Header";
@@ -89,20 +89,15 @@ const SearchPage = (props: any) => {
 
   useEffect(() => {
     // API 호출
-    const loadPosts = () => {
-      // API 호출
-      allPosts(query.where as string, query.what as string)
-        .then((list) => {
-          // @ts-ignore
-          setposts(list);
-        })
-        .catch((err) => {
-          console.warn(err);
-        });
-    };
-
-    loadPosts();
-  }, [navigate, query.what, query.where]);
+    listPosts(query.where as string, query.what as string)
+      .then((list) => {
+        // @ts-ignore
+        setposts(list);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }, [query.what, query.where]);
 
   return (
     <Wrapper>

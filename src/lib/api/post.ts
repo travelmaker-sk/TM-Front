@@ -1,9 +1,10 @@
 import axios from "axios";
 import postsData from "../json/posts.json";
+import mypostsData from "../json/myposts.json";
 
-// 전체 포스트 페이지
+// 전체 포스트
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
-export const allPosts = async (where?: string, what?: string) => {
+export const listPosts = async (where?: string, what?: string) => {
   // const response = await axios.get("/search", {
   //   params: {
   //     where,
@@ -38,8 +39,8 @@ export const allPosts = async (where?: string, what?: string) => {
   };
 };
 
-// 더보기 포스트 페이지
-export const detailPosts = async (
+// 더보기 포스트
+export const morePosts = async (
   category: string,
   sort: string,
   currentPage: number,
@@ -90,6 +91,19 @@ export const detailPosts = async (
   return {
     totalCount: 30,
     list: result,
+  };
+};
+
+// 마이페이지 포스트
+export const myPosts = async () => {
+  // const response = await axios.get("/myPosts");
+
+  // return response.data;
+
+  const list = mypostsData.postList;
+
+  return {
+    list,
   };
 };
 
