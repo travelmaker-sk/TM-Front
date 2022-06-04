@@ -8,6 +8,7 @@ import palette from "../../styles/palette";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
 import { useNavigate } from "react-router";
+import ReactToPrint from "react-to-print";
 
 interface ModalType {
   post: GetPostType | null;
@@ -51,10 +52,12 @@ const ModalBlock = styled.div`
       width: 40%;
     }
     > li:first-child {
-      margin-right: 10%;
       > * {
         width: 100%;
       }
+    }
+    > li:last-of-type {
+      margin-left: 10%;
     }
     > button {
       position: absolute;
@@ -86,8 +89,8 @@ const ModalBlock = styled.div`
       > li {
         width: 100%;
       }
-      > li:first-child {
-        margin-right: 0;
+      > li:last-of-type {
+        margin-left: 0;
       }
     }
   }
@@ -144,6 +147,8 @@ const BookmarkButton = styled.div`
 const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
   const navigate = useNavigate();
 
+  const refCard = useRef<HTMLLIElement>(null);
+
   // 수정 버튼
   const onEdit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -178,22 +183,27 @@ const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
     <ModalBlock className={open ? "open" : ""}>
       <div className="container">
         <ul className="white-box">
-          <li>
+          <li ref={refCard}>
             <Card post={post} />
           </li>
           <li>
-            <CardDetail post={post} />
+            <CardDetail post={post} close={close} />
           </li>
           <button onClick={close} title="닫기">
             <span className="material-icons">close</span>
           </button>
           {my ? (
             <MyButton>
-              <CyanButtonStyle>
-                <button className="print-btn">
-                  <span className="material-icons">print</span> &nbsp; 인쇄
-                </button>
-              </CyanButtonStyle>
+              <ReactToPrint
+                trigger={() => (
+                  <CyanButtonStyle>
+                    <button className="print-btn">
+                      <span className="material-icons">print</span> &nbsp; 인쇄
+                    </button>
+                  </CyanButtonStyle>
+                )}
+                content={() => refCard.current}
+              />
               <CyanButtonStyle>
                 <button onClick={onEdit}>수정</button>
               </CyanButtonStyle>
@@ -206,11 +216,16 @@ const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
           )}
           {bookmark ? (
             <BookmarkButton>
-              <CyanButtonStyle>
-                <button className="print-btn">
-                  <span className="material-icons">print</span> &nbsp; 인쇄
-                </button>
-              </CyanButtonStyle>
+              <ReactToPrint
+                trigger={() => (
+                  <CyanButtonStyle>
+                    <button className="print-btn">
+                      <span className="material-icons">print</span> &nbsp; 인쇄
+                    </button>
+                  </CyanButtonStyle>
+                )}
+                content={() => refCard.current}
+              />
             </BookmarkButton>
           ) : (
             ""

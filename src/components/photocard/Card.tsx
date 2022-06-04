@@ -12,7 +12,7 @@ export const CardStyle = styled.div`
   width: 23.875%;
   min-width: 238px;
   padding: 16px;
-  margin-bottom: 32px;
+  // margin-bottom: 32px;
   background-color: white;
   border: 1.5px solid ${palette.gray[3]};
   cursor: pointer;

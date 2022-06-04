@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Wrapper } from "../../pages/HomePage";
 import palette from "../../styles/palette";
 import { useNavigate } from "react-router";
-import { popularArea } from "../../lib/api/post";
 import areaData from "../../lib/json/areaData.json";
+import { popularArea } from "../../lib/api/home";
 
 const SearchBlock = styled.div`
   width: 100%;

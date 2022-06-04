@@ -88,7 +88,7 @@ const CardDetailStyle = styled.div`
   }
 `;
 
-const CardDetail = ({ post }: PostType) => {
+const CardDetail = ({ post, close }: PostType) => {
   const navigate = useNavigate();
 
   const [like, setLike] = useState(post?.like.likeCheck);
@@ -159,6 +159,8 @@ const CardDetail = ({ post }: PostType) => {
             cancelButtonText: "취소",
           }).then((result) => {
             if (result.isConfirmed) {
+              //@ts-ignore
+              close();
               navigate("/bookmarks");
             }
           });

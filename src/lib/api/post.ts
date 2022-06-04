@@ -108,19 +108,6 @@ export const myPosts = async () => {
   };
 };
 
-// 인기 여행지 TOP7
-export const popularArea = async () => {
-  // const response = await axios.get("/popularWhere");
-
-  // return response.data;
-
-  const list = popularWhere.areaList;
-
-  return {
-    list,
-  };
-};
-
 // 좋아요
 export const addLike = async (id: number) => {
   const response = await axios.post(`/like/add/${id}`);

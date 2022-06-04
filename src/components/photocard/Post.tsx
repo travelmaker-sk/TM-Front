@@ -5,6 +5,7 @@ import PostModal from "./PostModal";
 
 export interface PostType {
   post: GetPostType | null;
+  close?: () => void;
   my?: boolean;
   bookmark?: boolean;
 }
