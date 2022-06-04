@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AddPostType } from "../type";
+import { AddPostType, CategoryType, EditPostType } from "../type";
 
 export const addPost = async (data: AddPostType) => {
   const response = await axios.post("/post/new", data);
@@ -8,33 +8,8 @@ export const addPost = async (data: AddPostType) => {
   return false;
 };
 
-export const editPost = async (
-  id: number,
-  category: "place" | "restaurant" | "accomodation",
-  title: string,
-  location: string,
-  date: string,
-  score: number,
-  weather?: string,
-  menu?: string,
-  price?: string,
-  memo?: string,
-  tagList?: Array<string>,
-  imageUrl?: string
-) => {
-  const response = await axios.post(`/post/update/${id}`, {
-    category,
-    title,
-    location,
-    date,
-    score,
-    weather,
-    menu,
-    price,
-    memo,
-    tagList,
-    imageUrl,
-  });
+export const editPost = async (data: EditPostType) => {
+  const response = await axios.post(`/post/update/${data.id}`, data);
 
   return response.data;
 };
@@ -42,5 +17,6 @@ export const editPost = async (
 export const deletePost = async (id: number) => {
   const response = await axios.delete(`/post/delete/${id}`);
 
-  return response.data;
+  // return response.data;
+  return false;
 };

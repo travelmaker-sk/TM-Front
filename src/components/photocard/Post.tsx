@@ -5,9 +5,10 @@ import PostModal from "./PostModal";
 
 export interface PostType {
   post: GetPostType | null;
+  my?: boolean;
 }
 
-const Post = ({ post }: PostType) => {
+const Post = ({ post, my }: PostType) => {
   const [openModal, setOpenModal] = useState(false);
   const onOpenModal = () => {
     console.log("click modal");
@@ -20,7 +21,7 @@ const Post = ({ post }: PostType) => {
   return (
     <>
       <Card post={post} onOpenModal={onOpenModal} />
-      <PostModal post={post} open={openModal} close={onCloseModal} />
+      <PostModal post={post} open={openModal} close={onCloseModal} my={my} />
     </>
   );
 };

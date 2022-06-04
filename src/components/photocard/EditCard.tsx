@@ -2,195 +2,71 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Wrapper } from "../../pages/HomePage";
 import { HeaderBottomPlus } from "../../pages/MyPage";
-import palette from "../../styles/palette";
 import Footer from "../common/Footer";
 import Header from "../common/Header";
 import Swal from "sweetalert2";
 import {
   GrayButtonStyle,
   CyanButtonStyle,
-  LinkButton,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
-import { addPost } from "../../lib/api/write";
+import { addPost, editPost } from "../../lib/api/write";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
+import {
+  CreateCardBlock,
+  CreateCardStyle,
+  TagInput,
+  TagItem,
+  TagList,
+} from "./CreateCard";
 
-export const SelectCategory = styled.div`
-  margin-bottom: 64px;
-  .select {
-    width: 150px;
-    padding: 5px;
-    border: 1.4px solid ${palette.cyan[6]};
-    border-radius: 4px;
-    outline: 0 none;
-    color: ${palette.gray[7]};
-    font-size: 16px;
-    font-family: "Noto Sans KR", sans-serif;
-    option {
-      background: ${palette.cyan[8]};
-      color: #fff;
-    }
-  }
-`;
-
-const CreateCardBlock = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const EditCardBlock = styled(CreateCardBlock)`
+  margin-top: 64px;
   > div {
-    display: none;
-    position: relative;
+    display: block;
   }
 `;
 
-const CreateCardStyle = styled.div`
-  width: 400px;
-  height: 637px;
-  padding: 15px;
-  margin-bottom: 32px;
-  border: 1.5px solid ${palette.gray[3]};
-  overflow: scroll;
-  > label {
-    display: flex;
-    justify-cotent: center;
-    align-items: center;
-    margin-bottom: 16px;
-    > span:first-of-type {
-      width: 45px;
-      color: ${palette.cyan[6]};
-    }
-    input {
-      width: 320px;
-      padding: 5px 10px;
-      border-radius: 4px;
-      background-color: ${palette.gray[1]};
-    }
-    input.price,
-    input.score {
-      width: 285px;
-    }
-    > span.sub {
-      width: 35px;
-      text-align: right;
-      color: ${palette.gray[5]};
-    }
-  }
-  img {
-    width: 365px;
-    height: 273.75px;
-    margin-bottom: 16px;
-  }
-  .cardPhoto-upload {
-    position: absolute;
-    top: -50px;
-    left: 9px;
-    margin-bottom: 13px;
-    display: flex;
-    .cardPhoto-name,
-    .add-photo,
-    .del-photo {
-      padding: 5px 15px;
-      border-radius: 4px;
-    }
-    .cardPhoto-name {
-      width: 60%;
-      border: 1px solid ${palette.gray[4]};
-      color: ${palette.gray[4]};
-      background-color: white;
-    }
-    .add-photo,
-    .del-photo {
-      margin-left: 5px;
-      width: 20%;
-      // border: 1px solid ${palette.gray[4]};
-      cursor: pointer;
-      text-align: center;
-      line-height: 24px;
-      color: white;
-    }
-    .add-photo {
-      background-color: ${palette.cyan[5]};
-    }
-    .del-photo {
-      background-color: ${palette.gray[5]};
-    }
-    input[type="file"] {
-      display: none;
-    }
-  }
-  .tag {
-    color: ${palette.gray[6]};
-  }
-`;
-
-const TagInput = styled.input`
-  margin-bottom: 5px;
-  width: 307px !important;
-`;
-
-const TagList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const TagItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 5px 5px 0;
-  padding: 5px;
-  background-color: ${palette.cyan[8]};
-  border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 15px;
-    height: 15px;
-    margin-left: 5px;
-    background-color: white;
-    border-radius: 50%;
-    color: ${palette.cyan[8]};
-    span {
-      font-size: 12px;
-      font-weight: 600;
-    }
-  }
-`;
-
-const CreateCard = () => {
+const EditCard = () => {
   const navigate = useNavigate();
 
-  const refForm = useRef<HTMLDivElement>(null);
+  const postLocation = useLocation();
+  const post = postLocation.state;
+
   const refInputFile = useRef<HTMLInputElement>(null);
 
-  const [category, setCategory] = useState("");
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [date, setDate] = useState("");
-  const [weather, setWeather] = useState("");
-  const [menu, setMenu] = useState("");
-  const [price, setPrice] = useState("");
-  const [score, setScore] = useState("");
-  const [memo, setMemo] = useState("");
+  // @ts-ignore
+  const [id, setId] = useState(post.id);
+  // @ts-ignore
+  const [category, setCategory] = useState(post.category);
+  // @ts-ignore
+  const [title, setTitle] = useState(post.title);
+  // @ts-ignore
+  const [location, setLocation] = useState(post.location);
+  // @ts-ignore
+  const [date, setDate] = useState(post.date);
+  // @ts-ignore
+  const [weather, setWeather] = useState(post.weather);
+  // @ts-ignore
+  const [menu, setMenu] = useState(post.menu);
+  // @ts-ignore
+  const [price, setPrice] = useState(post.price);
+  // @ts-ignore
+  const [score, setScore] = useState(post.score);
+  // @ts-ignore
+  const [memo, setMemo] = useState(post.memo);
   const [tagItem, setTagItem] = useState("");
-  const [tagList, setTagList] = useState([]);
-  const [imageUrl, setImageUrl] = useState("");
+  // @ts-ignore
+  const [tagList, setTagList] = useState(post.tagList);
+  // @ts-ignore
+  const [imageUrl, setImageUrl] = useState(post.imageUrl);
 
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedRest, setSelectedRest] = useState(false);
   const [selectedAccom, setSelectedAccom] = useState(false);
 
   useEffect(() => {
-    if (category === "") {
-      Swal.fire(
-        "카테고리를 먼저 선택해주세요",
-        "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
-        "info"
-      );
-    }
     if (category === "place") {
       setSelectedPlace(true);
       setSelectedRest(false);
@@ -207,15 +83,6 @@ const CreateCard = () => {
       setSelectedAccom(true);
     }
   }, [category]);
-
-  // 카테고리 선택
-  const onSelectedCategory = useCallback((e: any) => {
-    if (!refForm.current) return;
-    refForm.current.style.display = "block";
-
-    onInit();
-    setCategory(e.target.value);
-  }, []);
 
   // 포토카드 이미지 업로드
   const [image, setImage] = useState({
@@ -255,6 +122,7 @@ const CreateCard = () => {
   const deleteTagItem = (e: any) => {
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
     const filteredTagList = tagList.filter(
+      // @ts-ignore
       (tagItem) => tagItem !== deleteTagItem
     );
     setTagList(filteredTagList);
@@ -300,7 +168,8 @@ const CreateCard = () => {
       }
 
       // API 호출
-      addPost({
+      editPost({
+        id,
         category,
         title,
         location,
@@ -317,14 +186,15 @@ const CreateCard = () => {
           console.log("에러 발생");
           return;
         } else {
-          Swal.fire("포토카드 생성 완료!", "success");
-          navigate("/");
+          Swal.fire("포토카드 수정 완료!", "", "success");
+          navigate("/mypage");
         }
       });
     },
     [
       category,
       date,
+      id,
       imageUrl,
       location,
       memo,
@@ -342,23 +212,8 @@ const CreateCard = () => {
     <Wrapper>
       <Header />
       <HeaderBottomPlus />
-      <SelectCategory>
-        <select
-          name="category"
-          className="select"
-          onChange={onSelectedCategory}
-          defaultValue="default"
-        >
-          <option value="default" disabled>
-            카테고리 선택
-          </option>
-          <option value="place">가볼 만한 곳</option>
-          <option value="restaurant">맛집</option>
-          <option value="accommodation">숙소</option>
-        </select>
-      </SelectCategory>
-      <CreateCardBlock>
-        <div ref={refForm}>
+      <EditCardBlock>
+        <div>
           <CreateCardStyle>
             <label>
               <img src={image.cardPhotoUrl} alt="Photocard Image" />
@@ -509,6 +364,7 @@ const CreateCard = () => {
                   onKeyPress={onKeyPress}
                 />
                 <TagList>
+                  {/* @ts-ignore */}
                   {tagList.map((tagItem, index) => (
                     <TagItem key={index}>
                       <span>{tagItem}</span>
@@ -524,7 +380,7 @@ const CreateCard = () => {
           <SelectButtonStyle>
             <CyanButtonStyle>
               <button type="submit" onClick={onSubmit}>
-                업로드
+                수정
               </button>
             </CyanButtonStyle>
             <GrayButtonStyle>
@@ -532,10 +388,10 @@ const CreateCard = () => {
             </GrayButtonStyle>
           </SelectButtonStyle>
         </div>
-      </CreateCardBlock>
+      </EditCardBlock>
       <Footer />
     </Wrapper>
   );
 };
 
-export default CreateCard;
+export default EditCard;

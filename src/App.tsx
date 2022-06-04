@@ -22,6 +22,7 @@ import CreateCardPage from "./pages/CreateCardPage";
 import SearchPage from "./pages/SearchPage";
 import ScrollToTop from "./components/common/ScrollToTop";
 import MorePage from "./pages/MorePage";
+import EditCardPage from "./pages/EditCardPage";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/quit" element={<QuitPage />} />
         <Route path="/quitFin" element={<QuitFinPage />} />
         <Route path="/createPhotocard" element={<CreateCardPage />} />
+        <Route path="/editPhotocard" element={<EditCardPage />} />
         <Route path="/bookmarks" element={<BookMarksListPage />} />
 
         <Route path="/*" element={<NotFoundPage />} />

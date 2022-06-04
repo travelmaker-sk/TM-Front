@@ -6,7 +6,7 @@ import Header from "../components/common/Header";
 import Search from "../components/home/Search";
 import Post from "../components/photocard/Post";
 import { PostBlock } from "../components/photocard/SearchPostList";
-import { SelectCategory } from "../components/write/CreateCard";
+import { SelectCategory } from "../components/photocard/CreateCard";
 import { morePosts } from "../lib/api/post";
 import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";

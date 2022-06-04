@@ -1,14 +1,23 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import styled from "styled-components";
+import Swal from "sweetalert2";
+import { deletePost } from "../../lib/api/write";
 import { GetPostType } from "../../lib/type";
+import {
+  CyanButtonStyle,
+  GrayButtonStyle,
+  SelectButtonStyle,
+} from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
+import { useNavigate } from "react-router";
 
 interface ModalType {
   post: GetPostType | null;
   open: boolean;
   close: () => void;
+  my?: boolean;
 }
 
 const ModalBlock = styled.div`
@@ -87,7 +96,53 @@ const ModalBlock = styled.div`
   }
 `;
 
-const PostModal = ({ post, open, close }: ModalType) => {
+const MyButton = styled.div`
+  width: 300px;
+  position: absolute;
+  bottom: -62px;
+  right: 0;
+  // Mobile
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    position: static;
+  }
+`;
+
+const PostModal = ({ post, open, close, my }: ModalType) => {
+  console.log("my", my);
+
+  const navigate = useNavigate();
+
+  // 수정 버튼
+  const onEdit = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+
+      navigate("/editPhotocard", { state: post });
+    },
+    [navigate, post]
+  );
+
+  // 삭제 버튼
+  const onDelete = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+
+      // @ts-ignore
+      deletePost(post?.id).then((res) => {
+        if (res) {
+          console.log("포토카드 삭제 실패");
+          return;
+        } else {
+          close();
+          Swal.fire("포토카드 삭제 완료!", "", "success");
+          navigate("/mypage");
+        }
+      });
+    },
+    [close, navigate, post?.id]
+  );
+
   return (
     <ModalBlock className={open ? "open" : ""}>
       <div className="container">
@@ -96,11 +151,25 @@ const PostModal = ({ post, open, close }: ModalType) => {
             <Card post={post} />
           </li>
           <li>
-            <CardDetail post={post} />
+            <CardDetail post={post} my={my} />
           </li>
           <button onClick={close} title="닫기">
             <span className="material-icons">close</span>
           </button>
+          {my ? (
+            <MyButton>
+              <SelectButtonStyle>
+                <CyanButtonStyle>
+                  <button onClick={onEdit}>수정</button>
+                </CyanButtonStyle>
+                <GrayButtonStyle>
+                  <button onClick={onDelete}>삭제</button>
+                </GrayButtonStyle>
+              </SelectButtonStyle>
+            </MyButton>
+          ) : (
+            ""
+          )}
         </ul>
       </div>
     </ModalBlock>

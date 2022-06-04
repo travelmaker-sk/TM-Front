@@ -67,3 +67,7 @@ export interface AddPostType {
   tagList?: Array<string>;
   imageUrl?: string;
 }
+
+export interface EditPostType extends AddPostType {
+  id: number;
+}

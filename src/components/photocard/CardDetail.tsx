@@ -61,6 +61,10 @@ const CardDetailStyle = styled.div`
           }
         }
       }
+      // Mobile
+      @media screen and (max-width: 767px) {
+        margin-bottom: 32px;
+      }
     }
     hr {
       border: none;
@@ -92,87 +96,93 @@ const CardDetail = ({ post }: PostType) => {
   }, [like, post?.id]);
 
   return (
-    <CardDetailStyle>
-      <ul>
-        <li>
-          <img
-            src={
-              post?.writer.profileImage
-                ? post?.writer.profileImage
-                : "./images/default-profile.png"
-            }
-            alt="profileImage"
-          />
-          <span>{post?.writer.username}</span>
-        </li>
-        <hr />
-        <li>
+    <>
+      <CardDetailStyle>
+        <ul>
           <li>
-            <span>이름</span>
-            {post?.title}
+            <img
+              src={
+                post?.writer.profileImage
+                  ? post?.writer.profileImage
+                  : "./images/default-profile.png"
+              }
+              alt="profileImage"
+            />
+            <span>{post?.writer.username}</span>
           </li>
+          <hr />
           <li>
-            <span>위치</span>
-            {post?.location}
-          </li>
-          <li>
-            <span>날짜</span>
-            {post?.date}
-          </li>
-          {post?.weather ? (
             <li>
-              <span>날씨</span>
-              {post?.weather}
+              <span>이름</span>
+              {post?.title}
             </li>
-          ) : (
-            ""
-          )}
-          {post?.menu ? (
             <li>
-              <span>메뉴</span>
-              {post?.menu}
+              <span>위치</span>
+              {post?.location}
             </li>
-          ) : (
-            ""
-          )}
-          {post?.price ? (
             <li>
-              <span>가격</span>
-              {post?.price}
+              <span>날짜</span>
+              {post?.date}
             </li>
-          ) : (
-            ""
-          )}
-          <li>
-            <span>평점</span>
-            {post?.score}
+            {post?.weather ? (
+              <li>
+                <span>날씨</span>
+                {post?.weather}
+              </li>
+            ) : (
+              ""
+            )}
+            {post?.menu ? (
+              <li>
+                <span>메뉴</span>
+                {post?.menu}
+              </li>
+            ) : (
+              ""
+            )}
+            {post?.price ? (
+              <li>
+                <span>가격</span>
+                {post?.price}
+              </li>
+            ) : (
+              ""
+            )}
+            <li>
+              <span>평점</span>
+              {post?.score}
+            </li>
+            <li>
+              <span>메모</span>
+              {post?.memo}
+            </li>
+            <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
           </li>
+          <hr />
           <li>
-            <span>메모</span>
-            {post?.memo}
-          </li>
-          <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
-        </li>
-        <hr />
-        <li>
-          <div className="like-container">
-            <button title="좋아요" onClick={onToggleLike} className="like-btn">
-              {like ? (
-                <span className="material-icons like">favorite</span>
-              ) : (
-                <span className="material-icons not-like">
-                  favorite_outline
-                </span>
-              )}
+            <div className="like-container">
+              <button
+                title="좋아요"
+                onClick={onToggleLike}
+                className="like-btn"
+              >
+                {like ? (
+                  <span className="material-icons like">favorite</span>
+                ) : (
+                  <span className="material-icons not-like">
+                    favorite_outline
+                  </span>
+                )}
+              </button>
+              <span>{cntLike}</span>
+            </div>
+            <button title="북마크 추가" className="bookmark-btn">
+              <span className="material-icons">bookmark_outline</span>
             </button>
-            <span>{cntLike}</span>
-          </div>
-          <button title="북마크 추가" className="bookmark-btn">
-            <span className="material-icons">bookmark_outline</span>
-          </button>
-        </li>
-      </ul>
-    </CardDetailStyle>
+          </li>
+        </ul>
+      </CardDetailStyle>
+    </>
   );
 };
 

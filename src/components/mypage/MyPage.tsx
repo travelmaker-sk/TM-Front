@@ -6,6 +6,13 @@ import { useEffect, useState } from "react";
 import { myPosts } from "../../lib/api/post";
 import Post from "../photocard/Post";
 import { PostBlock } from "../photocard/SearchPostList";
+import { Swiper, SwiperSlide } from "swiper/react"; // basic
+import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
+import "swiper/css"; //basic
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 interface MyPageType {
   user: UserType;
@@ -163,10 +170,21 @@ const MyPage = ({ user }: MyPageType) => {
             <div key={list.id}>
               <h3>{list.location}</h3>
               <PostBlock>
+                {/* <Swiper
+                  spaceBetween={50}
+                  slidesPerView={1}
+                  scrollbar={{ draggable: true }}
+                  navigation
+                  pagination={{ clickable: true }}
+                  autoplay={{ delay: 3000 }}
+                  loop={true}
+                > */}
                 {list.posts.map((post: GetPostType | null) => (
-                  //@ts-ignore
-                  <Post post={post} key={post?.id} />
+                  // <SwiperSlide>
+                  <Post post={post} key={post?.id} my={true} />
+                  // </SwiperSlide>
                 ))}
+                {/* </Swiper> */}
               </PostBlock>
             </div>
           ))}
