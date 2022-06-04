@@ -59,11 +59,19 @@ export const CreateCardStyle = styled.div`
       width: 45px;
       color: ${palette.cyan[6]};
     }
-    input {
+    input,
+    textarea {
       width: 320px;
       padding: 5px 10px;
       border-radius: 4px;
       background-color: ${palette.gray[1]};
+    }
+    textarea {
+      height: 56.666px;
+      border: none;
+      resize: none;
+      font-size: 16px;
+      font-family: "Noto Sans KR", sans-serif;
     }
     input.price,
     input.score {
@@ -602,9 +610,9 @@ const CreateCard = () => {
             </label>
             <label>
               <span>메모</span>
-              <input
-                type="textarea"
+              <textarea
                 name="memo"
+                maxLength={30}
                 placeholder="최대 30자"
                 value={memo}
                 onChange={(e) => {
