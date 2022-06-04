@@ -1,20 +1,19 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
-import { Wrapper } from "../../pages/HomePage";
-import { HeaderBottomPlus } from "../../pages/MyPage";
 import palette from "../../styles/palette";
-import Footer from "../common/Footer";
-import Header from "../common/Header";
 import Swal from "sweetalert2";
 import {
   GrayButtonStyle,
   CyanButtonStyle,
-  LinkButton,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import { addPost } from "../../lib/api/write";
 import { useNavigate } from "react-router";
 import areaData from "../../lib/json/areaData.json";
+import DatePicker from "react-datepicker";
+import { ko } from "date-fns/esm/locale";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export const SelectCategory = styled.div`
   margin-bottom: 64px;
@@ -152,9 +151,27 @@ export const CreateCardStyle = styled.div`
       }
     }
   }
+  .date {
+    input {
+      width: 307.25px;
+      height: 33.343px;
+      margin: 0;
+    }
+  }
   .tag {
     color: ${palette.gray[6]};
   }
+`;
+
+const CardDatePicker = styled(DatePicker)`
+  margin-top: 1.5rem;
+  width: 300px;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 1px solid ${palette.gray[5]}
+  font-size: 14px;
 `;
 
 export const TagInput = styled.input`
@@ -504,17 +521,20 @@ const CreateCard = () => {
                   ))}
               </ul>
             </label>
-            <label>
+            <label className="date">
               <span>날짜*</span>
-              <input
-                type="text"
-                name="date"
-                placeholder="ex) 2022-01-01"
-                value={date}
-                onChange={(e) => {
-                  setDate(e.target.value);
-                }}
-              />
+              <div>
+                {/* @ts-ignore */}
+                <CardDatePicker
+                  locale={ko}
+                  dateFormat="yyyy/MM/dd"
+                  placeholderText="📅 달력에서 선택하기"
+                  selected={date}
+                  onChange={(date: React.SetStateAction<string>) =>
+                    setDate(date)
+                  }
+                />
+              </div>
             </label>
             {selectedPlace ? (
               <label>
