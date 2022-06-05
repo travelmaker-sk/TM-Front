@@ -166,11 +166,9 @@ export const CreateCardStyle = styled.div`
       margin: 0;
     }
   }
-  .tag {
-    color: ${palette.gray[6]};
-  }
 `;
 
+// 날짜
 const CardDatePicker = styled(DatePicker)`
   margin-top: 1.5rem;
   width: 300px;
@@ -182,6 +180,28 @@ const CardDatePicker = styled(DatePicker)`
   font-size: 14px;
 `;
 
+// 평점
+const ReviewBox = styled.div`
+  padding: 0 7px;
+  span {
+    margin: 0 3px;
+    font-size: 28px;
+    opacity: 0.07;
+    cursor: pointer;
+  }
+  .yellowStar {
+    color: orange;
+    opacity: 1;
+  }
+`;
+
+const StarContainer = styled.div`
+  text-align: center;
+  border: none;
+  background-color: white;
+`;
+
+// 태그
 export const TagInput = styled.input`
   margin-bottom: 5px;
   width: 307px !important;
@@ -211,11 +231,9 @@ export const TagItem = styled.div`
     margin-left: 5px;
     background-color: white;
     border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
     color: ${palette.cyan[8]};
-    span {
-      font-size: 12px;
-      font-weight: 600;
-    }
   }
 `;
 
@@ -237,6 +255,7 @@ const CreateCard = () => {
   const [weather, setWeather] = useState("");
   const [menu, setMenu] = useState("");
   const [price, setPrice] = useState("");
+  const [scoreHover, setScoreHover] = useState(null);
   const [score, setScore] = useState("");
   const [memo, setMemo] = useState("");
   const [tagItem, setTagItem] = useState("");
@@ -247,6 +266,11 @@ const CreateCard = () => {
   const [selectedRest, setSelectedRest] = useState(false);
   const [selectedAccom, setSelectedAccom] = useState(false);
 
+  useEffect(() => {
+    console.log("score", score);
+  }, [score]);
+
+  // 카테고리 선택
   useEffect(() => {
     if (category === "") {
       Swal.fire(
@@ -272,7 +296,6 @@ const CreateCard = () => {
     }
   }, [category]);
 
-  // 카테고리 선택
   const onSelectedCategory = useCallback((e: any) => {
     if (!refForm.current) return;
     refForm.current.style.display = "block";
@@ -281,7 +304,7 @@ const CreateCard = () => {
     setCategory(e.target.value);
   }, []);
 
-  // 포토카드 이미지 업로드
+  // 사진
   const [image, setImage] = useState({
     cardPhotoFile: "",
     cardPhotoUrl: "./images/add-photo.png",
@@ -303,7 +326,7 @@ const CreateCard = () => {
     });
   };
 
-  // 포스트 위치
+  // 위치
   const onFocusWhereArea = () => {
     if (!refWhereArea.current) return;
     refWhereArea.current.style.display = "block";
@@ -339,7 +362,7 @@ const CreateCard = () => {
     }, 200);
   };
 
-  // 포토카드 태그 업로드
+  // 태그
   const onKeyPress = (e: any) => {
     if (e.target.value.length !== 0 && e.key === "Enter") {
       submitTagItem();
@@ -353,6 +376,7 @@ const CreateCard = () => {
     setTagItem("");
   };
   const deleteTagItem = (e: any) => {
+    console.log("delete tag");
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
     const filteredTagList = tagList.filter(
       (tagItem) => tagItem !== deleteTagItem
@@ -596,17 +620,26 @@ const CreateCard = () => {
             )}
             <label>
               <span>평점*</span>
-              <input
-                type="number"
-                name="score"
-                placeholder="ex) 4"
-                value={score}
-                onChange={(e) => {
-                  setScore(e.target.value);
-                }}
-                className="score"
-              />
-              <span className="sub">/ 5</span>
+              <ReviewBox>
+                <StarContainer>
+                  {[1, 2, 3, 4, 5].map((el) => (
+                    <span
+                      className={`material-icons ${
+                        // @ts-ignore
+                        (score >= el) | (scoreHover >= el) && "yellowStar"
+                      }`}
+                      key={el}
+                      // @ts-ignore
+                      onMouseEnter={() => setScoreHover(el)}
+                      onMouseLeave={() => setScoreHover(null)}
+                      // @ts-ignore
+                      onClick={() => setScore(el)}
+                    >
+                      grade
+                    </span>
+                  ))}
+                </StarContainer>
+              </ReviewBox>
             </label>
             <label>
               <span>메모</span>
@@ -635,8 +668,11 @@ const CreateCard = () => {
                   {tagList.map((tagItem, index) => (
                     <TagItem key={index}>
                       <span>{tagItem}</span>
-                      <button onClick={deleteTagItem}>
-                        <span className="material-icons">close</span>
+                      <button
+                        className="material-icons"
+                        onClick={deleteTagItem}
+                      >
+                        close
                       </button>
                     </TagItem>
                   ))}

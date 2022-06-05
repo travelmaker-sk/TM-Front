@@ -1,7 +1,7 @@
 import { GetPostType } from "../../lib/type";
 import styled from "styled-components";
 import palette from "../../styles/palette";
-import { useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 interface ICard {
   post: GetPostType | null;
@@ -29,9 +29,17 @@ export const CardStyle = styled.div`
       color: ${palette.cyan[6]};
     }
   }
+  .tagList {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
   .tag {
-    margin-top: 32.333px;
-    color: ${palette.gray[6]};
+    margin: 0 5px 0 0;
+    padding: 5px;
+    background-color: ${palette.cyan[8]};
+    border-radius: 5px;
+    color: white;
   }
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -46,6 +54,17 @@ export const CardStyle = styled.div`
 const Card = ({ post, onOpenModal }: ICard) => {
   const refCard = useRef<HTMLDivElement>(null);
   const cardWidth = refCard.current?.offsetWidth;
+
+  const dictScore = useMemo(
+    () => ({
+      1: "⭐",
+      2: "⭐⭐",
+      3: "⭐⭐⭐",
+      4: "⭐⭐⭐⭐",
+      5: "⭐⭐⭐⭐⭐",
+    }),
+    []
+  );
 
   return (
     <CardStyle
@@ -97,13 +116,18 @@ const Card = ({ post, onOpenModal }: ICard) => {
       )}
       <li>
         <span>평점</span>
-        {post?.score}
+        {/* @ts-ignore */}
+        {dictScore[post?.score]}
       </li>
       <li>
         <span>메모</span>
         {post?.memo}
       </li>
-      <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
+      <li className="tagList">
+        {post?.tagList?.map((item) => (
+          <li className="tag">{`# ${item}`}</li>
+        ))}
+      </li>
     </CardStyle>
   );
 };

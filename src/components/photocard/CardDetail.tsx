@@ -29,7 +29,7 @@ const CardDetailStyle = styled.div`
       }
       .tag {
         margin-top: 32px;
-        color: ${palette.gray[6]};
+        color: ${palette.cyan[8]};
       }
     }
     > li:nth-of-type(3) {
