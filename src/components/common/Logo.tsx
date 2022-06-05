@@ -10,9 +10,14 @@ const LogoStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: "Roboto", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.05rem;
+  > a {
+    font-family: "Roboto", sans-serif;
+    // font-family: "Staatliches", cursive;
+
+    font-size: 20px;
+    font-weight: 800;
+    // letter-spacing: -0.01rem;
+  }
   .logo {
     display: flex;
     justify-content: center;

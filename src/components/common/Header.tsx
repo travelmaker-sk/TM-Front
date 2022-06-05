@@ -47,7 +47,10 @@ const HeaderBlock = styled.div`
       }
     }
     .link-btn {
-      text-decoration: underline;
+      padding: 8px 15px;
+      color: ${palette.gray[6]};
+      border: 1.3px solid ${palette.gray[6]};
+      border-radius: 3px;
     }
   }
 
@@ -59,7 +62,7 @@ const HeaderBlock = styled.div`
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
-    padding: 10px 5%;: 3%;
+    padding: 15px 5%;
     }
   }
 `;
@@ -76,7 +79,7 @@ export const HeaderBottom = styled.div`
   height: 80px;
   // Mobile
   @media screen and (max-width: 767px) {
-    height: 64.838px;
+    height: 60px;
   }
 `;
 
