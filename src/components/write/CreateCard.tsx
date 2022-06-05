@@ -65,10 +65,10 @@ export const CreateCardStyle = styled.div`
       padding: 5px 10px;
       border-radius: 4px;
       background-color: ${palette.gray[1]};
+      border: 1px solid ${palette.gray[3]};
     }
     textarea {
-      height: 56.666px;
-      border: none;
+      height: 58.666px;
       resize: none;
       font-size: 16px;
       font-family: "Noto Sans KR", sans-serif;
@@ -144,7 +144,7 @@ export const CreateCardStyle = styled.div`
       h4 {
         padding: 10px 20px;
         font-size: 16px;
-        background-color: ${palette.gray[3]};
+        background-color: ${palette.gray[8]};
         margin: 0;
       }
       li {
@@ -156,7 +156,7 @@ export const CreateCardStyle = styled.div`
         border-bottom: 1px solid ${palette.gray[4]};
       }
       li:hover {
-        background-color: ${palette.gray[2]};
+        background-color: ${palette.gray[3]};
       }
     }
   }
@@ -177,7 +177,7 @@ const CardDatePicker = styled(DatePicker)`
   box-sizing: border-box;
   padding: 8px 20px;
   border-radius: 4px;
-  border: 1px solid ${palette.gray[5]};
+  // border: 1px solid ${palette.gray[5]};
   font-size: 14px;
 `;
 

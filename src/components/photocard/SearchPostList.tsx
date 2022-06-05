@@ -23,30 +23,28 @@ export const PostListBlock = styled.div`
 export const PostBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
-  > *:nth-of-type(odd) {
+  > ul {
     margin-right: 1.5%;
     transition: 0.5s;
   }
-  > *:nth-of-type(odd):hover {
+  > ul:hover {
     transform: translateY(-15px);
   }
-  // 7, 15 ...
-  > *:nth-of-type(8n-1) {
+  > ul:nth-of-type(4n) {
     margin-right: 0;
   }
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    > *:nth-of-type(8n-1) {
+    > ul:nth-of-type(4n) {
       margin-right: 1.5%;
     }
-    // 5, 11 ...
-    > *:nth-of-type(6n-1) {
+    > ul:nth-of-type(3n) {
       margin-right: 0;
     }
   }
   // Mobile
   @media screen and (max-width: 767px) {
-    > * {
+    > ul {
       margin-right: 0;
     }
   }

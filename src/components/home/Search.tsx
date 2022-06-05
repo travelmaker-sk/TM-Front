@@ -38,13 +38,14 @@ const SearchBlock = styled.div`
       left: 0;
       width: 100%;
       margin-top: 1px;
-      background-color: white;
+      background-color: ${palette.gray[0]};
       border: 1px solid ${palette.gray[4]};
       z-index: 1111;
       h4{
         padding: 10px 20px;
         font-size: 16px;
-        background-color:${palette.gray[3]};
+        background-color:${palette.gray[9]};
+        color: white;
         margin: 0;
       }
       li{
@@ -56,7 +57,7 @@ const SearchBlock = styled.div`
         border-bottom: 1px solid ${palette.gray[4]};
       }
       li:hover{
-        background-color: ${palette.gray[1]}
+        background-color: ${palette.gray[3]}
       }
     }
   }

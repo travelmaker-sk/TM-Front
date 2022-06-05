@@ -7,84 +7,82 @@ import { PostType } from "./Post";
 import { useNavigate } from "react-router";
 
 const CardDetailUl = styled.ul`
-  ul {
-    > li:nth-of-type(1) {
-      display: flex;
-      align-items: center;
-      font-size: 18px;
-      img {
-        width: 28px;
-        margin-right: 15px;
-      }
+  & > li:nth-of-type(1) {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    img {
+      width: 28px;
+      margin-right: 15px;
     }
-    > li:nth-of-type(2) {
-      li {
-        display: flex;
-        line-height: 1.5em;
-        margin-bottom: 10px;
-        span {
-          width: 40px;
-          font-weight: 700;
-        }
-      }
-      .tag {
-        margin-top: 32px;
-        color: ${palette.cyan[8]};
-      }
-    }
-    > li:nth-of-type(3) {
+  }
+  > li:nth-of-type(2) {
+    li {
       display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
+      line-height: 1.5em;
+      margin-bottom: 10px;
       span {
-        font-size: 28px;
-        color: ${palette.gray[6]};
-      }
-      .like-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        > span {
-          font-size: 16px;
-        }
-      }
-      button {
-        &.like-btn {
-          span.cancel-like,
-          span.like {
-            transition: transform 300ms ease;
-          }
-          span.cancel-like:hover,
-          span.like:hover {
-            transform: scale(1.1);
-          }
-          span.like {
-            color: #f06595;
-          }
-        }
-        &.bookmark-btn {
-          span {
-            transition: transform 300ms ease;
-          }
-          span:hover {
-            transform: scale(1.1);
-          }
-          span.bookmark {
-            color: ${palette.cyan[5]};
-          }
-        }
-      }
-      // Mobile
-      @media screen and (max-width: 767px) {
-        margin-bottom: 32px;
+        width: 40px;
+        font-weight: 700;
       }
     }
-    hr {
-      border: none;
-      background-color: ${palette.gray[6]};
-      height: 1.2px;
-      margin: 32px 0;
+    .tag {
+      margin-top: 32px;
+      color: ${palette.cyan[8]};
     }
+  }
+  > li:nth-of-type(3) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    span {
+      font-size: 28px;
+      color: ${palette.gray[6]};
+    }
+    .like-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > span {
+        font-size: 16px;
+      }
+    }
+    button {
+      &.like-btn {
+        span.cancel-like,
+        span.like {
+          transition: transform 300ms ease;
+        }
+        span.cancel-like:hover,
+        span.like:hover {
+          transform: scale(1.1);
+        }
+        span.like {
+          color: #f06595;
+        }
+      }
+      &.bookmark-btn {
+        span {
+          transition: transform 300ms ease;
+        }
+        span:hover {
+          transform: scale(1.1);
+        }
+        span.bookmark {
+          color: ${palette.cyan[5]};
+        }
+      }
+    }
+    // Mobile
+    @media screen and (max-width: 767px) {
+      margin-bottom: 32px;
+    }
+  }
+  hr {
+    border: none;
+    background-color: ${palette.gray[6]};
+    height: 1.2px;
+    margin: 32px 0;
   }
 `;
 

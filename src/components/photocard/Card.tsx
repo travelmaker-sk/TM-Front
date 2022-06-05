@@ -42,9 +42,9 @@ export const CardUl = styled.ul`
   }
   .tag {
     margin: 0 5px 0 0;
-    padding: 5px;
+    padding: 5px 7px;
     background-color: ${palette.cyan[8]};
-    border-radius: 5px;
+    border-radius: 4px;
     color: white;
   }
   // Tablet
