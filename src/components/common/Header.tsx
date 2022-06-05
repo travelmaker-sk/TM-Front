@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 const HeaderBlock = styled.div`
   max-width: 1320px;
   margin: 0 auto;
-  padding: 20px 3%;
+  padding: 25px 3%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,7 +76,7 @@ const UserName = styled.div`
 `;
 
 export const HeaderBottom = styled.div`
-  height: 80px;
+  height: 90px;
   // Mobile
   @media screen and (max-width: 767px) {
     height: 75.333px;

@@ -21,6 +21,7 @@ import {
   TagList,
 } from "./CreateCard";
 import palette from "../../styles/palette";
+import areaData from "../../lib/json/areaData.json";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import { NumberLiteralType } from "typescript";
@@ -80,6 +81,8 @@ interface EditCardType {
   imageUrl?: string;
 }
 
+let timer: NodeJS.Timeout | null = null;
+
 const EditCard = () => {
   const navigate = useNavigate();
 
@@ -108,6 +111,9 @@ const EditCard = () => {
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedRest, setSelectedRest] = useState(false);
   const [selectedAccom, setSelectedAccom] = useState(false);
+
+  const refLocationUl = useRef<HTMLUListElement>(null);
+  const refLocation = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     console.log("score", score);
@@ -149,6 +155,45 @@ const EditCard = () => {
       cardImageName: "",
       cardImageUrl: "./images/add-photo.png",
     });
+  };
+
+  // 위치
+  const onFocusLocation = () => {
+    if (!refLocationUl.current) return;
+    refLocationUl.current.style.display = "block";
+  };
+  const onBlurLocation = () => {
+    setTimeout(() => {
+      if (!refLocationUl.current) return;
+      refLocationUl.current.style.display = "none";
+    }, 130);
+  };
+
+  const onClickLoctionList = useCallback(
+    (e: React.MouseEvent<HTMLLIElement>) => {
+      if (!refLocation.current) return;
+      //@ts-ignore
+      refLocation.current.value = e.target.innerHTML;
+      console.log(
+        "input:",
+        refLocation.current.value,
+        "list:",
+        //@ts-ignore
+        e.target.innerHTML
+      );
+    },
+    []
+  );
+
+  const onLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (timer) clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      setLocation(e.target.value);
+      console.log("location: ", location);
+
+      // TODO: 지역명 검색 API 호출
+    }, 200);
   };
 
   // 포토카드 태그 업로드
@@ -304,18 +349,37 @@ const EditCard = () => {
                 }}
               />
             </label>
-            <label>
+            <div
+              className="location"
+              onFocus={onFocusLocation}
+              onBlur={onBlurLocation}
+            >
               <span>위치*</span>
               <input
                 type="text"
                 name="location"
                 placeholder="ex) 제주, 부산, 속초"
-                value={location}
-                onChange={(e) => {
-                  setLocation(e.target.value);
-                }}
+                ref={refLocation}
+                onChange={onLocation}
               />
-            </label>
+              <ul ref={refLocationUl}>
+                {areaData.areaList
+                  .filter((area) => {
+                    if (location === "") {
+                      return area;
+                    } else if (
+                      area.toLowerCase().includes(location.toLowerCase())
+                    ) {
+                      return area;
+                    }
+                  })
+                  .map((area) => (
+                    <li key={area} onClick={onClickLoctionList}>
+                      {area}
+                    </li>
+                  ))}
+              </ul>
+            </div>
             <label className="date">
               <span>날짜*</span>
               <input

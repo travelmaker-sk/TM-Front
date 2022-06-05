@@ -6,7 +6,7 @@ import { Wrapper } from "./HomePage";
 import Header from "../components/common/Header";
 
 export const HeaderBottomPlus = styled.div`
-  height: 52px;
+  height: 80px;
 `;
 
 const MyPagePage = () => {

@@ -50,7 +50,8 @@ export const CreateCardStyle = styled.div`
   margin-bottom: 40px;
   border: 1.5px solid ${palette.gray[3]};
   overflow: scroll;
-  > label {
+  > label,
+  .location {
     display: flex;
     justify-cotent: center;
     align-items: center;
@@ -135,6 +136,8 @@ export const CreateCardStyle = styled.div`
       top: 100%;
       left: 0;
       width: 307.25px;
+      max-height: 300px;
+      overflow: scroll;
       margin-left: 42.083px;
       margin-top: 2px;
       background-color: ${palette.gray[2]};
@@ -246,8 +249,8 @@ const CreateCard = () => {
   const refForm = useRef<HTMLDivElement>(null);
   const refInputFile = useRef<HTMLInputElement>(null);
 
-  const refWhereArea = useRef<HTMLUListElement>(null);
-  const refWhereInput = useRef<HTMLInputElement>(null);
+  const refLocationUl = useRef<HTMLUListElement>(null);
+  const refLocation = useRef<HTMLInputElement>(null);
 
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
@@ -325,29 +328,32 @@ const CreateCard = () => {
   };
 
   // 위치
-  const onFocusWhereArea = () => {
-    if (!refWhereArea.current) return;
-    refWhereArea.current.style.display = "block";
+  const onFocusLocation = () => {
+    if (!refLocationUl.current) return;
+    refLocationUl.current.style.display = "block";
   };
-  const onBlurWhereArea = () => {
+  const onBlurLocation = () => {
     setTimeout(() => {
-      if (!refWhereArea.current) return;
-      refWhereArea.current.style.display = "none";
+      if (!refLocationUl.current) return;
+      refLocationUl.current.style.display = "none";
     }, 130);
   };
 
-  const onClickWhereList = useCallback((e: React.MouseEvent<HTMLLIElement>) => {
-    if (!refWhereInput.current) return;
-    //@ts-ignore
-    refWhereInput.current.value = e.target.innerHTML;
-    console.log(
-      "input:",
-      refWhereInput.current.value,
-      "list:",
+  const onClickLoctionList = useCallback(
+    (e: React.MouseEvent<HTMLLIElement>) => {
+      if (!refLocation.current) return;
       //@ts-ignore
-      e.target.innerHTML
-    );
-  }, []);
+      refLocation.current.value = e.target.innerHTML;
+      console.log(
+        "input:",
+        refLocation.current.value,
+        "list:",
+        //@ts-ignore
+        e.target.innerHTML
+      );
+    },
+    []
+  );
 
   const onLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (timer) clearTimeout(timer);
@@ -520,21 +526,20 @@ const CreateCard = () => {
                 }}
               />
             </label>
-            <label
+            <div
               className="location"
-              onFocus={onFocusWhereArea}
-              onBlur={onBlurWhereArea}
+              onFocus={onFocusLocation}
+              onBlur={onBlurLocation}
             >
               <span>위치*</span>
               <input
                 type="text"
                 name="location"
                 placeholder="ex) 제주, 부산, 속초"
-                // value={location}
-                ref={refWhereInput}
+                ref={refLocation}
                 onChange={onLocation}
               />
-              <ul ref={refWhereArea}>
+              <ul ref={refLocationUl}>
                 {areaData.areaList
                   .filter((area) => {
                     if (location === "") {
@@ -546,12 +551,12 @@ const CreateCard = () => {
                     }
                   })
                   .map((area) => (
-                    <li key={area} onClick={onClickWhereList}>
+                    <li key={area} onClick={onClickLoctionList}>
                       {area}
                     </li>
                   ))}
               </ul>
-            </label>
+            </div>
             <label className="date">
               <span>날짜*</span>
               <div>
