@@ -65,7 +65,7 @@ export interface AddPostType {
   price?: number;
   memo?: string;
   tagList?: Array<string>;
-  imageUrl?: string;
+  image?: File;
 }
 
 export interface EditPostType extends AddPostType {

@@ -191,7 +191,7 @@ const CardDetail = ({ post, close }: PostType) => {
           <hr />
           <li>
             <li>
-              <span>이름</span>
+              <span>제목</span>
               {post?.title}
             </li>
             <li>

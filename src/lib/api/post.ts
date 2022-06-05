@@ -3,14 +3,16 @@ import postsData from "../json/posts.json";
 import mypostsData from "../json/myposts.json";
 import popularWhere from "../json/popularWhere.json";
 
-// 전체 포스트
+// 포스트 리스트 5개
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
 export const listPosts = async (where?: string, what?: string) => {
-  // const response = await axios.get("/search", {
-  //   params: {
-  //     where,
-  //     what,
-  //   },
+  const params: Record<string, any> = {};
+
+  if (where) params.where = where;
+  if (what) params.what = what;
+
+  // const response = await axios.get("/listPosts", {
+  //   params,
   // });
 
   // return response.data;
@@ -40,7 +42,7 @@ export const listPosts = async (where?: string, what?: string) => {
   };
 };
 
-// 더보기 포스트
+// 더보기, 포스트 16개
 export const morePosts = async (
   category: string,
   sort: string,
@@ -48,14 +50,17 @@ export const morePosts = async (
   where?: string,
   what?: string
 ) => {
-  // const response = await axios.get("/datailPosts", {
-  //   params: {
-  //     where,
-  //     what,
-  //     category,
-  //     sort,
-  //     page: currentPage,
-  //   },
+  const params: Record<string, any> = {
+    category,
+    sort,
+    page: currentPage,
+  };
+
+  if (where) params.where = where;
+  if (what) params.what = what;
+
+  // const response = await axios.get("/morePosts", {
+  //   params,
   // });
 
   // return response.data;

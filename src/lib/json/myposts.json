@@ -6,11 +6,11 @@
       "posts": [
         {
           "id": 0,
-          "title": "성산일출봉",
+          "title": "테스트",
           "location": "제주",
           "memo": "이십글자이십글자이십글자이십글자이십글자",
           "tagList": ["제주도", "성산일출봉", "성산"],
-          "imageUrl": "",
+          "imageUrl": "./images/thumbnail-test.jpg",
           "score": 4,
           "date": "2022-05-18",
           "uploadDate": "2022-05-18T09:41:17.295+00:00",

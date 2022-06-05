@@ -79,7 +79,7 @@ export const HeaderBottom = styled.div`
   height: 80px;
   // Mobile
   @media screen and (max-width: 767px) {
-    height: 60px;
+    height: 75.333px;
   }
 `;
 

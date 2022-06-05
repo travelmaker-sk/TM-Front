@@ -84,8 +84,9 @@ export const CreateCardStyle = styled.div`
     }
   }
   img {
-    width: 365px;
-    height: 273.75px;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
     margin-bottom: 16px;
   }
   .cardPhoto-upload {
@@ -176,7 +177,7 @@ const CardDatePicker = styled(DatePicker)`
   box-sizing: border-box;
   padding: 8px 20px;
   border-radius: 4px;
-  border: 1px solid ${palette.gray[5]}
+  border: 1px solid ${palette.gray[5]};
   font-size: 14px;
 `;
 
@@ -260,7 +261,6 @@ const CreateCard = () => {
   const [memo, setMemo] = useState("");
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
-  const [imageUrl, setImageUrl] = useState("");
 
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedRest, setSelectedRest] = useState(false);
@@ -305,25 +305,22 @@ const CreateCard = () => {
   }, []);
 
   // 사진
-  const [image, setImage] = useState({
-    cardPhotoFile: "",
-    cardPhotoUrl: "./images/add-photo.png",
+  const [cardImage, setCardImage] = useState({
+    cardImageName: "",
+    cardImageUrl: "./images/add-photo.png",
   });
   const cardPhotoChange = (e: any) => {
     e.preventDefault();
 
     if (!e.target.files.length) return;
     const url = URL.createObjectURL(e.target.files[0]);
-    setImageUrl(url);
-    setImage({ cardPhotoFile: e.target.files[0].name, cardPhotoUrl: url });
-    console.log(url);
+    setCardImage({ cardImageName: e.target.files[0].name, cardImageUrl: url });
   };
   const cardPhotoDel = () => {
     if (refInputFile.current) refInputFile.current.value = "";
-    setImageUrl("");
-    setImage({
-      cardPhotoFile: "",
-      cardPhotoUrl: "./images/add-photo.png",
+    setCardImage({
+      cardImageName: "",
+      cardImageUrl: "./images/add-photo.png",
     });
   };
 
@@ -424,6 +421,8 @@ const CreateCard = () => {
         return;
       }
 
+      const file = refInputFile.current?.files?.[0];
+
       // API 호출
       addPost({
         category,
@@ -436,7 +435,7 @@ const CreateCard = () => {
         price: numberPrice || undefined,
         memo: memo || undefined,
         tagList: tagList.length ? tagList : undefined,
-        imageUrl: imageUrl || undefined,
+        image: file || undefined,
       }).then((res) => {
         if (res) {
           console.log("에러 발생");
@@ -450,7 +449,6 @@ const CreateCard = () => {
     [
       category,
       date,
-      imageUrl,
       location,
       memo,
       menu,
@@ -484,11 +482,13 @@ const CreateCard = () => {
         <div ref={refForm}>
           <CreateCardStyle>
             <label>
-              <img src={image.cardPhotoUrl} alt="PhotocardImage" />
+              <img src={cardImage.cardImageUrl} alt="PhotocardImage" />
               <div className="cardPhoto-upload">
                 <input
                   placeholder={
-                    image.cardPhotoFile ? image.cardPhotoFile : "첨부파일"
+                    cardImage.cardImageName
+                      ? cardImage.cardImageName
+                      : "첨부파일"
                   }
                   className="cardPhoto-name"
                   readOnly

@@ -41,7 +41,7 @@ const MorePage = () => {
   const [posts, setPosts] = useState<any[]>([]);
 
   // 정렬 select
-  const [sort, setSort] = useState(query.sort);
+  const [sort, setSort] = useState("new");
 
   useEffect(() => {
     if (sort === "new") {
@@ -61,17 +61,12 @@ const MorePage = () => {
   }, []);
 
   // 페이지네이션
-  const numCurrentPage = Number(query.page);
-
   const [totalPage, setTotalPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(numCurrentPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const itemPerPage = useMemo(() => 16, []);
 
   useEffect(() => {
-    // 0~15 16~31 ...
-    // const from = (currentPage - 1) * itemPerPage;
-
     // API 호출
     //@ts-ignore
     morePosts(
@@ -87,10 +82,6 @@ const MorePage = () => {
     });
     console.log("search", sort, currentPage);
   }, [currentPage, itemPerPage, query.category, query.what, query.where, sort]);
-
-  useEffect(() => {
-    // render
-  }, [totalPage]);
 
   return (
     <Wrapper>
@@ -126,6 +117,11 @@ const MorePage = () => {
                 setCurrentPage(pageNumber);
                 console.log(pageNumber);
               }}
+              style={
+                currentPage === pageNumber
+                  ? { color: palette.cyan[6], fontWeight: 700 }
+                  : {}
+              }
             >
               {pageNumber}
             </button>

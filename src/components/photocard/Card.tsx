@@ -8,7 +8,7 @@ interface ICard {
   onOpenModal?: () => void;
 }
 
-export const CardStyle = styled.div`
+export const CardUl = styled.ul`
   width: 23.875%;
   min-width: 238px;
   padding: 16px;
@@ -23,6 +23,8 @@ export const CardStyle = styled.div`
     line-height: 1.2em;
     margin-bottom: 10px;
     img {
+      aspect-ratio: 4/3;
+      object-fit: cover;
       margin-bottom: 16px;
     }
     span {
@@ -56,7 +58,7 @@ export const CardStyle = styled.div`
 `;
 
 const Card = ({ post, onOpenModal }: ICard) => {
-  const refCard = useRef<HTMLDivElement>(null);
+  const refCard = useRef<HTMLUListElement>(null);
   const cardWidth = refCard.current?.offsetWidth;
 
   const dictScore = useMemo(
@@ -71,7 +73,7 @@ const Card = ({ post, onOpenModal }: ICard) => {
   );
 
   return (
-    <CardStyle
+    <CardUl
       ref={refCard}
       style={{ height: `calc(${cardWidth}*86/54)px` }}
       onClick={onOpenModal}
@@ -83,7 +85,7 @@ const Card = ({ post, onOpenModal }: ICard) => {
         />
       </li>
       <li>
-        <span>이름</span>
+        <span>제목</span>
         {post?.title}
       </li>
       <li>
@@ -134,7 +136,7 @@ const Card = ({ post, onOpenModal }: ICard) => {
           <li className="tag">{`# ${item}`}</li>
         ))}
       </li>
-    </CardStyle>
+    </CardUl>
   );
 };
 

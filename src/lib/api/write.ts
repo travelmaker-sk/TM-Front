@@ -2,7 +2,16 @@ import axios from "axios";
 import { AddPostType, CategoryType, EditPostType } from "../type";
 
 export const addPost = async (data: AddPostType) => {
-  const response = await axios.post("/post/new", data);
+  const fd = new FormData();
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (value === undefined) return;
+    fd.append(key, value);
+  });
+
+  const response = await axios.post("/post/new", fd, {
+    headers: { "Content-Type": "multipart/from-data" },
+  });
 
   // return response.data;
   return false;

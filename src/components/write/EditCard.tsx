@@ -10,7 +10,7 @@ import {
   CyanButtonStyle,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
-import { addPost, editPost } from "../../lib/api/write";
+import { editPost } from "../../lib/api/write";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import {
@@ -20,6 +20,10 @@ import {
   TagItem,
   TagList,
 } from "./CreateCard";
+import palette from "../../styles/palette";
+import DatePicker from "react-datepicker";
+import { ko } from "date-fns/esm/locale";
+import { NumberLiteralType } from "typescript";
 
 export const EditCardBlock = styled(CreateCardBlock)`
   margin-top: 64px;
@@ -28,43 +32,86 @@ export const EditCardBlock = styled(CreateCardBlock)`
   }
 `;
 
+// 날짜
+const CardDatePicker = styled(DatePicker)`
+  margin-top: 1.5rem;
+  width: 300px;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 1px solid ${palette.gray[5]};
+  font-size: 14px;
+`;
+
+// 평점
+const ReviewBox = styled.div`
+  padding: 0 7px;
+  span {
+    margin: 0 3px;
+    font-size: 28px;
+    opacity: 0.07;
+    cursor: pointer;
+  }
+  .yellowStar {
+    color: orange;
+    opacity: 1;
+  }
+`;
+
+const StarContainer = styled.div`
+  text-align: center;
+  border: none;
+  background-color: white;
+`;
+
+interface EditCardType {
+  id: number;
+  category: string;
+  title: string;
+  location: string;
+  date: string;
+  score: string;
+  weather?: string;
+  menu?: string;
+  price?: string;
+  memo?: string;
+  tagList?: Array<string>;
+  imageUrl?: string;
+}
+
 const EditCard = () => {
   const navigate = useNavigate();
 
   const postLocation = useLocation();
-  const post = postLocation.state;
+  const post = postLocation.state as EditCardType;
 
   const refInputFile = useRef<HTMLInputElement>(null);
 
-  // @ts-ignore
   const [id, setId] = useState(post.id);
-  // @ts-ignore
   const [category, setCategory] = useState(post.category);
-  // @ts-ignore
   const [title, setTitle] = useState(post.title);
-  // @ts-ignore
   const [location, setLocation] = useState(post.location);
-  // @ts-ignore
   const [date, setDate] = useState(post.date);
-  // @ts-ignore
-  const [weather, setWeather] = useState(post.weather);
-  // @ts-ignore
-  const [menu, setMenu] = useState(post.menu);
-  // @ts-ignore
-  const [price, setPrice] = useState(post.price);
-  // @ts-ignore
+  const [weather, setWeather] = useState(post.weather ? post.weather : "");
+  const [menu, setMenu] = useState(post.menu ? post.menu : "");
+  const [price, setPrice] = useState(post.price ? post.price : "");
+  const [scoreHover, setScoreHover] = useState(null);
   const [score, setScore] = useState(post.score);
-  // @ts-ignore
-  const [memo, setMemo] = useState(post.memo);
+  const [memo, setMemo] = useState(post.memo ? post.memo : "");
   const [tagItem, setTagItem] = useState("");
-  // @ts-ignore
-  const [tagList, setTagList] = useState(post.tagList);
-  // @ts-ignore
-  const [imageUrl, setImageUrl] = useState(post.imageUrl);
+  const [tagList, setTagList] = useState(post.tagList ? post.tagList : []);
+  const [postImage, setPostImage] = useState(
+    post.imageUrl ? post.imageUrl : ""
+  );
 
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedRest, setSelectedRest] = useState(false);
   const [selectedAccom, setSelectedAccom] = useState(false);
+
+  useEffect(() => {
+    console.log("score", score);
+  }, [score]);
 
   useEffect(() => {
     if (category === "place") {
@@ -85,22 +132,20 @@ const EditCard = () => {
   }, [category]);
 
   // 포토카드 이미지 업로드
-  const [image, setImage] = useState({
+  const [cardImage, setCardImage] = useState({
     cardPhotoFile: "",
-    cardPhotoUrl: "./images/add-photo.png",
+    cardPhotoUrl: postImage ? postImage : "./images/add-photo.png",
   });
   const cardPhotoChange = (e: any) => {
     e.preventDefault();
 
     if (!e.target.files.length) return;
     const url = URL.createObjectURL(e.target.files[0]);
-    setImageUrl(url);
-    setImage({ cardPhotoFile: e.target.files[0].name, cardPhotoUrl: url });
+    setCardImage({ cardPhotoFile: e.target.files[0].name, cardPhotoUrl: url });
   };
   const cardPhotoDel = () => {
     if (refInputFile.current) refInputFile.current.value = "";
-    setImageUrl("");
-    setImage({
+    setCardImage({
       cardPhotoFile: "",
       cardPhotoUrl: "./images/add-photo.png",
     });
@@ -139,6 +184,10 @@ const EditCard = () => {
     setScore("");
     setMemo("");
     setTagList([]);
+    setCardImage({
+      cardPhotoFile: "",
+      cardPhotoUrl: "./images/add-photo.png",
+    });
   };
 
   // 업로드 버튼
@@ -167,6 +216,8 @@ const EditCard = () => {
         return;
       }
 
+      const file = refInputFile.current?.files?.[0];
+
       // API 호출
       editPost({
         id,
@@ -180,7 +231,7 @@ const EditCard = () => {
         price: numberPrice || undefined,
         memo: memo || undefined,
         tagList: tagList.length ? tagList : undefined,
-        imageUrl: imageUrl || undefined,
+        image: file || undefined,
       }).then((res) => {
         if (res) {
           console.log("에러 발생");
@@ -195,7 +246,6 @@ const EditCard = () => {
       category,
       date,
       id,
-      imageUrl,
       location,
       memo,
       menu,
@@ -216,11 +266,13 @@ const EditCard = () => {
         <div>
           <CreateCardStyle>
             <label>
-              <img src={image.cardPhotoUrl} alt="PhotocardImage" />
+              <img src={cardImage.cardPhotoUrl} alt="PhotocardImage" />
               <div className="cardPhoto-upload">
                 <input
                   placeholder={
-                    image.cardPhotoFile ? image.cardPhotoFile : "첨부파일"
+                    cardImage.cardPhotoFile
+                      ? cardImage.cardPhotoFile
+                      : "첨부파일"
                   }
                   className="cardPhoto-name"
                   readOnly
@@ -264,7 +316,7 @@ const EditCard = () => {
                 }}
               />
             </label>
-            <label>
+            <label className="date">
               <span>날짜*</span>
               <input
                 type="text"
@@ -275,6 +327,18 @@ const EditCard = () => {
                   setDate(e.target.value);
                 }}
               />
+              <div>
+                {/* @ts-ignore */}
+                {/* <CardDatePicker
+                  locale={ko}
+                  dateFormat="yyyy/MM/dd"
+                  placeholderText="📅 달력에서 선택하기"
+                  selected={date}
+                  onChange={(date: React.SetStateAction<string>) =>
+                    setDate(date)
+                  }
+                /> */}
+              </div>
             </label>
             {selectedPlace ? (
               <label>
@@ -328,23 +392,32 @@ const EditCard = () => {
             )}
             <label>
               <span>평점*</span>
-              <input
-                type="number"
-                name="score"
-                placeholder="ex) 4"
-                value={score}
-                onChange={(e) => {
-                  setScore(e.target.value);
-                }}
-                className="score"
-              />
-              <span className="sub">/ 5</span>
+              <ReviewBox>
+                <StarContainer>
+                  {[1, 2, 3, 4, 5].map((el) => (
+                    <span
+                      className={`material-icons ${
+                        // @ts-ignore
+                        (score >= el) | (scoreHover >= el) && "yellowStar"
+                      }`}
+                      key={el}
+                      // @ts-ignore
+                      onMouseEnter={() => setScoreHover(el)}
+                      onMouseLeave={() => setScoreHover(null)}
+                      // @ts-ignore
+                      onClick={() => setScore(el)}
+                    >
+                      grade
+                    </span>
+                  ))}
+                </StarContainer>
+              </ReviewBox>
             </label>
             <label>
               <span>메모</span>
-              <input
-                type="textarea"
+              <textarea
                 name="memo"
+                maxLength={30}
                 placeholder="최대 30자"
                 value={memo}
                 onChange={(e) => {
@@ -364,12 +437,14 @@ const EditCard = () => {
                   onKeyPress={onKeyPress}
                 />
                 <TagList>
-                  {/* @ts-ignore */}
                   {tagList.map((tagItem, index) => (
                     <TagItem key={index}>
                       <span>{tagItem}</span>
-                      <button onClick={deleteTagItem}>
-                        <span className="material-icons">close</span>
+                      <button
+                        className="material-icons"
+                        onClick={deleteTagItem}
+                      >
+                        close
                       </button>
                     </TagItem>
                   ))}
