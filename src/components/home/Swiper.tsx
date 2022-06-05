@@ -9,7 +9,7 @@ import palette from "../../styles/palette";
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 export const SwiperBlock = styled.div`
-  margin-bottom: 64px;
+  margin-bottom: 80px;
   img {
     width: 100%;
     margin: 0 auto;

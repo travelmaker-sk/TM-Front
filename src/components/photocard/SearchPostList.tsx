@@ -13,7 +13,7 @@ export interface PostListType {
 }
 
 export const PostListBlock = styled.div`
-  margin-bottom: 64px;
+  margin-bottom: 80px;
   .more-btn-div {
     display: flex;
     justify-content: center;
@@ -52,13 +52,15 @@ export const PostBlock = styled.div`
 
 export const MoreButton = styled.button`
   padding: 8px 25px;
-  color: #fff;
-  background: ${palette.cyan[7]};
+  border: 1.3px solid ${palette.gray[5]};
+  color: ${palette.gray[6]};
   &:hover {
-    background: ${palette.cyan[6]};
+    border-color: ${palette.cyan[5]};
+    color: ${palette.cyan[5]};
   }
   &:active {
-    background: ${palette.cyan[8]};
+    border-color: ${palette.cyan[7]};
+    color: ${palette.cyan[7]};
   }
   border-radius: 3px;
   cursor: pointer;

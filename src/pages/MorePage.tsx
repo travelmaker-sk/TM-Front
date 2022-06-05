@@ -15,14 +15,14 @@ import queryString from "query-string";
 const SelectSort = styled(SelectCategory)`
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 `;
 
 const Pagination = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 20px;
   > span {
     margin: 0 5px;
     color: ${palette.gray[4]};
@@ -119,7 +119,7 @@ const MorePage = () => {
               }}
               style={
                 currentPage === pageNumber
-                  ? { color: palette.cyan[6], fontWeight: 700 }
+                  ? { color: palette.cyan[5], fontWeight: 700 }
                   : {}
               }
             >

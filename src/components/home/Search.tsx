@@ -13,7 +13,7 @@ const SearchBlock = styled.div`
   left: 0;
   display: flex;
   align-items: center;
-  background-color: ${palette.cyan[4]};
+  background-color: ${palette.cyan[5]};
   .where-area,
   .what-area,
   .search-btn {
@@ -96,7 +96,7 @@ const SearchBlock = styled.div`
     .where-area,
     .what-area {
       background-color: white;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
   }
 `;

@@ -12,7 +12,7 @@ export const CardUl = styled.ul`
   width: 23.875%;
   min-width: 238px;
   padding: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   background-color: white;
   border: 1.5px solid ${palette.gray[3]};
   cursor: pointer;
@@ -25,11 +25,11 @@ export const CardUl = styled.ul`
     img {
       aspect-ratio: 4/3;
       object-fit: cover;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
     span {
       width: 40px;
-      color: ${palette.cyan[6]};
+      color: ${palette.cyan[5]};
     }
   }
   .score > p {
@@ -38,12 +38,12 @@ export const CardUl = styled.ul`
   .tagList {
     display: flex;
     justify-content: center;
-    margin-top: 32px;
+    margin-top: 40px;
   }
   .tag {
     margin: 0 5px 0 0;
     padding: 5px 7px;
-    background-color: ${palette.cyan[8]};
+    background-color: ${palette.cyan[7]};
     border-radius: 4px;
     color: white;
   }

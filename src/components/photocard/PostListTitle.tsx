@@ -8,16 +8,20 @@ export interface PostListTitleType {
 }
 
 const PostListTitleStyle = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   span {
     display: block;
-    margin-bottom: 32px;
-    font-size: 20px;
+    margin-bottom: 40px;
+    color: ${palette.cyan[7]};
+    font-size: 24px;
+    // font-family: "Black Han Sans", sans-serif;
+    font-family: "Do Hyeon", sans-serif;
+    // font-family: "Jua", sans-serif;
+    // font-family: "Nanum Gothic", sans-serif;
   }
   hr {
-    border: none;
-    background-color: ${palette.gray[3]};
-    height: 1.5px;
+    border-top: 1.3px splid ${palette.gray[5]};
+    border-bottom: none;
   }
 `;
 

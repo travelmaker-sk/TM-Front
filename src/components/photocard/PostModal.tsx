@@ -69,7 +69,7 @@ const ModalBlock = styled.div`
         font-weight: 700;
       }
       span:hover {
-        color: ${palette.cyan[8]};
+        color: ${palette.gray[6]};
       }
     }
   }
@@ -91,7 +91,7 @@ const ModalBlock = styled.div`
         width: 100%;
       }
       > li:last-of-type {
-        margin-top: 32px;
+        margin-top: 40px;
         margin-left: 0;
       }
     }

@@ -68,7 +68,7 @@ const SearchTitle = styled.div`
   h3 {
     font-size: 14px;
     color: ${palette.gray[6]};
-    margin-bottom: 64px;
+    margin-bottom: 80px;
   }
 `;
 

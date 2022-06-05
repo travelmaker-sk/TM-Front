@@ -112,7 +112,7 @@ const LoginBlock = styled.div`
     background: #03c75a;
     // Mobile
     @media screen and (max-width: 767px) {
-      margin-bottom: 16px !important;
+      margin-bottom: 20px !important;
     }
   }
   #custom-login-btn {

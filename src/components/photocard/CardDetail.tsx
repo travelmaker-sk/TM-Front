@@ -27,8 +27,8 @@ const CardDetailUl = styled.ul`
       }
     }
     .tag {
-      margin-top: 32px;
-      color: ${palette.cyan[8]};
+      margin-top: 40px;
+      color: ${palette.cyan[7]};
     }
   }
   > li:nth-of-type(3) {
@@ -58,7 +58,7 @@ const CardDetailUl = styled.ul`
           transform: scale(1.1);
         }
         span.like {
-          color: #f06595;
+          color: #ff6b6b;
         }
       }
       &.bookmark-btn {
@@ -69,13 +69,13 @@ const CardDetailUl = styled.ul`
           transform: scale(1.1);
         }
         span.bookmark {
-          color: ${palette.cyan[5]};
+          color: #20c997;
         }
       }
     }
     // Mobile
     @media screen and (max-width: 767px) {
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
   }
   hr {

@@ -42,7 +42,6 @@ const MyPageTopBlock = styled.div`
     ul > li:nth-child(1) {
       font-size: 20px;
       margin-bottom: 13px;
-      font-weight: 700;
     }
     ul > li:nth-child(1) span {
       color: ${palette.cyan[5]};
@@ -92,15 +91,16 @@ export const MyPageBottomBlock = styled.div`
     margin: 0 auto;
     padding: 50px 3%;
     h2{
-      font-size: 20px;
-      font-weight: 700;
+      font-size: 24px;
+      font-family: "Do Hyeon", sans-serif;
       padding: 32px 0;
     }
     h3{
-      font-size: 20px;
+      font-size: 24px;
+      font-family: "Do Hyeon", sans-serif;
       color: ${palette.cyan[5]};
-      margin-top: 32px;
-      margin-bottom: 32px;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
     // Tablet
     @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -140,7 +140,7 @@ const MyPage = ({ user }: MyPageType) => {
           />
           <ul>
             <li>
-              <span>{user.username}</span> 님 안녕하세요!
+              <span>{user.username}</span>님 안녕하세요!
             </li>
             <li>{user.email}</li>
             <CyanButtonStyle>

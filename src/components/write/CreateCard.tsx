@@ -16,18 +16,18 @@ import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
 
 export const SelectCategory = styled.div`
-  margin-bottom: 64px;
+  margin-bottom: 80px;
   .select {
     width: 150px;
     padding: 5px;
-    border: 1.4px solid ${palette.cyan[6]};
+    border: 1.4px solid ${palette.cyan[5]};
     border-radius: 4px;
     outline: 0 none;
     color: ${palette.gray[7]};
     font-size: 16px;
     font-family: "Noto Sans KR", sans-serif;
     option {
-      background: ${palette.cyan[8]};
+      background: ${palette.cyan[7]};
       color: #fff;
     }
   }
@@ -47,17 +47,17 @@ export const CreateCardStyle = styled.div`
   width: 400px;
   height: 637px;
   padding: 15px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   border: 1.5px solid ${palette.gray[3]};
   overflow: scroll;
   > label {
     display: flex;
     justify-cotent: center;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     > span:first-of-type {
       width: 45px;
-      color: ${palette.cyan[6]};
+      color: ${palette.cyan[5]};
     }
     input,
     textarea {
@@ -87,7 +87,7 @@ export const CreateCardStyle = styled.div`
     width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
   .cardPhoto-upload {
     position: absolute;
@@ -137,7 +137,7 @@ export const CreateCardStyle = styled.div`
       width: 307.25px;
       margin-left: 42.083px;
       margin-top: 2px;
-      background-color: ${palette.gray[1]};
+      background-color: ${palette.gray[2]};
       border: 1px solid ${palette.gray[4]};
       border-radius: 4px;
       z-index: 1111;
@@ -219,7 +219,7 @@ export const TagItem = styled.div`
   justify-content: space-between;
   margin: 0 5px 5px 0;
   padding: 5px;
-  background-color: ${palette.cyan[8]};
+  background-color: ${palette.cyan[7]};
   border-radius: 5px;
   color: white;
   font-size: 14px;
@@ -234,7 +234,7 @@ export const TagItem = styled.div`
     border-radius: 50%;
     font-size: 12px;
     font-weight: 700;
-    color: ${palette.cyan[8]};
+    color: ${palette.cyan[7]};
   }
 `;
 

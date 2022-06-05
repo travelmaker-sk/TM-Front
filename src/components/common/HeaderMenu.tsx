@@ -43,7 +43,7 @@ const HeaderMenuStyle = styled.div`
     }
   }
   nav ul li:hover * {
-    color: ${palette.cyan[6]};
+    color: ${palette.cyan[5]};
   }
   nav ul li:active * {
     color: ${palette.cyan[7]};

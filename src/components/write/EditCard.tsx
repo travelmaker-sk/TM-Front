@@ -26,7 +26,7 @@ import { ko } from "date-fns/esm/locale";
 import { NumberLiteralType } from "typescript";
 
 export const EditCardBlock = styled(CreateCardBlock)`
-  margin-top: 64px;
+  margin-top: 80px;
   > div {
     display: block;
   }
