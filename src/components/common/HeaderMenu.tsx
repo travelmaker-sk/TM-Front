@@ -27,7 +27,7 @@ const HeaderMenuStyle = styled.div`
     padding: 30px;
     font-size: 16px;
     font-family: "Noto Sans KR", sans-serif;
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
   }
   nav ul.open {
@@ -38,6 +38,9 @@ const HeaderMenuStyle = styled.div`
     display: flex;
     align-items: center;
     transition: 0.1s;
+    > a {
+      width: 100%;
+    }
   }
   nav ul li:hover * {
     color: ${palette.cyan[6]};

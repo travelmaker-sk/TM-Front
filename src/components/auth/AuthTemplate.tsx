@@ -29,7 +29,7 @@ const WhiteBox = styled.div`
   align-items: space-between;
   background: #fff;
   border-radius: 2px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
   overflow: auto;
 
   // Tablet

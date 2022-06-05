@@ -17,6 +17,7 @@ export const CardStyle = styled.div`
   border: 1.5px solid ${palette.gray[3]};
   cursor: pointer;
   font-size: 14px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
   li {
     display: flex;
     line-height: 1.2em;
