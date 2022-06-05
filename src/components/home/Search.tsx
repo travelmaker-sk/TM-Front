@@ -224,16 +224,14 @@ const Search = () => {
                         if (inputWhere === "") {
                           return area;
                         } else if (
-                          area.areaName
-                            .toLowerCase()
-                            .includes(inputWhere.toLowerCase())
+                          area.toLowerCase().includes(inputWhere.toLowerCase())
                         ) {
                           return area;
                         }
                       })
                       .map((area) => (
-                        <li key={area.id} onClick={onClickWhereList}>
-                          {area.areaName}
+                        <li key={area} onClick={onClickWhereList}>
+                          {area}
                         </li>
                       ))}
                   </ul>

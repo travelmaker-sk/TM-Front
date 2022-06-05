@@ -540,16 +540,14 @@ const CreateCard = () => {
                     if (location === "") {
                       return area;
                     } else if (
-                      area.areaName
-                        .toLowerCase()
-                        .includes(location.toLowerCase())
+                      area.toLowerCase().includes(location.toLowerCase())
                     ) {
                       return area;
                     }
                   })
                   .map((area) => (
-                    <li key={area.id} onClick={onClickWhereList}>
-                      {area.areaName}
+                    <li key={area} onClick={onClickWhereList}>
+                      {area}
                     </li>
                   ))}
               </ul>

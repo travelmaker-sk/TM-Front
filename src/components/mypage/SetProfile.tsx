@@ -129,76 +129,78 @@ const SetProfile = () => {
     <SetProfileBlock>
       <h2>회원정보 설정</h2>
       <form onSubmit={onSubmit}>
-        <li>
-          <h3>프로필 사진 변경</h3>
-          <img src={image.profileImageUrl} alt="프로필 이미지" />
-          <div className="profileImage-upload">
-            <input
-              placeholder={
-                image.profileImageFile ? image.profileImageFile : "첨부파일"
-              }
-              className="profileImage-name"
-              readOnly
+        <ul>
+          <li>
+            <h3>프로필 사진 변경</h3>
+            <img src={image.profileImageUrl} alt="프로필 이미지" />
+            <div className="profileImage-upload">
+              <input
+                placeholder={
+                  image.profileImageFile ? image.profileImageFile : "첨부파일"
+                }
+                className="profileImage-name"
+                readOnly
+              />
+              <label htmlFor="profileImage">파일 선택</label>
+              <input
+                type="file"
+                id="profileImage"
+                accept="image/*"
+                onChange={profileImageChange}
+              />
+            </div>
+            <SelectButtonStyle>
+              <GrayButtonStyle>
+                <button onClick={profileImageDel}>삭제</button>
+              </GrayButtonStyle>
+              <CyanButtonStyle>
+                <button type="submit">저장</button>
+              </CyanButtonStyle>
+            </SelectButtonStyle>
+          </li>
+          <li>
+            <h3>닉네임 변경</h3>
+            <Input
+              type="text"
+              name="username"
+              autoComplete="username"
+              placeholder="닉네임"
+              defaultValue={newNickname}
+              onChange={(e) => {
+                setNewNickname(e.target.value);
+              }}
             />
-            <label htmlFor="profileImage">파일 선택</label>
-            <input
-              type="file"
-              id="profileImage"
-              accept="image/*"
-              onChange={profileImageChange}
-            />
-          </div>
-          <SelectButtonStyle>
-            <GrayButtonStyle>
-              <button onClick={profileImageDel}>삭제</button>
-            </GrayButtonStyle>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
             <CyanButtonStyle>
               <button type="submit">저장</button>
             </CyanButtonStyle>
-          </SelectButtonStyle>
-        </li>
-        <li>
-          <h3>닉네임 변경</h3>
-          <Input
-            type="text"
-            name="username"
-            autoComplete="username"
-            placeholder="닉네임"
-            defaultValue={newNickname}
-            onChange={(e) => {
-              setNewNickname(e.target.value);
-            }}
-          />
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-          <CyanButtonStyle>
-            <button type="submit">저장</button>
-          </CyanButtonStyle>
-        </li>
-        <li>
-          <h3>비밀번호 변경</h3>
-          <Input
-            type="password"
-            name="old-password"
-            autoComplete="current-password"
-            placeholder="현재 비밀번호"
-          />
-          <Input
-            type="password"
-            name="new-password"
-            autoComplete="new-password"
-            placeholder="새 비밀번호"
-          />
-          <Input
-            type="password"
-            name="confirm-new-password"
-            autoComplete="new-password"
-            placeholder="새 비밀번호 확인"
-          />
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-          <CyanButtonStyle>
-            <button type="submit">저장</button>
-          </CyanButtonStyle>
-        </li>
+          </li>
+          <li>
+            <h3>비밀번호 변경</h3>
+            <Input
+              type="password"
+              name="old-password"
+              autoComplete="current-password"
+              placeholder="현재 비밀번호"
+            />
+            <Input
+              type="password"
+              name="new-password"
+              autoComplete="new-password"
+              placeholder="새 비밀번호"
+            />
+            <Input
+              type="password"
+              name="confirm-new-password"
+              autoComplete="new-password"
+              placeholder="새 비밀번호 확인"
+            />
+            {error && <ErrorMessage>{error}</ErrorMessage>}
+            <CyanButtonStyle>
+              <button type="submit">저장</button>
+            </CyanButtonStyle>
+          </li>
+        </ul>
       </form>
       <QuitLinkButton to="/quit">탈퇴하기</QuitLinkButton>
     </SetProfileBlock>

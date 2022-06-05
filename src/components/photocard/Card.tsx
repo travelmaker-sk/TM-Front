@@ -80,7 +80,9 @@ const Card = ({ post, onOpenModal }: ICard) => {
     >
       <li>
         <img
-          src={post?.imageUrl ? post?.imageUrl : "./images/default-photo.png"}
+          src={
+            post?.imageUrl ? `/${post.imageUrl}` : "./images/default-photo.png"
+          }
           alt="PhotocardImage"
         />
       </li>

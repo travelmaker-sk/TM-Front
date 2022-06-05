@@ -6,7 +6,7 @@ import palette from "../../styles/palette";
 import { PostType } from "./Post";
 import { useNavigate } from "react-router";
 
-const CardDetailStyle = styled.div`
+const CardDetailUl = styled.ul`
   ul {
     > li:nth-of-type(1) {
       display: flex;
@@ -171,103 +171,97 @@ const CardDetail = ({ post, close }: PostType) => {
         }
       });
     }
-  }, [bookmark, navigate, post?.id]);
+  }, [bookmark, close, navigate, post?.id]);
 
   return (
     <>
-      <CardDetailStyle>
-        <ul>
+      <CardDetailUl>
+        <li>
+          <img
+            src={
+              post?.writer.profileImage
+                ? post?.writer.profileImage
+                : "./images/default-profile.png"
+            }
+            alt="ProfileImage"
+          />
+          <span>{post?.writer.username}</span>
+        </li>
+        <hr />
+        <li>
           <li>
-            <img
-              src={
-                post?.writer.profileImage
-                  ? post?.writer.profileImage
-                  : "./images/default-profile.png"
-              }
-              alt="ProfileImage"
-            />
-            <span>{post?.writer.username}</span>
+            <span>제목</span>
+            {post?.title}
           </li>
-          <hr />
           <li>
-            <li>
-              <span>제목</span>
-              {post?.title}
-            </li>
-            <li>
-              <span>위치</span>
-              {post?.location}
-            </li>
-            <li>
-              <span>날짜</span>
-              {post?.date}
-            </li>
-            {post?.weather ? (
-              <li>
-                <span>날씨</span>
-                {post?.weather}
-              </li>
-            ) : (
-              ""
-            )}
-            {post?.menu ? (
-              <li>
-                <span>메뉴</span>
-                {post?.menu}
-              </li>
-            ) : (
-              ""
-            )}
-            {post?.price ? (
-              <li>
-                <span>가격</span>
-                {post?.price}
-              </li>
-            ) : (
-              ""
-            )}
-            <li>
-              <span>평점</span>
-              {post?.score}
-            </li>
-            <li>
-              <span>메모</span>
-              {post?.memo}
-            </li>
-            <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
+            <span>위치</span>
+            {post?.location}
           </li>
-          <hr />
           <li>
-            <div className="like-container">
-              <button
-                title="좋아요"
-                onClick={onToggleLike}
-                className="like-btn"
-              >
-                {like ? (
-                  <span className="material-icons like">favorite</span>
-                ) : (
-                  <span className="material-icons cancel-like">
-                    favorite_outline
-                  </span>
-                )}
-              </button>
-              <span>{cntLike}</span>
-            </div>
-            <button
-              title="북마크"
-              onClick={onToggleBookmark}
-              className="bookmark-btn"
-            >
-              {bookmark ? (
-                <span className="material-icons bookmark">bookmark</span>
+            <span>날짜</span>
+            {post?.date}
+          </li>
+          {post?.weather ? (
+            <li>
+              <span>날씨</span>
+              {post?.weather}
+            </li>
+          ) : (
+            ""
+          )}
+          {post?.menu ? (
+            <li>
+              <span>메뉴</span>
+              {post?.menu}
+            </li>
+          ) : (
+            ""
+          )}
+          {post?.price ? (
+            <li>
+              <span>가격</span>
+              {post?.price}
+            </li>
+          ) : (
+            ""
+          )}
+          <li>
+            <span>평점</span>
+            {post?.score}
+          </li>
+          <li>
+            <span>메모</span>
+            {post?.memo}
+          </li>
+          <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
+        </li>
+        <hr />
+        <li>
+          <div className="like-container">
+            <button title="좋아요" onClick={onToggleLike} className="like-btn">
+              {like ? (
+                <span className="material-icons like">favorite</span>
               ) : (
-                <span className="material-icons">bookmark_outline</span>
+                <span className="material-icons cancel-like">
+                  favorite_outline
+                </span>
               )}
             </button>
-          </li>
-        </ul>
-      </CardDetailStyle>
+            <span>{cntLike}</span>
+          </div>
+          <button
+            title="북마크"
+            onClick={onToggleBookmark}
+            className="bookmark-btn"
+          >
+            {bookmark ? (
+              <span className="material-icons bookmark">bookmark</span>
+            ) : (
+              <span className="material-icons">bookmark_outline</span>
+            )}
+          </button>
+        </li>
+      </CardDetailUl>
     </>
   );
 };

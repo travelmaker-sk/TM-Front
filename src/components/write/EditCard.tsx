@@ -133,21 +133,21 @@ const EditCard = () => {
 
   // 포토카드 이미지 업로드
   const [cardImage, setCardImage] = useState({
-    cardPhotoFile: "",
-    cardPhotoUrl: postImage ? postImage : "./images/add-photo.png",
+    cardImageName: "",
+    cardImageUrl: postImage ? postImage : "./images/add-photo.png",
   });
   const cardPhotoChange = (e: any) => {
     e.preventDefault();
 
     if (!e.target.files.length) return;
     const url = URL.createObjectURL(e.target.files[0]);
-    setCardImage({ cardPhotoFile: e.target.files[0].name, cardPhotoUrl: url });
+    setCardImage({ cardImageName: e.target.files[0].name, cardImageUrl: url });
   };
   const cardPhotoDel = () => {
     if (refInputFile.current) refInputFile.current.value = "";
     setCardImage({
-      cardPhotoFile: "",
-      cardPhotoUrl: "./images/add-photo.png",
+      cardImageName: "",
+      cardImageUrl: "./images/add-photo.png",
     });
   };
 
@@ -185,8 +185,8 @@ const EditCard = () => {
     setMemo("");
     setTagList([]);
     setCardImage({
-      cardPhotoFile: "",
-      cardPhotoUrl: "./images/add-photo.png",
+      cardImageName: "",
+      cardImageUrl: "./images/add-photo.png",
     });
   };
 
@@ -266,12 +266,12 @@ const EditCard = () => {
         <div>
           <CreateCardStyle>
             <label>
-              <img src={cardImage.cardPhotoUrl} alt="PhotocardImage" />
+              <img src={cardImage.cardImageUrl} alt="PhotocardImage" />
               <div className="cardPhoto-upload">
                 <input
                   placeholder={
-                    cardImage.cardPhotoFile
-                      ? cardImage.cardPhotoFile
+                    cardImage.cardImageName
+                      ? cardImage.cardImageName
                       : "첨부파일"
                   }
                   className="cardPhoto-name"
