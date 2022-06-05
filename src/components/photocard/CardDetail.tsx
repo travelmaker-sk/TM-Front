@@ -24,7 +24,7 @@ const CardDetailStyle = styled.div`
         margin-bottom: 10px;
         span {
           width: 40px;
-          font-weight: 600;
+          font-weight: 700;
         }
       }
       .tag {

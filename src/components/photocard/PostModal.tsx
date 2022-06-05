@@ -66,7 +66,7 @@ const ModalBlock = styled.div`
       right: 30px;
       span {
         font-size: 32px;
-        font-weight: 600;
+        font-weight: 700;
       }
       span:hover {
         color: ${palette.cyan[8]};

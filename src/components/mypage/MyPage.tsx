@@ -42,7 +42,7 @@ const MyPageTopBlock = styled.div`
     ul > li:nth-child(1) {
       font-size: 20px;
       margin-bottom: 13px;
-      font-weight: 600;
+      font-weight: 700;
     }
     ul > li:nth-child(1) span {
       color: ${palette.cyan[5]};
@@ -93,7 +93,7 @@ export const MyPageBottomBlock = styled.div`
     padding: 50px 3%;
     h2{
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 32px 0;
     }
     h3{

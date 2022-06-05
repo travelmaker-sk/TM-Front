@@ -28,7 +28,7 @@ const RegisterAuthBlock = styled.div`
     font-size: 24px;
     text-align: center;
     b {
-      font-weight: 600;
+      font-weight: 700;
     }
   }
   h3 {

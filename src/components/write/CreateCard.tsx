@@ -232,7 +232,7 @@ export const TagItem = styled.div`
     background-color: white;
     border-radius: 50%;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     color: ${palette.cyan[8]};
   }
 `;
@@ -316,6 +316,7 @@ const CreateCard = () => {
     const url = URL.createObjectURL(e.target.files[0]);
     setImageUrl(url);
     setImage({ cardPhotoFile: e.target.files[0].name, cardPhotoUrl: url });
+    console.log(url);
   };
   const cardPhotoDel = () => {
     if (refInputFile.current) refInputFile.current.value = "";

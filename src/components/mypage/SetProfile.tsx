@@ -26,7 +26,7 @@ const SetProfileBlock = styled.div`
   }
   h3 {
     margin: 52px 0 26px;
-    font-weight: 600;
+    font-weight: 700;
   }
   img {
     margin: 0 auto 26px;

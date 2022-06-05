@@ -38,7 +38,7 @@ const QuitBlock = styled.div`
     margin-bottom: 52px;
     text-align: center;
     b {
-      font-weight: 600;
+      font-weight: 700;
     }
   }
   Input {

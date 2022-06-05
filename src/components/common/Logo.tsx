@@ -15,7 +15,7 @@ const LogoStyle = styled.div`
     // font-family: "Staatliches", cursive;
 
     font-size: 20px;
-    font-weight: 800;
+    font-weight: 700;
     // letter-spacing: -0.01rem;
   }
   .logo {

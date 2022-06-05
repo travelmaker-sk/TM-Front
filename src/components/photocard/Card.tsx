@@ -30,6 +30,9 @@ export const CardStyle = styled.div`
       color: ${palette.cyan[6]};
     }
   }
+  .score > p {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
   .tagList {
     display: flex;
     justify-content: center;
@@ -115,10 +118,12 @@ const Card = ({ post, onOpenModal }: ICard) => {
       ) : (
         ""
       )}
-      <li>
+      <li className="score">
         <span>평점</span>
-        {/* @ts-ignore */}
-        {dictScore[post?.score]}
+        <p>
+          {/* @ts-ignore */}
+          {dictScore[post?.score]}
+        </p>
       </li>
       <li>
         <span>메모</span>

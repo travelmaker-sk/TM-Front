@@ -17,7 +17,7 @@ const QuitFinBlock = styled.div`
     line-height: 1.5em;
     text-align: center;
     b {
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 `;
