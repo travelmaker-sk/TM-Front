@@ -14,7 +14,7 @@ export const LoadingStyle = styled.div`
   line-height: 1.5em;
   span {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
   }
 `;
 

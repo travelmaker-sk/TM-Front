@@ -1,27 +1,33 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 
-interface HeaderNavProps {
+interface HeaderMenuProps {
   onLogout: () => void;
 }
 
-const HeaderNavStyle = styled.div`
+const HeaderMenuStyle = styled.div`
   nav {
-    positin: relative;
+    position: relative;
     cursor: pointer;
+    padding-left: 20px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   nav ul {
     display: none;
     position: absolute;
-    top: 70px;
-    right: 3%;
+    top: 150%;
+    right: 0;
     background: white;
     padding: 30px;
     font-size: 16px;
     font-family: "Noto Sans KR", sans-serif;
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
   }
   nav ul.open {
@@ -31,16 +37,19 @@ const HeaderNavStyle = styled.div`
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+    transition: 0.1s;
+    > a {
+      width: 100%;
+    }
   }
   nav ul li:hover * {
-    color: ${palette.cyan[4]};
+    color: ${palette.cyan[5]};
   }
   nav ul li:active * {
-    color: ${palette.cyan[6]};
+    color: ${palette.cyan[7]};
   }
   nav ul li span {
-    font-family: "Material Icons";
-    margin-right: 10px;
+    margin-right: 12px;
     font-size: 18px;
   }
   nav ul hr {
@@ -60,12 +69,6 @@ const HeaderNavStyle = styled.div`
   nav ul button span {
     margin-right: 10px;
   }
-  // Tablet
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    nav ul {
-      right: 3%;
-    }
-  }
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
@@ -73,41 +76,39 @@ const HeaderNavStyle = styled.div`
   }
 `;
 
-const HeaderNav = ({ onLogout }: HeaderNavProps) => {
+const HeaderMenu = ({ onLogout }: HeaderMenuProps) => {
   const [isToggle, setToggle] = useState(false);
-  const onToggle = () => {
+  const onToggle = useCallback(() => {
     setToggle(!isToggle);
-  };
+  }, [isToggle]);
 
   return (
-    <HeaderNavStyle>
+    <HeaderMenuStyle>
       <nav className="material-icons apps-bar" onClick={onToggle}>
         apps
         <ul className={isToggle ? "open" : ""}>
           <li>
             <Link to="/mypage">
-              <span className="material-symbols-outlined">account_circle</span>
+              <span className="material-icons">account_circle</span>
               마이페이지
             </Link>
           </li>
           <li>
             <Link to="/createPhotocard">
-              <span className="material-symbols-outlined">
-                add_photo_alternate
-              </span>
+              <span className="material-icons">add_photo_alternate</span>
               포토카드 만들기
             </Link>
           </li>
           <li>
             <Link to="/bookmarks">
-              <span className="material-symbols-outlined">bookmarks</span>
+              <span className="material-icons">bookmarks</span>
               북마크
             </Link>
           </li>
           <li>
-            <Link to="/notice">
-              <span className="material-symbols-outlined">campaign</span>
-              공지사항
+            <Link to="/setProfile">
+              <span className="material-icons">manage_accounts</span>
+              회원정보 설정
             </Link>
           </li>
           <hr />
@@ -117,8 +118,8 @@ const HeaderNav = ({ onLogout }: HeaderNavProps) => {
           </button>
         </ul>
       </nav>
-    </HeaderNavStyle>
+    </HeaderMenuStyle>
   );
 };
 
-export default HeaderNav;
+export default HeaderMenu;

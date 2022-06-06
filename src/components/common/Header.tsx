@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
-import HeaderNav from "./HeaderMenu";
+import HeaderMenu from "./HeaderMenu";
 import { UserType } from "../../lib/type";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user";
@@ -16,13 +16,13 @@ const Wrapper = styled.div`
   left: 0;
   background-color: #fff;
   border-bottom: 1px solid ${palette.gray[2]};
-  z-index: 9999;
+  z-index: 7777;
 `;
 
 const HeaderBlock = styled.div`
   max-width: 1320px;
   margin: 0 auto;
-  padding: 20px 3%;
+  padding: 25px 3%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,11 +34,7 @@ const HeaderBlock = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 20px;
-      // Mobile
-      @media screen and (max-width: 767px) {
-        margin-right: 10px;
-      }
+      // margin-right: 20px;
       img {
         width: 24px;
         height: 24px;
@@ -51,7 +47,10 @@ const HeaderBlock = styled.div`
       }
     }
     .link-btn {
-      text-decoration: underline;
+      padding: 8px 15px;
+      color: ${palette.gray[6]};
+      border: 1.3px solid ${palette.gray[6]};
+      border-radius: 3px;
     }
   }
 
@@ -63,7 +62,7 @@ const HeaderBlock = styled.div`
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
-    padding: 10px 5%;: 3%;
+    padding: 15px 5%;
     }
   }
 `;
@@ -77,17 +76,10 @@ const UserName = styled.div`
 `;
 
 export const HeaderBottom = styled.div`
-  // Desktop
-  @media screen and (min-width: 1280px) {
-    height: 80px;
-  }
-  // Tablet
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    height: 80px;
-  }
+  height: 90px;
   // Mobile
   @media screen and (max-width: 767px) {
-    height: 52px;
+    height: 75.333px;
   }
 `;
 
@@ -117,11 +109,11 @@ const Header = () => {
                       ? user.profileImage
                       : "./images/default-profile.png"
                   }
-                  alt="profileImage"
+                  alt="ProfileImage"
                 />
                 <UserName>반가워요, {user.username} 님!</UserName>
               </span>
-              <HeaderNav onLogout={onLogout} />
+              <HeaderMenu onLogout={onLogout} />
             </div>
           ) : (
             <div className="right">

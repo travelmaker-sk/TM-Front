@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { CyanButtonStyle } from "../../styles/ButtonStyle";
 import { Link } from "react-router-dom";
+import { register } from "../../lib/api/auth";
+import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
-interface RegisterProps {
+interface RegisterType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   error: string | null;
 }
@@ -16,7 +20,7 @@ const RegisterBlock = styled.div`
     font-size: 24px;
     text-align: center;
     b {
-      font-weight: 600;
+      font-weight: 700;
     }
   }
   .register-btn {
@@ -38,10 +42,65 @@ export const ErrorMessage = styled.div`
   margin-bottom: 26px;
   color: red;
   text-align: center;
-  font-size: 14px;
 `;
 
-const Register = ({ onSubmit, error }: RegisterProps) => {
+const Register = () => {
+  const navigate = useNavigate();
+
+  const [error, setError] = useState<string | null>(null);
+
+  const { state } = useLocation();
+  useEffect(() => {
+    if (!state) {
+      Swal.fire(
+        "",
+        "회원가입을 위해 서비스 이용 약관 동의가 필요합니다",
+        "warning"
+      );
+      navigate("/privacyPolicy");
+    }
+  }, [state, navigate]);
+
+  // 폼 등록 이벤트 핸들러
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      const form = e.target as HTMLFormElement;
+      const $inputs = Array.from(form.querySelectorAll("input"));
+
+      const [inputNickname, inputEmail, inputPw, inputPwConfirm] = $inputs.map(
+        ($input) => $input.value
+      );
+
+      if ([inputNickname, inputEmail, inputPw, inputPwConfirm].includes("")) {
+        setError("빈 칸을 모두 입력하세요.");
+        return;
+      } else if (inputPw !== inputPwConfirm) {
+        setError("비밀번호가 일치하지 않습니다.");
+        return;
+      } else {
+        setError(null);
+      }
+
+      // API 호출
+      register(inputNickname, inputEmail, inputPw)
+        .then((res) => {
+          if (res) {
+            setError("이미 사용중인 아이디입니다."); // 닉네임 중복 or 이메일 중복 or 비밀번호 형식 미충족
+            return;
+          } else {
+            setError("");
+            navigate("/registerAuth", { state: inputEmail });
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
+    },
+    [navigate]
+  );
+
   return (
     <RegisterBlock>
       <h2>

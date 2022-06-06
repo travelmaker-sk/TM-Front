@@ -1,12 +1,21 @@
-import React, { MutableRefObject, useEffect, useRef } from "react";
+import React, {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "./Register";
 import { CyanButtonStyle, SelectButtonStyle } from "../../styles/ButtonStyle";
 import { Link } from "react-router-dom";
+import { RootStateOrAny, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { login } from "../../lib/api/auth";
 
-interface LoginProps {
+interface LoginType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   initialUid: MutableRefObject<string>;
   onKakaoLogin: () => void;
@@ -103,7 +112,7 @@ const LoginBlock = styled.div`
     background: #03c75a;
     // Mobile
     @media screen and (max-width: 767px) {
-      margin-bottom: 16px !important;
+      margin-bottom: 20px !important;
     }
   }
   #custom-login-btn {
@@ -118,11 +127,92 @@ const LoginBlock = styled.div`
   }
 `;
 
-const Login = ({ onSubmit, initialUid, onKakaoLogin, error }: LoginProps) => {
+const Login = () => {
+  const navigate = useNavigate();
+
+  const [error, setError] = useState<string | null>(null);
+
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
+
+  const initialUid = useRef(localStorage.getItem("tm-saved-id") ?? "");
+
   const naverRef = useRef<any>();
   const onNaverLogin = () => {
     naverRef.current.children[0].click();
   };
+
+  // 폼 등록 이벤트 핸들러
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      const form = e.target as HTMLFormElement;
+      const $inputs = Array.from(form.querySelectorAll("input"));
+
+      const [inputEmail, inputPw, checkSaveId, checkKeepLogin] = $inputs.map(
+        ($input) => ($input.type === "checkbox" ? $input.checked : $input.value)
+      );
+
+      if ([inputEmail, inputPw].includes("")) {
+        setError("빈 칸을 모두 입력하세요.");
+        return;
+      } else {
+        setError(null);
+      }
+
+      // API 호출
+      login(inputEmail as string, inputPw as string)
+        .then((res) => {
+          let token = localStorage.getItem("tm-token");
+
+          if (checkSaveId)
+            localStorage.setItem("tm-saved-id", inputEmail as string);
+          if (checkKeepLogin) localStorage.setItem("tm-token", token as string);
+
+          if (token === "undefined") {
+            setError("아이디나 비밀번호가 일치하지 않습니다.");
+            return;
+          } else {
+            setError("");
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
+    },
+    [navigate]
+  );
+
+  // 카카오 로그인
+  const onKakaoLogin = () => {
+    const { REACT_APP_KAKAO_REST_API_KEY, REACT_APP_BASE_URL } = process.env;
+    const redirectUri = `${REACT_APP_BASE_URL}/kakaoLogin`;
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${redirectUri}&response_type=code`;
+    window.location.href = kakaoAuthUrl;
+  };
+
+  // 네이버 로그인
+  useEffect(() => {
+    const { REACT_APP_NAVER_CLIENT_ID, REACT_APP_BASE_URL } = process.env;
+
+    // @ts-ignore
+    let naver_id_login = new window.naver_id_login(
+      REACT_APP_NAVER_CLIENT_ID,
+      `${REACT_APP_BASE_URL}/naverLogin`
+    );
+
+    const state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 2, 40);
+    naver_id_login.setDomain(REACT_APP_BASE_URL);
+    naver_id_login.setState(state);
+    // naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+  }, []);
+
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user, navigate]);
 
   return (
     <LoginBlock>

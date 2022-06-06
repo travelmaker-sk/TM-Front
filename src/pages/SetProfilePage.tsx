@@ -1,11 +1,11 @@
 import React from "react";
 import AuthTemplate from "../components/auth/AuthTemplate";
-import SetProfileForm from "../containers/mypage/SetProfileForm";
+import SetProfile from "../components/mypage/SetProfile";
 
 const SetProfilePage = () => {
   return (
     <AuthTemplate>
-      <SetProfileForm />
+      <SetProfile />
     </AuthTemplate>
   );
 };

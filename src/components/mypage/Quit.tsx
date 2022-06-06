@@ -16,7 +16,7 @@ import { quit } from "../../lib/api/auth";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user";
 
-interface QuitProps {
+interface QuitType {
   user: UserType;
 }
 
@@ -38,7 +38,7 @@ const QuitBlock = styled.div`
     margin-bottom: 52px;
     text-align: center;
     b {
-      font-weight: 600;
+      font-weight: 700;
     }
   }
   Input {
@@ -46,7 +46,7 @@ const QuitBlock = styled.div`
   }
 `;
 
-const Quit = ({ user }: QuitProps) => {
+const Quit = ({ user }: QuitType) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState<string | null>(null);
@@ -58,7 +58,7 @@ const Quit = ({ user }: QuitProps) => {
 
       let token = localStorage.getItem("tm-token");
       // API 호출
-      quit(token as string)
+      quit()
         .then((res) => {
           if (res) {
             setError("탈퇴하기 실패");

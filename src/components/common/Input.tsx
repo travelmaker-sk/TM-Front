@@ -13,8 +13,8 @@ const InputStyle = styled.input`
   font-size: 16px;
 `;
 
-const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
-  return <InputStyle {...props} />;
+const Input = (Type: React.InputHTMLAttributes<HTMLInputElement>) => {
+  return <InputStyle {...Type} />;
 };
 
 export default Input;

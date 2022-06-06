@@ -1,9 +1,20 @@
 import styled from "styled-components";
 import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import { UserType } from "../../lib/type";
+import { GetPostType, UserType } from "../../lib/type";
+import { useEffect, useState } from "react";
+import Post from "../photocard/Post";
+import { PostBlock } from "../photocard/SearchPostList";
+import { Swiper, SwiperSlide } from "swiper/react"; // basic
+import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
+import "swiper/css"; //basic
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { myPosts } from "../../lib/api/home";
 
-interface MyPageProps {
+SwiperCore.use([Navigation, Pagination, Autoplay]);
+
+interface MyPageType {
   user: UserType;
 }
 
@@ -70,9 +81,8 @@ const MyPageTopBlock = styled.div`
   }
 `;
 
-const MyPageBottomBlock = styled.div`
+export const MyPageBottomBlock = styled.div`
   width: 100%;
-  height: 100%;
   position: absolute;
   left: 0;
   background-color: ${palette.gray[1]};
@@ -80,8 +90,17 @@ const MyPageBottomBlock = styled.div`
     max-width: 1320px;
     margin: 0 auto;
     padding: 50px 3%;
+    h2{
+      font-size: 24px;
+      font-family: "Do Hyeon", sans-serif;
+      padding: 32px 0;
+    }
     h3{
-      font-size: 20px;
+      font-size: 24px;
+      font-family: "Do Hyeon", sans-serif;
+      color: ${palette.cyan[5]};
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
     // Tablet
     @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -97,7 +116,20 @@ const MyPageBottomBlock = styled.div`
   }
 `;
 
-const MyPage = ({ user }: MyPageProps) => {
+const MyPage = ({ user }: MyPageType) => {
+  const [posts, setPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    // API 호출
+    myPosts()
+      .then(({ list }) => {
+        setPosts(list);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }, []);
+
   return (
     <>
       <MyPageTopBlock>
@@ -108,16 +140,16 @@ const MyPage = ({ user }: MyPageProps) => {
                 ? user.profileImage
                 : "./images/default-profile.png"
             }
-            alt="profileImage"
+            alt="ProfileImage"
           />
           <ul>
             <li>
-              <span>{user.username}</span> 님 안녕하세요!
+              <span>{user.username}</span>님 안녕하세요!
             </li>
             <li>{user.email}</li>
             <CyanButtonStyle>
               <button>
-                <LinkButton to="/setProfile">회원정보 변경</LinkButton>
+                <LinkButton to="/setProfile">회원정보 설정</LinkButton>
               </button>
             </CyanButtonStyle>
           </ul>
@@ -125,22 +157,47 @@ const MyPage = ({ user }: MyPageProps) => {
         <div className="right-area">
           <ul>
             <li className="first-li">
-              <span>{user.postCount ? user.postCount : 0}</span>게시물
+              <span>{user.postCount ?? 0}</span>게시물
             </li>
             <li>
-              <span>{user.followers ? user.followers : 0}</span>팔로워
+              <span>{user.followers ?? 0}</span>팔로워
             </li>
             <li>
-              <span>{user.followings ? user.followings : 0}</span>팔로잉
+              <span>{user.followings ?? 0}</span>팔로잉
             </li>
           </ul>
         </div>
       </MyPageTopBlock>
       <MyPageBottomBlock>
         <div>
-          <h3>공개된 여행</h3>
+          <h2>{user.username}님의 포토카드 ✈️</h2>
+          {posts.map((list) => (
+            <div key={list.id}>
+              <h3>
+                {list.location} ({list.posts.length})
+              </h3>
+              <PostBlock>
+                {/* <Swiper
+                  spaceBetween={50}
+                  slidesPerView={1}
+                  scrollbar={{ draggable: true }}
+                  navigation
+                  pagination={{ clickable: true }}
+                  autoplay={{ delay: 3000 }}
+                  loop={true}
+                > */}
+                {list.posts.map((post: GetPostType | null) => (
+                  // <SwiperSlide>
+                  <Post post={post} key={post?.id} my={true} />
+                  // </SwiperSlide>
+                ))}
+                {/* </Swiper> */}
+              </PostBlock>
+            </div>
+          ))}
         </div>
       </MyPageBottomBlock>
+      export{" "}
     </>
   );
 };

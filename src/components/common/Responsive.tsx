@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-interface ResponsiveProps {
+interface ResponsiveType {
   children: any;
 }
 
@@ -25,8 +25,8 @@ const ResponsiveBlock = styled.div`
   }
 `;
 
-const Responsive = ({ children, ...rest }: ResponsiveProps) => {
-  // style, className, onClick, onMouseMove 등의 props를 사용할 수 있도록
+const Responsive = ({ children, ...rest }: ResponsiveType) => {
+  // style, className, onClick, onMouseMove 등의 Type를 사용할 수 있도록
   // ...rest를 사용하여 ResponsiveBlock에게 전달
   return <ResponsiveBlock {...rest}>{children}</ResponsiveBlock>;
 };

@@ -39,6 +39,13 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
   }
+  swal2-shown,
+  swal2-height-auto,
+  .swal2-container,
+  .swal2-center,
+  .swal2-backdrop-show {
+    z-index: 9999 !important;
+  }
 `;
 
 export default GlobalStyle;
