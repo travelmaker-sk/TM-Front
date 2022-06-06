@@ -58,7 +58,7 @@ const Quit = ({ user }: QuitType) => {
 
       let token = localStorage.getItem("tm-token");
       // API 호출
-      quit(token as string)
+      quit()
         .then((res) => {
           if (res) {
             setError("탈퇴하기 실패");

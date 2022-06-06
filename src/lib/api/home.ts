@@ -3,6 +3,19 @@ import popularWhere from "../json/popularWhere.json";
 import postsData from "../json/posts.json";
 import mypostsData from "../json/myposts.json";
 
+let token = localStorage.getItem("tm-token");
+
+// 포토카드 삭제
+export const loadPost = async (id: number) => {
+  const response = await axios.get(`/total/api/detailresponse/${id}`, {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
+
+  return response.data;
+};
+
 // 포스트 리스트 5개
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
 export const listPosts = async (where?: string, what?: string) => {
@@ -13,6 +26,9 @@ export const listPosts = async (where?: string, what?: string) => {
 
   const response = await axios.get("/listPosts", {
     params,
+    headers: {
+      Authorization: `${token}`,
+    },
   });
 
   return response.data;
@@ -61,6 +77,9 @@ export const morePosts = async (
 
   const response = await axios.get("/morePosts", {
     params,
+    headers: {
+      Authorization: `${token}`,
+    },
   });
 
   return response.data;
@@ -102,20 +121,28 @@ export const morePosts = async (
 
 // 마이페이지 포스트
 export const myPosts = async () => {
-  // const response = await axios.get("/myPosts");
+  const response = await axios.get("/myPosts", {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
 
-  // return response.data;
+  return response.data;
 
-  const list = mypostsData.postList;
+  // const list = mypostsData.postList;
 
-  return {
-    list,
-  };
+  // return {
+  //   list,
+  // };
 };
 
 // 북마크 페이지 포스트
 export const myBookmarks = async () => {
-  const response = await axios.get("/myBookmarks");
+  const response = await axios.get("/myBookmarks", {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
 
   return response.data;
 
@@ -128,7 +155,11 @@ export const myBookmarks = async () => {
 
 // 인기 여행지 TOP7
 export const popularArea = async () => {
-  const response = await axios.get("/popularWhere");
+  const response = await axios.get("/popularWhere", {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
 
   return response.data;
 

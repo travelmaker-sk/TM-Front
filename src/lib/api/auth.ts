@@ -1,5 +1,7 @@
 import axios from "axios";
 
+let token = localStorage.getItem("tm-token");
+
 // const baseUrl = "http://localhost:8080";
 
 export const login = async (username: string, password: string) => {
@@ -23,7 +25,7 @@ export const naverLogin = async (accessToken: string) => {
   return response.data.token;
 };
 
-export const userInfo = async (token: string) => {
+export const userInfo = async () => {
   const response = await axios.get("/account/mypage", {
     headers: {
       Authorization: `${token}`,
@@ -37,7 +39,7 @@ export const userInfo = async (token: string) => {
   return response.data;
 };
 
-export const quit = async (token: string) => {
+export const quit = async () => {
   const response = await axios.delete("/account/delete", {
     headers: {
       Authorization: `${token}`,
@@ -63,10 +65,10 @@ export const register = async (
   return response.data;
 };
 
-export const registerAuth = async (email: string, token: string) => {
+export const registerAuth = async (email: string, authToken: string) => {
   const response = await axios.post("/check-email-token", {
     email,
-    token,
+    authToken,
   });
 
   return response.data;

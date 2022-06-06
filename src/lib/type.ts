@@ -37,7 +37,7 @@ export interface GetPostType {
   price?: number;
   memo?: string;
   tagList?: Array<string>;
-  imageUrl?: string;
+  image?: string;
   like: {
     likeNum: number;
     likeCheck: boolean;
