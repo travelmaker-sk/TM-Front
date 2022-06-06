@@ -5,6 +5,7 @@ import palette from "../../styles/palette";
 import { PostType } from "./Post";
 import { useNavigate } from "react-router";
 import { bookmark, like } from "../../lib/api/post";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 const CardDetailDiv = styled.div`
   > ul:nth-of-type(1) {
@@ -96,6 +97,8 @@ const CardDetail = ({ post, close }: PostType) => {
   const [numLike, setNumLike] = useState(post?.like.likeNum ?? 0);
 
   const [checkBookmark, setCheckBookmark] = useState(post?.bookmarkCheck);
+
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
 
   // 좋아요
   const onToggleLike = useCallback(() => {
@@ -263,35 +266,39 @@ const CardDetail = ({ post, close }: PostType) => {
         <hr />
         <ul>
           <li>조회수 {post?.viewCount}</li>
-          <li>
-            <div className="like-container">
+          {user ? (
+            <li>
+              <div className="like-container">
+                <button
+                  title="좋아요"
+                  onClick={onToggleLike}
+                  className="like-btn"
+                >
+                  {checkLike ? (
+                    <span className="material-icons like">favorite</span>
+                  ) : (
+                    <span className="material-icons cancel-like">
+                      favorite_outline
+                    </span>
+                  )}
+                </button>
+                <span>{numLike}</span>
+              </div>
               <button
-                title="좋아요"
-                onClick={onToggleLike}
-                className="like-btn"
+                title="북마크"
+                onClick={onToggleBookmark}
+                className="bookmark-btn"
               >
-                {checkLike ? (
-                  <span className="material-icons like">favorite</span>
+                {checkBookmark ? (
+                  <span className="material-icons bookmark">bookmark</span>
                 ) : (
-                  <span className="material-icons cancel-like">
-                    favorite_outline
-                  </span>
+                  <span className="material-icons">bookmark_outline</span>
                 )}
               </button>
-              <span>{numLike}</span>
-            </div>
-            <button
-              title="북마크"
-              onClick={onToggleBookmark}
-              className="bookmark-btn"
-            >
-              {checkBookmark ? (
-                <span className="material-icons bookmark">bookmark</span>
-              ) : (
-                <span className="material-icons">bookmark_outline</span>
-              )}
-            </button>
-          </li>
+            </li>
+          ) : (
+            ""
+          )}
         </ul>
       </CardDetailDiv>
     </>
