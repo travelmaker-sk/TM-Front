@@ -12,7 +12,6 @@ import { listPosts } from "../lib/api/home";
 import PostList from "../components/photocard/SearchPostList";
 import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
-import { HeaderBottomPlus } from "./MyPage";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -69,7 +68,6 @@ const HomePage = () => {
   return (
     <Wrapper>
       <Header />
-      <HeaderBottomPlus />
       <Search />
       <Swiper />
       <HomePostList list={homePosts.popular} category="popular" />

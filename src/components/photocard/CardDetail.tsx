@@ -6,8 +6,8 @@ import { PostType } from "./Post";
 import { useNavigate } from "react-router";
 import { bookmark, like } from "../../lib/api/post";
 
-const CardDetailUl = styled.ul`
-  & > li:nth-of-type(1) {
+const CardDetailDiv = styled.div`
+  > ul:nth-of-type(1) {
     display: flex;
     align-items: center;
     font-size: 18px;
@@ -16,7 +16,7 @@ const CardDetailUl = styled.ul`
       margin-right: 15px;
     }
   }
-  > li:nth-of-type(2) {
+  > ul:nth-of-type(2) {
     li {
       display: flex;
       line-height: 1.5em;
@@ -31,13 +31,16 @@ const CardDetailUl = styled.ul`
       color: ${palette.cyan[7]};
     }
   }
-  > li:nth-of-type(3) {
+  > ul:nth-of-type(3) {
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
+    justify-content: space-between;
+    color: ${palette.gray[6]};
+    > li:nth-of-type(2) {
+      display: flex;
+      align-items: flex-start;
+    }
     span {
       font-size: 28px;
-      color: ${palette.gray[6]};
     }
     .like-container {
       display: flex;
@@ -195,20 +198,22 @@ const CardDetail = ({ post, close }: PostType) => {
 
   return (
     <>
-      <CardDetailUl>
-        <li>
-          <img
-            src={
-              post?.writer.profileImage
-                ? post?.writer.profileImage
-                : "./images/default-profile.png"
-            }
-            alt="ProfileImage"
-          />
-          <span>{post?.writer.username}</span>
-        </li>
+      <CardDetailDiv>
+        <ul>
+          <li>
+            <img
+              src={
+                post?.writer.profileImage
+                  ? post?.writer.profileImage
+                  : "./images/default-profile.png"
+              }
+              alt="ProfileImage"
+            />
+          </li>
+          <li>{post?.writer.username}</li>
+        </ul>
         <hr />
-        <li>
+        <ul>
           <li>
             <span>제목</span>
             {post?.title}
@@ -254,34 +259,41 @@ const CardDetail = ({ post, close }: PostType) => {
             {post?.memo}
           </li>
           <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
-        </li>
+        </ul>
         <hr />
-        <li>
-          <div className="like-container">
-            <button title="좋아요" onClick={onToggleLike} className="like-btn">
-              {checkLike ? (
-                <span className="material-icons like">favorite</span>
+        <ul>
+          <li>조회수 {post?.viewCount}</li>
+          <li>
+            <div className="like-container">
+              <button
+                title="좋아요"
+                onClick={onToggleLike}
+                className="like-btn"
+              >
+                {checkLike ? (
+                  <span className="material-icons like">favorite</span>
+                ) : (
+                  <span className="material-icons cancel-like">
+                    favorite_outline
+                  </span>
+                )}
+              </button>
+              <span>{numLike}</span>
+            </div>
+            <button
+              title="북마크"
+              onClick={onToggleBookmark}
+              className="bookmark-btn"
+            >
+              {checkBookmark ? (
+                <span className="material-icons bookmark">bookmark</span>
               ) : (
-                <span className="material-icons cancel-like">
-                  favorite_outline
-                </span>
+                <span className="material-icons">bookmark_outline</span>
               )}
             </button>
-            <span>{numLike}</span>
-          </div>
-          <button
-            title="북마크"
-            onClick={onToggleBookmark}
-            className="bookmark-btn"
-          >
-            {checkBookmark ? (
-              <span className="material-icons bookmark">bookmark</span>
-            ) : (
-              <span className="material-icons">bookmark_outline</span>
-            )}
-          </button>
-        </li>
-      </CardDetailUl>
+          </li>
+        </ul>
+      </CardDetailDiv>
     </>
   );
 };

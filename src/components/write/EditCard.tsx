@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Wrapper } from "../../pages/HomePage";
-import { HeaderBottomPlus } from "../../pages/MyPage";
 import Footer from "../common/Footer";
 import Header from "../common/Header";
 import Swal from "sweetalert2";
@@ -303,96 +302,91 @@ const EditCard = () => {
   );
 
   return (
-    <Wrapper>
-      <Header />
-      <HeaderBottomPlus />
-      <EditCardBlock>
-        <div>
-          <CreateCardStyle>
-            <label>
-              <img src={cardImage.cardImageUrl} alt="PhotocardImage" />
-              <div className="cardPhoto-upload">
-                <input
-                  placeholder={
-                    cardImage.cardImageName
-                      ? cardImage.cardImageName
-                      : "첨부파일"
-                  }
-                  className="cardPhoto-name"
-                  readOnly
-                />
-                <label htmlFor="cardPhoto" className="add-photo">
-                  선택
-                </label>
-                <input
-                  type="file"
-                  id="cardPhoto"
-                  accept="image/*"
-                  onChange={cardPhotoChange}
-                  ref={refInputFile}
-                />
-                <button onClick={cardPhotoDel} className="del-photo">
-                  삭제
-                </button>
-              </div>
-            </label>
-            <label>
-              <span>제목*</span>
+    <EditCardBlock>
+      <div>
+        <CreateCardStyle>
+          <label>
+            <img src={cardImage.cardImageUrl} alt="PhotocardImage" />
+            <div className="cardPhoto-upload">
               <input
-                type="text"
-                name="title"
-                placeholder="ex) 성산일출봉, 제주식당, 제주호텔"
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
+                placeholder={
+                  cardImage.cardImageName ? cardImage.cardImageName : "첨부파일"
+                }
+                className="cardPhoto-name"
+                readOnly
               />
-            </label>
-            <div
-              className="location"
-              onFocus={onFocusLocation}
-              onBlur={onBlurLocation}
-            >
-              <span>위치*</span>
+              <label htmlFor="cardPhoto" className="add-photo">
+                선택
+              </label>
               <input
-                type="text"
-                name="location"
-                placeholder="ex) 제주, 부산, 속초"
-                ref={refLocation}
-                onChange={onLocation}
+                type="file"
+                id="cardPhoto"
+                accept="image/*"
+                onChange={cardPhotoChange}
+                ref={refInputFile}
               />
-              <ul ref={refLocationUl}>
-                {areaData.areaList
-                  .filter((area) => {
-                    if (location === "") {
-                      return area;
-                    } else if (
-                      area.toLowerCase().includes(location.toLowerCase())
-                    ) {
-                      return area;
-                    }
-                  })
-                  .map((area) => (
-                    <li key={area} onClick={onClickLoctionList}>
-                      {area}
-                    </li>
-                  ))}
-              </ul>
+              <button onClick={cardPhotoDel} className="del-photo">
+                삭제
+              </button>
             </div>
-            <label className="date">
-              <span>날짜*</span>
-              <input
-                type="text"
-                name="date"
-                placeholder="ex) 2022-01-01"
-                value={date}
-                onChange={(e) => {
-                  setDate(e.target.value);
-                }}
-              />
-              <div>
-                {/* @ts-ignore */}
-                {/* <CardDatePicker
+          </label>
+          <label>
+            <span>제목*</span>
+            <input
+              type="text"
+              name="title"
+              placeholder="ex) 성산일출봉, 제주식당, 제주호텔"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+          </label>
+          <div
+            className="location"
+            onFocus={onFocusLocation}
+            onBlur={onBlurLocation}
+          >
+            <span>위치*</span>
+            <input
+              type="text"
+              name="location"
+              placeholder="ex) 제주, 부산, 속초"
+              ref={refLocation}
+              onChange={onLocation}
+            />
+            <ul ref={refLocationUl}>
+              {areaData.areaList
+                .filter((area) => {
+                  if (location === "") {
+                    return area;
+                  } else if (
+                    area.toLowerCase().includes(location.toLowerCase())
+                  ) {
+                    return area;
+                  }
+                })
+                .map((area) => (
+                  <li key={area} onClick={onClickLoctionList}>
+                    {area}
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <label className="date">
+            <span>날짜*</span>
+            <input
+              type="text"
+              name="date"
+              placeholder="ex) 2022-01-01"
+              value={date}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+            <div>
+              {/* @ts-ignore */}
+              {/* <CardDatePicker
                   locale={ko}
                   dateFormat="yyyy/MM/dd"
                   placeholderText="📅 달력에서 선택하기"
@@ -401,134 +395,129 @@ const EditCard = () => {
                     setDate(date)
                   }
                 /> */}
-              </div>
-            </label>
-            {selectedPlace ? (
-              <label>
-                <span>날씨*</span>
-                <input
-                  type="text"
-                  name="weather"
-                  placeholder="ex) 맑음, 흐림"
-                  value={weather}
-                  onChange={(e) => {
-                    setWeather(e.target.value);
-                  }}
-                />
-              </label>
-            ) : (
-              ""
-            )}
-            {selectedStore ? (
-              <label>
-                <span>메뉴*</span>
-                <input
-                  type="text"
-                  name="menu"
-                  placeholder="ex) 갈치구이"
-                  value={menu}
-                  onChange={(e) => {
-                    setMenu(e.target.value);
-                  }}
-                />
-              </label>
-            ) : (
-              ""
-            )}
-            {selectedStore || selectedLodging ? (
-              <label>
-                <span>가격*</span>
-                <input
-                  type="number"
-                  name="price"
-                  placeholder="ex) 25000"
-                  value={price}
-                  onChange={(e) => {
-                    setPrice(e.target.value);
-                  }}
-                  className="price"
-                />
-                <span className="sub">원</span>
-              </label>
-            ) : (
-              ""
-            )}
+            </div>
+          </label>
+          {selectedPlace ? (
             <label>
-              <span>평점*</span>
-              <ReviewBox>
-                <StarContainer>
-                  {[1, 2, 3, 4, 5].map((el) => (
-                    <span
-                      className={`material-icons ${
-                        // @ts-ignore
-                        (score >= el) | (scoreHover >= el) && "yellowStar"
-                      }`}
-                      key={el}
-                      // @ts-ignore
-                      onMouseEnter={() => setScoreHover(el)}
-                      onMouseLeave={() => setScoreHover(null)}
-                      // @ts-ignore
-                      onClick={() => setScore(el)}
-                    >
-                      grade
-                    </span>
-                  ))}
-                </StarContainer>
-              </ReviewBox>
-            </label>
-            <label>
-              <span>메모</span>
-              <textarea
-                name="memo"
-                maxLength={30}
-                placeholder="최대 30자"
-                value={memo}
+              <span>날씨*</span>
+              <input
+                type="text"
+                name="weather"
+                placeholder="ex) 맑음, 흐림"
+                value={weather}
                 onChange={(e) => {
-                  setMemo(e.target.value);
+                  setWeather(e.target.value);
                 }}
               />
             </label>
-            <label className="tag">
-              <span>태그</span>
-              <div>
-                <TagInput
-                  type="text"
-                  name="tag"
-                  placeholder="태그를 입력하고 엔터키를 눌러주세요!"
-                  value={tagItem}
-                  onChange={(e) => setTagItem(e.target.value)}
-                  onKeyPress={onKeyPress}
-                />
-                <TagList>
-                  {tagList.map((tagItem, index) => (
-                    <TagItem key={index}>
-                      <span>{tagItem}</span>
-                      <button
-                        className="material-icons"
-                        onClick={deleteTagItem}
-                      >
-                        close
-                      </button>
-                    </TagItem>
-                  ))}
-                </TagList>
-              </div>
+          ) : (
+            ""
+          )}
+          {selectedStore ? (
+            <label>
+              <span>메뉴*</span>
+              <input
+                type="text"
+                name="menu"
+                placeholder="ex) 갈치구이"
+                value={menu}
+                onChange={(e) => {
+                  setMenu(e.target.value);
+                }}
+              />
             </label>
-          </CreateCardStyle>
-          <SelectButtonStyle>
-            <CyanButtonStyle>
-              <button type="submit" onClick={onSubmit}>
-                수정
-              </button>
-            </CyanButtonStyle>
-            <GrayButtonStyle>
-              <button onClick={onInit}>초기화</button>
-            </GrayButtonStyle>
-          </SelectButtonStyle>
-        </div>
-      </EditCardBlock>
-      <Footer />
-    </Wrapper>
+          ) : (
+            ""
+          )}
+          {selectedStore || selectedLodging ? (
+            <label>
+              <span>가격*</span>
+              <input
+                type="number"
+                name="price"
+                placeholder="ex) 25000"
+                value={price}
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+                className="price"
+              />
+              <span className="sub">원</span>
+            </label>
+          ) : (
+            ""
+          )}
+          <label>
+            <span>평점*</span>
+            <ReviewBox>
+              <StarContainer>
+                {[1, 2, 3, 4, 5].map((el) => (
+                  <span
+                    className={`material-icons ${
+                      // @ts-ignore
+                      (score >= el) | (scoreHover >= el) && "yellowStar"
+                    }`}
+                    key={el}
+                    // @ts-ignore
+                    onMouseEnter={() => setScoreHover(el)}
+                    onMouseLeave={() => setScoreHover(null)}
+                    // @ts-ignore
+                    onClick={() => setScore(el)}
+                  >
+                    grade
+                  </span>
+                ))}
+              </StarContainer>
+            </ReviewBox>
+          </label>
+          <label>
+            <span>메모</span>
+            <textarea
+              name="memo"
+              maxLength={30}
+              placeholder="최대 30자"
+              value={memo}
+              onChange={(e) => {
+                setMemo(e.target.value);
+              }}
+            />
+          </label>
+          <label className="tag">
+            <span>태그</span>
+            <div>
+              <TagInput
+                type="text"
+                name="tag"
+                placeholder="태그를 입력하고 엔터키를 눌러주세요!"
+                value={tagItem}
+                onChange={(e) => setTagItem(e.target.value)}
+                onKeyPress={onKeyPress}
+              />
+              <TagList>
+                {tagList.map((tagItem, index) => (
+                  <TagItem key={index}>
+                    <span>{tagItem}</span>
+                    <button className="material-icons" onClick={deleteTagItem}>
+                      close
+                    </button>
+                  </TagItem>
+                ))}
+              </TagList>
+            </div>
+          </label>
+        </CreateCardStyle>
+        <SelectButtonStyle>
+          <CyanButtonStyle>
+            <button type="submit" onClick={onSubmit}>
+              수정
+            </button>
+          </CyanButtonStyle>
+          <GrayButtonStyle>
+            <button onClick={onInit}>초기화</button>
+          </GrayButtonStyle>
+        </SelectButtonStyle>
+      </div>
+    </EditCardBlock>
   );
 };
 

@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Wrapper } from "../../pages/HomePage";
 import palette from "../../styles/palette";
 import { useNavigate } from "react-router";
 import areaData from "../../lib/json/areaData.json";
@@ -8,9 +7,14 @@ import { popularArea } from "../../lib/api/home";
 
 const SearchWrapper = styled.div`
   width: 100%;
-  margin-bottom: 80px;
+  height: 65px;
+  margin: 80px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
   border: 3px solid ${palette.cyan[5]};
-  box-sizing: border-box;
+  border-radius: 4px;
   .where-area,
   .what-area,
   .search-btn {
@@ -22,7 +26,6 @@ const SearchWrapper = styled.div`
     display: flex;
     align-items: center;
     font-size: 20px;
-    border-right: 1px solid ${palette.gray[5]};
     input {
       width: 100%;
       font-size: 20px;
@@ -61,6 +64,7 @@ const SearchWrapper = styled.div`
   .where-area {
     width: 40%;
     padding: 0 20px;
+    border-right: 1px solid ${palette.gray[5]};
   }
   .what-area {
     width: 53%;
@@ -75,40 +79,23 @@ const SearchWrapper = styled.div`
     color: white;
     font-size: 20px;
   }
-  @media screen and (min-width: 1280px) {
-    height: 65px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    border-radius: 4px;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    height: 65px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    border-radius: 4px;
-  }
   // Mobile
   @media screen and (max-width: 767px) {
-    // height: 232px;
+    height: 200px;
+    display: block;
     .where-area,
     .what-area,
     .search-btn {
       width: 100%;
       padding: 10px 20px;
-      border-radius: 4px;
       font-size: 18px;
       input {
         font-size: 18px;
       }
     }
-    .where-area,
-    .what-area {
-      background-color: white;
-      margin-bottom: 20px;
+    .where-area {
+      border-right: none;
+      border-bottom: 1px solid ${palette.gray[5]};
     }
   }
 `;
@@ -169,7 +156,7 @@ const Search = () => {
     }, 200);
   };
 
-  const OnSearch = () => {
+  const onSearch = () => {
     const keywordWhere = refWhereInput.current?.value;
     const keywordWhat = refWhatInput.current?.value;
     console.log("keywordWhere: ", keywordWhere, "keywordWhat: ", keywordWhat);
@@ -198,67 +185,65 @@ const Search = () => {
 
   return (
     <>
-      <form>
-        <SearchWrapper>
-          <div
-            className="where-area"
-            onFocus={onFocusWhereArea}
-            onBlur={onBlurWhereArea}
-          >
-            <span className="material-icons">pin_drop</span>
-            <input
-              type="text"
-              name="where"
-              placeholder="어디에서"
-              ref={refWhereInput}
-              onChange={onInputWhere}
-            />
-            {inputWhere ? (
-              <ul
-                ref={refWhereArea}
-                style={{ maxHeight: "500px", overflow: "scroll" }}
-              >
-                {areaData.areaList
-                  .filter((area) => {
-                    if (inputWhere === "") {
-                      return area;
-                    } else if (
-                      area.toLowerCase().includes(inputWhere.toLowerCase())
-                    ) {
-                      return area;
-                    }
-                  })
-                  .map((area) => (
-                    <li key={area} onClick={onClickWhereList}>
-                      {area}
-                    </li>
-                  ))}
-              </ul>
-            ) : (
-              <ul ref={refWhereArea}>
-                <h4>인기 여행지 TOP7</h4>
-                {popularWhere.map((item) => (
-                  <li key={item.id} onClick={onClickWhereList}>
-                    {item.areaName}
+      <SearchWrapper>
+        <div
+          className="where-area"
+          onFocus={onFocusWhereArea}
+          onBlur={onBlurWhereArea}
+        >
+          <span className="material-icons">pin_drop</span>
+          <input
+            type="text"
+            name="where"
+            placeholder="어디에서"
+            ref={refWhereInput}
+            onChange={onInputWhere}
+          />
+          {inputWhere ? (
+            <ul
+              ref={refWhereArea}
+              style={{ maxHeight: "500px", overflow: "scroll" }}
+            >
+              {areaData.areaList
+                .filter((area) => {
+                  if (inputWhere === "") {
+                    return area;
+                  } else if (
+                    area.toLowerCase().includes(inputWhere.toLowerCase())
+                  ) {
+                    return area;
+                  }
+                })
+                .map((area) => (
+                  <li key={area} onClick={onClickWhereList}>
+                    {area}
                   </li>
                 ))}
-              </ul>
-            )}
-          </div>
-          <div className="what-area">
-            <span className="material-icons">sms</span>
-            <input
-              type="text"
-              name="what"
-              placeholder="무엇을 하고 싶으세요?"
-              ref={refWhatInput}
-            />
-          </div>
-          <button type="submit" className="search-btn" onClick={OnSearch}>
-            <span className="material-icons">search</span>
-          </button>
-        </SearchWrapper>
-      </form>
+            </ul>
+          ) : (
+            <ul ref={refWhereArea}>
+              <h4>인기 여행지 TOP7</h4>
+              {popularWhere.map((item) => (
+                <li key={item.id} onClick={onClickWhereList}>
+                  {item.areaName}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className="what-area">
+          <span className="material-icons">sms</span>
+          <input
+            type="text"
+            name="what"
+            placeholder="무엇을 하고 싶으세요?"
+            ref={refWhatInput}
+          />
+        </div>
+        <button type="submit" className="search-btn" onClick={onSearch}>
+          <span className="material-icons">search</span>
+        </button>
+      </SearchWrapper>
     </>
   );
 };
