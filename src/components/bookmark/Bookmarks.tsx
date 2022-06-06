@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { myBookmarks } from "../../lib/api/post";
+import { myBookmarks } from "../../lib/api/home";
 import { GetPostType, UserType } from "../../lib/type";
 import { MyPageBottomBlock } from "../mypage/MyPage";
 import Post from "../photocard/Post";
@@ -14,9 +14,13 @@ const Bookmarks = ({ user }: BookmarkType) => {
 
   useEffect(() => {
     // API 호출
-    myBookmarks().then(({ list }) => {
-      setPosts(list);
-    });
+    myBookmarks()
+      .then(({ list }) => {
+        setPosts(list);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
   }, []);
 
   return (

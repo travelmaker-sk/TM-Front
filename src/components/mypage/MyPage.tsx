@@ -3,7 +3,6 @@ import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import { GetPostType, UserType } from "../../lib/type";
 import { useEffect, useState } from "react";
-import { myPosts } from "../../lib/api/post";
 import Post from "../photocard/Post";
 import { PostBlock } from "../photocard/SearchPostList";
 import { Swiper, SwiperSlide } from "swiper/react"; // basic
@@ -11,6 +10,7 @@ import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import "swiper/css"; //basic
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { myPosts } from "../../lib/api/home";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
@@ -121,9 +121,13 @@ const MyPage = ({ user }: MyPageType) => {
 
   useEffect(() => {
     // API 호출
-    myPosts().then(({ list }) => {
-      setPosts(list);
-    });
+    myPosts()
+      .then(({ list }) => {
+        setPosts(list);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
   }, []);
 
   return (

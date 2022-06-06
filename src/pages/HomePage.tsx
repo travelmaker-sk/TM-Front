@@ -8,7 +8,7 @@ import { setUser } from "../redux/user";
 import Header from "../components/common/Header";
 import Swiper from "../components/home/Swiper";
 import { AllPostsType } from "../lib/type";
-import { listPosts } from "../lib/api/post";
+import { listPosts } from "../lib/api/home";
 import PostList from "../components/photocard/SearchPostList";
 import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
@@ -31,8 +31,8 @@ const HomePage = () => {
     popular: [],
     recent: [],
     place: [],
-    restaurant: [],
-    accommodation: [],
+    store: [],
+    lodging: [],
   });
 
   useEffect(() => {
@@ -75,8 +75,8 @@ const HomePage = () => {
       <HomePostList list={homePosts.popular} category="popular" />
       <HomePostList list={homePosts.recent} category="recent" />
       <HomePostList list={homePosts.place} category="place" />
-      <HomePostList list={homePosts.restaurant} category="restaurant" />
-      <HomePostList list={homePosts.accommodation} category="accommodation" />
+      <HomePostList list={homePosts.store} category="store" />
+      <HomePostList list={homePosts.lodging} category="lodging" />
       <Footer />
     </Wrapper>
   );

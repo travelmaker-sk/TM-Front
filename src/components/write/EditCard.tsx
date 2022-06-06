@@ -109,8 +109,8 @@ const EditCard = () => {
   );
 
   const [selectedPlace, setSelectedPlace] = useState(false);
-  const [selectedRest, setSelectedRest] = useState(false);
-  const [selectedAccom, setSelectedAccom] = useState(false);
+  const [selectedStore, setSelectedStore] = useState(false);
+  const [selectedLodging, setSelectedLodging] = useState(false);
 
   const refLocationUl = useRef<HTMLUListElement>(null);
   const refLocation = useRef<HTMLInputElement>(null);
@@ -122,18 +122,18 @@ const EditCard = () => {
   useEffect(() => {
     if (category === "place") {
       setSelectedPlace(true);
-      setSelectedRest(false);
-      setSelectedAccom(false);
+      setSelectedStore(false);
+      setSelectedLodging(false);
     }
-    if (category === "restaurant") {
+    if (category === "store") {
       setSelectedPlace(false);
-      setSelectedRest(true);
-      setSelectedAccom(false);
+      setSelectedStore(true);
+      setSelectedLodging(false);
     }
-    if (category === "accommodation") {
+    if (category === "lodging") {
       setSelectedPlace(false);
-      setSelectedRest(false);
-      setSelectedAccom(true);
+      setSelectedStore(false);
+      setSelectedLodging(true);
     }
   }, [category]);
 
@@ -248,10 +248,10 @@ const EditCard = () => {
         case "place":
           validationItems = [title, location, date, score];
           break;
-        case "restaurant":
+        case "store":
           validationItems = [title, location, date, menu, price, score];
           break;
-        case "accommodation":
+        case "lodging":
           validationItems = [title, location, date, price, score];
           break;
       }
@@ -277,15 +277,14 @@ const EditCard = () => {
         memo: memo || undefined,
         tagList: tagList.length ? tagList : undefined,
         image: file || undefined,
-      }).then((res) => {
-        if (res) {
-          console.log("에러 발생");
-          return;
-        } else {
+      })
+        .then((res) => {
           Swal.fire("포토카드 수정 완료!", "", "success");
           navigate("/mypage");
-        }
-      });
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
     [
       category,
@@ -420,7 +419,7 @@ const EditCard = () => {
             ) : (
               ""
             )}
-            {selectedRest ? (
+            {selectedStore ? (
               <label>
                 <span>메뉴*</span>
                 <input
@@ -436,7 +435,7 @@ const EditCard = () => {
             ) : (
               ""
             )}
-            {selectedRest || selectedAccom ? (
+            {selectedStore || selectedLodging ? (
               <label>
                 <span>가격*</span>
                 <input

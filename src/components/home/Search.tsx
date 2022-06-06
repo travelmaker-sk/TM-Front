@@ -187,9 +187,13 @@ const Search = () => {
 
   useEffect(() => {
     // API 호출
-    popularArea().then(({ list }) => {
-      setPopularWhere(list);
-    });
+    popularArea()
+      .then(({ list }) => {
+        setPopularWhere(list);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
   }, []);
 
   return (

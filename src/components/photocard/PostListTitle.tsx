@@ -31,8 +31,8 @@ const PostListTitle = ({ category }: PostListTitleType) => {
       popular: "인기 포토카드",
       recent: "최신 포토카드",
       place: "가볼 만한 곳",
-      restaurant: "맛집",
-      accommodation: "숙소",
+      store: "맛집",
+      lodging: "숙소",
     }),
     []
   );

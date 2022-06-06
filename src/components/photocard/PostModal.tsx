@@ -167,16 +167,17 @@ const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
       e.preventDefault();
 
       // @ts-ignore
-      deletePost(post?.id).then((res) => {
-        if (res) {
-          console.log("포토카드 삭제 실패");
-          return;
-        } else {
-          close();
-          Swal.fire("포토카드 삭제 완료!", "", "success");
-          navigate("/mypage");
-        }
-      });
+      deletePost(post?.id)
+        .then((res) => {
+          if (res) {
+            close();
+            Swal.fire("포토카드 삭제 완료!", "", "success");
+            navigate("/mypage");
+          }
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
     [close, navigate, post?.id]
   );

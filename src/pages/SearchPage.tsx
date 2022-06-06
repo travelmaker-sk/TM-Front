@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
-import { listPosts } from "../lib/api/post";
+import { listPosts } from "../lib/api/home";
 import { AllPostsType } from "../lib/type";
 import { Wrapper } from "./HomePage";
 import Header from "../components/common/Header";
@@ -83,8 +83,8 @@ const SearchPage = (props: any) => {
     popular: [],
     recent: [],
     place: [],
-    restaurant: [],
-    accommodation: [],
+    store: [],
+    lodging: [],
   });
 
   useEffect(() => {
@@ -130,14 +130,14 @@ const SearchPage = (props: any) => {
         what={query.what}
       />
       <SearchPostList
-        list={posts.restaurant}
-        category="restaurant"
+        list={posts.store}
+        category="store"
         where={query.where}
         what={query.what}
       />
       <SearchPostList
-        list={posts.accommodation}
-        category="accommodation"
+        list={posts.lodging}
+        category="lodging"
         where={query.where}
         what={query.what}
       />

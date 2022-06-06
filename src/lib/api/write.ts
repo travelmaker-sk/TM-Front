@@ -1,6 +1,7 @@
 import axios from "axios";
-import { AddPostType, CategoryType, EditPostType } from "../type";
+import { AddPostType, EditPostType } from "../type";
 
+// 포토카드 생성
 export const addPost = async (data: AddPostType) => {
   const fd = new FormData();
 
@@ -9,23 +10,28 @@ export const addPost = async (data: AddPostType) => {
     fd.append(key, value);
   });
 
-  const response = await axios.post("/post/new", fd, {
+  await axios.post("/total/api/detailsave", fd, {
     headers: { "Content-Type": "multipart/from-data" },
   });
-
-  // return response.data;
-  return false;
 };
 
+// 포토카드 수정
 export const editPost = async (data: EditPostType) => {
-  const response = await axios.post(`/post/update/${data.id}`, data);
+  const fd = new FormData();
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (value === undefined) return;
+    fd.append(key, value);
+  });
+
+  await axios.post(`/total/api/update/${data.id}`, fd, {
+    headers: { "Content-Type": "multipart/from-data" },
+  });
+};
+
+// 포토카드 삭제
+export const deletePost = async (id: number) => {
+  const response = await axios.get(`/total/api/delete/${id}`);
 
   return response.data;
-};
-
-export const deletePost = async (id: number) => {
-  const response = await axios.delete(`/post/delete/${id}`);
-
-  // return response.data;
-  return false;
 };

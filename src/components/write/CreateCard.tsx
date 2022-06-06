@@ -266,8 +266,8 @@ const CreateCard = () => {
   const [tagList, setTagList] = useState([]);
 
   const [selectedPlace, setSelectedPlace] = useState(false);
-  const [selectedRest, setSelectedRest] = useState(false);
-  const [selectedAccom, setSelectedAccom] = useState(false);
+  const [selectedStore, setSelectedStore] = useState(false);
+  const [selectedLodging, setSelectedLodging] = useState(false);
 
   useEffect(() => {
     console.log("score", score);
@@ -284,18 +284,18 @@ const CreateCard = () => {
     }
     if (category === "place") {
       setSelectedPlace(true);
-      setSelectedRest(false);
-      setSelectedAccom(false);
+      setSelectedStore(false);
+      setSelectedLodging(false);
     }
-    if (category === "restaurant") {
+    if (category === "store") {
       setSelectedPlace(false);
-      setSelectedRest(true);
-      setSelectedAccom(false);
+      setSelectedStore(true);
+      setSelectedLodging(false);
     }
-    if (category === "accommodation") {
+    if (category === "lodging") {
       setSelectedPlace(false);
-      setSelectedRest(false);
-      setSelectedAccom(true);
+      setSelectedStore(false);
+      setSelectedLodging(true);
     }
   }, [category]);
 
@@ -414,10 +414,10 @@ const CreateCard = () => {
         case "place":
           validationItems = [title, location, date, score];
           break;
-        case "restaurant":
+        case "store":
           validationItems = [title, location, date, menu, price, score];
           break;
-        case "accommodation":
+        case "lodging":
           validationItems = [title, location, date, price, score];
           break;
       }
@@ -442,15 +442,14 @@ const CreateCard = () => {
         memo: memo || undefined,
         tagList: tagList.length ? tagList : undefined,
         image: file || undefined,
-      }).then((res) => {
-        if (res) {
-          console.log("에러 발생");
-          return;
-        } else {
+      })
+        .then(() => {
           Swal.fire("포토카드 생성 완료!", "", "success");
           navigate("/");
-        }
-      });
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     },
     [
       category,
@@ -480,8 +479,8 @@ const CreateCard = () => {
             카테고리 선택
           </option>
           <option value="place">가볼 만한 곳</option>
-          <option value="restaurant">맛집</option>
-          <option value="accommodation">숙소</option>
+          <option value="store">맛집</option>
+          <option value="lodging">숙소</option>
         </select>
       </SelectCategory>
       <CreateCardBlock>
@@ -588,7 +587,7 @@ const CreateCard = () => {
             ) : (
               ""
             )}
-            {selectedRest ? (
+            {selectedStore ? (
               <label>
                 <span>메뉴*</span>
                 <input
@@ -604,7 +603,7 @@ const CreateCard = () => {
             ) : (
               ""
             )}
-            {selectedRest || selectedAccom ? (
+            {selectedStore || selectedLodging ? (
               <label>
                 <span>가격*</span>
                 <input

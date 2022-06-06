@@ -11,20 +11,21 @@ export interface AllPostsType {
   popular: GetPostType[];
   recent: GetPostType[];
   place: GetPostType[];
-  restaurant: GetPostType[];
-  accommodation: GetPostType[];
+  store: GetPostType[];
+  lodging: GetPostType[];
 }
 
 export type AllPostsCategoryType =
   | "popular"
   | "recent"
   | "place"
-  | "restaurant"
-  | "accommodation";
+  | "store"
+  | "lodging";
 
-export type CategoryType = "place" | "restaurant" | "accomodation" | string;
+export type CategoryType = "place" | "store" | "lodging" | string;
 
 export interface GetPostType {
+  viewCount: number;
   id: number;
   category: CategoryType;
   title: string;
@@ -42,12 +43,11 @@ export interface GetPostType {
     likeCheck: boolean;
   };
   bookmarkCheck: boolean;
-  uploadDate: string;
-  view: number;
   writer: {
     username: string;
     profileImage?: string;
   };
+  createDate: string;
 }
 
 export interface PostType {

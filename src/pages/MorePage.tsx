@@ -7,7 +7,7 @@ import Search from "../components/home/Search";
 import Post from "../components/photocard/Post";
 import { PostBlock } from "../components/photocard/SearchPostList";
 import { SelectCategory } from "../components/write/CreateCard";
-import { morePosts } from "../lib/api/post";
+import { morePosts } from "../lib/api/home";
 import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";
 import queryString from "query-string";
@@ -75,11 +75,15 @@ const MorePage = () => {
       currentPage,
       query.where as string,
       query.what as string
-    ).then(({ totalCount, list }) => {
-      const totalPageCount = Math.ceil(totalCount / itemPerPage);
-      setTotalPage(totalPageCount);
-      setPosts(list);
-    });
+    )
+      .then(({ totalCount, list }) => {
+        const totalPageCount = Math.ceil(totalCount / itemPerPage);
+        setTotalPage(totalPageCount);
+        setPosts(list);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
     console.log("search", sort, currentPage);
   }, [currentPage, itemPerPage, query.category, query.what, query.where, sort]);
 
