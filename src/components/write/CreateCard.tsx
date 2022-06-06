@@ -270,8 +270,28 @@ const CreateCard = () => {
   const [selectedLodging, setSelectedLodging] = useState(false);
 
   useEffect(() => {
+    console.log("category", category);
+    console.log("title", title);
+    console.log("location", location);
+    console.log("date", date);
+    console.log("weather", weather);
+    console.log("menu", menu);
+    console.log("price", price);
     console.log("score", score);
-  }, [score]);
+    console.log("memo", memo);
+    console.log("tagList", tagList);
+  }, [
+    category,
+    date,
+    location,
+    memo,
+    menu,
+    price,
+    score,
+    tagList,
+    title,
+    weather,
+  ]);
 
   // 카테고리 선택
   useEffect(() => {

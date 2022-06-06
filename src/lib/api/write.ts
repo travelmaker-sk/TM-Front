@@ -11,7 +11,7 @@ export const addPost = async (data: AddPostType) => {
   });
 
   await axios.post("/total/api/detailsave", fd, {
-    headers: { "Content-Type": "multipart/from-data" },
+    headers: { "Content-Type": "multipart/form-data" },
   });
 };
 
