@@ -50,7 +50,7 @@ const SwiperC = () => {
         scrollbar={{ draggable: true }}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
+        autoplay={{ delay: 5000 }}
         loop={true}
       >
         <SwiperSlide>
@@ -58,15 +58,6 @@ const SwiperC = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img src="/images/slide2.png" alt="slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/images/slide3.png" alt="slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/images/slide4.png" alt="slide" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/images/slide5.png" alt="slide" />
         </SwiperSlide>
       </Swiper>
     </SwiperBlock>

@@ -1,7 +1,5 @@
 import axios from "axios";
 
-let token = localStorage.getItem("tm-token");
-
 // const baseUrl = "http://localhost:8080";
 
 export const login = async (username: string, password: string) => {
@@ -26,6 +24,8 @@ export const naverLogin = async (accessToken: string) => {
 };
 
 export const userInfo = async () => {
+  let token = localStorage.getItem("tm-token");
+
   const response = await axios.get("/account/mypage", {
     headers: {
       Authorization: `${token}`,
@@ -40,6 +40,8 @@ export const userInfo = async () => {
 };
 
 export const quit = async () => {
+  let token = localStorage.getItem("tm-token");
+
   const response = await axios.delete("/account/delete", {
     headers: {
       Authorization: `${token}`,

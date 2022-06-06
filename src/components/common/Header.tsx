@@ -46,11 +46,20 @@ const HeaderBlock = styled.div`
         }
       }
     }
-    .link-btn {
+    .login-btn {
       padding: 8px 15px;
+      border: 1.3px solid ${palette.gray[5]};
       color: ${palette.gray[6]};
-      border: 1.3px solid ${palette.gray[6]};
+      &:hover {
+        border-color: ${palette.cyan[5]};
+        color: ${palette.cyan[5]};
+      }
+      &:active {
+        border-color: ${palette.cyan[7]};
+        color: ${palette.cyan[7]};
+      }
       border-radius: 3px;
+      cursor: pointer;
     }
   }
 
@@ -117,7 +126,7 @@ const Header = () => {
             </div>
           ) : (
             <div className="right">
-              <Link to="/login" className="link-btn">
+              <Link to="/login" className="login-btn">
                 로그인
               </Link>
             </div>
