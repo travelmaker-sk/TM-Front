@@ -10,14 +10,15 @@ export const setUser = (payload: any) => ({ type: "SET_USER", payload });
 export const logout = () => ({ type: "LOGOUT" });
 
 const initialState: UserState = {
-  user: {
-    username: "김트메",
-    email: "tm@a.com",
-    profileImage: "",
-    postCount: 0,
-    followers: 0,
-    followings: 0,
-  },
+  // user: {
+  //   username: "김트메",
+  //   email: "tm@a.com",
+  //   profileImage: "",
+  //   postCount: 0,
+  //   followers: 0,
+  //   followings: 0,
+  // },
+  user: null,
 };
 
 const user = (

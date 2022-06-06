@@ -442,10 +442,10 @@ const CreateCard = () => {
           break;
       }
 
-      if (validationItems.includes("")) {
-        Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
-        return;
-      }
+      // if (validationItems.includes("")) {
+      //   Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
+      //   return;
+      // }
 
       const file = refInputFile.current?.files?.[0];
 
