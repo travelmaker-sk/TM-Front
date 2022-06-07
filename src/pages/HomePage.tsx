@@ -14,6 +14,7 @@ import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
 import Post from "../components/photocard/Post";
 import { useNavigate } from "react-router";
+import { Loading } from "../components/common/Loading";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -30,6 +31,8 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
   const [testPost, setTestPost] = useState(null);
 
   const [homePosts, setHomePosts] = useState<AllPostsType>({
@@ -41,7 +44,11 @@ const HomePage = () => {
   });
 
   useEffect(() => {
+    // 테스트 포스트 출력
     const loadTestPost = () => {
+      setLoading(true);
+
+      // API 호출
       loadPost(8)
         .then((res) => {
           setTestPost(res);
@@ -50,11 +57,15 @@ const HomePage = () => {
           console.warn(err);
         })
         .finally(() => {
+          setLoading(false);
           navigate("/");
         });
     };
 
+    // 포스트 리스트 출력
     const loadHomePosts = () => {
+      setLoading(true);
+
       // API 호출
       listPosts()
         .then((res) => {
@@ -65,11 +76,15 @@ const HomePage = () => {
           console.warn(err);
         })
         .finally(() => {
+          setLoading(false);
           navigate("/");
         });
     };
 
+    // 유저 확인
     const loadUser = () => {
+      setLoading(true);
+
       let token = localStorage.getItem("tm-token");
       if (!token) return;
 
@@ -80,10 +95,11 @@ const HomePage = () => {
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
+          // navigate("/");
         });
-      // .finally(() => {
-      //   navigate("/");
-      // });
     };
 
     loadTestPost();
@@ -92,18 +108,21 @@ const HomePage = () => {
   }, [dispatch, navigate]);
 
   return (
-    <Wrapper>
-      <Header />
-      <Search />
-      <Swiper />
-      <Post post={testPost} key={testPost} my={true} />
-      <HomePostList list={homePosts.popular} category="popular" />
-      <HomePostList list={homePosts.recent} category="recent" />
-      <HomePostList list={homePosts.place} category="place" />
-      <HomePostList list={homePosts.store} category="store" />
-      <HomePostList list={homePosts.lodging} category="lodging" />
-      <Footer />
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Header />
+        <Search />
+        <Swiper />
+        <Post post={testPost} key={testPost} my={true} />
+        <HomePostList list={homePosts.popular} category="popular" />
+        <HomePostList list={homePosts.recent} category="recent" />
+        <HomePostList list={homePosts.place} category="place" />
+        <HomePostList list={homePosts.store} category="store" />
+        <HomePostList list={homePosts.lodging} category="lodging" />
+        <Footer />
+      </Wrapper>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 
