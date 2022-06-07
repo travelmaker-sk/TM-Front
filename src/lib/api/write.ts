@@ -34,7 +34,7 @@ export const editPost = async (data: EditPostType) => {
   await axios.post(`/total/api/update/${data.id}`, fd, {
     headers: {
       Authorization: `${token}`,
-      "Content-Type": "multipart/from-data",
+      "Content-Type": "multipart/form-data",
     },
   });
 };

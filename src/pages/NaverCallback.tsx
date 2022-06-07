@@ -28,11 +28,13 @@ const NaverCallback = () => {
           return;
         } else {
           setError("");
-          navigate("/");
         }
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        navigate("/");
       });
   }, [location, navigate]);
 

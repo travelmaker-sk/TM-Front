@@ -4,12 +4,15 @@ import { GetPostType, UserType } from "../../lib/type";
 import { MyPageBottomBlock } from "../mypage/MyPage";
 import Post from "../photocard/Post";
 import { PostBlock } from "../photocard/SearchPostList";
+import { useNavigate } from "react-router";
 
 interface BookmarkType {
   user: UserType;
 }
 
 const Bookmarks = ({ user }: BookmarkType) => {
+  const navigate = useNavigate();
+
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
@@ -20,8 +23,11 @@ const Bookmarks = ({ user }: BookmarkType) => {
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        navigate("/bookmarks");
       });
-  }, []);
+  }, [navigate]);
 
   return (
     <MyPageBottomBlock>

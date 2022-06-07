@@ -96,8 +96,11 @@ const SearchPage = (props: any) => {
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        navigate(`/search?where=${query.where}&what=${query.what}`);
       });
-  }, [query.what, query.where]);
+  }, [navigate, query.what, query.where]);
 
   return (
     <Wrapper>

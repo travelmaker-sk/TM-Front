@@ -11,6 +11,7 @@ import "swiper/css"; //basic
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { myPosts } from "../../lib/api/home";
+import { useNavigate } from "react-router";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
@@ -117,6 +118,8 @@ export const MyPageBottomBlock = styled.div`
 `;
 
 const MyPage = ({ user }: MyPageType) => {
+  const navigate = useNavigate();
+
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
@@ -127,8 +130,11 @@ const MyPage = ({ user }: MyPageType) => {
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        navigate("/mypage");
       });
-  }, []);
+  }, [navigate]);
 
   return (
     <>

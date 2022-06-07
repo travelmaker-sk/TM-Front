@@ -13,6 +13,7 @@ import PostList from "../components/photocard/SearchPostList";
 import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
 import Post from "../components/photocard/Post";
+import { useNavigate } from "react-router";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -27,15 +28,9 @@ export const Wrapper = styled(Responsive)`
 const HomePage = () => {
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const [testPost, setTestPost] = useState(null);
-  useEffect(() => {
-    const loadTestPost = () => {
-      loadPost(6).then((res) => {
-        setTestPost(res);
-      });
-    };
-    loadTestPost();
-  }, []);
 
   const [homePosts, setHomePosts] = useState<AllPostsType>({
     popular: [],
@@ -46,6 +41,19 @@ const HomePage = () => {
   });
 
   useEffect(() => {
+    const loadTestPost = () => {
+      loadPost(8)
+        .then((res) => {
+          setTestPost(res);
+        })
+        .catch((err) => {
+          console.warn(err);
+        })
+        .finally(() => {
+          navigate("/");
+        });
+    };
+
     const loadHomePosts = () => {
       // API 호출
       listPosts()
@@ -55,6 +63,9 @@ const HomePage = () => {
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          navigate("/");
         });
     };
 
@@ -70,18 +81,22 @@ const HomePage = () => {
         .catch((err) => {
           console.warn(err);
         });
+      // .finally(() => {
+      //   navigate("/");
+      // });
     };
 
+    loadTestPost();
     loadUser();
     loadHomePosts();
-  }, [dispatch]);
+  }, [dispatch, navigate]);
 
   return (
     <Wrapper>
       <Header />
       <Search />
       <Swiper />
-      <Post post={testPost} key={testPost} />
+      <Post post={testPost} key={testPost} my={true} />
       <HomePostList list={homePosts.popular} category="popular" />
       <HomePostList list={homePosts.recent} category="recent" />
       <HomePostList list={homePosts.place} category="place" />

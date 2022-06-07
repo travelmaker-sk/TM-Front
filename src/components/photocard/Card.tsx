@@ -72,8 +72,6 @@ const Card = ({ post, onOpenModal }: ICard) => {
     []
   );
 
-  console.log("imageUrl", post?.image);
-
   return (
     <CardUl
       ref={refCard}

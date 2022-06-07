@@ -364,6 +364,9 @@ const CreateCard = () => {
       if (!refLocation.current) return;
       //@ts-ignore
       refLocation.current.value = e.target.innerHTML;
+
+      setLocation(refLocation.current.value);
+
       console.log(
         "input:",
         refLocation.current.value,
@@ -381,8 +384,6 @@ const CreateCard = () => {
     timer = setTimeout(() => {
       setLocation(e.target.value);
       console.log("location: ", location);
-
-      // TODO: 지역명 검색 API 호출
     }, 200);
   };
 
@@ -465,10 +466,12 @@ const CreateCard = () => {
       })
         .then(() => {
           Swal.fire("포토카드 생성 완료!", "", "success");
-          navigate("/");
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          navigate("/");
         });
     },
     [
@@ -555,6 +558,7 @@ const CreateCard = () => {
                 type="text"
                 name="location"
                 placeholder="ex) 제주, 부산, 속초"
+                defaultValue={location}
                 ref={refLocation}
                 onChange={onLocation}
               />

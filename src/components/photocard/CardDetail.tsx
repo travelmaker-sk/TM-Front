@@ -102,20 +102,17 @@ const CardDetail = ({ post, close }: PostType) => {
 
   // 좋아요
   const onToggleLike = useCallback(() => {
-    like(post?.id as number)
-      .then((res) => {
-        if (res) {
-          setNumLike((cnt) => cnt - 1);
-          setCheckLike(false);
-        } else {
-          setNumLike((cnt) => cnt + 1);
-          setCheckLike(true);
-        }
-      })
-      .catch((err) => {
-        console.warn(err);
+    if (checkLike) {
+      like(6).then((res) => {
+        setNumLike((cnt) => cnt - 1);
       });
-  }, [post?.id]);
+    } else {
+      like(6).then((res) => {
+        setNumLike((cnt) => cnt + 1);
+      });
+    }
+    setCheckLike(!checkLike);
+  }, [checkLike]);
 
   // 북마크
   const onToggleBookmark = useCallback(() => {
@@ -132,7 +129,7 @@ const CardDetail = ({ post, close }: PostType) => {
       })
         .then((result) => {
           if (result.isConfirmed) {
-            bookmark(post?.id as number)
+            bookmark(6)
               .then(() => {
                 Swal.fire({
                   title: "북마크 취소 완료!",
@@ -141,7 +138,7 @@ const CardDetail = ({ post, close }: PostType) => {
                   confirmButtonText: "확인",
                 });
 
-                setCheckBookmark(false);
+                setCheckBookmark(!checkBookmark);
               })
               .catch((err) => {
                 console.warn(err);
@@ -163,7 +160,7 @@ const CardDetail = ({ post, close }: PostType) => {
       })
         .then((result) => {
           if (result.isConfirmed) {
-            bookmark(post?.id as number)
+            bookmark(6)
               .then(() => {
                 Swal.fire({
                   title: "북마크 추가 완료!",
@@ -186,7 +183,7 @@ const CardDetail = ({ post, close }: PostType) => {
                     console.warn(err);
                   });
 
-                setCheckBookmark(true);
+                setCheckBookmark(!checkBookmark);
               })
               .catch((err) => {
                 console.warn(err);

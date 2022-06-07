@@ -3,7 +3,7 @@ import popularWhere from "../json/popularWhere.json";
 import postsData from "../json/posts.json";
 import mypostsData from "../json/myposts.json";
 
-// 포토카드 삭제
+// 테스트
 export const loadPost = async (id: number) => {
   let token = localStorage.getItem("tm-token");
 

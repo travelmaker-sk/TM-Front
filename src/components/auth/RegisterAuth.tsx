@@ -83,11 +83,13 @@ const RegisterAuth = () => {
             setError("인증번호가 일치하지 않습니다.");
           } else {
             setError("");
-            navigate("/registerFin");
           }
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          navigate("/registerFin");
         });
     },
     [email, navigate]

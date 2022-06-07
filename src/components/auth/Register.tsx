@@ -91,11 +91,13 @@ const Register = () => {
             return;
           } else {
             setError("");
-            navigate("/registerAuth", { state: inputEmail });
           }
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          navigate("/registerAuth", { state: inputEmail });
         });
     },
     [navigate]

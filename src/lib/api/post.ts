@@ -4,6 +4,8 @@ import axios from "axios";
 export const like = async (id: number) => {
   let token = localStorage.getItem("tm-token");
 
+  console.log("token", token);
+
   const response = await axios.get(`/total/api/liked/${id}`, {
     headers: {
       Authorization: `${token}`,

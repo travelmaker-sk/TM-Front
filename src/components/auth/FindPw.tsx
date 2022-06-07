@@ -57,14 +57,15 @@ const FindPw = () => {
         .then((res) => {
           if (res) {
             setError("가입하지 않은 회원입니다.");
-            return;
           } else {
             setError("");
-            navigate("/findPwFin");
           }
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          navigate("/findPwFin");
         });
     },
     [navigate]

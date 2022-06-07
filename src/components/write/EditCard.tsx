@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
-import { Wrapper } from "../../pages/HomePage";
-import Footer from "../common/Footer";
-import Header from "../common/Header";
 import Swal from "sweetalert2";
 import {
   GrayButtonStyle,
@@ -77,7 +74,7 @@ interface EditCardType {
   price?: string;
   memo?: string;
   tagList?: Array<string>;
-  imageUrl?: string;
+  image?: string;
 }
 
 let timer: NodeJS.Timeout | null = null;
@@ -90,7 +87,6 @@ const EditCard = () => {
 
   const refInputFile = useRef<HTMLInputElement>(null);
 
-  const [id, setId] = useState(post.id);
   const [category, setCategory] = useState(post.category);
   const [title, setTitle] = useState(post.title);
   const [location, setLocation] = useState(post.location);
@@ -103,9 +99,6 @@ const EditCard = () => {
   const [memo, setMemo] = useState(post.memo ? post.memo : "");
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState(post.tagList ? post.tagList : []);
-  const [postImage, setPostImage] = useState(
-    post.imageUrl ? post.imageUrl : ""
-  );
 
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedStore, setSelectedStore] = useState(false);
@@ -139,7 +132,9 @@ const EditCard = () => {
   // 포토카드 이미지 업로드
   const [cardImage, setCardImage] = useState({
     cardImageName: "",
-    cardImageUrl: postImage ? postImage : "./images/add-photo.png",
+    cardImageUrl: post.image
+      ? `./PhotoCard/${post.image}`
+      : "./images/add-photo.png",
   });
   const cardPhotoChange = (e: any) => {
     e.preventDefault();
@@ -168,21 +163,21 @@ const EditCard = () => {
     }, 130);
   };
 
-  const onClickLoctionList = useCallback(
-    (e: React.MouseEvent<HTMLLIElement>) => {
-      if (!refLocation.current) return;
+  const onClickLoctionList = (e: React.MouseEvent<HTMLLIElement>) => {
+    if (!refLocation.current) return;
+    //@ts-ignore
+    refLocation.current.value = e.target.innerHTML;
+
+    setLocation(refLocation.current.value);
+
+    console.log(
+      "input:",
+      refLocation.current.value,
+      "list:",
       //@ts-ignore
-      refLocation.current.value = e.target.innerHTML;
-      console.log(
-        "input:",
-        refLocation.current.value,
-        "list:",
-        //@ts-ignore
-        e.target.innerHTML
-      );
-    },
-    []
-  );
+      e.target.innerHTML
+    );
+  };
 
   const onLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (timer) clearTimeout(timer);
@@ -190,8 +185,6 @@ const EditCard = () => {
     timer = setTimeout(() => {
       setLocation(e.target.value);
       console.log("location: ", location);
-
-      // TODO: 지역명 검색 API 호출
     }, 200);
   };
 
@@ -255,16 +248,16 @@ const EditCard = () => {
           break;
       }
 
-      if (validationItems.includes("")) {
-        Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
-        return;
-      }
+      // if (validationItems.includes("")) {
+      //   Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
+      //   return;
+      // }
 
       const file = refInputFile.current?.files?.[0];
 
       // API 호출
       editPost({
-        id,
+        id: post.id,
         category,
         title,
         location,
@@ -278,21 +271,25 @@ const EditCard = () => {
         image: file || undefined,
       })
         .then((res) => {
+          console.log("title", title);
+          console.log("file", file);
           Swal.fire("포토카드 수정 완료!", "", "success");
-          navigate("/mypage");
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          navigate("/mypage");
         });
     },
     [
       category,
       date,
-      id,
       location,
       memo,
       menu,
       navigate,
+      post.id,
       price,
       score,
       tagList,
@@ -352,6 +349,7 @@ const EditCard = () => {
               type="text"
               name="location"
               placeholder="ex) 제주, 부산, 속초"
+              defaultValue={location}
               ref={refLocation}
               onChange={onLocation}
             />

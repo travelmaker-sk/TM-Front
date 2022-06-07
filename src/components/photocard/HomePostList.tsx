@@ -10,9 +10,11 @@ import {
 
 const HomePostList = ({ list, category }: PostListType) => {
   const navigate = useNavigate();
+
   const onHomeMore = () => {
     navigate(`/more?category=${category}`);
   };
+
   return (
     <PostListBlock>
       <PostListTitle category={category} />
