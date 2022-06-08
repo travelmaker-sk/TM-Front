@@ -172,14 +172,15 @@ const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
           if (res) {
             close();
             Swal.fire("포토카드 삭제 완료!", "", "success");
+            navigate("/mypage");
           }
         })
         .catch((err) => {
           console.warn(err);
-        })
-        .finally(() => {
-          navigate("/mypage");
         });
+      // .finally(() => {
+      //   navigate("/mypage");
+      // });
     },
     [close, navigate, post?.id]
   );

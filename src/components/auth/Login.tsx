@@ -173,13 +173,11 @@ const Login = () => {
             setError("아이디나 비밀번호가 일치하지 않습니다.");
           } else {
             setError("");
+            navigate("/");
           }
         })
         .catch((err) => {
           console.warn(err);
-        })
-        .finally(() => {
-          navigate("/");
         });
     },
     [navigate]

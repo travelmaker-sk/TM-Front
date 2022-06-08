@@ -23,8 +23,6 @@ const Bookmarks = ({ user }: BookmarkType) => {
       })
       .catch((err) => {
         console.warn(err);
-      })
-      .finally(() => {
         navigate("/bookmarks");
       });
   }, [navigate]);

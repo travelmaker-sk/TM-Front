@@ -32,12 +32,10 @@ export type AllPostsCategoryType =
   | "store"
   | "lodging";
 
-export type CategoryType = "place" | "store" | "lodging" | string;
-
 export interface GetPostType {
   viewCount: number;
   id: number;
-  category: CategoryType;
+  category: string;
   title: string;
   location: string;
   date: string;
@@ -65,7 +63,7 @@ export interface PostType {
 }
 
 export interface AddPostType {
-  category: CategoryType;
+  category: string;
   title: string;
   location: string;
   date: string;

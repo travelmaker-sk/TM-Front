@@ -85,16 +85,16 @@ const MorePage = () => {
       })
       .catch((err) => {
         console.warn(err);
-      })
-      .finally(() => {
-        if (query.where && query.what) {
-          navigate(
-            `/more?where=${query.where}&what=${query.what}&category=${query.category}`
-          );
-        } else {
-          navigate(`/more?category=${query.category}`);
-        }
       });
+    // .finally(() => {
+    //   // if (query.where && query.what) {
+    //   //   navigate(
+    //   //     `/more?where=${query.where}&what=${query.what}&category=${query.category}`
+    //   //   );
+    //   // } else {
+    //   //   navigate(`/more?category=${query.category}`);
+    //   // }
+    // });
     console.log("search", sort, currentPage);
   }, [
     currentPage,

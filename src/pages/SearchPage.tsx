@@ -106,10 +106,10 @@ const SearchPage = (props: any) => {
       })
       .catch((err) => {
         console.warn(err);
-      })
-      .finally(() => {
-        navigate(`/search?where=${query.where}&what=${query.what}`);
       });
+    // .finally(() => {
+    //   // navigate(`/search?where=${query.where}&what=${query.what}`);
+    // });
   }, [navigate, query.what, query.where]);
 
   return (

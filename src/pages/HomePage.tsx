@@ -59,17 +59,20 @@ const HomePage = () => {
       setLoading(true);
 
       // API 호출
-      loadPost(8)
+      loadPost(10)
         .then((res) => {
           setTestPost(res);
+          navigate("/");
         })
         .catch((err) => {
+          // alert("세션 만료?");
           console.warn(err);
-        })
-        .finally(() => {
-          setLoading(false);
-          navigate("/");
         });
+      // .finally(() => {
+      //   setLoading(false);
+      //   navigate("/");
+      //   // window.location.reload();
+      // });
     };
 
     // 포스트 리스트 출력
@@ -81,14 +84,17 @@ const HomePage = () => {
         .then((res) => {
           // @ts-ignore
           setHomePosts(res);
+          navigate("/");
         })
         .catch((err) => {
+          // alert("세션 만료?");
           console.warn(err);
-        })
-        .finally(() => {
-          setLoading(false);
-          navigate("/");
         });
+      // .finally(() => {
+      //   setLoading(false);
+      //   navigate("/");
+      //   // window.location.reload();
+      // });
     };
 
     // 유저 확인
@@ -104,12 +110,13 @@ const HomePage = () => {
           dispatch(setUser({ user: res }));
         })
         .catch((err) => {
+          // alert("세션 만료?");
           console.warn(err);
-        })
-        .finally(() => {
-          setLoading(false);
-          // navigate("/");
         });
+      // .finally(() => {
+      //   setLoading(false);
+      //   // navigate("/");
+      // });
     };
 
     loadTestPost();

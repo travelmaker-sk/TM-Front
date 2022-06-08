@@ -96,15 +96,11 @@ const Register = () => {
             return;
           } else {
             setError("");
+            navigate("/registerAuth", { state: inputEmail });
           }
         })
         .catch((err) => {
           console.warn(err);
-        })
-        .finally(() => {
-          setLoading(false);
-          console.log("2", loading);
-          navigate("/registerAuth", { state: inputEmail });
         });
     },
     [loading, navigate]

@@ -103,13 +103,21 @@ const CardDetail = ({ post, close }: PostType) => {
   // 좋아요
   const onToggleLike = useCallback(() => {
     if (checkLike) {
-      like(6).then((res) => {
-        setNumLike((cnt) => cnt - 1);
-      });
+      like(6)
+        .then((res) => {
+          setNumLike((cnt) => cnt - 1);
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     } else {
-      like(6).then((res) => {
-        setNumLike((cnt) => cnt + 1);
-      });
+      like(6)
+        .then((res) => {
+          setNumLike((cnt) => cnt + 1);
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
     }
     setCheckLike(!checkLike);
   }, [checkLike]);
@@ -126,28 +134,24 @@ const CardDetail = ({ post, close }: PostType) => {
         cancelButtonColor: palette.gray[5],
         confirmButtonText: "확인",
         cancelButtonText: "취소",
-      })
-        .then((result) => {
-          if (result.isConfirmed) {
-            bookmark(6)
-              .then(() => {
-                Swal.fire({
-                  title: "북마크 취소 완료!",
-                  icon: "success",
-                  confirmButtonColor: palette.cyan[5],
-                  confirmButtonText: "확인",
-                });
-
-                setCheckBookmark(!checkBookmark);
-              })
-              .catch((err) => {
-                console.warn(err);
+      }).then((result) => {
+        if (result.isConfirmed) {
+          bookmark(6)
+            .then(() => {
+              Swal.fire({
+                title: "북마크 취소 완료!",
+                icon: "success",
+                confirmButtonColor: palette.cyan[5],
+                confirmButtonText: "확인",
               });
-          }
-        })
-        .catch((err) => {
-          console.warn(err);
-        });
+
+              setCheckBookmark(!checkBookmark);
+            })
+            .catch((err) => {
+              console.warn(err);
+            });
+        }
+      });
     } else {
       Swal.fire({
         title: "북마크를 추가하시겠습니까?",
@@ -157,44 +161,36 @@ const CardDetail = ({ post, close }: PostType) => {
         cancelButtonColor: palette.gray[5],
         confirmButtonText: "확인",
         cancelButtonText: "취소",
-      })
-        .then((result) => {
-          if (result.isConfirmed) {
-            bookmark(6)
-              .then(() => {
-                Swal.fire({
-                  title: "북마크 추가 완료!",
-                  text: "",
-                  icon: "success",
-                  showCancelButton: true,
-                  confirmButtonColor: palette.cyan[5],
-                  cancelButtonColor: palette.gray[5],
-                  confirmButtonText: "내 북마크로 이동",
-                  cancelButtonText: "취소",
-                })
-                  .then((result) => {
-                    if (result.isConfirmed) {
-                      //@ts-ignore
-                      close();
-                      navigate("/bookmarks");
-                    }
-                  })
-                  .catch((err) => {
-                    console.warn(err);
-                  });
-
-                setCheckBookmark(!checkBookmark);
-              })
-              .catch((err) => {
-                console.warn(err);
+      }).then((result) => {
+        if (result.isConfirmed) {
+          bookmark(6)
+            .then(() => {
+              Swal.fire({
+                title: "북마크 추가 완료!",
+                text: "",
+                icon: "success",
+                showCancelButton: true,
+                confirmButtonColor: palette.cyan[5],
+                cancelButtonColor: palette.gray[5],
+                confirmButtonText: "내 북마크로 이동",
+                cancelButtonText: "취소",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  //@ts-ignore
+                  close();
+                  navigate("/bookmarks");
+                }
               });
-          }
-        })
-        .catch((err) => {
-          console.warn(err);
-        });
+
+              setCheckBookmark(!checkBookmark);
+            })
+            .catch((err) => {
+              console.warn(err);
+            });
+        }
+      });
     }
-  }, [checkBookmark, close, navigate, post?.id]);
+  }, [checkBookmark, close, navigate]);
 
   return (
     <>

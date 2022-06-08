@@ -130,10 +130,11 @@ const MyPage = ({ user }: MyPageType) => {
       })
       .catch((err) => {
         console.warn(err);
-      })
-      .finally(() => {
         navigate("/mypage");
       });
+    // .finally(() => {
+    //   navigate("/mypage");
+    // });
   }, [navigate]);
 
   return (

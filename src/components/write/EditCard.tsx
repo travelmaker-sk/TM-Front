@@ -273,13 +273,14 @@ const EditCard = () => {
           console.log("title", title);
           console.log("file", file);
           Swal.fire("포토카드 수정 완료!", "", "success");
+          navigate("/mypage");
         })
         .catch((err) => {
           console.warn(err);
-        })
-        .finally(() => {
-          navigate("/mypage");
         });
+      // .finally(() => {
+      //   navigate("/mypage");
+      // });
     },
     [
       category,

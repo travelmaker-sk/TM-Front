@@ -464,13 +464,21 @@ const CreateCard = () => {
         image: file || undefined,
       })
         .then(() => {
-          Swal.fire("포토카드 생성 완료!", "", "success");
+          Swal.fire({
+            title: "포토카드 생성 완료!",
+            text: "",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: palette.cyan[5],
+            confirmButtonText: "확인",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
         })
         .catch((err) => {
           console.warn(err);
-        })
-        .finally(() => {
-          navigate("/");
         });
     },
     [

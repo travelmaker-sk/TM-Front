@@ -67,14 +67,15 @@ const Quit = ({ user }: QuitType) => {
             setError("");
             dispatch(logout());
             localStorage.removeItem("tm-token");
+            navigate("/quitFin");
           }
         })
         .catch((err) => {
           console.warn(err);
-        })
-        .finally(() => {
-          navigate("/quitFin");
         });
+      // .finally(() => {
+      //   navigate("/quitFin");
+      // });
     },
     [dispatch, navigate]
   );
