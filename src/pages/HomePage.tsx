@@ -14,7 +14,6 @@ import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
 import Post from "../components/photocard/Post";
 import { useNavigate } from "react-router";
-import { Loading } from "../components/common/Loading";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -31,8 +30,6 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false);
-
   const [testPost, setTestPost] = useState(null);
 
   const [homePosts, setHomePosts] = useState<AllPostsType>({
@@ -45,10 +42,10 @@ const HomePage = () => {
     placeList: {
       content: [],
     },
-    restaurantList: {
+    storeList: {
       content: [],
     },
-    accommodationList: {
+    lodgingList: {
       content: [],
     },
   });
@@ -56,51 +53,35 @@ const HomePage = () => {
   useEffect(() => {
     // 테스트 포스트 출력
     const loadTestPost = () => {
-      setLoading(true);
-
       // API 호출
-      loadPost(10)
+      loadPost(11)
         .then((res) => {
           setTestPost(res);
-          navigate("/");
+          // navigate("/");
         })
         .catch((err) => {
           // alert("세션 만료?");
           console.warn(err);
         });
-      // .finally(() => {
-      //   setLoading(false);
-      //   navigate("/");
-      //   // window.location.reload();
-      // });
     };
 
     // 포스트 리스트 출력
     const loadHomePosts = () => {
-      setLoading(true);
-
       // API 호출
       listPosts()
         .then((res) => {
           // @ts-ignore
           setHomePosts(res);
-          navigate("/");
+          // navigate("/");
         })
         .catch((err) => {
           // alert("세션 만료?");
           console.warn(err);
         });
-      // .finally(() => {
-      //   setLoading(false);
-      //   navigate("/");
-      //   // window.location.reload();
-      // });
     };
 
     // 유저 확인
     const loadUser = () => {
-      setLoading(true);
-
       let token = localStorage.getItem("tm-token");
       if (!token) return;
 
@@ -113,16 +94,12 @@ const HomePage = () => {
           // alert("세션 만료?");
           console.warn(err);
         });
-      // .finally(() => {
-      //   setLoading(false);
-      //   // navigate("/");
-      // });
     };
 
     loadTestPost();
     loadUser();
     loadHomePosts();
-  }, [dispatch, navigate]);
+  }, [dispatch]);
 
   return (
     <>
@@ -130,21 +107,13 @@ const HomePage = () => {
         <Header />
         <Search />
         <Swiper />
-        <Post post={testPost} key={testPost} my={true} />
         <HomePostList list={homePosts.popularList.content} category="popular" />
         <HomePostList list={homePosts.recentList.content} category="recent" />
         <HomePostList list={homePosts.placeList.content} category="place" />
-        <HomePostList
-          list={homePosts.restaurantList.content}
-          category="store"
-        />
-        <HomePostList
-          list={homePosts.accommodationList.content}
-          category="lodging"
-        />
+        <HomePostList list={homePosts.storeList.content} category="store" />
+        <HomePostList list={homePosts.lodgingList.content} category="lodging" />
         <Footer />
       </Wrapper>
-      {loading ? <Loading /> : ""}
     </>
   );
 };

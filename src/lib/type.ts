@@ -17,10 +17,10 @@ export interface AllPostsType {
   placeList: {
     content: GetPostType[];
   };
-  restaurantList: {
+  storeList: {
     content: GetPostType[];
   };
-  accommodationList: {
+  lodgingList: {
     content: GetPostType[];
   };
 }

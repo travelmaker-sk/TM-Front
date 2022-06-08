@@ -272,15 +272,12 @@ const EditCard = () => {
         .then((res) => {
           console.log("title", title);
           console.log("file", file);
-          Swal.fire("포토카드 수정 완료!", "", "success");
           navigate("/mypage");
+          Swal.fire("포토카드 수정 완료!", "", "success");
         })
         .catch((err) => {
           console.warn(err);
         });
-      // .finally(() => {
-      //   navigate("/mypage");
-      // });
     },
     [
       category,
@@ -506,7 +503,7 @@ const EditCard = () => {
         </CreateCardStyle>
         <SelectButtonStyle>
           <CyanButtonStyle>
-            <button type="submit" onClick={onSubmit}>
+            <button type="button" onClick={onSubmit}>
               수정
             </button>
           </CyanButtonStyle>

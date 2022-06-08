@@ -7,13 +7,14 @@ import {
   CyanButtonStyle,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
-import { addPost } from "../../lib/api/write";
+import { addPost, editPost } from "../../lib/api/write";
 import { useNavigate } from "react-router";
 import areaData from "../../lib/json/areaData.json";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 export const SelectCategory = styled.div`
   margin-bottom: 80px;
@@ -463,19 +464,9 @@ const CreateCard = () => {
         tagList: tagList.length ? tagList : undefined,
         image: file || undefined,
       })
-        .then(() => {
-          Swal.fire({
-            title: "포토카드 생성 완료!",
-            text: "",
-            icon: "success",
-            showCancelButton: false,
-            confirmButtonColor: palette.cyan[5],
-            confirmButtonText: "확인",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate("/");
-            }
-          });
+        .then((res) => {
+          navigate("/");
+          Swal.fire("포토카드 생성 완료!", "", "success");
         })
         .catch((err) => {
           console.warn(err);
@@ -716,7 +707,7 @@ const CreateCard = () => {
           </CreateCardStyle>
           <SelectButtonStyle>
             <CyanButtonStyle>
-              <button type="submit" onClick={onSubmit}>
+              <button type="button" onClick={onSubmit}>
                 업로드
               </button>
             </CyanButtonStyle>

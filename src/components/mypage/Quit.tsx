@@ -73,9 +73,6 @@ const Quit = ({ user }: QuitType) => {
         .catch((err) => {
           console.warn(err);
         });
-      // .finally(() => {
-      //   navigate("/quitFin");
-      // });
     },
     [dispatch, navigate]
   );

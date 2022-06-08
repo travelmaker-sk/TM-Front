@@ -89,10 +89,10 @@ const SearchPage = (props: any) => {
     placeList: {
       content: [],
     },
-    restaurantList: {
+    storeList: {
       content: [],
     },
-    accommodationList: {
+    lodgingList: {
       content: [],
     },
   });
@@ -107,9 +107,6 @@ const SearchPage = (props: any) => {
       .catch((err) => {
         console.warn(err);
       });
-    // .finally(() => {
-    //   // navigate(`/search?where=${query.where}&what=${query.what}`);
-    // });
   }, [navigate, query.what, query.where]);
 
   return (
@@ -143,13 +140,13 @@ const SearchPage = (props: any) => {
         what={query.what}
       />
       <SearchPostList
-        list={posts.restaurantList.content}
+        list={posts.storeList.content}
         category="store"
         where={query.where}
         what={query.what}
       />
       <SearchPostList
-        list={posts.accommodationList.content}
+        list={posts.lodgingList.content}
         category="lodging"
         where={query.where}
         what={query.what}
