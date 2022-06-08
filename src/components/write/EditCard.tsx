@@ -38,7 +38,6 @@ const CardDatePicker = styled(DatePicker)`
   padding: 8px 20px;
   border-radius: 4px;
   border: 1px solid ${palette.gray[5]};
-  font-size: 14px;
 `;
 
 // 평점

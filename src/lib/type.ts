@@ -8,11 +8,21 @@ export interface UserType {
 }
 
 export interface AllPostsType {
-  popular: GetPostType[];
-  recent: GetPostType[];
-  place: GetPostType[];
-  store: GetPostType[];
-  lodging: GetPostType[];
+  popularList: {
+    content: GetPostType[];
+  };
+  recentList: {
+    content: GetPostType[];
+  };
+  placeList: {
+    content: GetPostType[];
+  };
+  restaurantList: {
+    content: GetPostType[];
+  };
+  accommodationList: {
+    content: GetPostType[];
+  };
 }
 
 export type AllPostsCategoryType =

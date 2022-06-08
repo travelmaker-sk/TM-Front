@@ -78,10 +78,10 @@ const MorePage = () => {
       query.where as string,
       query.what as string
     )
-      .then(({ totalCount, list }) => {
-        const totalPageCount = Math.ceil(totalCount / itemPerPage);
-        setTotalPage(totalPageCount);
-        setPosts(list);
+      .then((res) => {
+        // const totalPageCount = Math.ceil(res.totalPages / itemPerPage);
+        setTotalPage(res.totalPages);
+        setPosts(res.content);
       })
       .catch((err) => {
         console.warn(err);

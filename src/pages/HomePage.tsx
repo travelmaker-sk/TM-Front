@@ -36,11 +36,21 @@ const HomePage = () => {
   const [testPost, setTestPost] = useState(null);
 
   const [homePosts, setHomePosts] = useState<AllPostsType>({
-    popular: [],
-    recent: [],
-    place: [],
-    store: [],
-    lodging: [],
+    popularList: {
+      content: [],
+    },
+    recentList: {
+      content: [],
+    },
+    placeList: {
+      content: [],
+    },
+    restaurantList: {
+      content: [],
+    },
+    accommodationList: {
+      content: [],
+    },
   });
 
   useEffect(() => {
@@ -114,11 +124,17 @@ const HomePage = () => {
         <Search />
         <Swiper />
         <Post post={testPost} key={testPost} my={true} />
-        <HomePostList list={homePosts.popular} category="popular" />
-        <HomePostList list={homePosts.recent} category="recent" />
-        <HomePostList list={homePosts.place} category="place" />
-        <HomePostList list={homePosts.store} category="store" />
-        <HomePostList list={homePosts.lodging} category="lodging" />
+        <HomePostList list={homePosts.popularList.content} category="popular" />
+        <HomePostList list={homePosts.recentList.content} category="recent" />
+        <HomePostList list={homePosts.placeList.content} category="place" />
+        <HomePostList
+          list={homePosts.restaurantList.content}
+          category="store"
+        />
+        <HomePostList
+          list={homePosts.accommodationList.content}
+          category="lodging"
+        />
         <Footer />
       </Wrapper>
       {loading ? <Loading /> : ""}

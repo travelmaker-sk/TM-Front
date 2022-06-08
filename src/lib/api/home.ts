@@ -26,7 +26,7 @@ export const listPosts = async (where?: string, what?: string) => {
   if (where) params.where = where;
   if (what) params.what = what;
 
-  const response = await axios.get("/listPosts", {
+  const response = await axios.get("/total/api/search", {
     params,
     headers: {
       Authorization: `${token}`,
@@ -79,7 +79,7 @@ export const morePosts = async (
   if (where) params.where = where;
   if (what) params.what = what;
 
-  const response = await axios.get("/morePosts", {
+  const response = await axios.get("/totla/api/more", {
     params,
     headers: {
       Authorization: `${token}`,
