@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
-import { Wrapper } from "../../pages/HomePage";
-import Footer from "../common/Footer";
-import Header from "../common/Header";
 import Swal from "sweetalert2";
 import {
   GrayButtonStyle,
@@ -41,7 +38,6 @@ const CardDatePicker = styled(DatePicker)`
   padding: 8px 20px;
   border-radius: 4px;
   border: 1px solid ${palette.gray[5]};
-  font-size: 14px;
 `;
 
 // 평점
@@ -77,7 +73,7 @@ interface EditCardType {
   price?: string;
   memo?: string;
   tagList?: Array<string>;
-  imageUrl?: string;
+  image?: string;
 }
 
 let timer: NodeJS.Timeout | null = null;
@@ -90,7 +86,6 @@ const EditCard = () => {
 
   const refInputFile = useRef<HTMLInputElement>(null);
 
-  const [id, setId] = useState(post.id);
   const [category, setCategory] = useState(post.category);
   const [title, setTitle] = useState(post.title);
   const [location, setLocation] = useState(post.location);
@@ -103,9 +98,6 @@ const EditCard = () => {
   const [memo, setMemo] = useState(post.memo ? post.memo : "");
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState(post.tagList ? post.tagList : []);
-  const [postImage, setPostImage] = useState(
-    post.imageUrl ? post.imageUrl : ""
-  );
 
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedStore, setSelectedStore] = useState(false);
@@ -139,7 +131,9 @@ const EditCard = () => {
   // 포토카드 이미지 업로드
   const [cardImage, setCardImage] = useState({
     cardImageName: "",
-    cardImageUrl: postImage ? postImage : "./images/add-photo.png",
+    cardImageUrl: post.image
+      ? `./PhotoCard/${post.image}`
+      : "./images/add-photo.png",
   });
   const cardPhotoChange = (e: any) => {
     e.preventDefault();
@@ -168,21 +162,21 @@ const EditCard = () => {
     }, 130);
   };
 
-  const onClickLoctionList = useCallback(
-    (e: React.MouseEvent<HTMLLIElement>) => {
-      if (!refLocation.current) return;
+  const onClickLoctionList = (e: React.MouseEvent<HTMLLIElement>) => {
+    if (!refLocation.current) return;
+    //@ts-ignore
+    refLocation.current.value = e.target.innerHTML;
+
+    setLocation(refLocation.current.value);
+
+    console.log(
+      "input:",
+      refLocation.current.value,
+      "list:",
       //@ts-ignore
-      refLocation.current.value = e.target.innerHTML;
-      console.log(
-        "input:",
-        refLocation.current.value,
-        "list:",
-        //@ts-ignore
-        e.target.innerHTML
-      );
-    },
-    []
-  );
+      e.target.innerHTML
+    );
+  };
 
   const onLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (timer) clearTimeout(timer);
@@ -190,8 +184,6 @@ const EditCard = () => {
     timer = setTimeout(() => {
       setLocation(e.target.value);
       console.log("location: ", location);
-
-      // TODO: 지역명 검색 API 호출
     }, 200);
   };
 
@@ -264,7 +256,7 @@ const EditCard = () => {
 
       // API 호출
       editPost({
-        id,
+        id: post.id,
         category,
         title,
         location,
@@ -278,8 +270,10 @@ const EditCard = () => {
         image: file || undefined,
       })
         .then((res) => {
-          Swal.fire("포토카드 수정 완료!", "", "success");
+          console.log("title", title);
+          console.log("file", file);
           navigate("/mypage");
+          Swal.fire("포토카드 수정 완료!", "", "success");
         })
         .catch((err) => {
           console.warn(err);
@@ -288,11 +282,11 @@ const EditCard = () => {
     [
       category,
       date,
-      id,
       location,
       memo,
       menu,
       navigate,
+      post.id,
       price,
       score,
       tagList,
@@ -352,6 +346,7 @@ const EditCard = () => {
               type="text"
               name="location"
               placeholder="ex) 제주, 부산, 속초"
+              defaultValue={location}
               ref={refLocation}
               onChange={onLocation}
             />
@@ -508,7 +503,7 @@ const EditCard = () => {
         </CreateCardStyle>
         <SelectButtonStyle>
           <CyanButtonStyle>
-            <button type="submit" onClick={onSubmit}>
+            <button type="button" onClick={onSubmit}>
               수정
             </button>
           </CyanButtonStyle>

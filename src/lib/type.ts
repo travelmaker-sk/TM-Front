@@ -8,11 +8,21 @@ export interface UserType {
 }
 
 export interface AllPostsType {
-  popular: GetPostType[];
-  recent: GetPostType[];
-  place: GetPostType[];
-  store: GetPostType[];
-  lodging: GetPostType[];
+  popularList: {
+    content: GetPostType[];
+  };
+  recentList: {
+    content: GetPostType[];
+  };
+  placeList: {
+    content: GetPostType[];
+  };
+  storeList: {
+    content: GetPostType[];
+  };
+  lodgingList: {
+    content: GetPostType[];
+  };
 }
 
 export type AllPostsCategoryType =
@@ -22,12 +32,10 @@ export type AllPostsCategoryType =
   | "store"
   | "lodging";
 
-export type CategoryType = "place" | "store" | "lodging" | string;
-
 export interface GetPostType {
   viewCount: number;
   id: number;
-  category: CategoryType;
+  category: string;
   title: string;
   location: string;
   date: string;
@@ -55,7 +63,7 @@ export interface PostType {
 }
 
 export interface AddPostType {
-  category: CategoryType;
+  category: string;
   title: string;
   location: string;
   date: string;

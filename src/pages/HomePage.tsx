@@ -13,6 +13,7 @@ import PostList from "../components/photocard/SearchPostList";
 import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
 import Post from "../components/photocard/Post";
+import { useNavigate } from "react-router";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -27,37 +28,59 @@ export const Wrapper = styled(Responsive)`
 const HomePage = () => {
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const [testPost, setTestPost] = useState(null);
-  useEffect(() => {
-    const loadTestPost = () => {
-      loadPost(6).then((res) => {
-        setTestPost(res);
-      });
-    };
-    loadTestPost();
-  }, []);
 
   const [homePosts, setHomePosts] = useState<AllPostsType>({
-    popular: [],
-    recent: [],
-    place: [],
-    store: [],
-    lodging: [],
+    popularList: {
+      content: [],
+    },
+    recentList: {
+      content: [],
+    },
+    placeList: {
+      content: [],
+    },
+    storeList: {
+      content: [],
+    },
+    lodgingList: {
+      content: [],
+    },
   });
 
   useEffect(() => {
+    // 테스트 포스트 출력
+    const loadTestPost = () => {
+      // API 호출
+      loadPost(11)
+        .then((res) => {
+          setTestPost(res);
+          // navigate("/");
+        })
+        .catch((err) => {
+          // alert("세션 만료?");
+          console.warn(err);
+        });
+    };
+
+    // 포스트 리스트 출력
     const loadHomePosts = () => {
       // API 호출
       listPosts()
         .then((res) => {
           // @ts-ignore
           setHomePosts(res);
+          // navigate("/");
         })
         .catch((err) => {
+          // alert("세션 만료?");
           console.warn(err);
         });
     };
 
+    // 유저 확인
     const loadUser = () => {
       let token = localStorage.getItem("tm-token");
       if (!token) return;
@@ -68,27 +91,30 @@ const HomePage = () => {
           dispatch(setUser({ user: res }));
         })
         .catch((err) => {
+          // alert("세션 만료?");
           console.warn(err);
         });
     };
 
+    loadTestPost();
     loadUser();
     loadHomePosts();
   }, [dispatch]);
 
   return (
-    <Wrapper>
-      <Header />
-      <Search />
-      <Swiper />
-      <Post post={testPost} key={testPost} />
-      <HomePostList list={homePosts.popular} category="popular" />
-      <HomePostList list={homePosts.recent} category="recent" />
-      <HomePostList list={homePosts.place} category="place" />
-      <HomePostList list={homePosts.store} category="store" />
-      <HomePostList list={homePosts.lodging} category="lodging" />
-      <Footer />
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Header />
+        <Search />
+        <Swiper />
+        <HomePostList list={homePosts.popularList.content} category="popular" />
+        <HomePostList list={homePosts.recentList.content} category="recent" />
+        <HomePostList list={homePosts.placeList.content} category="place" />
+        <HomePostList list={homePosts.storeList.content} category="store" />
+        <HomePostList list={homePosts.lodgingList.content} category="lodging" />
+        <Footer />
+      </Wrapper>
+    </>
   );
 };
 

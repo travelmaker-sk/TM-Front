@@ -8,6 +8,7 @@ import { register } from "../../lib/api/auth";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Loading } from "../common/Loading";
 
 interface RegisterType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -48,6 +49,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const { state } = useLocation();
   useEffect(() => {
@@ -65,6 +67,9 @@ const Register = () => {
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
+      setLoading(true);
+      console.log("1", loading);
 
       const form = e.target as HTMLFormElement;
       const $inputs = Array.from(form.querySelectorAll("input"));
@@ -98,50 +103,53 @@ const Register = () => {
           console.warn(err);
         });
     },
-    [navigate]
+    [loading, navigate]
   );
 
   return (
-    <RegisterBlock>
-      <h2>
-        <b>트레블메이커</b>와 함께 하세요!
-      </h2>
-      <form onSubmit={onSubmit}>
-        <Input
-          type="text"
-          name="id"
-          autoComplete="username"
-          placeholder="아이디"
-        />
-        <Input
-          type="email"
-          name="email"
-          autoComplete="email"
-          placeholder="이메일"
-        />
-        <Input
-          type="password"
-          name="password"
-          autoComplete="new-password"
-          placeholder="비밀번호"
-        />
-        <Input
-          type="password"
-          name="confirm-password"
-          autoComplete="new-password"
-          placeholder="비밀번호 확인"
-        />
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        <CyanButtonStyle>
-          <button type="submit" className="register-btn">
-            회원가입
-          </button>
-        </CyanButtonStyle>
-      </form>
-      <div className="sub-register">
-        <Link to="/login">로그인</Link>
-      </div>
-    </RegisterBlock>
+    <>
+      <RegisterBlock>
+        <h2>
+          <b>트레블메이커</b>와 함께 하세요!
+        </h2>
+        <form onSubmit={onSubmit}>
+          <Input
+            type="text"
+            name="id"
+            autoComplete="username"
+            placeholder="아이디"
+          />
+          <Input
+            type="email"
+            name="email"
+            autoComplete="email"
+            placeholder="이메일"
+          />
+          <Input
+            type="password"
+            name="password"
+            autoComplete="new-password"
+            placeholder="비밀번호"
+          />
+          <Input
+            type="password"
+            name="confirm-password"
+            autoComplete="new-password"
+            placeholder="비밀번호 확인"
+          />
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          <CyanButtonStyle>
+            <button type="submit" className="register-btn">
+              회원가입
+            </button>
+          </CyanButtonStyle>
+        </form>
+        <div className="sub-register">
+          <Link to="/login">로그인</Link>
+        </div>
+      </RegisterBlock>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 

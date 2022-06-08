@@ -74,7 +74,7 @@ const Quit = ({ user }: QuitType) => {
           console.warn(err);
         });
     },
-    [navigate]
+    [dispatch, navigate]
   );
 
   return (

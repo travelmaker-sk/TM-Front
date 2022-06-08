@@ -11,6 +11,7 @@ import { morePosts } from "../lib/api/home";
 import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";
 import queryString from "query-string";
+import { useNavigate } from "react-router";
 
 const SelectSort = styled(SelectCategory)`
   display: flex;
@@ -34,6 +35,7 @@ const Pagination = styled.div`
 `;
 
 const MorePage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
@@ -76,16 +78,24 @@ const MorePage = () => {
       query.where as string,
       query.what as string
     )
-      .then(({ totalCount, list }) => {
-        const totalPageCount = Math.ceil(totalCount / itemPerPage);
-        setTotalPage(totalPageCount);
-        setPosts(list);
+      .then((res) => {
+        // const totalPageCount = Math.ceil(res.totalPages / itemPerPage);
+        setTotalPage(res.totalPages);
+        setPosts(res.content);
       })
       .catch((err) => {
         console.warn(err);
       });
     console.log("search", sort, currentPage);
-  }, [currentPage, itemPerPage, query.category, query.what, query.where, sort]);
+  }, [
+    currentPage,
+    itemPerPage,
+    navigate,
+    query.category,
+    query.what,
+    query.where,
+    sort,
+  ]);
 
   return (
     <Wrapper>

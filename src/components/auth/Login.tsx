@@ -171,7 +171,6 @@ const Login = () => {
 
           if (token === "undefined") {
             setError("아이디나 비밀번호가 일치하지 않습니다.");
-            return;
           } else {
             setError("");
             navigate("/");

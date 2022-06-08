@@ -7,13 +7,14 @@ import {
   CyanButtonStyle,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
-import { addPost } from "../../lib/api/write";
+import { addPost, editPost } from "../../lib/api/write";
 import { useNavigate } from "react-router";
 import areaData from "../../lib/json/areaData.json";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 export const SelectCategory = styled.div`
   margin-bottom: 80px;
@@ -181,7 +182,6 @@ const CardDatePicker = styled(DatePicker)`
   padding: 8px 20px;
   border-radius: 4px;
   // border: 1px solid ${palette.gray[5]};
-  font-size: 14px;
 `;
 
 // 평점
@@ -364,6 +364,9 @@ const CreateCard = () => {
       if (!refLocation.current) return;
       //@ts-ignore
       refLocation.current.value = e.target.innerHTML;
+
+      setLocation(refLocation.current.value);
+
       console.log(
         "input:",
         refLocation.current.value,
@@ -381,8 +384,6 @@ const CreateCard = () => {
     timer = setTimeout(() => {
       setLocation(e.target.value);
       console.log("location: ", location);
-
-      // TODO: 지역명 검색 API 호출
     }, 200);
   };
 
@@ -442,10 +443,10 @@ const CreateCard = () => {
           break;
       }
 
-      // if (validationItems.includes("")) {
-      //   Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
-      //   return;
-      // }
+      if (validationItems.includes("")) {
+        Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
+        return;
+      }
 
       const file = refInputFile.current?.files?.[0];
 
@@ -463,9 +464,9 @@ const CreateCard = () => {
         tagList: tagList.length ? tagList : undefined,
         image: file || undefined,
       })
-        .then(() => {
-          Swal.fire("포토카드 생성 완료!", "", "success");
+        .then((res) => {
           navigate("/");
+          Swal.fire("포토카드 생성 완료!", "", "success");
         })
         .catch((err) => {
           console.warn(err);
@@ -555,6 +556,7 @@ const CreateCard = () => {
                 type="text"
                 name="location"
                 placeholder="ex) 제주, 부산, 속초"
+                defaultValue={location}
                 ref={refLocation}
                 onChange={onLocation}
               />
@@ -705,7 +707,7 @@ const CreateCard = () => {
           </CreateCardStyle>
           <SelectButtonStyle>
             <CyanButtonStyle>
-              <button type="submit" onClick={onSubmit}>
+              <button type="button" onClick={onSubmit}>
                 업로드
               </button>
             </CyanButtonStyle>

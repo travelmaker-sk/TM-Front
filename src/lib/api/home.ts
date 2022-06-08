@@ -3,10 +3,10 @@ import popularWhere from "../json/popularWhere.json";
 import postsData from "../json/posts.json";
 import mypostsData from "../json/myposts.json";
 
-let token = localStorage.getItem("tm-token");
-
-// 포토카드 삭제
+// 테스트
 export const loadPost = async (id: number) => {
+  let token = localStorage.getItem("tm-token");
+
   const response = await axios.get(`/total/api/detailresponse/${id}`, {
     headers: {
       Authorization: `${token}`,
@@ -19,12 +19,14 @@ export const loadPost = async (id: number) => {
 // 포스트 리스트 5개
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
 export const listPosts = async (where?: string, what?: string) => {
+  let token = localStorage.getItem("tm-token");
+
   const params: Record<string, any> = {};
 
   if (where) params.where = where;
   if (what) params.what = what;
 
-  const response = await axios.get("/listPosts", {
+  const response = await axios.get("/total/api/search", {
     params,
     headers: {
       Authorization: `${token}`,
@@ -66,6 +68,8 @@ export const morePosts = async (
   where?: string,
   what?: string
 ) => {
+  let token = localStorage.getItem("tm-token");
+
   const params: Record<string, any> = {
     category,
     sort,
@@ -75,7 +79,7 @@ export const morePosts = async (
   if (where) params.where = where;
   if (what) params.what = what;
 
-  const response = await axios.get("/morePosts", {
+  const response = await axios.get("/totla/api/more", {
     params,
     headers: {
       Authorization: `${token}`,
@@ -121,6 +125,8 @@ export const morePosts = async (
 
 // 마이페이지 포스트
 export const myPosts = async () => {
+  let token = localStorage.getItem("tm-token");
+
   const response = await axios.get("/myPosts", {
     headers: {
       Authorization: `${token}`,
@@ -138,6 +144,8 @@ export const myPosts = async () => {
 
 // 북마크 페이지 포스트
 export const myBookmarks = async () => {
+  let token = localStorage.getItem("tm-token");
+
   const response = await axios.get("/myBookmarks", {
     headers: {
       Authorization: `${token}`,
@@ -155,6 +163,8 @@ export const myBookmarks = async () => {
 
 // 인기 여행지 TOP7
 export const popularArea = async () => {
+  let token = localStorage.getItem("tm-token");
+
   const response = await axios.get("/popularWhere", {
     headers: {
       Authorization: `${token}`,

@@ -72,8 +72,6 @@ const Card = ({ post, onOpenModal }: ICard) => {
     []
   );
 
-  console.log("imageUrl", post?.image);
-
   return (
     <CardUl
       ref={refCard}
@@ -84,7 +82,7 @@ const Card = ({ post, onOpenModal }: ICard) => {
         <img
           src={
             post?.image
-              ? `C:\Temp\spring\project\${post.image}`
+              ? `./PhotoCard/${post.image}`
               : "./images/default-photo.png"
           }
           alt="PhotocardImage"

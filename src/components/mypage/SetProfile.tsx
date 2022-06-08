@@ -80,8 +80,6 @@ const QuitLinkButton = styled(LinkButton)`
 `;
 
 const SetProfile = () => {
-  const navigate = useNavigate();
-
   const [error, setError] = useState<string | null>(null);
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
@@ -116,14 +114,11 @@ const SetProfile = () => {
     });
   };
 
-  const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      // TODO. API 호출
-    },
-    [navigate]
-  );
+    // TODO. API 호출
+  }, []);
 
   return (
     <SetProfileBlock>

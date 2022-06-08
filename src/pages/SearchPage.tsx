@@ -80,24 +80,34 @@ const SearchPage = (props: any) => {
   const query = queryString.parse(searchParams);
 
   const [posts, setposts] = useState<AllPostsType>({
-    popular: [],
-    recent: [],
-    place: [],
-    store: [],
-    lodging: [],
+    popularList: {
+      content: [],
+    },
+    recentList: {
+      content: [],
+    },
+    placeList: {
+      content: [],
+    },
+    storeList: {
+      content: [],
+    },
+    lodgingList: {
+      content: [],
+    },
   });
 
   useEffect(() => {
     // API 호출
     listPosts(query.where as string, query.what as string)
-      .then((list) => {
+      .then((res) => {
         // @ts-ignore
-        setposts(list);
+        setposts(res);
       })
       .catch((err) => {
         console.warn(err);
       });
-  }, [query.what, query.where]);
+  }, [navigate, query.what, query.where]);
 
   return (
     <Wrapper>
@@ -112,31 +122,31 @@ const SearchPage = (props: any) => {
         </h3>
       </SearchTitle>
       <SearchPostList
-        list={posts.popular}
+        list={posts.popularList.content}
         category="popular"
         where={query.where}
         what={query.what}
       />
       <SearchPostList
-        list={posts.recent}
+        list={posts.recentList.content}
         category="recent"
         where={query.where}
         what={query.what}
       />
       <SearchPostList
-        list={posts.place}
+        list={posts.placeList.content}
         category="place"
         where={query.where}
         what={query.what}
       />
       <SearchPostList
-        list={posts.store}
+        list={posts.storeList.content}
         category="store"
         where={query.where}
         what={query.what}
       />
       <SearchPostList
-        list={posts.lodging}
+        list={posts.lodgingList.content}
         category="lodging"
         where={query.where}
         what={query.what}

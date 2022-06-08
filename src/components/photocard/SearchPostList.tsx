@@ -68,9 +68,11 @@ export const MoreButton = styled.button`
 
 const SearchPostList = ({ list, category, where, what }: PostListType) => {
   const navigate = useNavigate();
+
   const onDetailMore = () => {
     navigate(`/more?where=${where}&what=${what}&category=${category}`);
   };
+
   return (
     <PostListBlock>
       <PostListTitle category={category} />
