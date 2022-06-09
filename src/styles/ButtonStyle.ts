@@ -45,12 +45,12 @@ export const CyanButtonStyle = styled(GlobalButtonStyle)`
     width: 100%;
     font-size: 18px;
     color: #fff;
-    background: ${palette.cyan[4]};
+    background: ${palette.cyan[5]};
     &:hover {
       background: ${palette.cyan[4]};
     }
     &:active {
-      background: ${palette.cyan[4]};
+      background: ${palette.cyan[6]};
     }
   }
 `;

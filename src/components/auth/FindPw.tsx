@@ -24,7 +24,7 @@ const FindPwBlock = styled.div`
     margin-bottom: 104px;
     text-align: center;
     b {
-      color: ${palette.cyan[4]};
+      color: ${palette.cyan[5]};
     }
   }
   Input {

@@ -31,9 +31,9 @@ const RegisterBlock = styled.div`
     font-size: 14px;
     text-align: right;
     a {
-      color: ${palette.cyan[4]};
+      color: ${palette.cyan[5]};
       &:hover {
-        color: ${palette.cyan[4]};
+        color: ${palette.cyan[5]};
       }
     }
   }

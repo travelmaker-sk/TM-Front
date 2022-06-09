@@ -129,7 +129,7 @@ const MorePage = () => {
                 }}
                 style={
                   currentPage === pageNumber - 1
-                    ? { color: palette.cyan[4], fontWeight: 700 }
+                    ? { color: palette.cyan[5], fontWeight: 700 }
                     : {}
                 }
               >

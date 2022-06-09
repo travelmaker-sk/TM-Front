@@ -31,7 +31,7 @@ const CardDetailDiv = styled.div`
     }
     .tag {
       margin-top: 40px;
-      color: ${palette.cyan[7]};
+      color: ${palette.cyan[5]};
     }
   }
   > ul:nth-of-type(3) {
@@ -75,7 +75,7 @@ const CardDetailDiv = styled.div`
           transform: scale(1.1);
         }
         span.bookmark {
-          color: #20c997;
+          color: ${palette.cyan[8]};
         }
       }
     }
@@ -134,7 +134,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         text: "",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: palette.cyan[4],
+        confirmButtonColor: "#ff6b6b",
         cancelButtonColor: palette.gray[5],
         confirmButtonText: "확인",
         cancelButtonText: "취소",
@@ -146,7 +146,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
               Swal.fire({
                 title: "북마크 취소 완료!",
                 icon: "success",
-                confirmButtonColor: palette.cyan[4],
+                confirmButtonColor: palette.gray[5],
                 confirmButtonText: "확인",
               });
 
@@ -162,7 +162,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         title: "북마크를 추가하시겠습니까?",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: palette.cyan[4],
+        confirmButtonColor: "#ff6b6b",
         cancelButtonColor: palette.gray[5],
         confirmButtonText: "확인",
         cancelButtonText: "취소",
@@ -176,7 +176,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                 text: "",
                 icon: "success",
                 showCancelButton: true,
-                confirmButtonColor: palette.cyan[4],
+                confirmButtonColor: "#ff6b6b",
                 cancelButtonColor: palette.gray[5],
                 confirmButtonText: "내 북마크로 이동",
                 cancelButtonText: "취소",

@@ -55,12 +55,8 @@ export const MoreButton = styled.button`
   border: 1.3px solid ${palette.gray[5]};
   color: ${palette.gray[6]};
   &:hover {
-    border-color: ${palette.cyan[4]};
-    color: ${palette.cyan[4]};
-  }
-  &:active {
-    border-color: ${palette.cyan[7]};
-    color: ${palette.cyan[7]};
+    border-color: ${palette.cyan[8]};
+    color: ${palette.cyan[8]};
   }
   border-radius: 3px;
   cursor: pointer;

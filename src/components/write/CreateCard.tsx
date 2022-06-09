@@ -22,14 +22,14 @@ export const SelectCategory = styled.div`
   .select {
     width: 150px;
     padding: 5px;
-    border: 1.4px solid ${palette.cyan[4]};
+    border: 1.4px solid ${palette.cyan[5]};
     border-radius: 4px;
     outline: 0 none;
     color: ${palette.gray[7]};
     font-size: 16px;
     font-family: "Noto Sans KR", sans-serif;
     option {
-      background: ${palette.cyan[7]};
+      background: ${palette.cyan[8]};
       color: #fff;
     }
   }
@@ -60,7 +60,7 @@ export const CreateCardStyle = styled.div`
     margin-bottom: 20px;
     > span:first-of-type {
       width: 45px;
-      color: ${palette.cyan[4]};
+      color: ${palette.cyan[5]};
     }
     input,
     textarea {
@@ -121,7 +121,7 @@ export const CreateCardStyle = styled.div`
       color: white;
     }
     .add-photo {
-      background-color: ${palette.cyan[4]};
+      background-color: ${palette.cyan[5]};
     }
     .del-photo {
       background-color: ${palette.gray[5]};
@@ -223,7 +223,7 @@ export const TagItem = styled.div`
   justify-content: space-between;
   margin: 0 5px 5px 0;
   padding: 5px;
-  background-color: ${palette.cyan[7]};
+  background-color: ${palette.cyan[8]};
   border-radius: 5px;
   color: white;
   font-size: 14px;
@@ -238,7 +238,7 @@ export const TagItem = styled.div`
     border-radius: 50%;
     font-size: 12px;
     font-weight: 700;
-    color: ${palette.cyan[7]};
+    color: ${palette.cyan[8]};
   }
 `;
 

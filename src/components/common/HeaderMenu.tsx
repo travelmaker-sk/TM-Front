@@ -43,10 +43,7 @@ const HeaderMenuStyle = styled.div`
     }
   }
   nav ul li:hover * {
-    color: ${palette.cyan[4]};
-  }
-  nav ul li:active * {
-    color: ${palette.cyan[7]};
+    color: ${palette.cyan[8]};
   }
   nav ul li span {
     margin-right: 12px;

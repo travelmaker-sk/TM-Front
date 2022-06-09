@@ -46,7 +46,7 @@ const MyPageTopBlock = styled.div`
       margin-bottom: 13px;
     }
     ul > li:nth-child(1) span {
-      color: ${palette.cyan[4]};
+      color: ${palette.cyan[5]};
     }
     ul > li:nth-child(2) {
       font-size: 14px;
@@ -100,7 +100,7 @@ export const MyPageBottomBlock = styled.div`
     h3{
       font-size: 24px;
       font-family: "Do Hyeon", sans-serif;
-      color: ${palette.cyan[4]};
+      color: ${palette.cyan[5]};
       margin-top: 40px;
       margin-bottom: 40px;
     }

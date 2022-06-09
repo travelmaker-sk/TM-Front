@@ -30,7 +30,7 @@ export const CardUl = styled.ul`
     }
     span {
       width: 40px;
-      color: ${palette.cyan[4]};
+      color: ${palette.cyan[5]};
     }
   }
   .score > p {
@@ -44,7 +44,7 @@ export const CardUl = styled.ul`
   .tag {
     margin: 0 5px 0 0;
     padding: 5px 7px;
-    background-color: ${palette.cyan[7]};
+    background-color: ${palette.cyan[5]};
     border-radius: 4px;
     color: white;
   }

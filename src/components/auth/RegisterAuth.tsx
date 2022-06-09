@@ -42,9 +42,9 @@ const RegisterAuthBlock = styled.div`
       cursor: pointer;
       a {
         font-size: 16px;
-        color: ${palette.cyan[4]};
+        color: ${palette.cyan[5]};
         &:hover {
-          color: ${palette.cyan[4]};
+          color: ${palette.cyan[5]};
         }
       }
     }

@@ -15,7 +15,7 @@ import Loading from "../components/common/Loading";
 
 const SearchTitle = styled.div`
   h2 {
-    color: ${palette.cyan[7]};
+    color: ${palette.cyan[8]};
     font-size: 40px;
     font-weight: 700;
     margin: 32px 0;
@@ -125,9 +125,9 @@ const SearchPage = (props: any) => {
         <SearchTitle>
           <h2 className="bounce">{query.location}</h2>
           <h3>
-            {query.location ?? "전 지역"}
+            {query.location ? query.location : "전 지역"}
             &nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;
-            {query.tag ?? "전체"}
+            {query.tag ? query.tag : "전체"}
           </h3>
         </SearchTitle>
         {/* <SearchPostList

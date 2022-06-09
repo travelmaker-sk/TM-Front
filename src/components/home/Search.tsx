@@ -13,7 +13,7 @@ const SearchWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  border: 3px solid ${palette.cyan[4]};
+  border: 3px solid ${palette.cyan[5]};
   border-radius: 4px;
   .location-area,
   .tag-area,
@@ -40,11 +40,11 @@ const SearchWrapper = styled.div`
       // margin-top: 1px;
       background-color: ${palette.gray[0]};
       border: 1px solid ${palette.gray[4]};
-      z-index: 1111;
+      z-index: 8888;
       h4 {
         padding: 10px 20px;
         font-size: 16px;
-        background-color: ${palette.cyan[4]};
+        background-color: ${palette.cyan[5]};
         color: white;
         margin: 0;
       }
@@ -74,7 +74,7 @@ const SearchWrapper = styled.div`
     width: 7%;
     text-align: center;
     line-height: 100%;
-    background-color: ${palette.cyan[4]};
+    background-color: ${palette.cyan[5]};
     color: white;
     font-size: 20px;
     transform: translateX(1px);
