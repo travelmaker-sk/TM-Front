@@ -16,10 +16,6 @@ const Post = ({ post, my, bookmark }: PostType) => {
   const [openModal, setOpenModal] = useState(false);
   const [detailPost, setDetailPost] = useState<DetailPostType | null>();
 
-  // const onOpenModal = () => {
-  //   console.log("click modal");
-  //   setOpenModal(true);
-  // };
   const onOpenModal = useCallback(() => {
     console.log("click modal");
     setOpenModal(true);

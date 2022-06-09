@@ -246,7 +246,7 @@ let timer: NodeJS.Timeout | null = null;
 const CreateCard = () => {
   const navigate = useNavigate();
 
-  const refForm = useRef<HTMLDivElement>(null);
+  const refDiv = useRef<HTMLDivElement>(null);
   const refInputFile = useRef<HTMLInputElement>(null);
 
   const refLocationUl = useRef<HTMLUListElement>(null);
@@ -319,13 +319,21 @@ const CreateCard = () => {
     }
   }, [category]);
 
-  const onSelectedCategory = useCallback((e: any) => {
-    if (!refForm.current) return;
-    refForm.current.style.display = "block";
+  const onSelectedCategory = useCallback(
+    (e: {
+      preventDefault: () => void;
+      target: { value: React.SetStateAction<string> };
+    }) => {
+      e.preventDefault();
 
-    onInit();
-    setCategory(e.target.value);
-  }, []);
+      if (!refDiv.current) return;
+      refDiv.current.style.display = "block";
+
+      onInit();
+      setCategory(e.target.value);
+    },
+    []
+  );
 
   // 사진
   const [cardImage, setCardImage] = useState({
@@ -361,24 +369,20 @@ const CreateCard = () => {
 
   const onClickLoctionList = useCallback(
     (e: React.MouseEvent<HTMLLIElement>) => {
+      e.preventDefault();
+
       if (!refLocation.current) return;
       //@ts-ignore
       refLocation.current.value = e.target.innerHTML;
 
       setLocation(refLocation.current.value);
-
-      console.log(
-        "input:",
-        refLocation.current.value,
-        "list:",
-        //@ts-ignore
-        e.target.innerHTML
-      );
     },
     []
   );
 
   const onLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
     if (timer) clearTimeout(timer);
 
     timer = setTimeout(() => {
@@ -389,6 +393,8 @@ const CreateCard = () => {
 
   // 태그
   const onKeyPress = (e: any) => {
+    e.preventDefault();
+
     if (e.target.value.length !== 0 && e.key === "Enter") {
       submitTagItem();
     }
@@ -401,6 +407,8 @@ const CreateCard = () => {
     setTagItem("");
   };
   const deleteTagItem = (e: any) => {
+    e.preventDefault();
+
     console.log("delete tag");
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
     const filteredTagList = tagList.filter(
@@ -420,6 +428,10 @@ const CreateCard = () => {
     setScore("");
     setMemo("");
     setTagList([]);
+    setCardImage({
+      cardImageName: "",
+      cardImageUrl: "./images/add-photo.png",
+    });
   };
 
   // 업로드 버튼
@@ -505,7 +517,7 @@ const CreateCard = () => {
         </select>
       </SelectCategory>
       <CreateCardBlock>
-        <div ref={refForm}>
+        <div ref={refDiv}>
           <CreateCardStyle>
             <label>
               <img src={cardImage.cardImageUrl} alt="PhotocardImage" />

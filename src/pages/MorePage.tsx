@@ -85,7 +85,6 @@ const MorePage = () => {
       .catch((err) => {
         console.warn(err);
       });
-    console.log("search", sort, currentPage);
   }, [
     currentPage,
     itemPerPage,
@@ -128,7 +127,6 @@ const MorePage = () => {
               key={pageNumber}
               onClick={() => {
                 setCurrentPage(pageNumber);
-                console.log(pageNumber);
               }}
               style={
                 currentPage === pageNumber

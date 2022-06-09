@@ -107,10 +107,6 @@ const EditCard = () => {
   const refLocation = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    console.log("score", score);
-  }, [score]);
-
-  useEffect(() => {
     if (category === "place") {
       setSelectedPlace(true);
       setSelectedStore(false);
@@ -163,32 +159,29 @@ const EditCard = () => {
   };
 
   const onClickLoctionList = (e: React.MouseEvent<HTMLLIElement>) => {
+    e.preventDefault();
+
     if (!refLocation.current) return;
     //@ts-ignore
     refLocation.current.value = e.target.innerHTML;
 
     setLocation(refLocation.current.value);
-
-    console.log(
-      "input:",
-      refLocation.current.value,
-      "list:",
-      //@ts-ignore
-      e.target.innerHTML
-    );
   };
 
   const onLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
     if (timer) clearTimeout(timer);
 
     timer = setTimeout(() => {
       setLocation(e.target.value);
-      console.log("location: ", location);
     }, 200);
   };
 
   // 포토카드 태그 업로드
   const onKeyPress = (e: any) => {
+    e.preventDefault();
+
     if (e.target.value.length !== 0 && e.key === "Enter") {
       submitTagItem();
     }
@@ -201,6 +194,8 @@ const EditCard = () => {
     setTagItem("");
   };
   const deleteTagItem = (e: any) => {
+    e.preventDefault();
+
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
     const filteredTagList = tagList.filter(
       // @ts-ignore
@@ -270,8 +265,6 @@ const EditCard = () => {
         image: file || undefined,
       })
         .then((res) => {
-          console.log("title", title);
-          console.log("file", file);
           navigate("/mypage");
           Swal.fire("포토카드 수정 완료!", "", "success");
         })

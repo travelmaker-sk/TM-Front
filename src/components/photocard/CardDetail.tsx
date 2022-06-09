@@ -198,18 +198,6 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
     }
   }, [checkBookmark, close, navigate, post?.id]);
 
-  // useEffect(() => {
-  //   // @ts-ignore
-  //   loadPost(post?.id)
-  //     .then((res) => {
-  //       console.log("detailPost", res);
-  //       setDetailPost(res);
-  //     })
-  //     .catch((err) => {
-  //       console.warn(err);
-  //     });
-  // }, [post?.id]);
-
   return (
     <>
       <CardDetailDiv>
@@ -272,7 +260,9 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
             <span>메모</span>
             {detailPost?.memo}
           </li>
-          {/* <li className="tag">{detailPost?.tagList?.map((item) => `#${item} `)}</li> */}
+          <li className="tag">
+            {detailPost?.tagList?.map((item) => `#${item} `)}
+          </li>
         </ul>
         <hr />
         <ul>

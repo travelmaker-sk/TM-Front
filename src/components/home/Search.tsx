@@ -137,13 +137,6 @@ const Search = () => {
       if (!refLocationInput.current) return;
       //@ts-ignore
       refLocationInput.current.value = e.target.innerHTML;
-      console.log(
-        "input:",
-        refLocationInput.current.value,
-        "list:",
-        //@ts-ignore
-        e.target.innerHTML
-      );
     },
     []
   );
@@ -153,7 +146,6 @@ const Search = () => {
 
     timer = setTimeout(() => {
       seInputLocation(e.target.value);
-      console.log("inputLocation: ", inputLocation);
 
       // TODO: 지역명 검색 API 호출
     }, 200);
@@ -162,12 +154,6 @@ const Search = () => {
   const onSearch = () => {
     const keywordLocation = refLocationInput.current?.value;
     const keywordTag = refTagInput.current?.value;
-    console.log(
-      "keywordLocation: ",
-      keywordLocation,
-      "keywordTag: ",
-      keywordTag
-    );
 
     // TODO: 페이지 전환. 전환된 페이지에서 API 호출
     /*

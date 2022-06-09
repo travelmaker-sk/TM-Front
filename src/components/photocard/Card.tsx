@@ -2,6 +2,7 @@ import { GetPostType } from "../../lib/type";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import { useEffect, useMemo, useRef } from "react";
+import React, { useState } from "react";
 
 interface ICard {
   post: GetPostType | null;
@@ -72,6 +73,13 @@ const Card = ({ post, onOpenModal }: ICard) => {
     []
   );
 
+  const [tagList, setTagList] = useState(post?.tagList ? post?.tagList : "");
+
+  if (tagList !== "") {
+    // @ts-ignore
+    var splitTagList = tagList.split(" ");
+  }
+
   return (
     <CardUl
       ref={refCard}
@@ -135,11 +143,11 @@ const Card = ({ post, onOpenModal }: ICard) => {
         <span>메모</span>
         {post?.memo}
       </li>
-      {/* <li className="tagList">
-        {post?.tagList?.map((item) => (
-          <li className="tag">{`# ${item}`}</li>
+      <li className="tagList">
+        {splitTagList?.map((item: any) => (
+          <li className="tag">{`#${item}`}</li>
         ))}
-      </li> */}
+      </li>
     </CardUl>
   );
 };

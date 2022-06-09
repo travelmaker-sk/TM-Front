@@ -5,6 +5,7 @@ import mypostsData from "../json/myposts.json";
 
 // 테스트
 export const loadPost = async (id: number) => {
+  console.log("loadPost");
   let token = localStorage.getItem("tm-token");
 
   const response = await axios.get(`/total/api/detailresponse/${id}`, {
@@ -19,6 +20,7 @@ export const loadPost = async (id: number) => {
 // 포스트 리스트 5개
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
 export const listPosts = async (location?: string, tag?: string) => {
+  console.log("listPost");
   let token = localStorage.getItem("tm-token");
 
   // const params: Record<string, any> = {};
@@ -68,6 +70,7 @@ export const morePosts = async (
   location?: string,
   tag?: string
 ) => {
+  console.log("morePosts");
   let token = localStorage.getItem("tm-token");
 
   // const params: Record<string, any> = {

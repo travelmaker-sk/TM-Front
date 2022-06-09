@@ -69,7 +69,6 @@ const Register = () => {
       e.preventDefault();
 
       setLoading(true);
-      console.log("1", loading);
 
       const form = e.target as HTMLFormElement;
       const $inputs = Array.from(form.querySelectorAll("input"));
