@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { deletePost } from "../../lib/api/write";
@@ -9,6 +9,7 @@ import Card from "./Card";
 import CardDetail from "./CardDetail";
 import { useNavigate } from "react-router";
 import ReactToPrint from "react-to-print";
+import Loading from "../common/Loading";
 
 interface ModalType {
   post: GetPostType | null;
@@ -157,6 +158,8 @@ const PostModal = ({
 }: ModalType) => {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
   const refCard = useRef<HTMLLIElement>(null);
 
   // 수정 버튼
@@ -174,6 +177,8 @@ const PostModal = ({
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
+      setLoading(true);
+
       // @ts-ignore
       deletePost(post?.id)
         .then((res) => {
@@ -184,65 +189,73 @@ const PostModal = ({
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
     [close, post?.id]
   );
 
   return (
-    <ModalBlock className={open ? "open" : ""}>
-      <div className="container">
-        <ul className="white-box">
-          <li ref={refCard}>
-            <Card post={post} />
-          </li>
-          <li>
-            <CardDetail post={post} close={close} detailPost={detailPost} />
-          </li>
-          <button onClick={close} title="닫기">
-            <span className="material-icons">close</span>
-          </button>
-          {my ? (
-            <MyButton>
-              <ReactToPrint
-                trigger={() => (
-                  <CyanButtonStyle>
-                    <button className="print-btn">
-                      <span className="material-icons">print</span> &nbsp; 인쇄
-                    </button>
-                  </CyanButtonStyle>
-                )}
-                content={() => refCard.current}
-              />
-              <CyanButtonStyle>
-                <button onClick={onEdit}>수정</button>
-              </CyanButtonStyle>
-              <GrayButtonStyle>
-                <button onClick={onDelete}>삭제</button>
-              </GrayButtonStyle>
-            </MyButton>
-          ) : (
-            ""
-          )}
-          {bookmark ? (
-            <BookmarkButton>
-              <ReactToPrint
-                trigger={() => (
-                  <CyanButtonStyle>
-                    <button className="print-btn">
-                      <span className="material-icons">print</span> &nbsp; 인쇄
-                    </button>
-                  </CyanButtonStyle>
-                )}
-                content={() => refCard.current}
-              />
-            </BookmarkButton>
-          ) : (
-            ""
-          )}
-        </ul>
-      </div>
-    </ModalBlock>
+    <>
+      <ModalBlock className={open ? "open" : ""}>
+        <div className="container">
+          <ul className="white-box">
+            <li ref={refCard}>
+              <Card post={post} />
+            </li>
+            <li>
+              <CardDetail post={post} close={close} detailPost={detailPost} />
+            </li>
+            <button onClick={close} title="닫기">
+              <span className="material-icons">close</span>
+            </button>
+            {my ? (
+              <MyButton>
+                <ReactToPrint
+                  trigger={() => (
+                    <CyanButtonStyle>
+                      <button className="print-btn">
+                        <span className="material-icons">print</span> &nbsp;
+                        인쇄
+                      </button>
+                    </CyanButtonStyle>
+                  )}
+                  content={() => refCard.current}
+                />
+                <CyanButtonStyle>
+                  <button onClick={onEdit}>수정</button>
+                </CyanButtonStyle>
+                <GrayButtonStyle>
+                  <button onClick={onDelete}>삭제</button>
+                </GrayButtonStyle>
+              </MyButton>
+            ) : (
+              ""
+            )}
+            {bookmark ? (
+              <BookmarkButton>
+                <ReactToPrint
+                  trigger={() => (
+                    <CyanButtonStyle>
+                      <button className="print-btn">
+                        <span className="material-icons">print</span> &nbsp;
+                        인쇄
+                      </button>
+                    </CyanButtonStyle>
+                  )}
+                  content={() => refCard.current}
+                />
+              </BookmarkButton>
+            ) : (
+              ""
+            )}
+          </ul>
+        </div>
+      </ModalBlock>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 

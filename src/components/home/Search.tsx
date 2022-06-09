@@ -13,7 +13,7 @@ const SearchWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  border: 3px solid ${palette.cyan[5]};
+  border: 3px solid ${palette.cyan[4]};
   border-radius: 4px;
   .location-area,
   .tag-area,
@@ -44,7 +44,7 @@ const SearchWrapper = styled.div`
       h4 {
         padding: 10px 20px;
         font-size: 16px;
-        background-color: ${palette.cyan[5]};
+        background-color: ${palette.cyan[4]};
         color: white;
         margin: 0;
       }
@@ -72,12 +72,12 @@ const SearchWrapper = styled.div`
   }
   .search-btn {
     width: 7%;
-    min-width: 70px;
     text-align: center;
     line-height: 100%;
-    background-color: ${palette.cyan[5]};
+    background-color: ${palette.cyan[4]};
     color: white;
     font-size: 20px;
+    transform: translateX(1px);
   }
   // Mobile
   @media screen and (max-width: 767px) {
@@ -86,9 +86,10 @@ const SearchWrapper = styled.div`
     .location-area,
     .tag-area,
     .search-btn {
-      width: 100%;
+      width: 101%;
       padding: 10px 20px;
       font-size: 18px;
+      transform: translateX(-1px);
       input {
         font-size: 18px;
       }

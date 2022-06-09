@@ -51,8 +51,8 @@ const HeaderBlock = styled.div`
       border: 1.3px solid ${palette.gray[5]};
       color: ${palette.gray[6]};
       &:hover {
-        border-color: ${palette.cyan[5]};
-        color: ${palette.cyan[5]};
+        border-color: ${palette.cyan[4]};
+        color: ${palette.cyan[4]};
       }
       &:active {
         border-color: ${palette.cyan[7]};

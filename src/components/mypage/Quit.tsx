@@ -15,6 +15,7 @@ import { UserType } from "../../lib/type";
 import { quit } from "../../lib/api/auth";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user";
+import Loading from "../common/Loading";
 
 interface QuitType {
   user: UserType;
@@ -49,14 +50,18 @@ const QuitBlock = styled.div`
 const Quit = ({ user }: QuitType) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
   const [quitEmail, setQuitEamil] = useState<string | null>(null);
 
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      let token = localStorage.getItem("tm-token");
+      setLoading(true);
+
       // API 호출
       quit()
         .then((res) => {
@@ -72,43 +77,49 @@ const Quit = ({ user }: QuitType) => {
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
     [dispatch, navigate]
   );
 
   return (
-    <QuitBlock>
-      <span className="material-icons">warning</span>
-      <h2>경고문 어쩌구</h2>
-      <h3>
-        탈퇴를 원하시면 입력란에 <b>{user.email}</b>을 입력해주세요.
-      </h3>
-      <form onSubmit={onSubmit}>
-        <Input
-          type="text"
-          name="quitEmail"
-          placeholder="ex) travelmaker@google.com"
-          onChange={(e) => {
-            setQuitEamil(e.target.value);
-          }}
-        />
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        <SelectButtonStyle>
-          {quitEmail === user.email ? (
-            <CyanButtonStyle>
-              <button type="submit">확인</button>
-            </CyanButtonStyle>
-          ) : (
-            <GrayButtonStyle>
-              <button>
-                <LinkButton to="/setProfile">취소</LinkButton>
-              </button>
-            </GrayButtonStyle>
-          )}
-        </SelectButtonStyle>
-      </form>
-    </QuitBlock>
+    <>
+      <QuitBlock>
+        <span className="material-icons">warning</span>
+        <h2>경고문 어쩌구</h2>
+        <h3>
+          탈퇴를 원하시면 입력란에 <b>{user.email}</b>을 입력해주세요.
+        </h3>
+        <form onSubmit={onSubmit}>
+          <Input
+            type="text"
+            name="quitEmail"
+            placeholder="ex) travelmaker@google.com"
+            onChange={(e) => {
+              setQuitEamil(e.target.value);
+            }}
+          />
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          <SelectButtonStyle>
+            {quitEmail === user.email ? (
+              <CyanButtonStyle>
+                <button type="submit">확인</button>
+              </CyanButtonStyle>
+            ) : (
+              <GrayButtonStyle>
+                <button>
+                  <LinkButton to="/setProfile">취소</LinkButton>
+                </button>
+              </GrayButtonStyle>
+            )}
+          </SelectButtonStyle>
+        </form>
+      </QuitBlock>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 

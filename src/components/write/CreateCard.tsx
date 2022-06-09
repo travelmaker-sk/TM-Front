@@ -15,13 +15,14 @@ import { ko } from "date-fns/esm/locale";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { RootStateOrAny, useSelector } from "react-redux";
+import Loading from "../common/Loading";
 
 export const SelectCategory = styled.div`
   margin-bottom: 80px;
   .select {
     width: 150px;
     padding: 5px;
-    border: 1.4px solid ${palette.cyan[5]};
+    border: 1.4px solid ${palette.cyan[4]};
     border-radius: 4px;
     outline: 0 none;
     color: ${palette.gray[7]};
@@ -59,7 +60,7 @@ export const CreateCardStyle = styled.div`
     margin-bottom: 20px;
     > span:first-of-type {
       width: 45px;
-      color: ${palette.cyan[5]};
+      color: ${palette.cyan[4]};
     }
     input,
     textarea {
@@ -120,7 +121,7 @@ export const CreateCardStyle = styled.div`
       color: white;
     }
     .add-photo {
-      background-color: ${palette.cyan[5]};
+      background-color: ${palette.cyan[4]};
     }
     .del-photo {
       background-color: ${palette.gray[5]};
@@ -245,6 +246,8 @@ let timer: NodeJS.Timeout | null = null;
 
 const CreateCard = () => {
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   const refDiv = useRef<HTMLDivElement>(null);
   const refInputFile = useRef<HTMLInputElement>(null);
@@ -439,6 +442,8 @@ const CreateCard = () => {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
+      setLoading(true);
+
       const numberPrice = Number(price);
       const numberScore = Number(score);
 
@@ -482,6 +487,9 @@ const CreateCard = () => {
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
     [
@@ -729,6 +737,7 @@ const CreateCard = () => {
           </SelectButtonStyle>
         </div>
       </CreateCardBlock>
+      {loading ? <Loading /> : ""}
     </>
   );
 };

@@ -3,6 +3,7 @@ import { DetailPostType, GetPostType } from "../../lib/type";
 import Card from "./Card";
 import PostModal from "./PostModal";
 import { loadPost } from "../../lib/api/home";
+import Loading from "../common/Loading";
 
 export interface PostType {
   post: GetPostType | null;
@@ -13,12 +14,15 @@ export interface PostType {
 }
 
 const Post = ({ post, my, bookmark }: PostType) => {
+  const [loading, setLoading] = useState(false);
+
   const [openModal, setOpenModal] = useState(false);
   const [detailPost, setDetailPost] = useState<DetailPostType | null>();
 
   const onOpenModal = useCallback(() => {
     console.log("click modal");
     setOpenModal(true);
+    setLoading(true);
 
     // @ts-ignore
     loadPost(post?.id)
@@ -28,6 +32,9 @@ const Post = ({ post, my, bookmark }: PostType) => {
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [post?.id]);
   const onCloseModal = () => {
@@ -45,6 +52,7 @@ const Post = ({ post, my, bookmark }: PostType) => {
         my={my}
         bookmark={bookmark}
       />
+      {loading ? <Loading /> : ""}
     </>
   );
 };

@@ -8,7 +8,7 @@ const InputStyle = styled.input`
   padding: 0 13px 13px;
   border-bottom: 1px solid ${palette.gray[6]};
   &:focus {
-    border-bottom: 1px solid ${palette.cyan[5]};
+    border-bottom: 1px solid ${palette.cyan[4]};
   }
   font-size: 16px;
 `;

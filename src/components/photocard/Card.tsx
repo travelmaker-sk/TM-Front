@@ -30,7 +30,7 @@ export const CardUl = styled.ul`
     }
     span {
       width: 40px;
-      color: ${palette.cyan[5]};
+      color: ${palette.cyan[4]};
     }
   }
   .score > p {

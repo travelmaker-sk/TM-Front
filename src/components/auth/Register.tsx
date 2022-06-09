@@ -8,7 +8,7 @@ import { register } from "../../lib/api/auth";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Loading } from "../common/Loading";
+import Loading from "../common/Loading";
 
 interface RegisterType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -31,9 +31,9 @@ const RegisterBlock = styled.div`
     font-size: 14px;
     text-align: right;
     a {
-      color: ${palette.cyan[5]};
+      color: ${palette.cyan[4]};
       &:hover {
-        color: ${palette.cyan[3]};
+        color: ${palette.cyan[4]};
       }
     }
   }
@@ -47,11 +47,11 @@ export const ErrorMessage = styled.div`
 
 const Register = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { state } = useLocation();
   useEffect(() => {
     if (!state) {
       Swal.fire(
@@ -100,9 +100,12 @@ const Register = () => {
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
-    [loading, navigate]
+    [navigate]
   );
 
   return (

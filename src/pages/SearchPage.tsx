@@ -11,6 +11,7 @@ import palette from "../styles/palette";
 import Footer from "../components/common/Footer";
 import SearchPostList from "../components/photocard/SearchPostList";
 import { useNavigate } from "react-router";
+import Loading from "../components/common/Loading";
 
 const SearchTitle = styled.div`
   h2 {
@@ -79,6 +80,8 @@ const SearchPage = (props: any) => {
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
 
+  const [loading, setLoading] = useState(false);
+
   const [searchPosts, setSearchPosts] = useState<AllPostsType>({
     popularList: {
       content: [],
@@ -98,6 +101,8 @@ const SearchPage = (props: any) => {
   });
 
   useEffect(() => {
+    setLoading(true);
+
     // API 호출
     listPosts(query.location as string, query.tag as string)
       .then((res) => {
@@ -106,53 +111,59 @@ const SearchPage = (props: any) => {
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [navigate, query.tag, query.location]);
 
   return (
-    <Wrapper>
-      <Header />
-      <Search />
-      <SearchTitle>
-        <h2 className="bounce">{query.location}</h2>
-        <h3>
-          {query.location ?? "전 지역"}
-          &nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;
-          {query.tag ?? "전체"}
-        </h3>
-      </SearchTitle>
-      {/* <SearchPostList
+    <>
+      <Wrapper>
+        <Header />
+        <Search />
+        <SearchTitle>
+          <h2 className="bounce">{query.location}</h2>
+          <h3>
+            {query.location ?? "전 지역"}
+            &nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;
+            {query.tag ?? "전체"}
+          </h3>
+        </SearchTitle>
+        {/* <SearchPostList
         list={posts.popularList.content}
         category="popular"
         location={query.location}
         tag={query.tag}
       /> */}
-      <SearchPostList
-        list={searchPosts.recentList.content}
-        category="recent"
-        location={query.location}
-        tag={query.tag}
-      />
-      <SearchPostList
-        list={searchPosts.placeList.content}
-        category="place"
-        location={query.location}
-        tag={query.tag}
-      />
-      <SearchPostList
-        list={searchPosts.storeList.content}
-        category="store"
-        location={query.location}
-        tag={query.tag}
-      />
-      <SearchPostList
-        list={searchPosts.lodgingList.content}
-        category="lodging"
-        location={query.location}
-        tag={query.tag}
-      />
-      <Footer />
-    </Wrapper>
+        <SearchPostList
+          list={searchPosts.recentList.content}
+          category="recent"
+          location={query.location}
+          tag={query.tag}
+        />
+        <SearchPostList
+          list={searchPosts.placeList.content}
+          category="place"
+          location={query.location}
+          tag={query.tag}
+        />
+        <SearchPostList
+          list={searchPosts.storeList.content}
+          category="store"
+          location={query.location}
+          tag={query.tag}
+        />
+        <SearchPostList
+          list={searchPosts.lodgingList.content}
+          category="lodging"
+          location={query.location}
+          tag={query.tag}
+        />
+        <Footer />
+      </Wrapper>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 

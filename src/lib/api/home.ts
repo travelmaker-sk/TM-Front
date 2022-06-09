@@ -3,20 +3,6 @@ import popularLocation from "../json/popularLocation.json";
 import postsData from "../json/posts.json";
 import mypostsData from "../json/myposts.json";
 
-// 테스트
-export const loadPost = async (id: number) => {
-  console.log("loadPost");
-  let token = localStorage.getItem("tm-token");
-
-  const response = await axios.get(`/total/api/detailresponse/${id}`, {
-    headers: {
-      Authorization: `${token}`,
-    },
-  });
-
-  return response.data;
-};
-
 // 포스트 리스트 5개
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
 export const listPosts = async (location?: string, tag?: string) => {
@@ -130,6 +116,20 @@ export const morePosts = async (
   //   totalCount: 30,
   //   list: result,
   // };
+};
+
+// 개별 포스트
+export const loadPost = async (id: number) => {
+  console.log("loadPost");
+  let token = localStorage.getItem("tm-token");
+
+  const response = await axios.get(`/total/api/detailresponse/${id}`, {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
+
+  return response.data;
 };
 
 // 마이페이지 포스트

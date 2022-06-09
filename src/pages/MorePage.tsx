@@ -12,6 +12,7 @@ import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";
 import queryString from "query-string";
 import { useNavigate } from "react-router";
+import Loading from "../components/common/Loading";
 
 const SelectSort = styled(SelectCategory)`
   display: flex;
@@ -40,9 +41,11 @@ const MorePage = () => {
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
 
+  const [loading, setLoading] = useState(false);
+
   const [posts, setPosts] = useState<any[]>([]);
 
-  // 정렬 select
+  // 정렬
   const [sort, setSort] = useState("id,desc");
 
   useEffect(() => {
@@ -67,6 +70,8 @@ const MorePage = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
+    setLoading(true);
+
     // API 호출
     morePosts(
       query.category as string,
@@ -82,56 +87,62 @@ const MorePage = () => {
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [currentPage, navigate, query.category, query.tag, query.location, sort]);
 
   return (
-    <Wrapper>
-      <Header />
-      <Search />
-      <SelectSort>
-        <div>
-          <select
-            name="sort"
-            className="select"
-            onChange={onSelectedSort}
-            defaultValue="id,desc"
-          >
-            <option value="id,desc">최신순</option>
-            <option value="id,asc">오래된순</option>
-            <option value="viewcount,desc">인기순</option>
-          </select>
-        </div>
-      </SelectSort>
-      <PostBlock>
-        {posts.map((post) => (
-          //@ts-ignore
-          <Post post={post} key={post?.id} />
-        ))}
-      </PostBlock>
-      <Pagination>
-        <span className="material-icons">chevron_left</span>
-        {Array.from({ length: totalPage }, (x, i) => i + 1).map(
-          (pageNumber) => (
-            <button
-              key={pageNumber}
-              onClick={() => {
-                setCurrentPage(pageNumber - 1);
-              }}
-              style={
-                currentPage === pageNumber - 1
-                  ? { color: palette.cyan[5], fontWeight: 700 }
-                  : {}
-              }
+    <>
+      <Wrapper>
+        <Header />
+        <Search />
+        <SelectSort>
+          <div>
+            <select
+              name="sort"
+              className="select"
+              onChange={onSelectedSort}
+              defaultValue="id,desc"
             >
-              {pageNumber}
-            </button>
-          )
-        )}
-        <span className="material-icons">chevron_right</span>
-      </Pagination>
-      <Footer />
-    </Wrapper>
+              <option value="id,desc">최신순</option>
+              <option value="id,asc">오래된순</option>
+              <option value="viewcount,desc">인기순</option>
+            </select>
+          </div>
+        </SelectSort>
+        <PostBlock>
+          {posts.map((post) => (
+            //@ts-ignore
+            <Post post={post} key={post?.id} />
+          ))}
+        </PostBlock>
+        <Pagination>
+          <span className="material-icons">chevron_left</span>
+          {Array.from({ length: totalPage }, (x, i) => i + 1).map(
+            (pageNumber) => (
+              <button
+                key={pageNumber}
+                onClick={() => {
+                  setCurrentPage(pageNumber - 1);
+                }}
+                style={
+                  currentPage === pageNumber - 1
+                    ? { color: palette.cyan[4], fontWeight: 700 }
+                    : {}
+                }
+              >
+                {pageNumber}
+              </button>
+            )
+          )}
+          <span className="material-icons">chevron_right</span>
+        </Pagination>
+        <Footer />
+      </Wrapper>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 

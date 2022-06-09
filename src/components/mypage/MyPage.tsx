@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { myPosts } from "../../lib/api/home";
 import { useNavigate } from "react-router";
+import Loading from "../common/Loading";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
@@ -45,7 +46,7 @@ const MyPageTopBlock = styled.div`
       margin-bottom: 13px;
     }
     ul > li:nth-child(1) span {
-      color: ${palette.cyan[5]};
+      color: ${palette.cyan[4]};
     }
     ul > li:nth-child(2) {
       font-size: 14px;
@@ -99,7 +100,7 @@ export const MyPageBottomBlock = styled.div`
     h3{
       font-size: 24px;
       font-family: "Do Hyeon", sans-serif;
-      color: ${palette.cyan[5]};
+      color: ${palette.cyan[4]};
       margin-top: 40px;
       margin-bottom: 40px;
     }
@@ -120,9 +121,13 @@ export const MyPageBottomBlock = styled.div`
 const MyPage = ({ user }: MyPageType) => {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
+    setLoading(true);
+
     // API 호출
     myPosts()
       .then(({ list }) => {
@@ -130,6 +135,9 @@ const MyPage = ({ user }: MyPageType) => {
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [navigate]);
 
@@ -200,7 +208,7 @@ const MyPage = ({ user }: MyPageType) => {
           ))}
         </div>
       </MyPageBottomBlock>
-      export{" "}
+      {loading ? <Loading /> : ""}
     </>
   );
 };
