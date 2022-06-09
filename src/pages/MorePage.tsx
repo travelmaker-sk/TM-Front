@@ -63,10 +63,8 @@ const MorePage = () => {
   }, []);
 
   // 페이지네이션
-  const [totalPage, setTotalPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-
-  const itemPerPage = useMemo(() => 16, []);
 
   useEffect(() => {
     // API 호출
@@ -85,15 +83,7 @@ const MorePage = () => {
       .catch((err) => {
         console.warn(err);
       });
-  }, [
-    currentPage,
-    itemPerPage,
-    navigate,
-    query.category,
-    query.tag,
-    query.location,
-    sort,
-  ]);
+  }, [currentPage, navigate, query.category, query.tag, query.location, sort]);
 
   return (
     <Wrapper>
@@ -126,10 +116,10 @@ const MorePage = () => {
             <button
               key={pageNumber}
               onClick={() => {
-                setCurrentPage(pageNumber);
+                setCurrentPage(pageNumber - 1);
               }}
               style={
-                currentPage === pageNumber
+                currentPage === pageNumber - 1
                   ? { color: palette.cyan[5], fontWeight: 700 }
                   : {}
               }
