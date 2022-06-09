@@ -1,5 +1,5 @@
 import axios from "axios";
-import popularWhere from "../json/popularWhere.json";
+import popularLocation from "../json/popularLocation.json";
 import postsData from "../json/posts.json";
 import mypostsData from "../json/myposts.json";
 
@@ -18,16 +18,16 @@ export const loadPost = async (id: number) => {
 
 // 포스트 리스트 5개
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
-export const listPosts = async (where?: string, what?: string) => {
+export const listPosts = async (location?: string, tag?: string) => {
   let token = localStorage.getItem("tm-token");
 
-  const params: Record<string, any> = {};
+  // const params: Record<string, any> = {};
 
-  if (where) params.where = where;
-  if (what) params.what = what;
+  // if (location) params.location = location;
+  // if (tag) params.tag = tag;
 
   const response = await axios.get("/total/api/search", {
-    params,
+    params: { location, tag },
     headers: {
       Authorization: `${token}`,
     },
@@ -65,22 +65,28 @@ export const morePosts = async (
   category: string,
   sort: string,
   currentPage: number,
-  where?: string,
-  what?: string
+  location?: string,
+  tag?: string
 ) => {
   let token = localStorage.getItem("tm-token");
 
-  const params: Record<string, any> = {
-    category,
-    sort,
-    page: currentPage,
-  };
+  // const params: Record<string, any> = {
+  //   category,
+  //   sort,
+  //   page: currentPage,
+  // };
 
-  if (where) params.where = where;
-  if (what) params.what = what;
+  // if (location) params.location = location;
+  // if (tag) params.tag = tag;
 
-  const response = await axios.get("/totla/api/more", {
-    params,
+  const response = await axios.get("/total/api/more", {
+    params: {
+      category,
+      sort,
+      page: currentPage,
+      location,
+      tag,
+    },
     headers: {
       Authorization: `${token}`,
     },
@@ -165,7 +171,7 @@ export const myBookmarks = async () => {
 export const popularArea = async () => {
   let token = localStorage.getItem("tm-token");
 
-  const response = await axios.get("/popularWhere", {
+  const response = await axios.get("/popularLocation", {
     headers: {
       Authorization: `${token}`,
     },
@@ -173,7 +179,7 @@ export const popularArea = async () => {
 
   return response.data;
 
-  // const list = popularWhere.areaList;
+  // const list = popularLocation.areaList;
 
   // return {
   //   list,

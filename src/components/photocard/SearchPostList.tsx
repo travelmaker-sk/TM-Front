@@ -8,8 +8,8 @@ import { useNavigate } from "react-router";
 export interface PostListType {
   list: any[];
   category: AllPostsCategoryType;
-  where?: any;
-  what?: any;
+  location?: any;
+  tag?: any;
 }
 
 export const PostListBlock = styled.div`
@@ -66,11 +66,11 @@ export const MoreButton = styled.button`
   cursor: pointer;
 `;
 
-const SearchPostList = ({ list, category, where, what }: PostListType) => {
+const SearchPostList = ({ list, category, location, tag }: PostListType) => {
   const navigate = useNavigate();
 
   const onDetailMore = () => {
-    navigate(`/more?where=${where}&what=${what}&category=${category}`);
+    navigate(`/more?location=${location}&tag=${tag}&category=${category}`);
   };
 
   return (

@@ -45,8 +45,29 @@ export interface GetPostType {
   price?: number;
   memo?: string;
   tagList?: Array<string>;
+  imageUrl?: string;
+  createdate: string;
+  liked?: number;
+  username?: string;
+  useremail?: string;
+  profileImage?: string;
+}
+
+export interface DetailPostType {
+  viewCount: number;
+  id: number;
+  category: string;
+  title: string;
+  location: string;
+  date: string;
+  score: number;
+  weather?: string;
+  menu?: string;
+  price?: number;
+  memo?: string;
+  tagList?: Array<string>;
   image?: string;
-  like: {
+  liked: {
     likeNum: number;
     likeCheck: boolean;
   };

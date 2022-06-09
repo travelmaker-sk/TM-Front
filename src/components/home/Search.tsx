@@ -15,13 +15,13 @@ const SearchWrapper = styled.div`
   background-color: white;
   border: 3px solid ${palette.cyan[5]};
   border-radius: 4px;
-  .where-area,
-  .what-area,
+  .location-area,
+  .tag-area,
   .search-btn {
     height: 65px;
   }
-  .where-area,
-  .what-area {
+  .location-area,
+  .tag-area {
     position: relative;
     display: flex;
     align-items: center;
@@ -61,12 +61,12 @@ const SearchWrapper = styled.div`
       }
     }
   }
-  .where-area {
+  .location-area {
     width: 40%;
     padding: 0 20px;
     border-right: 1px solid ${palette.gray[5]};
   }
-  .what-area {
+  .tag-area {
     width: 53%;
     padding: 0 20px;
   }
@@ -83,8 +83,8 @@ const SearchWrapper = styled.div`
   @media screen and (max-width: 767px) {
     height: 200px;
     display: block;
-    .where-area,
-    .what-area,
+    .location-area,
+    .tag-area,
     .search-btn {
       width: 100%;
       padding: 10px 20px;
@@ -93,7 +93,7 @@ const SearchWrapper = styled.div`
         font-size: 18px;
       }
     }
-    .where-area {
+    .location-area {
       border-right: none;
       border-bottom: 1px solid ${palette.gray[5]};
     }
@@ -114,52 +114,60 @@ let timer: NodeJS.Timeout | null = null;
 const Search = () => {
   const navigate = useNavigate();
 
-  const [popularWhere, setPopularWhere] = useState<any[]>([]);
-  const [inputWhere, seInputWhere] = useState("");
+  const [popularLocation, setPopularLocation] = useState<any[]>([]);
+  const [inputLocation, seInputLocation] = useState("");
 
-  const refWhereArea = useRef<HTMLUListElement>(null);
-  const refWhereInput = useRef<HTMLInputElement>(null);
-  const refWhatInput = useRef<HTMLInputElement>(null);
+  const refLocationArea = useRef<HTMLUListElement>(null);
+  const refLocationInput = useRef<HTMLInputElement>(null);
+  const refTagInput = useRef<HTMLInputElement>(null);
 
-  const onFocusWhereArea = () => {
-    if (!refWhereArea.current) return;
-    refWhereArea.current.style.display = "block";
+  const onFocusLocationArea = () => {
+    if (!refLocationArea.current) return;
+    refLocationArea.current.style.display = "block";
   };
-  const onBlurWhereArea = () => {
+  const onBlurLocationArea = () => {
     setTimeout(() => {
-      if (!refWhereArea.current) return;
-      refWhereArea.current.style.display = "none";
+      if (!refLocationArea.current) return;
+      refLocationArea.current.style.display = "none";
     }, 130);
   };
 
-  const onClickWhereList = useCallback((e: React.MouseEvent<HTMLLIElement>) => {
-    if (!refWhereInput.current) return;
-    //@ts-ignore
-    refWhereInput.current.value = e.target.innerHTML;
-    console.log(
-      "input:",
-      refWhereInput.current.value,
-      "list:",
+  const onClickLocationList = useCallback(
+    (e: React.MouseEvent<HTMLLIElement>) => {
+      if (!refLocationInput.current) return;
       //@ts-ignore
-      e.target.innerHTML
-    );
-  }, []);
+      refLocationInput.current.value = e.target.innerHTML;
+      console.log(
+        "input:",
+        refLocationInput.current.value,
+        "list:",
+        //@ts-ignore
+        e.target.innerHTML
+      );
+    },
+    []
+  );
 
-  const onInputWhere = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onInputLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (timer) clearTimeout(timer);
 
     timer = setTimeout(() => {
-      seInputWhere(e.target.value);
-      console.log("inputWhere: ", inputWhere);
+      seInputLocation(e.target.value);
+      console.log("inputLocation: ", inputLocation);
 
       // TODO: 지역명 검색 API 호출
     }, 200);
   };
 
   const onSearch = () => {
-    const keywordWhere = refWhereInput.current?.value;
-    const keywordWhat = refWhatInput.current?.value;
-    console.log("keywordWhere: ", keywordWhere, "keywordWhat: ", keywordWhat);
+    const keywordLocation = refLocationInput.current?.value;
+    const keywordTag = refTagInput.current?.value;
+    console.log(
+      "keywordLocation: ",
+      keywordLocation,
+      "keywordTag: ",
+      keywordTag
+    );
 
     // TODO: 페이지 전환. 전환된 페이지에서 API 호출
     /*
@@ -169,14 +177,14 @@ const Search = () => {
       가져올 아이템 갯수 (limit) = 16
       몇번째 데이터부터 받을건지 (from)
     */
-    navigate(`/search?where=${keywordWhere}&what=${keywordWhat}`);
+    navigate(`/search?location=${keywordLocation}&tag=${keywordTag}`);
   };
 
   useEffect(() => {
     // API 호출
     popularArea()
       .then(({ list }) => {
-        setPopularWhere(list);
+        setPopularLocation(list);
       })
       .catch((err) => {
         console.warn(err);
@@ -187,57 +195,57 @@ const Search = () => {
     <>
       <SearchWrapper>
         <div
-          className="where-area"
-          onFocus={onFocusWhereArea}
-          onBlur={onBlurWhereArea}
+          className="location-area"
+          onFocus={onFocusLocationArea}
+          onBlur={onBlurLocationArea}
         >
           <span className="material-icons">pin_drop</span>
           <input
             type="text"
-            name="where"
+            name="location"
             placeholder="어디에서"
-            ref={refWhereInput}
-            onChange={onInputWhere}
+            ref={refLocationInput}
+            onChange={onInputLocation}
           />
-          {inputWhere ? (
+          {inputLocation ? (
             <ul
-              ref={refWhereArea}
+              ref={refLocationArea}
               style={{ maxHeight: "500px", overflow: "scroll" }}
             >
               {areaData.areaList
                 .filter((area) => {
-                  if (inputWhere === "") {
+                  if (inputLocation === "") {
                     return area;
                   } else if (
-                    area.toLowerCase().includes(inputWhere.toLowerCase())
+                    area.toLowerCase().includes(inputLocation.toLowerCase())
                   ) {
                     return area;
                   }
                 })
                 .map((area) => (
-                  <li key={area} onClick={onClickWhereList}>
+                  <li key={area} onClick={onClickLocationList}>
                     {area}
                   </li>
                 ))}
             </ul>
           ) : (
-            <ul ref={refWhereArea}>
+            <ul ref={refLocationArea}>
               <h4>인기 여행지 TOP7</h4>
-              {popularWhere.map((item) => (
-                <li key={item.id} onClick={onClickWhereList}>
+              {popularLocation.map((item) => (
+                <li key={item.id} onClick={onClickLocationList}>
                   {item.areaName}
                 </li>
               ))}
             </ul>
           )}
         </div>
-        <div className="what-area">
+        <div className="tag-area">
           <span className="material-icons">sms</span>
           <input
             type="text"
-            name="what"
+            name="tag"
             placeholder="무엇을 하고 싶으세요?"
-            ref={refWhatInput}
+            ref={refTagInput}
           />
         </div>
         <button type="submit" className="search-btn" onClick={onSearch}>

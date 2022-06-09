@@ -52,30 +52,28 @@ const HomePage = () => {
 
   useEffect(() => {
     // 테스트 포스트 출력
-    const loadTestPost = () => {
-      // API 호출
-      loadPost(11)
-        .then((res) => {
-          setTestPost(res);
-          // navigate("/");
-        })
-        .catch((err) => {
-          // alert("세션 만료?");
-          console.warn(err);
-        });
-    };
+    // const loadTestPost = () => {
+    //   // API 호출
+    //   loadPost(11)
+    //     .then((res) => {
+    //       setTestPost(res);
+    //       // navigate("/");
+    //     })
+    //     .catch((err) => {
+    //       // alert("세션 만료?");
+    //       console.warn(err);
+    //     });
+    // };
 
     // 포스트 리스트 출력
     const loadHomePosts = () => {
       // API 호출
       listPosts()
         .then((res) => {
-          // @ts-ignore
           setHomePosts(res);
-          // navigate("/");
+          console.log("homePosts", res);
         })
         .catch((err) => {
-          // alert("세션 만료?");
           console.warn(err);
         });
     };
@@ -91,12 +89,11 @@ const HomePage = () => {
           dispatch(setUser({ user: res }));
         })
         .catch((err) => {
-          // alert("세션 만료?");
           console.warn(err);
         });
     };
 
-    loadTestPost();
+    // loadTestPost();
     loadUser();
     loadHomePosts();
   }, [dispatch]);
@@ -107,7 +104,7 @@ const HomePage = () => {
         <Header />
         <Search />
         <Swiper />
-        <HomePostList list={homePosts.popularList.content} category="popular" />
+        {/* <HomePostList list={homePosts.popularList.content} category="popular" /> */}
         <HomePostList list={homePosts.recentList.content} category="recent" />
         <HomePostList list={homePosts.placeList.content} category="place" />
         <HomePostList list={homePosts.storeList.content} category="store" />

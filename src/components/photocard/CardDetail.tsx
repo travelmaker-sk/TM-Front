@@ -6,6 +6,8 @@ import { PostType } from "./Post";
 import { useNavigate } from "react-router";
 import { bookmark, like } from "../../lib/api/post";
 import { RootStateOrAny, useSelector } from "react-redux";
+import { loadPost } from "../../lib/api/home";
+import { DetailPostType, GetPostType } from "../../lib/type";
 
 const CardDetailDiv = styled.div`
   > ul:nth-of-type(1) {
@@ -90,20 +92,21 @@ const CardDetailDiv = styled.div`
   }
 `;
 
-const CardDetail = ({ post, close }: PostType) => {
+const CardDetail = ({ post, close, detailPost }: PostType) => {
   const navigate = useNavigate();
 
-  const [checkLike, setCheckLike] = useState(post?.like.likeCheck);
-  const [numLike, setNumLike] = useState(post?.like.likeNum ?? 0);
+  const [checkLike, setCheckLike] = useState(detailPost?.liked?.likeCheck);
+  const [numLike, setNumLike] = useState(detailPost?.liked?.likeNum ?? 0);
 
-  const [checkBookmark, setCheckBookmark] = useState(post?.bookmarkCheck);
+  const [checkBookmark, setCheckBookmark] = useState(detailPost?.bookmarkCheck);
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
 
   // 좋아요
   const onToggleLike = useCallback(() => {
     if (checkLike) {
-      like(6)
+      // @ts-ignore
+      like(post?.id)
         .then((res) => {
           setNumLike((cnt) => cnt - 1);
         })
@@ -111,7 +114,8 @@ const CardDetail = ({ post, close }: PostType) => {
           console.warn(err);
         });
     } else {
-      like(6)
+      // @ts-ignore
+      like(post?.id)
         .then((res) => {
           setNumLike((cnt) => cnt + 1);
         })
@@ -120,7 +124,7 @@ const CardDetail = ({ post, close }: PostType) => {
         });
     }
     setCheckLike(!checkLike);
-  }, [checkLike]);
+  }, [checkLike, post?.id]);
 
   // 북마크
   const onToggleBookmark = useCallback(() => {
@@ -136,7 +140,8 @@ const CardDetail = ({ post, close }: PostType) => {
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          bookmark(6)
+          // @ts-ignore
+          bookmark(post?.id)
             .then(() => {
               Swal.fire({
                 title: "북마크 취소 완료!",
@@ -163,7 +168,8 @@ const CardDetail = ({ post, close }: PostType) => {
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          bookmark(6)
+          // @ts-ignore
+          bookmark(post?.id)
             .then(() => {
               Swal.fire({
                 title: "북마크 추가 완료!",
@@ -190,7 +196,19 @@ const CardDetail = ({ post, close }: PostType) => {
         }
       });
     }
-  }, [checkBookmark, close, navigate]);
+  }, [checkBookmark, close, navigate, post?.id]);
+
+  // useEffect(() => {
+  //   // @ts-ignore
+  //   loadPost(post?.id)
+  //     .then((res) => {
+  //       console.log("detailPost", res);
+  //       setDetailPost(res);
+  //     })
+  //     .catch((err) => {
+  //       console.warn(err);
+  //     });
+  // }, [post?.id]);
 
   return (
     <>
@@ -199,66 +217,66 @@ const CardDetail = ({ post, close }: PostType) => {
           <li>
             <img
               src={
-                post?.writer.profileImage
-                  ? post?.writer.profileImage
+                detailPost?.writer?.profileImage
+                  ? detailPost.writer.profileImage
                   : "./images/default-profile.png"
               }
               alt="ProfileImage"
             />
           </li>
-          <li>{post?.writer.username}</li>
+          <li>{detailPost?.writer?.username}</li>
         </ul>
         <hr />
         <ul>
           <li>
             <span>제목</span>
-            {post?.title}
+            {detailPost?.title}
           </li>
           <li>
             <span>위치</span>
-            {post?.location}
+            {detailPost?.location}
           </li>
           <li>
             <span>날짜</span>
-            {post?.date}
+            {detailPost?.date}
           </li>
-          {post?.weather ? (
+          {detailPost?.weather ? (
             <li>
               <span>날씨</span>
-              {post?.weather}
+              {detailPost?.weather}
             </li>
           ) : (
             ""
           )}
-          {post?.menu ? (
+          {detailPost?.menu ? (
             <li>
               <span>메뉴</span>
-              {post?.menu}
+              {detailPost?.menu}
             </li>
           ) : (
             ""
           )}
-          {post?.price ? (
+          {detailPost?.price ? (
             <li>
               <span>가격</span>
-              {post?.price}
+              {detailPost?.price}
             </li>
           ) : (
             ""
           )}
           <li>
             <span>평점</span>
-            {post?.score}
+            {detailPost?.score}
           </li>
           <li>
             <span>메모</span>
-            {post?.memo}
+            {detailPost?.memo}
           </li>
-          <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
+          {/* <li className="tag">{detailPost?.tagList?.map((item) => `#${item} `)}</li> */}
         </ul>
         <hr />
         <ul>
-          <li>조회수 {post?.viewCount}</li>
+          <li>조회수 {detailPost?.viewCount}</li>
           {user ? (
             <li>
               <div className="like-container">

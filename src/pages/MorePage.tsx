@@ -43,17 +43,17 @@ const MorePage = () => {
   const [posts, setPosts] = useState<any[]>([]);
 
   // 정렬 select
-  const [sort, setSort] = useState("new");
+  const [sort, setSort] = useState("id,desc");
 
   useEffect(() => {
-    if (sort === "new") {
-      setSort("new");
+    if (sort === "id,desc") {
+      setSort("id,desc");
     }
-    if (sort === "old") {
-      setSort("old");
+    if (sort === "id,asc") {
+      setSort("id,asc");
     }
-    if (sort === "popular") {
-      setSort("popular");
+    if (sort === "viewcount,desc") {
+      setSort("viewcount,desc");
     }
   }, [sort]);
 
@@ -64,22 +64,21 @@ const MorePage = () => {
 
   // 페이지네이션
   const [totalPage, setTotalPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const itemPerPage = useMemo(() => 16, []);
 
   useEffect(() => {
     // API 호출
-    //@ts-ignore
     morePosts(
       query.category as string,
-      sort as string,
+      sort,
       currentPage,
-      query.where as string,
-      query.what as string
+      query.location as string,
+      query.tag as string
     )
       .then((res) => {
-        // const totalPageCount = Math.ceil(res.totalPages / itemPerPage);
+        console.log("morePosts", res);
         setTotalPage(res.totalPages);
         setPosts(res.content);
       })
@@ -92,8 +91,8 @@ const MorePage = () => {
     itemPerPage,
     navigate,
     query.category,
-    query.what,
-    query.where,
+    query.tag,
+    query.location,
     sort,
   ]);
 
@@ -107,11 +106,11 @@ const MorePage = () => {
             name="sort"
             className="select"
             onChange={onSelectedSort}
-            defaultValue="new"
+            defaultValue="id,desc"
           >
-            <option value="new">최신순</option>
-            <option value="old">오래된순</option>
-            <option value="popular">인기순</option>
+            <option value="id,desc">최신순</option>
+            <option value="id,asc">오래된순</option>
+            <option value="viewcount,desc">인기순</option>
           </select>
         </div>
       </SelectSort>

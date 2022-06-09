@@ -79,7 +79,7 @@ const SearchPage = (props: any) => {
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
 
-  const [posts, setposts] = useState<AllPostsType>({
+  const [searchPosts, setSearchPosts] = useState<AllPostsType>({
     popularList: {
       content: [],
     },
@@ -99,57 +99,57 @@ const SearchPage = (props: any) => {
 
   useEffect(() => {
     // API 호출
-    listPosts(query.where as string, query.what as string)
+    listPosts(query.location as string, query.tag as string)
       .then((res) => {
-        // @ts-ignore
-        setposts(res);
+        setSearchPosts(res);
+        console.log("searchPosts", res);
       })
       .catch((err) => {
         console.warn(err);
       });
-  }, [navigate, query.what, query.where]);
+  }, [navigate, query.tag, query.location]);
 
   return (
     <Wrapper>
       <Header />
       <Search />
       <SearchTitle>
-        <h2 className="bounce">{query.where}</h2>
+        <h2 className="bounce">{query.location}</h2>
         <h3>
-          {query.where ?? "전 지역"}
+          {query.location ?? "전 지역"}
           &nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;
-          {query.what ?? "전체"}
+          {query.tag ?? "전체"}
         </h3>
       </SearchTitle>
-      <SearchPostList
+      {/* <SearchPostList
         list={posts.popularList.content}
         category="popular"
-        where={query.where}
-        what={query.what}
-      />
+        location={query.location}
+        tag={query.tag}
+      /> */}
       <SearchPostList
-        list={posts.recentList.content}
+        list={searchPosts.recentList.content}
         category="recent"
-        where={query.where}
-        what={query.what}
+        location={query.location}
+        tag={query.tag}
       />
       <SearchPostList
-        list={posts.placeList.content}
+        list={searchPosts.placeList.content}
         category="place"
-        where={query.where}
-        what={query.what}
+        location={query.location}
+        tag={query.tag}
       />
       <SearchPostList
-        list={posts.storeList.content}
+        list={searchPosts.storeList.content}
         category="store"
-        where={query.where}
-        what={query.what}
+        location={query.location}
+        tag={query.tag}
       />
       <SearchPostList
-        list={posts.lodgingList.content}
+        list={searchPosts.lodgingList.content}
         category="lodging"
-        where={query.where}
-        what={query.what}
+        location={query.location}
+        tag={query.tag}
       />
       <Footer />
     </Wrapper>

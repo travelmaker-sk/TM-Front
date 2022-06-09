@@ -2,7 +2,7 @@ import { useCallback, useRef } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { deletePost } from "../../lib/api/write";
-import { GetPostType } from "../../lib/type";
+import { DetailPostType, GetPostType } from "../../lib/type";
 import { CyanButtonStyle, GrayButtonStyle } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import Card from "./Card";
@@ -12,6 +12,7 @@ import ReactToPrint from "react-to-print";
 
 interface ModalType {
   post: GetPostType | null;
+  detailPost?: DetailPostType | null;
   open: boolean;
   close: () => void;
   my?: boolean;
@@ -146,7 +147,14 @@ const BookmarkButton = styled.div`
   }
 `;
 
-const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
+const PostModal = ({
+  post,
+  detailPost,
+  open,
+  close,
+  my,
+  bookmark,
+}: ModalType) => {
   const navigate = useNavigate();
 
   const refCard = useRef<HTMLLIElement>(null);
@@ -189,7 +197,7 @@ const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
             <Card post={post} />
           </li>
           <li>
-            <CardDetail post={post} close={close} />
+            <CardDetail post={post} close={close} detailPost={detailPost} />
           </li>
           <button onClick={close} title="닫기">
             <span className="material-icons">close</span>

@@ -20,7 +20,7 @@ export const addPost = async (data: AddPostType) => {
   });
 };
 
-// 포토카드 수정
+// 포토카드 수정tnwjdtnwjd
 export const editPost = async (data: EditPostType) => {
   let token = localStorage.getItem("tm-token");
 

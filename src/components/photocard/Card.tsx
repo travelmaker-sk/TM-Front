@@ -81,8 +81,8 @@ const Card = ({ post, onOpenModal }: ICard) => {
       <li>
         <img
           src={
-            post?.image
-              ? `./PhotoCard/${post.image}`
+            post?.imageUrl
+              ? `./PhotoCard/${post.imageUrl}`
               : "./images/default-photo.png"
           }
           alt="PhotocardImage"
@@ -135,11 +135,11 @@ const Card = ({ post, onOpenModal }: ICard) => {
         <span>메모</span>
         {post?.memo}
       </li>
-      <li className="tagList">
+      {/* <li className="tagList">
         {post?.tagList?.map((item) => (
           <li className="tag">{`# ${item}`}</li>
         ))}
-      </li>
+      </li> */}
     </CardUl>
   );
 };

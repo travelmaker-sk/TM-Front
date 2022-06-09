@@ -1,0 +1,11 @@
+{
+  "areaList": [
+    { "id": 0, "areaName": "제주" },
+    { "id": 1, "areaName": "부산" },
+    { "id": 2, "areaName": "서울" },
+    { "id": 3, "areaName": "인천" },
+    { "id": 4, "areaName": "속초" },
+    { "id": 5, "areaName": "강릉" },
+    { "id": 6, "areaName": "여수" }
+  ]
+}
