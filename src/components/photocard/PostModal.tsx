@@ -184,7 +184,14 @@ const PostModal = ({
         .then((res) => {
           if (res) {
             close();
-            Swal.fire("포토카드 삭제 완료!", "", "success");
+            Swal.fire({
+              title: "포토카드 삭제 완료!",
+              text: "",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: palette.gray[5],
+              confirmButtonText: "확인",
+            });
           }
         })
         .catch((err) => {

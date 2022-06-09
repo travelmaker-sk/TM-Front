@@ -8,13 +8,12 @@ import { popularArea } from "../../lib/api/home";
 const SearchWrapper = styled.div`
   width: 100%;
   height: 65px;
-  margin: 80px 0;
+  margin: 80px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
   border: 3px solid ${palette.cyan[5]};
-  border-radius: 4px;
+  border-radius: 6px;
   .location-area,
   .tag-area,
   .search-btn {
@@ -76,11 +75,17 @@ const SearchWrapper = styled.div`
     line-height: 100%;
     background-color: ${palette.cyan[5]};
     color: white;
+    border-radius: 0 6px 6px 0;
     font-size: 20px;
     transform: translateX(1px);
   }
+  // Tablet
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    width: 100%;
+  }
   // Mobile
   @media screen and (max-width: 767px) {
+    width: 100%;
     height: 200px;
     display: block;
     .location-area,
@@ -89,7 +94,8 @@ const SearchWrapper = styled.div`
       width: 101%;
       padding: 10px 20px;
       font-size: 18px;
-      transform: translateX(-1px);
+      transform: translateX(-1.5px);
+      border-radius: 0 0 6px 6px;
       input {
         font-size: 18px;
       }

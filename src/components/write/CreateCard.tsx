@@ -299,11 +299,14 @@ const CreateCard = () => {
   // 카테고리 선택
   useEffect(() => {
     if (category === "") {
-      Swal.fire(
-        "카테고리를 먼저 선택해주세요",
-        "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
-        "info"
-      );
+      Swal.fire({
+        title: "카테고리를 먼저 선택해주세요",
+        text: "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
+        icon: "info",
+        showCancelButton: false,
+        confirmButtonColor: palette.gray[5],
+        confirmButtonText: "확인",
+      });
     }
     if (category === "place") {
       setSelectedPlace(true);
@@ -461,7 +464,14 @@ const CreateCard = () => {
       }
 
       if (validationItems.includes("")) {
-        Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
+        Swal.fire({
+          title: "필수 항목을 모두 입력해주세요",
+          text: "",
+          icon: "warning",
+          showCancelButton: false,
+          confirmButtonColor: palette.gray[5],
+          confirmButtonText: "확인",
+        });
         return;
       }
 
@@ -483,7 +493,14 @@ const CreateCard = () => {
       })
         .then((res) => {
           navigate("/");
-          Swal.fire("포토카드 생성 완료!", "", "success");
+          Swal.fire({
+            title: "포토카드 생성 완료!",
+            text: "",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: palette.gray[5],
+            confirmButtonText: "확인",
+          });
         })
         .catch((err) => {
           console.warn(err);

@@ -248,7 +248,14 @@ const EditCard = () => {
       }
 
       if (validationItems.includes("")) {
-        Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
+        Swal.fire({
+          title: "필수 항목을 모두 입력해주세요",
+          text: "",
+          icon: "warning",
+          showCancelButton: false,
+          confirmButtonColor: palette.gray[5],
+          confirmButtonText: "확인",
+        });
         return;
       }
 
@@ -271,7 +278,14 @@ const EditCard = () => {
       })
         .then((res) => {
           navigate("/mypage");
-          Swal.fire("포토카드 수정 완료!", "", "success");
+          Swal.fire({
+            title: "포토카드 수정 완료!",
+            text: "",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: palette.gray[5],
+            confirmButtonText: "확인",
+          });
         })
         .catch((err) => {
           console.warn(err);

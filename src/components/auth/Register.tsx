@@ -54,12 +54,18 @@ const Register = () => {
 
   useEffect(() => {
     if (!state) {
-      Swal.fire(
-        "",
-        "회원가입을 위해 서비스 이용 약관 동의가 필요합니다",
-        "warning"
-      );
-      navigate("/privacyPolicy");
+      Swal.fire({
+        title: "회원가입을 위해 서비스 이용 약관 동의가 필요합니다",
+        text: "",
+        icon: "warning",
+        showCancelButton: false,
+        confirmButtonColor: palette.gray[5],
+        confirmButtonText: "확인",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/privacyPolicy");
+        }
+      });
     }
   }, [state, navigate]);
 
