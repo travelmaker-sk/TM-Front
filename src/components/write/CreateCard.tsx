@@ -494,6 +494,9 @@ const CreateCard = () => {
         image: file || undefined,
       })
         .then((res) => {
+          console.dir("###", res);
+          alert("테스트");
+
           navigate("/");
           Swal.fire({
             title: "포토카드 생성 완료!",
@@ -518,7 +521,6 @@ const CreateCard = () => {
       location,
       memo,
       menu,
-      navigate,
       price,
       score,
       tagList,

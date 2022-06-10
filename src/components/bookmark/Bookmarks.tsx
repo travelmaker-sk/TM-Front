@@ -23,8 +23,8 @@ const Bookmarks = ({ user }: BookmarkType) => {
 
     // API 호출
     myBookmarks()
-      .then(({ list }) => {
-        setPosts(list);
+      .then((res) => {
+        setPosts(res);
       })
       .catch((err) => {
         console.warn(err);
@@ -39,10 +39,10 @@ const Bookmarks = ({ user }: BookmarkType) => {
       <MyPageBottomBlock>
         <div>
           <h2>{user.username}님의 북마크 🏷️</h2>
-          {posts.map((list) => (
-            <div key={list.id}>
+          {posts.map((content) => (
+            <div key={content.location}>
               <h3>
-                {list.location} ({list.posts.length})
+                {content.location} ({content.total.length})
               </h3>
               <PostBlock>
                 {/* <Swiper
@@ -54,7 +54,7 @@ const Bookmarks = ({ user }: BookmarkType) => {
         autoplay={{ delay: 3000 }}
         loop={true}
       > */}
-                {list.posts.map((post: GetPostType | null) => (
+                {content.total.map((post: GetPostType | null) => (
                   // <SwiperSlide>
                   <Post post={post} key={post?.id} bookmark={true} />
                   // </SwiperSlide>

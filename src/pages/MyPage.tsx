@@ -10,13 +10,11 @@ export const HeaderBottomPlus = styled.div`
 `;
 
 const MyPagePage = () => {
-  const { user } = useSelector((state: RootStateOrAny) => state.user);
-
   return (
     <Wrapper>
       <Header />
       <HeaderBottomPlus />
-      <MyPage user={user} />
+      <MyPage />
     </Wrapper>
   );
 };

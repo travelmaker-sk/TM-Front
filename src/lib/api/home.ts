@@ -155,7 +155,7 @@ export const myPosts = async () => {
 export const myBookmarks = async () => {
   let token = localStorage.getItem("tm-token");
 
-  const response = await axios.get("/myBookmarks", {
+  const response = await axios.get("/total/api/bookmark", {
     headers: {
       Authorization: `${token}`,
     },

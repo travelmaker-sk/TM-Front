@@ -100,7 +100,10 @@ const EditCard = () => {
   const [score, setScore] = useState(post.score);
   const [memo, setMemo] = useState(post.memo ? post.memo : "");
   const [tagItem, setTagItem] = useState("");
-  const [tagList, setTagList] = useState(post.tagList ? post.tagList : []);
+  const [tagList, setTagList] = useState(post?.tagList ? post?.tagList : "");
+
+  // @ts-ignore
+  const [splitTagList, setSplitTagList] = useState(tagList.split(" "));
 
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedStore, setSelectedStore] = useState(false);
@@ -190,7 +193,7 @@ const EditCard = () => {
     }
   };
   const submitTagItem = () => {
-    let updatedTagList = [...tagList];
+    let updatedTagList = [...splitTagList];
     // @ts-ignore
     updatedTagList.push(tagItem);
     setTagList(updatedTagList);
@@ -200,7 +203,7 @@ const EditCard = () => {
     e.preventDefault();
 
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tagList.filter(
+    const filteredTagList = splitTagList.filter(
       // @ts-ignore
       (tagItem) => tagItem !== deleteTagItem
     );
@@ -274,7 +277,7 @@ const EditCard = () => {
         menu: menu || undefined,
         price: numberPrice || undefined,
         memo: memo || undefined,
-        tagList: tagList.length ? tagList : undefined,
+        tagList: splitTagList.length ? splitTagList : undefined,
         image: file || undefined,
       })
         .then((res) => {
@@ -306,7 +309,7 @@ const EditCard = () => {
       post.id,
       price,
       score,
-      tagList,
+      splitTagList,
       title,
       weather,
     ]
@@ -509,7 +512,8 @@ const EditCard = () => {
                   onKeyPress={onKeyPress}
                 />
                 <TagList>
-                  {tagList.map((tagItem, index) => (
+                  {/* @ts-ignore */}
+                  {splitTagList.map((tagItem, index) => (
                     <TagItem key={index}>
                       <span>{tagItem}</span>
                       <button

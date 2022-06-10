@@ -13,12 +13,9 @@ import "swiper/css/pagination";
 import { myPosts } from "../../lib/api/home";
 import { useNavigate } from "react-router";
 import Loading from "../common/Loading";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
-
-interface MyPageType {
-  user: UserType;
-}
 
 const MyPageTopBlock = styled.div`
   display: flex;
@@ -118,8 +115,10 @@ export const MyPageBottomBlock = styled.div`
   }
 `;
 
-const MyPage = ({ user }: MyPageType) => {
+const MyPage = () => {
   const navigate = useNavigate();
+
+  const { user } = useSelector((state: RootStateOrAny) => state.user);
 
   const [loading, setLoading] = useState(false);
 
@@ -130,8 +129,8 @@ const MyPage = ({ user }: MyPageType) => {
 
     // API 호출
     myPosts()
-      .then(({ list }) => {
-        setPosts(list);
+      .then((res) => {
+        setPosts(res);
       })
       .catch((err) => {
         console.warn(err);
@@ -182,10 +181,10 @@ const MyPage = ({ user }: MyPageType) => {
       <MyPageBottomBlock>
         <div>
           <h2>{user.username}님의 포토카드 ✈️</h2>
-          {posts.map((list) => (
-            <div key={list.id}>
+          {posts.map((content) => (
+            <div key={content.location}>
               <h3>
-                {list.location} ({list.posts.length})
+                {content.location} ({content.total.length})
               </h3>
               <PostBlock>
                 {/* <Swiper
@@ -197,7 +196,7 @@ const MyPage = ({ user }: MyPageType) => {
                   autoplay={{ delay: 3000 }}
                   loop={true}
                 > */}
-                {list.posts.map((post: GetPostType | null) => (
+                {content.total.map((post: GetPostType | null) => (
                   // <SwiperSlide>
                   <Post post={post} key={post?.id} my={true} />
                   // </SwiperSlide>

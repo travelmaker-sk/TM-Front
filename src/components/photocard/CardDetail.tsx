@@ -103,9 +103,9 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
   const [bookmarkCheck, setBookmarkCheck] = useState(false);
 
   useEffect(() => {
-    console.log("likeCheck", likeCheck);
-    console.log("likeNum", likeNum);
-    console.log("bookmarkCheck", bookmarkCheck);
+    // console.log("likeCheck", likeCheck);
+    // console.log("likeNum", likeNum);
+    // console.log("bookmarkCheck", bookmarkCheck);
 
     setLikeCheck(detailPost?.liked.likeCheck as boolean);
     setLikeNum(detailPost?.liked.likeNum as number);
