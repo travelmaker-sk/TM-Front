@@ -25,10 +25,10 @@ export const PostBlock = styled.div`
   flex-wrap: wrap;
   > ul {
     margin-right: 1.5%;
-    transition: 0.5s;
+    transition: 0.4s;
   }
   > ul:hover {
-    transform: translateY(-15px);
+    transform: translateY(-10px);
   }
   > ul:nth-of-type(4n) {
     margin-right: 0;

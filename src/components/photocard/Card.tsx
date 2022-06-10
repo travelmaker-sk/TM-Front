@@ -75,10 +75,8 @@ const Card = ({ post, onOpenModal }: ICard) => {
 
   const [tagList, setTagList] = useState(post?.tagList ? post?.tagList : "");
 
-  if (tagList !== "") {
-    // @ts-ignore
-    var splitTagList = tagList.split(" ");
-  }
+  // @ts-ignore
+  const splitTagList = tagList.split(" ");
 
   return (
     <CardUl
@@ -139,15 +137,23 @@ const Card = ({ post, onOpenModal }: ICard) => {
           {dictScore[post?.score]}
         </p>
       </li>
-      <li>
-        <span>메모</span>
-        {post?.memo}
-      </li>
-      <li className="tagList">
-        {splitTagList?.map((item: any) => (
-          <li className="tag">{`#${item}`}</li>
-        ))}
-      </li>
+      {post?.memo ? (
+        <li>
+          <span>메모</span>
+          {post?.memo}
+        </li>
+      ) : (
+        ""
+      )}
+      {post?.tagList ? (
+        <li className="tagList">
+          {splitTagList?.map((item: any) => (
+            <li className="tag">{`#${item}`}</li>
+          ))}
+        </li>
+      ) : (
+        ""
+      )}
     </CardUl>
   );
 };

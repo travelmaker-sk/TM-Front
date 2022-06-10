@@ -136,7 +136,7 @@ export const loadPost = async (id: number) => {
 export const myPosts = async () => {
   let token = localStorage.getItem("tm-token");
 
-  const response = await axios.get("/myPosts", {
+  const response = await axios.get("/total/api/mypage", {
     headers: {
       Authorization: `${token}`,
     },
@@ -172,19 +172,19 @@ export const myBookmarks = async () => {
 
 // 인기 여행지 TOP7
 export const popularArea = async () => {
-  let token = localStorage.getItem("tm-token");
+  // let token = localStorage.getItem("tm-token");
 
-  const response = await axios.get("/popularLocation", {
-    headers: {
-      Authorization: `${token}`,
-    },
-  });
+  // const response = await axios.get("/popularLocation", {
+  //   headers: {
+  //     Authorization: `${token}`,
+  //   },
+  // });
 
-  return response.data;
+  // return response.data;
 
-  // const list = popularLocation.areaList;
+  const list = popularLocation.areaList;
 
-  // return {
-  //   list,
-  // };
+  return {
+    list,
+  };
 };

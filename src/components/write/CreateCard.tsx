@@ -304,8 +304,9 @@ const CreateCard = () => {
         text: "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
         icon: "info",
         showCancelButton: false,
-        confirmButtonColor: palette.gray[5],
+        confirmButtonColor: "#20c997",
         confirmButtonText: "확인",
+        iconColor: palette.gray[5],
       });
     }
     if (category === "place") {
@@ -469,8 +470,9 @@ const CreateCard = () => {
           text: "",
           icon: "warning",
           showCancelButton: false,
-          confirmButtonColor: palette.gray[5],
+          confirmButtonColor: "#20c997",
           confirmButtonText: "확인",
+          iconColor: palette.gray[5],
         });
         return;
       }
@@ -498,8 +500,9 @@ const CreateCard = () => {
             text: "",
             icon: "success",
             showCancelButton: false,
-            confirmButtonColor: palette.gray[5],
+            confirmButtonColor: "#20c997",
             confirmButtonText: "확인",
+            iconColor: palette.gray[5],
           });
         })
         .catch((err) => {

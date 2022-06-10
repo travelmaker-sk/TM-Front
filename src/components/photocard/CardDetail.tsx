@@ -75,7 +75,7 @@ const CardDetailDiv = styled.div`
           transform: scale(1.1);
         }
         span.bookmark {
-          color: ${palette.cyan[8]};
+          color: #20c997;
         }
       }
     }
@@ -95,62 +95,79 @@ const CardDetailDiv = styled.div`
 const CardDetail = ({ post, close, detailPost }: PostType) => {
   const navigate = useNavigate();
 
-  const [checkLike, setCheckLike] = useState(detailPost?.liked?.likeCheck);
-  const [numLike, setNumLike] = useState(detailPost?.liked?.likeNum ?? 0);
-
-  const [checkBookmark, setCheckBookmark] = useState(detailPost?.bookmarkCheck);
-
   const { user } = useSelector((state: RootStateOrAny) => state.user);
+
+  const [likeCheck, setLikeCheck] = useState(false);
+  const [likeNum, setLikeNum] = useState(0);
+
+  const [bookmarkCheck, setBookmarkCheck] = useState(false);
+
+  useEffect(() => {
+    console.log("likeCheck", likeCheck);
+    console.log("likeNum", likeNum);
+    console.log("bookmarkCheck", bookmarkCheck);
+
+    setLikeCheck(detailPost?.liked.likeCheck as boolean);
+    setLikeNum(detailPost?.liked.likeNum as number);
+    setBookmarkCheck(detailPost?.bookmarkCheck as boolean);
+  }, [
+    bookmarkCheck,
+    detailPost?.bookmarkCheck,
+    detailPost?.liked.likeCheck,
+    detailPost?.liked.likeNum,
+    likeCheck,
+    likeNum,
+  ]);
 
   // 좋아요
   const onToggleLike = useCallback(() => {
-    if (checkLike) {
-      // @ts-ignore
-      like(post?.id)
+    if (likeCheck) {
+      like(post?.id as number)
         .then((res) => {
-          setNumLike((cnt) => cnt - 1);
+          console.log("likechecknono⭐⭐⭐⭐");
+          setLikeNum((cnt) => cnt - 1);
+          setLikeCheck(!likeCheck);
         })
         .catch((err) => {
           console.warn(err);
         });
     } else {
-      // @ts-ignore
-      like(post?.id)
+      like(post?.id as number)
         .then((res) => {
-          setNumLike((cnt) => cnt + 1);
+          console.log("likecheck⭐⭐⭐⭐");
+          setLikeNum((cnt) => cnt + 1);
+          setLikeCheck(!likeCheck);
         })
         .catch((err) => {
           console.warn(err);
         });
     }
-    setCheckLike(!checkLike);
-  }, [checkLike, post?.id]);
+  }, [likeCheck, post?.id]);
 
   // 북마크
   const onToggleBookmark = useCallback(() => {
-    if (checkBookmark) {
+    if (bookmarkCheck) {
       Swal.fire({
         title: "북마크를 취소하시겠습니까?",
         text: "",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#ff6b6b",
+        confirmButtonColor: palette.cyan[5],
         cancelButtonColor: palette.gray[5],
         confirmButtonText: "확인",
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          // @ts-ignore
-          bookmark(post?.id)
+          bookmark(post?.id as number)
             .then(() => {
               Swal.fire({
                 title: "북마크 취소 완료!",
                 icon: "success",
-                confirmButtonColor: palette.gray[5],
+                confirmButtonColor: palette.cyan[5],
                 confirmButtonText: "확인",
               });
 
-              setCheckBookmark(!checkBookmark);
+              setBookmarkCheck(!bookmarkCheck);
             })
             .catch((err) => {
               console.warn(err);
@@ -162,21 +179,20 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         title: "북마크를 추가하시겠습니까?",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#ff6b6b",
+        confirmButtonColor: palette.cyan[5],
         cancelButtonColor: palette.gray[5],
         confirmButtonText: "확인",
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          // @ts-ignore
-          bookmark(post?.id)
+          bookmark(post?.id as number)
             .then(() => {
               Swal.fire({
                 title: "북마크 추가 완료!",
                 text: "",
                 icon: "success",
                 showCancelButton: true,
-                confirmButtonColor: "#ff6b6b",
+                confirmButtonColor: palette.cyan[5],
                 cancelButtonColor: palette.gray[5],
                 confirmButtonText: "내 북마크로 이동",
                 cancelButtonText: "취소",
@@ -188,7 +204,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                 }
               });
 
-              setCheckBookmark(!checkBookmark);
+              setBookmarkCheck(!bookmarkCheck);
             })
             .catch((err) => {
               console.warn(err);
@@ -196,7 +212,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         }
       });
     }
-  }, [checkBookmark, close, navigate, post?.id]);
+  }, [bookmarkCheck, close, navigate, post?.id]);
 
   return (
     <>
@@ -256,13 +272,21 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
             <span>평점</span>
             {detailPost?.score}
           </li>
-          <li>
-            <span>메모</span>
-            {detailPost?.memo}
-          </li>
-          <li className="tag">
-            {detailPost?.tagList?.map((item) => `#${item} `)}
-          </li>
+          {detailPost?.memo ? (
+            <li>
+              <span>메모</span>
+              {detailPost?.memo}
+            </li>
+          ) : (
+            ""
+          )}
+          {detailPost?.tagList ? (
+            <li className="tag">
+              {detailPost?.tagList?.map((item) => `#${item} `)}
+            </li>
+          ) : (
+            ""
+          )}
         </ul>
         <hr />
         <ul>
@@ -275,7 +299,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                   onClick={onToggleLike}
                   className="like-btn"
                 >
-                  {checkLike ? (
+                  {likeCheck ? (
                     <span className="material-icons like">favorite</span>
                   ) : (
                     <span className="material-icons cancel-like">
@@ -283,14 +307,14 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                     </span>
                   )}
                 </button>
-                <span>{numLike}</span>
+                <span>{likeNum}</span>
               </div>
               <button
                 title="북마크"
                 onClick={onToggleBookmark}
                 className="bookmark-btn"
               >
-                {checkBookmark ? (
+                {bookmarkCheck ? (
                   <span className="material-icons bookmark">bookmark</span>
                 ) : (
                   <span className="material-icons">bookmark_outline</span>

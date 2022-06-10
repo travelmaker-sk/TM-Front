@@ -47,7 +47,7 @@ export interface GetPostType {
   tagList?: Array<string>;
   imageUrl?: string;
   createdate: string;
-  liked?: number;
+  liked: number;
   username?: string;
   useremail?: string;
   profileImage?: string;

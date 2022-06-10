@@ -50,6 +50,7 @@ const ModalBlock = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #fff;
+    animation: modal-show 0.3s;
     > li {
       width: 40%;
     }
@@ -96,6 +97,16 @@ const ModalBlock = styled.div`
         margin-top: 40px;
         margin-left: 0;
       }
+    }
+  }
+  @keyframes modal-show {
+    from {
+      opacity: 0;
+      margin-top: -50px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0;
     }
   }
 `;
@@ -189,8 +200,9 @@ const PostModal = ({
               text: "",
               icon: "success",
               showCancelButton: false,
-              confirmButtonColor: palette.gray[5],
+              confirmButtonColor: "#20c997",
               confirmButtonText: "확인",
+              iconColor: palette.gray[5],
             });
           }
         })

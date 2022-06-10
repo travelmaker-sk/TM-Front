@@ -18,7 +18,7 @@ const LoadingDiv = styled.div`
   img {
     width: 80px;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 `;
 

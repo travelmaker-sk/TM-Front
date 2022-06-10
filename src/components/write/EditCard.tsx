@@ -253,8 +253,9 @@ const EditCard = () => {
           text: "",
           icon: "warning",
           showCancelButton: false,
-          confirmButtonColor: palette.gray[5],
+          confirmButtonColor: "#20c997",
           confirmButtonText: "확인",
+          iconColor: palette.gray[5],
         });
         return;
       }
@@ -283,8 +284,9 @@ const EditCard = () => {
             text: "",
             icon: "success",
             showCancelButton: false,
-            confirmButtonColor: palette.gray[5],
+            confirmButtonColor: "#20c997",
             confirmButtonText: "확인",
+            iconColor: palette.gray[5],
           });
         })
         .catch((err) => {
