@@ -241,7 +241,7 @@ const PostModal = ({
           <div className="container">
             <ul className="white-box">
               <li ref={refCard}>
-                <Card post={post} />
+                <Card post={post} my={my} bookmark={bookmark} />
               </li>
               <li>
                 <CardDetail post={post} close={close} detailPost={detailPost} />
