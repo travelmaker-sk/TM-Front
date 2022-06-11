@@ -27,6 +27,10 @@ const Post = ({ post, my, bookmark }: PostType) => {
     // @ts-ignore
     loadPost(post?.id)
       .then((res) => {
+        if (res.status == "403") {
+          alert("토큰 만료");
+        }
+
         console.log("detailPost", res);
         setDetailPost(res);
       })

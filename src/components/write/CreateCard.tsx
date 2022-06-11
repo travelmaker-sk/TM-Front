@@ -494,6 +494,10 @@ const CreateCard = () => {
         image: file || undefined,
       })
         .then((res) => {
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
           navigate("/");
           Swal.fire({
             title: "포토카드 생성 완료!",

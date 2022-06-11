@@ -107,6 +107,9 @@ const SearchPage = (props: any) => {
     // API 호출
     listPosts(query.location as string, query.tag as string)
       .then((res) => {
+        if (res.status == "403") {
+          alert("토큰 만료");
+        }
         setSearchPosts(res);
         console.log("searchPosts", res);
       })

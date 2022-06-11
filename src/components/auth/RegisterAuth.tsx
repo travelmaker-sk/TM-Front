@@ -83,6 +83,7 @@ const RegisterAuth = () => {
       // API 호출
       registerAuth(email as string, inputAuthCode as string)
         .then((res) => {
+          console.log("auth res", res);
           if (res) {
             setError("인증번호가 일치하지 않습니다.");
           } else {

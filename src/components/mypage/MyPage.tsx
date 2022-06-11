@@ -138,6 +138,10 @@ const MyPage = () => {
     // API 호출
     myPosts()
       .then((res) => {
+        if (res.status == "403") {
+          alert("토큰 만료");
+        }
+
         setPosts(res);
       })
       .catch((err) => {

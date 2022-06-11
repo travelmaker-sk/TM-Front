@@ -74,7 +74,7 @@ interface EditCardType {
   price?: string;
   memo?: string;
   tagList?: Array<string>;
-  image?: string;
+  imageUrl?: string;
 }
 
 let timer: NodeJS.Timeout | null = null;
@@ -137,8 +137,8 @@ const EditCard = () => {
   // 포토카드 이미지 업로드
   const [cardImage, setCardImage] = useState({
     cardImageName: "",
-    cardImageUrl: post.image
-      ? `./PhotoCard/${post.image}`
+    cardImageUrl: post.imageUrl
+      ? `./PhotoCard/${post.imageUrl}`
       : "./images/add-photo.png",
   });
   const cardPhotoChange = (e: any) => {
@@ -231,6 +231,10 @@ const EditCard = () => {
     });
   };
 
+  useEffect(() => {
+    console.log("cardImageUrl", cardImage.cardImageUrl);
+  });
+
   // 업로드 버튼
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -285,6 +289,10 @@ const EditCard = () => {
         image: file || undefined,
       })
         .then((res) => {
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
           navigate("/mypage");
           Swal.fire({
             title: "포토카드 수정 완료!",

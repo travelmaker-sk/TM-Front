@@ -44,10 +44,32 @@ const MorePage = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const [selSort, setSelSort] = useState(false);
+
   const [posts, setPosts] = useState<any[]>([]);
 
   // 정렬
   const [sort, setSort] = useState("id,desc");
+
+  useEffect(() => {
+    console.log("setSelSort", selSort);
+    console.log("query.category", query.category);
+    if (query.category === "popular") {
+      setSelSort(false);
+    }
+    if (query.category === "recent") {
+      setSelSort(false);
+    }
+    if (query.category === "place") {
+      setSelSort(true);
+    }
+    if (query.category === "store") {
+      setSelSort(true);
+    }
+    if (query.category === "lodging") {
+      setSelSort(true);
+    }
+  }, [query.category, selSort]);
 
   useEffect(() => {
     if (sort === "id,desc") {
@@ -82,6 +104,10 @@ const MorePage = () => {
       query.tag as string
     )
       .then((res) => {
+        if (res.status == "403") {
+          alert("토큰 만료");
+        }
+
         console.log("morePosts", res);
         setTotalPage(res.totalPages);
         setPosts(res.content);
@@ -99,20 +125,24 @@ const MorePage = () => {
       <Wrapper>
         <Header />
         <Search />
-        <SelectSort>
-          <div>
-            <select
-              name="sort"
-              className="select"
-              onChange={onSelectedSort}
-              defaultValue="id,desc"
-            >
-              <option value="id,desc">최신순</option>
-              <option value="id,asc">오래된순</option>
-              <option value="viewcount,desc">인기순</option>
-            </select>
-          </div>
-        </SelectSort>
+        {selSort ? (
+          <SelectSort>
+            <div>
+              <select
+                name="sort"
+                className="select"
+                onChange={onSelectedSort}
+                defaultValue="id,desc"
+              >
+                <option value="id,desc">최신순</option>
+                <option value="id,asc">오래된순</option>
+                <option value="viewcount,desc">인기순</option>
+              </select>
+            </div>
+          </SelectSort>
+        ) : (
+          ""
+        )}
         <PostBlock>
           {posts.map((post) => (
             //@ts-ignore

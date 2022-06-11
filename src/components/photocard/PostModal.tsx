@@ -202,6 +202,10 @@ const PostModal = ({
       // @ts-ignore
       deletePost(post?.id)
         .then((res) => {
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
           if (res) {
             close();
             Swal.fire({

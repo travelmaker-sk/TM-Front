@@ -10,6 +10,7 @@ export interface PostListType {
   category: AllPostsCategoryType;
   location?: any;
   tag?: any;
+  selSort?: boolean;
 }
 
 export const PostListBlock = styled.div`

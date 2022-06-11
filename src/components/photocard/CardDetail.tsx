@@ -127,6 +127,10 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
     if (likeCheck) {
       like(post?.id as number)
         .then((res) => {
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
           setLikeCnt((cnt) => cnt + 1);
           console.log("likechecknono⭐⭐⭐⭐");
           console.log("likeCnt", likeCnt);
@@ -146,6 +150,10 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
     } else {
       like(post?.id as number)
         .then((res) => {
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
           setCancelLikeCnt((cnt) => cnt + 1);
           console.log("likecheck⭐⭐⭐⭐");
           console.log("cancelLikeCnt", cancelLikeCnt);
@@ -163,7 +171,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
           console.warn(err);
         });
     }
-  }, [likeCheck, post?.id]);
+  }, [cancelLikeCnt, likeCheck, likeCnt, post?.id]);
 
   // 북마크
   const onToggleBookmark = useCallback(() => {
@@ -180,7 +188,11 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
       }).then((result) => {
         if (result.isConfirmed) {
           bookmark(post?.id as number)
-            .then(() => {
+            .then((res) => {
+              if (res.status == "403") {
+                alert("토큰 만료");
+              }
+
               setBookmarkCnt((cnt) => cnt + 1);
               console.log("bookmarkchecknono⭐⭐⭐⭐");
               console.log("bookmarkCnt", bookmarkCnt);
@@ -192,13 +204,21 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
               // }
 
               Swal.fire({
-                title: "북마크 취소 완료!",
+                title: "북마크 삭제 완료!",
+                text: "",
                 icon: "success",
-                confirmButtonColor: palette.cyan[5],
+                showCancelButton: false,
+                confirmButtonColor: "#20c997",
                 confirmButtonText: "확인",
-              });
+                iconColor: palette.gray[5],
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // eslint-disable-next-line no-restricted-globals
+                  location.reload();
 
-              setBookmarkCheck(!bookmarkCheck);
+                  setBookmarkCheck(!bookmarkCheck);
+                }
+              });
             })
             .catch((err) => {
               console.warn(err);
@@ -217,7 +237,11 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
       }).then((result) => {
         if (result.isConfirmed) {
           bookmark(post?.id as number)
-            .then(() => {
+            .then((res) => {
+              if (res.status == "403") {
+                alert("토큰 만료");
+              }
+
               setCancelBookmarkCnt((cnt) => cnt + 1);
               console.log("bookmarkcheck⭐⭐⭐⭐");
               console.log("cancelBookmarkCnt", cancelBookmarkCnt);
@@ -253,7 +277,14 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         }
       });
     }
-  }, [bookmarkCheck, close, navigate, post?.id]);
+  }, [
+    bookmarkCheck,
+    bookmarkCnt,
+    cancelBookmarkCnt,
+    close,
+    navigate,
+    post?.id,
+  ]);
 
   return (
     <>

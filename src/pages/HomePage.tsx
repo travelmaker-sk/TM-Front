@@ -29,11 +29,8 @@ export const Wrapper = styled(Responsive)`
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-
-  const [testPost, setTestPost] = useState(null);
 
   const [homePosts, setHomePosts] = useState<AllPostsType>({
     popularList: {
@@ -61,8 +58,11 @@ const HomePage = () => {
       // API 호출
       listPosts()
         .then((res) => {
-          setHomePosts(res);
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
           console.log("homePosts", res);
+          setHomePosts(res);
         })
         .catch((err) => {
           console.warn(err);
