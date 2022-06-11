@@ -371,7 +371,7 @@ const CreateCard = () => {
     setTimeout(() => {
       if (!refLocationUl.current) return;
       refLocationUl.current.style.display = "none";
-    }, 130);
+    }, 200);
   };
 
   const onClickLoctionList = useCallback(
@@ -465,6 +465,7 @@ const CreateCard = () => {
       }
 
       if (validationItems.includes("")) {
+        setLoading(false);
         Swal.fire({
           title: "필수 항목을 모두 입력해주세요",
           text: "",

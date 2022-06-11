@@ -52,10 +52,23 @@ const MorePage = () => {
   const [sort, setSort] = useState("id,desc");
 
   useEffect(() => {
+    if (sort === "id,desc") {
+      setSort("id,desc");
+    }
+    if (sort === "id,asc") {
+      setSort("id,asc");
+    }
+    if (sort === "viewcount,desc") {
+      setSort("viewcount,desc");
+    }
+  }, [sort]);
+
+  useEffect(() => {
     console.log("setSelSort", selSort);
     console.log("query.category", query.category);
     if (query.category === "popular") {
       setSelSort(false);
+      setSort("viewcount,desc");
     }
     if (query.category === "recent") {
       setSelSort(false);
@@ -70,18 +83,6 @@ const MorePage = () => {
       setSelSort(true);
     }
   }, [query.category, selSort]);
-
-  useEffect(() => {
-    if (sort === "id,desc") {
-      setSort("id,desc");
-    }
-    if (sort === "id,asc") {
-      setSort("id,asc");
-    }
-    if (sort === "viewcount,desc") {
-      setSort("viewcount,desc");
-    }
-  }, [sort]);
 
   // 정렬 선택
   const onSelectedSort = useCallback((e: any) => {

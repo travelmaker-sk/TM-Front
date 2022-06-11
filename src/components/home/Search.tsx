@@ -136,7 +136,7 @@ const Search = () => {
     setTimeout(() => {
       if (!refLocationArea.current) return;
       refLocationArea.current.style.display = "none";
-    }, 130);
+    }, 200);
   };
 
   const onClickLocationList = useCallback(

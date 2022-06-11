@@ -158,6 +158,7 @@ const Login = () => {
       );
 
       if ([inputEmail, inputPw].includes("")) {
+        setLoading(false);
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {

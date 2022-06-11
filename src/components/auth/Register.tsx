@@ -85,9 +85,11 @@ const Register = () => {
       );
 
       if ([inputNickname, inputEmail, inputPw, inputPwConfirm].includes("")) {
+        setLoading(false);
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else if (inputPw !== inputPwConfirm) {
+        setLoading(false);
         setError("비밀번호가 일치하지 않습니다.");
         return;
       } else {

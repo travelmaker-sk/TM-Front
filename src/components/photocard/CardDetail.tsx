@@ -216,7 +216,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                   // eslint-disable-next-line no-restricted-globals
                   location.reload();
 
-                  setBookmarkCheck(!bookmarkCheck);
+                  // setBookmarkCheck(!bookmarkCheck);
                 }
               });
             })
@@ -269,7 +269,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                 }
               });
 
-              setBookmarkCheck(!bookmarkCheck);
+              // setBookmarkCheck(!bookmarkCheck);
             })
             .catch((err) => {
               console.warn(err);

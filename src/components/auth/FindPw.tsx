@@ -50,6 +50,7 @@ const FindPw = () => {
       const [inputEmail] = $inputs.map(($input) => $input.value);
 
       if ([inputEmail].includes("")) {
+        setLoading(false);
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {

@@ -75,6 +75,7 @@ const RegisterAuth = () => {
       const [inputAuthCode] = $inputs.map(($input) => $input.value);
 
       if ([inputAuthCode].includes("")) {
+        setLoading(false);
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {

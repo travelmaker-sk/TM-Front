@@ -134,12 +134,12 @@ const SearchPage = (props: any) => {
             {query.tag ? query.tag : "전체"}
           </h3>
         </SearchTitle>
-        {/* <SearchPostList
-        list={posts.popularList.content}
-        category="popular"
-        location={query.location}
-        tag={query.tag}
-      /> */}
+        <SearchPostList
+          list={searchPosts.popularList.content}
+          category="popular"
+          location={query.location}
+          tag={query.tag}
+        />
         <SearchPostList
           list={searchPosts.recentList.content}
           category="recent"
