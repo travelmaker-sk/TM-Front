@@ -21,7 +21,6 @@ interface ModalType {
 }
 
 const ModalBlock = styled.div`
-  display: none;
   position: fixed;
   top: 0;
   right: 0;
@@ -31,9 +30,6 @@ const ModalBlock = styled.div`
   height: 100%;
   z-index: 8888;
   background-color: rgba(0, 0, 0, 0.6);
-  &.open {
-    display: block;
-  }
   .container {
     width: 100%;
     height: 100%;
@@ -236,61 +232,65 @@ const PostModal = ({
 
   return (
     <>
-      <ModalBlock className={open ? "open" : ""}>
-        <div className="container">
-          <ul className="white-box">
-            <li ref={refCard}>
-              <Card post={post} />
-            </li>
-            <li>
-              <CardDetail post={post} close={close} detailPost={detailPost} />
-            </li>
-            <button onClick={close} title="닫기">
-              <span className="material-icons">close</span>
-            </button>
-            {my ? (
-              <MyButton>
-                <ReactToPrint
-                  trigger={() => (
-                    <CyanButtonStyle>
-                      <button className="print-btn">
-                        <span className="material-icons">print</span> &nbsp;
-                        인쇄
-                      </button>
-                    </CyanButtonStyle>
-                  )}
-                  content={() => refCard.current}
-                />
-                <CyanButtonStyle>
-                  <button onClick={onEdit}>수정</button>
-                </CyanButtonStyle>
-                <GrayButtonStyle>
-                  <button onClick={onDelete}>삭제</button>
-                </GrayButtonStyle>
-              </MyButton>
-            ) : (
-              ""
-            )}
-            {bookmark ? (
-              <BookmarkButton>
-                <ReactToPrint
-                  trigger={() => (
-                    <CyanButtonStyle>
-                      <button className="print-btn">
-                        <span className="material-icons">print</span> &nbsp;
-                        인쇄
-                      </button>
-                    </CyanButtonStyle>
-                  )}
-                  content={() => refCard.current}
-                />
-              </BookmarkButton>
-            ) : (
-              ""
-            )}
-          </ul>
-        </div>
-      </ModalBlock>
+      {open ? (
+        <ModalBlock>
+          <div className="container">
+            <ul className="white-box">
+              <li ref={refCard}>
+                <Card post={post} />
+              </li>
+              <li>
+                <CardDetail post={post} close={close} detailPost={detailPost} />
+              </li>
+              <button onClick={close} title="닫기">
+                <span className="material-icons">close</span>
+              </button>
+              {my ? (
+                <MyButton>
+                  <ReactToPrint
+                    trigger={() => (
+                      <CyanButtonStyle>
+                        <button className="print-btn">
+                          <span className="material-icons">print</span> &nbsp;
+                          인쇄
+                        </button>
+                      </CyanButtonStyle>
+                    )}
+                    content={() => refCard.current}
+                  />
+                  <CyanButtonStyle>
+                    <button onClick={onEdit}>수정</button>
+                  </CyanButtonStyle>
+                  <GrayButtonStyle>
+                    <button onClick={onDelete}>삭제</button>
+                  </GrayButtonStyle>
+                </MyButton>
+              ) : (
+                ""
+              )}
+              {bookmark ? (
+                <BookmarkButton>
+                  <ReactToPrint
+                    trigger={() => (
+                      <CyanButtonStyle>
+                        <button className="print-btn">
+                          <span className="material-icons">print</span> &nbsp;
+                          인쇄
+                        </button>
+                      </CyanButtonStyle>
+                    )}
+                    content={() => refCard.current}
+                  />
+                </BookmarkButton>
+              ) : (
+                ""
+              )}
+            </ul>
+          </div>
+        </ModalBlock>
+      ) : (
+        ""
+      )}
       {loading ? <Loading /> : ""}
     </>
   );

@@ -37,6 +37,7 @@ const Post = ({ post, my, bookmark }: PostType) => {
         setLoading(false);
       });
   }, [post?.id]);
+
   const onCloseModal = () => {
     setOpenModal(false);
   };
