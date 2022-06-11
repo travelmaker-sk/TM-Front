@@ -55,12 +55,10 @@ const CardDetailDiv = styled.div`
     }
     button {
       &.like-btn {
-        span.cancel-like,
-        span.like {
+        span {
           transition: transform 300ms ease;
         }
-        span.cancel-like:hover,
-        span.like:hover {
+        span:hover {
           transform: scale(1.1);
         }
         span.like {
@@ -97,16 +95,21 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
 
+  const refLike = useRef<HTMLSpanElement>(null);
+  const refLikeCancel = useRef<HTMLSpanElement>(null);
+  const refBookmark = useRef<HTMLSpanElement>(null);
+  const refBookmarkCancel = useRef<HTMLSpanElement>(null);
+
+  const [likeCnt, setLikeCnt] = useState(0);
+  const [cancelLikeCnt, setCancelLikeCnt] = useState(0);
+  const [bookmarkCnt, setBookmarkCnt] = useState(0);
+  const [cancelBookmarkCnt, setCancelBookmarkCnt] = useState(0);
+
   const [likeCheck, setLikeCheck] = useState(false);
   const [likeNum, setLikeNum] = useState(0);
-
   const [bookmarkCheck, setBookmarkCheck] = useState(false);
 
   useEffect(() => {
-    // console.log("likeCheck", likeCheck);
-    // console.log("likeNum", likeNum);
-    // console.log("bookmarkCheck", bookmarkCheck);
-
     setLikeCheck(detailPost?.liked.likeCheck as boolean);
     setLikeNum(detailPost?.liked.likeNum as number);
     setBookmarkCheck(detailPost?.bookmarkCheck as boolean);
@@ -124,7 +127,16 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
     if (likeCheck) {
       like(post?.id as number)
         .then((res) => {
+          setLikeCnt((cnt) => cnt + 1);
           console.log("likechecknono⭐⭐⭐⭐");
+          console.log("likeCnt", likeCnt);
+          if (!refLike.current) return;
+          if (likeCnt % 2) {
+            refLike.current.style.color = "#ff6b6b";
+          } else {
+            refLike.current.style.color = `${palette.gray[6]}`;
+          }
+
           setLikeNum((cnt) => cnt - 1);
           setLikeCheck(!likeCheck);
         })
@@ -134,7 +146,16 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
     } else {
       like(post?.id as number)
         .then((res) => {
+          setCancelLikeCnt((cnt) => cnt + 1);
           console.log("likecheck⭐⭐⭐⭐");
+          console.log("cancelLikeCnt", cancelLikeCnt);
+          if (!refLikeCancel.current) return;
+          if (cancelLikeCnt % 2) {
+            refLikeCancel.current.style.color = `${palette.gray[6]}`;
+          } else {
+            refLikeCancel.current.style.color = "#ff6b6b";
+          }
+
           setLikeNum((cnt) => cnt + 1);
           setLikeCheck(!likeCheck);
         })
@@ -160,6 +181,16 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         if (result.isConfirmed) {
           bookmark(post?.id as number)
             .then(() => {
+              setBookmarkCnt((cnt) => cnt + 1);
+              console.log("bookmarkchecknono⭐⭐⭐⭐");
+              console.log("bookmarkCnt", bookmarkCnt);
+              if (!refBookmark.current) return;
+              // if (bookmarkCnt % 2) {
+              //   refBookmark.current.style.color = "#20c997";
+              // } else {
+              refBookmark.current.style.color = `${palette.gray[6]}`;
+              // }
+
               Swal.fire({
                 title: "북마크 취소 완료!",
                 icon: "success",
@@ -187,6 +218,16 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         if (result.isConfirmed) {
           bookmark(post?.id as number)
             .then(() => {
+              setCancelBookmarkCnt((cnt) => cnt + 1);
+              console.log("bookmarkcheck⭐⭐⭐⭐");
+              console.log("cancelBookmarkCnt", cancelBookmarkCnt);
+              if (!refBookmarkCancel.current) return;
+              // if (cancelBookmarkCnt % 2) {
+              //   refBookmarkCancel.current.style.color = `${palette.gray[6]}`;
+              // } else {
+              refBookmarkCancel.current.style.color = "#20c997";
+              // }
+
               Swal.fire({
                 title: "북마크 추가 완료!",
                 text: "",
@@ -300,9 +341,11 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                   className="like-btn"
                 >
                   {likeCheck ? (
-                    <span className="material-icons like">favorite</span>
+                    <span className="material-icons like" ref={refLike}>
+                      favorite
+                    </span>
                   ) : (
-                    <span className="material-icons cancel-like">
+                    <span className="material-icons" ref={refLikeCancel}>
                       favorite_outline
                     </span>
                   )}
@@ -315,9 +358,13 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                 className="bookmark-btn"
               >
                 {bookmarkCheck ? (
-                  <span className="material-icons bookmark">bookmark</span>
+                  <span className="material-icons bookmark" ref={refBookmark}>
+                    bookmark
+                  </span>
                 ) : (
-                  <span className="material-icons">bookmark_outline</span>
+                  <span className="material-icons" ref={refBookmarkCancel}>
+                    bookmark_outline
+                  </span>
                 )}
               </button>
             </li>
