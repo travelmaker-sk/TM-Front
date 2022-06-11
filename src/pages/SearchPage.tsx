@@ -12,6 +12,7 @@ import Footer from "../components/common/Footer";
 import SearchPostList from "../components/photocard/SearchPostList";
 import { useNavigate } from "react-router";
 import Loading from "../components/common/Loading";
+import ScrollToTopButton from "../components/common/scrollToTopButton";
 
 const SearchTitle = styled.div`
   h2 {
@@ -161,6 +162,7 @@ const SearchPage = (props: any) => {
           tag={query.tag}
         />
         <Footer />
+        <ScrollToTopButton />
       </Wrapper>
       {loading ? <Loading /> : ""}
     </>

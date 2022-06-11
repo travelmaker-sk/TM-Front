@@ -13,6 +13,7 @@ import { Wrapper } from "./HomePage";
 import queryString from "query-string";
 import { useNavigate } from "react-router";
 import Loading from "../components/common/Loading";
+import ScrollToTopButton from "../components/common/scrollToTopButton";
 
 const SelectSort = styled(SelectCategory)`
   display: flex;
@@ -140,6 +141,7 @@ const MorePage = () => {
           <span className="material-icons">chevron_right</span>
         </Pagination>
         <Footer />
+        <ScrollToTopButton />
       </Wrapper>
       {loading ? <Loading /> : ""}
     </>

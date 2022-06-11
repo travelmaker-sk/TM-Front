@@ -11,7 +11,7 @@ interface ICard {
 
 export const CardUl = styled.ul`
   width: 23.875%;
-  min-width: 238px;
+  min-height: 521px;
   padding: 16px;
   margin-bottom: 40px;
   background-color: white;
@@ -51,16 +51,18 @@ export const CardUl = styled.ul`
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     width: 30%;
+    min-height: 483px;
   }
   // Mobile
   @media screen and (max-width: 767px) {
     width: 100%;
+    min-height: 553px;
   }
 `;
 
 const Card = ({ post, onOpenModal }: ICard) => {
   const refCard = useRef<HTMLUListElement>(null);
-  const cardWidth = refCard.current?.offsetWidth;
+  let cardWidth = refCard.current?.offsetWidth;
 
   const dictScore = useMemo(
     () => ({
@@ -148,7 +150,7 @@ const Card = ({ post, onOpenModal }: ICard) => {
       {post?.tagList ? (
         <li className="tagList">
           {splitTagList?.map((item: any) => (
-            <li className="tag">{`#${item}`}</li>
+            <li className="tag" key={item}>{`#${item}`}</li>
           ))}
         </li>
       ) : (

@@ -100,10 +100,14 @@ const EditCard = () => {
   const [score, setScore] = useState(post.score);
   const [memo, setMemo] = useState(post.memo ? post.memo : "");
   const [tagItem, setTagItem] = useState("");
-  const [tagList, setTagList] = useState(post?.tagList ? post?.tagList : "");
+  const [tagList, setTagList] = useState(
+    // @ts-ignore
+    post?.tagList ? post.tagList.split(" ") : []
+  );
 
-  // @ts-ignore
-  const [splitTagList, setSplitTagList] = useState(tagList.split(" "));
+  useEffect(() => {
+    console.log("tagList", tagList);
+  });
 
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedStore, setSelectedStore] = useState(false);
@@ -186,14 +190,14 @@ const EditCard = () => {
 
   // 포토카드 태그 업로드
   const onKeyPress = (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     if (e.target.value.length !== 0 && e.key === "Enter") {
       submitTagItem();
     }
   };
   const submitTagItem = () => {
-    let updatedTagList = [...splitTagList];
+    let updatedTagList = [...tagList];
     // @ts-ignore
     updatedTagList.push(tagItem);
     setTagList(updatedTagList);
@@ -203,7 +207,7 @@ const EditCard = () => {
     e.preventDefault();
 
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = splitTagList.filter(
+    const filteredTagList = tagList.filter(
       // @ts-ignore
       (tagItem) => tagItem !== deleteTagItem
     );
@@ -277,7 +281,7 @@ const EditCard = () => {
         menu: menu || undefined,
         price: numberPrice || undefined,
         memo: memo || undefined,
-        tagList: splitTagList.length ? splitTagList : undefined,
+        tagList: tagList.length ? tagList : undefined,
         image: file || undefined,
       })
         .then((res) => {
@@ -309,7 +313,7 @@ const EditCard = () => {
       post.id,
       price,
       score,
-      splitTagList,
+      tagList,
       title,
       weather,
     ]
@@ -512,18 +516,28 @@ const EditCard = () => {
                   onKeyPress={onKeyPress}
                 />
                 <TagList>
-                  {/* @ts-ignore */}
-                  {splitTagList.map((tagItem, index) => (
-                    <TagItem key={index}>
-                      <span>{tagItem}</span>
-                      <button
-                        className="material-icons"
-                        onClick={deleteTagItem}
-                      >
-                        close
-                      </button>
-                    </TagItem>
-                  ))}
+                  {tagList.map(
+                    (
+                      tagItem:
+                        | boolean
+                        | React.ReactChild
+                        | React.ReactFragment
+                        | React.ReactPortal
+                        | null
+                        | undefined,
+                      index: React.Key | null | undefined
+                    ) => (
+                      <TagItem key={index}>
+                        <span>{tagItem}</span>
+                        <button
+                          className="material-icons"
+                          onClick={deleteTagItem}
+                        >
+                          close
+                        </button>
+                      </TagItem>
+                    )
+                  )}
                 </TagList>
               </div>
             </label>

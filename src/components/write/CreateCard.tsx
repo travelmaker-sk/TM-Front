@@ -400,7 +400,7 @@ const CreateCard = () => {
 
   // 태그
   const onKeyPress = (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     if (e.target.value.length !== 0 && e.key === "Enter") {
       submitTagItem();
@@ -494,9 +494,6 @@ const CreateCard = () => {
         image: file || undefined,
       })
         .then((res) => {
-          console.dir("###", res);
-          alert("테스트");
-
           navigate("/");
           Swal.fire({
             title: "포토카드 생성 완료!",
@@ -521,6 +518,7 @@ const CreateCard = () => {
       location,
       memo,
       menu,
+      navigate,
       price,
       score,
       tagList,

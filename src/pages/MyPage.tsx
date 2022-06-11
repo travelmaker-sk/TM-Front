@@ -4,6 +4,8 @@ import styled from "styled-components";
 import MyPage from "../components/mypage/MyPage";
 import { Wrapper } from "./HomePage";
 import Header from "../components/common/Header";
+import ScrollToTopButton from "../components/common/scrollToTopButton";
+import Footer from "../components/common/Footer";
 
 export const HeaderBottomPlus = styled.div`
   height: 80px;
@@ -15,6 +17,8 @@ const MyPagePage = () => {
       <Header />
       <HeaderBottomPlus />
       <MyPage />
+      <Footer />
+      <ScrollToTopButton />
     </Wrapper>
   );
 };

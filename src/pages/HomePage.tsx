@@ -15,6 +15,7 @@ import HomePostList from "../components/photocard/HomePostList";
 import Post from "../components/photocard/Post";
 import { useNavigate } from "react-router";
 import Loading from "../components/common/Loading";
+import ScrollToTopButton from "../components/common/scrollToTopButton";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -96,12 +97,13 @@ const HomePage = () => {
         <Header />
         <Search />
         <Swiper />
-        {/* <HomePostList list={homePosts.popularList.content} category="popular" /> */}
+        <HomePostList list={homePosts.popularList.content} category="popular" />
         <HomePostList list={homePosts.recentList.content} category="recent" />
         <HomePostList list={homePosts.placeList.content} category="place" />
         <HomePostList list={homePosts.storeList.content} category="store" />
         <HomePostList list={homePosts.lodgingList.content} category="lodging" />
         <Footer />
+        <ScrollToTopButton />
       </Wrapper>
       {loading ? <Loading /> : ""}
     </>

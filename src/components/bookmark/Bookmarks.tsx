@@ -6,20 +6,30 @@ import Post from "../photocard/Post";
 import { PostBlock } from "../photocard/SearchPostList";
 import { useNavigate } from "react-router";
 import Loading from "../common/Loading";
+import { userInfo } from "../../lib/api/auth";
 
 interface BookmarkType {
   user: UserType;
 }
 
-const Bookmarks = ({ user }: BookmarkType) => {
+const Bookmarks = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
+  const [user, setUser] = useState<UserType>();
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
     setLoading(true);
+
+    userInfo()
+      .then((res) => {
+        setUser(res);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
 
     // API 호출
     myBookmarks()
@@ -38,7 +48,7 @@ const Bookmarks = ({ user }: BookmarkType) => {
     <>
       <MyPageBottomBlock>
         <div>
-          <h2>{user.username}님의 북마크 🏷️</h2>
+          <h2>{user?.username}님의 북마크 🏷️</h2>
           {posts.map((content) => (
             <div key={content.location}>
               <h3>

@@ -51,17 +51,20 @@ const ModalBlock = styled.div`
     align-items: center;
     background-color: #fff;
     animation: modal-show 0.3s;
-    > li {
-      width: 40%;
-    }
     > li:first-of-type {
+      width: 324px;
+      height: 516px;
+      min-height: 516px;
       > * {
         margin-bottom: 0;
         width: 100%;
+        min-height: 516px;
+        box-shadow: none;
       }
     }
     > li:last-of-type {
-      margin-left: 10%;
+      width: 324px;
+      margin-left: 8%;
     }
     > button {
       position: absolute;
@@ -93,7 +96,17 @@ const ModalBlock = styled.div`
       > li {
         width: 100%;
       }
+      > li:first-of-type {
+        width: 243px;
+        height: 473px;
+        min-height: 473px;
+        margin: 0 auto;
+        > * {
+          min-height: 473px;
+        }
+      }
       > li:last-of-type {
+        width: 100%;
         margin-top: 40px;
         margin-left: 0;
       }
@@ -203,6 +216,11 @@ const PostModal = ({
               confirmButtonColor: "#20c997",
               confirmButtonText: "확인",
               iconColor: palette.gray[5],
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // eslint-disable-next-line no-restricted-globals
+                location.reload();
+              }
             });
           }
         })
