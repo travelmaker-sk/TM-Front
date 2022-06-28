@@ -55,7 +55,42 @@ const ModalBlock = styled.div`
         margin-bottom: 0;
         width: 100%;
         min-height: 516px;
-        box-shadow: none;
+        font-size: 14px;
+        border: 1.5px solid ${palette.gray[3]};
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+        li {
+          display: flex;
+          line-height: 1.2em;
+          margin-bottom: 10px;
+          img {
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            margin-bottom: 20px;
+          }
+          span {
+            width: 40px;
+            color: ${palette.cyan[5]};
+          }
+        }
+        .tagList {
+          display: flex;
+          justify-content: center;
+          margin-top: 40px;
+        }
+        .tag {
+          margin: 0 5px 0 0;
+          padding: 5px 7px;
+          background-color: ${palette.cyan[5]};
+          border-radius: 4px;
+          color: white;
+        }
+        .tag {
+          margin: 0 5px 0 0;
+          padding: 5px 7px;
+          background-color: ${palette.cyan[5]};
+          border-radius: 4px;
+          color: white;
+        }
       }
     }
     > li:last-of-type {

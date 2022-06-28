@@ -37,7 +37,7 @@ export const PostBlock = styled.div`
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     > ul:nth-of-type(4n) {
-      margin-right: 1.5%;
+      margin-right: 2%;
     }
     > ul:nth-of-type(3n) {
       margin-right: 0;

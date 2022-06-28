@@ -12,25 +12,25 @@ interface ICard {
 }
 
 const PrintCardUl = styled.ul`
-  width: 324px;
-  height: 516px;
-  min-height: 516px;
-  padding: 16px;
-  background-color: white;
-  border: 1.5px solid ${palette.gray[3]};
+  width: 204px;
+  height: 325px;
+  min-height: 325px;
+  padding: 15px;
+  border: 1.5px solid ${palette.gray[0]};
   cursor: pointer;
-  font-size: 14px;
+  font-size: 10px;
+  background-color: white;
   li {
     display: flex;
     line-height: 1.2em;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     img {
       aspect-ratio: 4/3;
       object-fit: cover;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     span {
-      width: 40px;
+      width: 35px;
       color: ${palette.cyan[5]};
     }
   }
@@ -40,15 +40,16 @@ const PrintCardUl = styled.ul`
   .tagList {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 10px;
   }
   .tag {
     margin: 0 5px 0 0;
-    padding: 5px 7px;
+    padding: 5px;
     background-color: ${palette.cyan[5]};
     border-radius: 4px;
     color: white;
   }
+
   // Mobile
   @media screen and (max-width: 767px) {
     width: 243px;
@@ -61,13 +62,13 @@ const PrintCardUl = styled.ul`
 export const CardUl = styled.ul`
   width: 23.875%;
   min-height: 521px;
-  padding: 16px;
+  padding: 15px;
   margin-bottom: 40px;
-  background-color: white;
-  border: 1.5px solid ${palette.gray[3]};
   cursor: pointer;
   font-size: 14px;
+  border: 1.5px solid ${palette.gray[3]};
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+  background-color: white;
   li {
     display: flex;
     line-height: 1.2em;
@@ -99,7 +100,7 @@ export const CardUl = styled.ul`
   }
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    width: 30%;
+    width: 32%;
     min-height: 483px;
   }
   // Mobile
