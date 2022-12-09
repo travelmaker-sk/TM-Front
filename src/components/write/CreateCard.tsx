@@ -15,6 +15,7 @@ import { ko } from "date-fns/esm/locale";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { RootStateOrAny, useSelector } from "react-redux";
+import Loading from "../common/Loading";
 
 export const SelectCategory = styled.div`
   margin-bottom: 80px;
@@ -28,7 +29,7 @@ export const SelectCategory = styled.div`
     font-size: 16px;
     font-family: "Noto Sans KR", sans-serif;
     option {
-      background: ${palette.cyan[7]};
+      background: ${palette.cyan[8]};
       color: #fff;
     }
   }
@@ -222,7 +223,7 @@ export const TagItem = styled.div`
   justify-content: space-between;
   margin: 0 5px 5px 0;
   padding: 5px;
-  background-color: ${palette.cyan[7]};
+  background-color: ${palette.cyan[8]};
   border-radius: 5px;
   color: white;
   font-size: 14px;
@@ -237,7 +238,7 @@ export const TagItem = styled.div`
     border-radius: 50%;
     font-size: 12px;
     font-weight: 700;
-    color: ${palette.cyan[7]};
+    color: ${palette.cyan[8]};
   }
 `;
 
@@ -246,7 +247,9 @@ let timer: NodeJS.Timeout | null = null;
 const CreateCard = () => {
   const navigate = useNavigate();
 
-  const refForm = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
+
+  const refDiv = useRef<HTMLDivElement>(null);
   const refInputFile = useRef<HTMLInputElement>(null);
 
   const refLocationUl = useRef<HTMLUListElement>(null);
@@ -296,11 +299,15 @@ const CreateCard = () => {
   // 카테고리 선택
   useEffect(() => {
     if (category === "") {
-      Swal.fire(
-        "카테고리를 먼저 선택해주세요",
-        "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
-        "info"
-      );
+      Swal.fire({
+        title: "카테고리를 먼저 선택해주세요",
+        text: "카테고리를 선택하면 포토카드 생성 화면이 나옵니다 ☺️",
+        icon: "info",
+        showCancelButton: false,
+        confirmButtonColor: "#20c997",
+        confirmButtonText: "확인",
+        iconColor: palette.gray[5],
+      });
     }
     if (category === "place") {
       setSelectedPlace(true);
@@ -319,13 +326,21 @@ const CreateCard = () => {
     }
   }, [category]);
 
-  const onSelectedCategory = useCallback((e: any) => {
-    if (!refForm.current) return;
-    refForm.current.style.display = "block";
+  const onSelectedCategory = useCallback(
+    (e: {
+      preventDefault: () => void;
+      target: { value: React.SetStateAction<string> };
+    }) => {
+      e.preventDefault();
 
-    onInit();
-    setCategory(e.target.value);
-  }, []);
+      if (!refDiv.current) return;
+      refDiv.current.style.display = "block";
+
+      onInit();
+      setCategory(e.target.value);
+    },
+    []
+  );
 
   // 사진
   const [cardImage, setCardImage] = useState({
@@ -356,29 +371,25 @@ const CreateCard = () => {
     setTimeout(() => {
       if (!refLocationUl.current) return;
       refLocationUl.current.style.display = "none";
-    }, 130);
+    }, 200);
   };
 
   const onClickLoctionList = useCallback(
     (e: React.MouseEvent<HTMLLIElement>) => {
+      e.preventDefault();
+
       if (!refLocation.current) return;
       //@ts-ignore
       refLocation.current.value = e.target.innerHTML;
 
       setLocation(refLocation.current.value);
-
-      console.log(
-        "input:",
-        refLocation.current.value,
-        "list:",
-        //@ts-ignore
-        e.target.innerHTML
-      );
     },
     []
   );
 
   const onLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
     if (timer) clearTimeout(timer);
 
     timer = setTimeout(() => {
@@ -389,6 +400,8 @@ const CreateCard = () => {
 
   // 태그
   const onKeyPress = (e: any) => {
+    // e.preventDefault();
+
     if (e.target.value.length !== 0 && e.key === "Enter") {
       submitTagItem();
     }
@@ -401,6 +414,8 @@ const CreateCard = () => {
     setTagItem("");
   };
   const deleteTagItem = (e: any) => {
+    e.preventDefault();
+
     console.log("delete tag");
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
     const filteredTagList = tagList.filter(
@@ -420,12 +435,18 @@ const CreateCard = () => {
     setScore("");
     setMemo("");
     setTagList([]);
+    setCardImage({
+      cardImageName: "",
+      cardImageUrl: "./images/add-photo.png",
+    });
   };
 
   // 업로드 버튼
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
+
+      setLoading(true);
 
       const numberPrice = Number(price);
       const numberScore = Number(score);
@@ -444,7 +465,16 @@ const CreateCard = () => {
       }
 
       if (validationItems.includes("")) {
-        Swal.fire("", "필수 항목을 모두 입력해주세요", "warning");
+        setLoading(false);
+        Swal.fire({
+          title: "필수 항목을 모두 입력해주세요",
+          text: "",
+          icon: "warning",
+          showCancelButton: false,
+          confirmButtonColor: "#20c997",
+          confirmButtonText: "확인",
+          iconColor: palette.gray[5],
+        });
         return;
       }
 
@@ -465,11 +495,26 @@ const CreateCard = () => {
         image: file || undefined,
       })
         .then((res) => {
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
           navigate("/");
-          Swal.fire("포토카드 생성 완료!", "", "success");
+          Swal.fire({
+            title: "포토카드 생성 완료!",
+            text: "",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#20c997",
+            confirmButtonText: "확인",
+            iconColor: palette.gray[5],
+          });
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
     [
@@ -505,7 +550,7 @@ const CreateCard = () => {
         </select>
       </SelectCategory>
       <CreateCardBlock>
-        <div ref={refForm}>
+        <div ref={refDiv}>
           <CreateCardStyle>
             <label>
               <img src={cardImage.cardImageUrl} alt="PhotocardImage" />
@@ -717,6 +762,7 @@ const CreateCard = () => {
           </SelectButtonStyle>
         </div>
       </CreateCardBlock>
+      {loading ? <Loading /> : ""}
     </>
   );
 };

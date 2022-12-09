@@ -12,7 +12,7 @@ const PostListTitleStyle = styled.div`
   span {
     display: block;
     margin-bottom: 40px;
-    color: ${palette.cyan[7]};
+    color: ${palette.cyan[8]};
     font-size: 24px;
     // font-family: "Black Han Sans", sans-serif;
     font-family: "Do Hyeon", sans-serif;

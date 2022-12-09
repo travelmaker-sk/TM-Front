@@ -34,7 +34,7 @@ const FindPwFinBlock = styled.div`
         font-size: 16px;
         color: ${palette.cyan[5]};
         &:hover {
-          color: ${palette.cyan[4]};
+          color: ${palette.cyan[5]};
         }
       }
     }

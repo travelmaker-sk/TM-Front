@@ -1,17 +1,19 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { deletePost } from "../../lib/api/write";
-import { GetPostType } from "../../lib/type";
+import { DetailPostType, GetPostType } from "../../lib/type";
 import { CyanButtonStyle, GrayButtonStyle } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
 import { useNavigate } from "react-router";
 import ReactToPrint from "react-to-print";
+import Loading from "../common/Loading";
 
 interface ModalType {
   post: GetPostType | null;
+  detailPost?: DetailPostType | null;
   open: boolean;
   close: () => void;
   my?: boolean;
@@ -19,7 +21,6 @@ interface ModalType {
 }
 
 const ModalBlock = styled.div`
-  display: none;
   position: fixed;
   top: 0;
   right: 0;
@@ -29,9 +30,6 @@ const ModalBlock = styled.div`
   height: 100%;
   z-index: 8888;
   background-color: rgba(0, 0, 0, 0.6);
-  &.open {
-    display: block;
-  }
   .container {
     width: 100%;
     height: 100%;
@@ -48,17 +46,56 @@ const ModalBlock = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #fff;
-    > li {
-      width: 40%;
-    }
+    animation: modal-show 0.3s;
     > li:first-of-type {
+      width: 324px;
+      height: 516px;
+      min-height: 516px;
       > * {
         margin-bottom: 0;
         width: 100%;
+        min-height: 516px;
+        font-size: 14px;
+        border: 1.5px solid ${palette.gray[3]};
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+        li {
+          display: flex;
+          line-height: 1.2em;
+          margin-bottom: 10px;
+          img {
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            margin-bottom: 20px;
+          }
+          span {
+            width: 40px;
+            color: ${palette.cyan[5]};
+          }
+        }
+        .tagList {
+          display: flex;
+          justify-content: center;
+          margin-top: 40px;
+        }
+        .tag {
+          margin: 0 5px 0 0;
+          padding: 5px 7px;
+          background-color: ${palette.cyan[5]};
+          border-radius: 4px;
+          color: white;
+        }
+        .tag {
+          margin: 0 5px 0 0;
+          padding: 5px 7px;
+          background-color: ${palette.cyan[5]};
+          border-radius: 4px;
+          color: white;
+        }
       }
     }
     > li:last-of-type {
-      margin-left: 10%;
+      width: 324px;
+      margin-left: 8%;
     }
     > button {
       position: absolute;
@@ -90,10 +127,30 @@ const ModalBlock = styled.div`
       > li {
         width: 100%;
       }
+      > li:first-of-type {
+        width: 243px;
+        height: 473px;
+        min-height: 473px;
+        margin: 0 auto;
+        > * {
+          min-height: 473px;
+        }
+      }
       > li:last-of-type {
+        width: 100%;
         margin-top: 40px;
         margin-left: 0;
       }
+    }
+  }
+  @keyframes modal-show {
+    from {
+      opacity: 0;
+      margin-top: -50px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0;
     }
   }
 `;
@@ -146,8 +203,17 @@ const BookmarkButton = styled.div`
   }
 `;
 
-const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
+const PostModal = ({
+  post,
+  detailPost,
+  open,
+  close,
+  my,
+  bookmark,
+}: ModalType) => {
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   const refCard = useRef<HTMLLIElement>(null);
 
@@ -166,75 +232,106 @@ const PostModal = ({ post, open, close, my, bookmark }: ModalType) => {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
+      setLoading(true);
+
       // @ts-ignore
       deletePost(post?.id)
         .then((res) => {
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
           if (res) {
             close();
-            Swal.fire("포토카드 삭제 완료!", "", "success");
+            Swal.fire({
+              title: "포토카드 삭제 완료!",
+              text: "",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#20c997",
+              confirmButtonText: "확인",
+              iconColor: palette.gray[5],
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // eslint-disable-next-line no-restricted-globals
+                location.reload();
+              }
+            });
           }
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
     [close, post?.id]
   );
 
   return (
-    <ModalBlock className={open ? "open" : ""}>
-      <div className="container">
-        <ul className="white-box">
-          <li ref={refCard}>
-            <Card post={post} />
-          </li>
-          <li>
-            <CardDetail post={post} close={close} />
-          </li>
-          <button onClick={close} title="닫기">
-            <span className="material-icons">close</span>
-          </button>
-          {my ? (
-            <MyButton>
-              <ReactToPrint
-                trigger={() => (
+    <>
+      {open ? (
+        <ModalBlock>
+          <div className="container">
+            <ul className="white-box">
+              <li ref={refCard}>
+                <Card post={post} my={my} bookmark={bookmark} />
+              </li>
+              <li>
+                <CardDetail post={post} close={close} detailPost={detailPost} />
+              </li>
+              <button onClick={close} title="닫기">
+                <span className="material-icons">close</span>
+              </button>
+              {my ? (
+                <MyButton>
+                  <ReactToPrint
+                    trigger={() => (
+                      <CyanButtonStyle>
+                        <button className="print-btn">
+                          <span className="material-icons">print</span> &nbsp;
+                          인쇄
+                        </button>
+                      </CyanButtonStyle>
+                    )}
+                    content={() => refCard.current}
+                  />
                   <CyanButtonStyle>
-                    <button className="print-btn">
-                      <span className="material-icons">print</span> &nbsp; 인쇄
-                    </button>
+                    <button onClick={onEdit}>수정</button>
                   </CyanButtonStyle>
-                )}
-                content={() => refCard.current}
-              />
-              <CyanButtonStyle>
-                <button onClick={onEdit}>수정</button>
-              </CyanButtonStyle>
-              <GrayButtonStyle>
-                <button onClick={onDelete}>삭제</button>
-              </GrayButtonStyle>
-            </MyButton>
-          ) : (
-            ""
-          )}
-          {bookmark ? (
-            <BookmarkButton>
-              <ReactToPrint
-                trigger={() => (
-                  <CyanButtonStyle>
-                    <button className="print-btn">
-                      <span className="material-icons">print</span> &nbsp; 인쇄
-                    </button>
-                  </CyanButtonStyle>
-                )}
-                content={() => refCard.current}
-              />
-            </BookmarkButton>
-          ) : (
-            ""
-          )}
-        </ul>
-      </div>
-    </ModalBlock>
+                  <GrayButtonStyle>
+                    <button onClick={onDelete}>삭제</button>
+                  </GrayButtonStyle>
+                </MyButton>
+              ) : (
+                ""
+              )}
+              {bookmark ? (
+                <BookmarkButton>
+                  <ReactToPrint
+                    trigger={() => (
+                      <CyanButtonStyle>
+                        <button className="print-btn">
+                          <span className="material-icons">print</span> &nbsp;
+                          인쇄
+                        </button>
+                      </CyanButtonStyle>
+                    )}
+                    content={() => refCard.current}
+                  />
+                </BookmarkButton>
+              ) : (
+                ""
+              )}
+            </ul>
+          </div>
+        </ModalBlock>
+      ) : (
+        ""
+      )}
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 

@@ -6,6 +6,8 @@ import { PostType } from "./Post";
 import { useNavigate } from "react-router";
 import { bookmark, like } from "../../lib/api/post";
 import { RootStateOrAny, useSelector } from "react-redux";
+import { loadPost } from "../../lib/api/home";
+import { DetailPostType, GetPostType } from "../../lib/type";
 
 const CardDetailDiv = styled.div`
   > ul:nth-of-type(1) {
@@ -29,7 +31,7 @@ const CardDetailDiv = styled.div`
     }
     .tag {
       margin-top: 40px;
-      color: ${palette.cyan[7]};
+      color: ${palette.cyan[5]};
     }
   }
   > ul:nth-of-type(3) {
@@ -53,12 +55,10 @@ const CardDetailDiv = styled.div`
     }
     button {
       &.like-btn {
-        span.cancel-like,
-        span.like {
+        span {
           transition: transform 300ms ease;
         }
-        span.cancel-like:hover,
-        span.like:hover {
+        span:hover {
           transform: scale(1.1);
         }
         span.like {
@@ -90,62 +90,135 @@ const CardDetailDiv = styled.div`
   }
 `;
 
-const CardDetail = ({ post, close }: PostType) => {
+const CardDetail = ({ post, close, detailPost }: PostType) => {
   const navigate = useNavigate();
-
-  const [checkLike, setCheckLike] = useState(post?.like.likeCheck);
-  const [numLike, setNumLike] = useState(post?.like.likeNum ?? 0);
-
-  const [checkBookmark, setCheckBookmark] = useState(post?.bookmarkCheck);
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
 
+  const refLike = useRef<HTMLSpanElement>(null);
+  const refLikeCancel = useRef<HTMLSpanElement>(null);
+  const refBookmark = useRef<HTMLSpanElement>(null);
+  const refBookmarkCancel = useRef<HTMLSpanElement>(null);
+
+  const [likeCnt, setLikeCnt] = useState(0);
+  const [cancelLikeCnt, setCancelLikeCnt] = useState(0);
+  const [bookmarkCnt, setBookmarkCnt] = useState(0);
+  const [cancelBookmarkCnt, setCancelBookmarkCnt] = useState(0);
+
+  const [likeCheck, setLikeCheck] = useState(false);
+  const [likeNum, setLikeNum] = useState(0);
+  const [bookmarkCheck, setBookmarkCheck] = useState(false);
+
+  useEffect(() => {
+    setLikeCheck(detailPost?.liked.likeCheck as boolean);
+    setLikeNum(detailPost?.liked.likeNum as number);
+    setBookmarkCheck(detailPost?.bookmarkCheck as boolean);
+  }, [
+    bookmarkCheck,
+    detailPost?.bookmarkCheck,
+    detailPost?.liked.likeCheck,
+    detailPost?.liked.likeNum,
+    likeCheck,
+    likeNum,
+  ]);
+
   // 좋아요
   const onToggleLike = useCallback(() => {
-    if (checkLike) {
-      like(6)
+    if (likeCheck) {
+      like(post?.id as number)
         .then((res) => {
-          setNumLike((cnt) => cnt - 1);
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
+          setLikeCnt((cnt) => cnt + 1);
+          console.log("likechecknono⭐⭐⭐⭐");
+          console.log("likeCnt", likeCnt);
+          if (!refLike.current) return;
+          if (likeCnt % 2) {
+            refLike.current.style.color = "#ff6b6b";
+          } else {
+            refLike.current.style.color = `${palette.gray[6]}`;
+          }
+
+          setLikeNum((cnt) => cnt - 1);
+          setLikeCheck(!likeCheck);
         })
         .catch((err) => {
           console.warn(err);
         });
     } else {
-      like(6)
+      like(post?.id as number)
         .then((res) => {
-          setNumLike((cnt) => cnt + 1);
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+
+          setCancelLikeCnt((cnt) => cnt + 1);
+          console.log("likecheck⭐⭐⭐⭐");
+          console.log("cancelLikeCnt", cancelLikeCnt);
+          if (!refLikeCancel.current) return;
+          if (cancelLikeCnt % 2) {
+            refLikeCancel.current.style.color = `${palette.gray[6]}`;
+          } else {
+            refLikeCancel.current.style.color = "#ff6b6b";
+          }
+
+          setLikeNum((cnt) => cnt + 1);
+          setLikeCheck(!likeCheck);
         })
         .catch((err) => {
           console.warn(err);
         });
     }
-    setCheckLike(!checkLike);
-  }, [checkLike]);
+  }, [cancelLikeCnt, likeCheck, likeCnt, post?.id]);
 
   // 북마크
   const onToggleBookmark = useCallback(() => {
-    if (checkBookmark) {
+    if (bookmarkCheck) {
       Swal.fire({
         title: "북마크를 취소하시겠습니까?",
         text: "",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: palette.cyan[5],
+        confirmButtonColor: "#20c997",
         cancelButtonColor: palette.gray[5],
         confirmButtonText: "확인",
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          bookmark(6)
-            .then(() => {
-              Swal.fire({
-                title: "북마크 취소 완료!",
-                icon: "success",
-                confirmButtonColor: palette.cyan[5],
-                confirmButtonText: "확인",
-              });
+          bookmark(post?.id as number)
+            .then((res) => {
+              if (res.status == "403") {
+                alert("토큰 만료");
+              }
 
-              setCheckBookmark(!checkBookmark);
+              setBookmarkCnt((cnt) => cnt + 1);
+              console.log("bookmarkchecknono⭐⭐⭐⭐");
+              console.log("bookmarkCnt", bookmarkCnt);
+              if (!refBookmark.current) return;
+              // if (bookmarkCnt % 2) {
+              //   refBookmark.current.style.color = "#20c997";
+              // } else {
+              refBookmark.current.style.color = `${palette.gray[6]}`;
+              // }
+
+              Swal.fire({
+                title: "북마크 삭제 완료!",
+                text: "",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#20c997",
+                confirmButtonText: "확인",
+                iconColor: palette.gray[5],
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // eslint-disable-next-line no-restricted-globals
+                  location.reload();
+
+                  // setBookmarkCheck(!bookmarkCheck);
+                }
+              });
             })
             .catch((err) => {
               console.warn(err);
@@ -157,20 +230,34 @@ const CardDetail = ({ post, close }: PostType) => {
         title: "북마크를 추가하시겠습니까?",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: palette.cyan[5],
+        confirmButtonColor: "#20c997",
         cancelButtonColor: palette.gray[5],
         confirmButtonText: "확인",
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          bookmark(6)
-            .then(() => {
+          bookmark(post?.id as number)
+            .then((res) => {
+              if (res.status == "403") {
+                alert("토큰 만료");
+              }
+
+              setCancelBookmarkCnt((cnt) => cnt + 1);
+              console.log("bookmarkcheck⭐⭐⭐⭐");
+              console.log("cancelBookmarkCnt", cancelBookmarkCnt);
+              if (!refBookmarkCancel.current) return;
+              // if (cancelBookmarkCnt % 2) {
+              //   refBookmarkCancel.current.style.color = `${palette.gray[6]}`;
+              // } else {
+              refBookmarkCancel.current.style.color = "#20c997";
+              // }
+
               Swal.fire({
                 title: "북마크 추가 완료!",
                 text: "",
                 icon: "success",
                 showCancelButton: true,
-                confirmButtonColor: palette.cyan[5],
+                confirmButtonColor: "#20c997",
                 cancelButtonColor: palette.gray[5],
                 confirmButtonText: "내 북마크로 이동",
                 cancelButtonText: "취소",
@@ -182,7 +269,7 @@ const CardDetail = ({ post, close }: PostType) => {
                 }
               });
 
-              setCheckBookmark(!checkBookmark);
+              // setBookmarkCheck(!bookmarkCheck);
             })
             .catch((err) => {
               console.warn(err);
@@ -190,7 +277,14 @@ const CardDetail = ({ post, close }: PostType) => {
         }
       });
     }
-  }, [checkBookmark, close, navigate]);
+  }, [
+    bookmarkCheck,
+    bookmarkCnt,
+    cancelBookmarkCnt,
+    close,
+    navigate,
+    post?.id,
+  ]);
 
   return (
     <>
@@ -199,66 +293,76 @@ const CardDetail = ({ post, close }: PostType) => {
           <li>
             <img
               src={
-                post?.writer.profileImage
-                  ? post?.writer.profileImage
+                detailPost?.writer?.profileImage
+                  ? detailPost.writer.profileImage
                   : "./images/default-profile.png"
               }
               alt="ProfileImage"
             />
           </li>
-          <li>{post?.writer.username}</li>
+          <li>{detailPost?.writer?.username}</li>
         </ul>
         <hr />
         <ul>
           <li>
             <span>제목</span>
-            {post?.title}
+            {detailPost?.title}
           </li>
           <li>
             <span>위치</span>
-            {post?.location}
+            {detailPost?.location}
           </li>
           <li>
             <span>날짜</span>
-            {post?.date}
+            {detailPost?.date}
           </li>
-          {post?.weather ? (
+          {detailPost?.weather ? (
             <li>
               <span>날씨</span>
-              {post?.weather}
+              {detailPost?.weather}
             </li>
           ) : (
             ""
           )}
-          {post?.menu ? (
+          {detailPost?.menu ? (
             <li>
               <span>메뉴</span>
-              {post?.menu}
+              {detailPost?.menu}
             </li>
           ) : (
             ""
           )}
-          {post?.price ? (
+          {detailPost?.price ? (
             <li>
               <span>가격</span>
-              {post?.price}
+              {detailPost?.price}
             </li>
           ) : (
             ""
           )}
           <li>
             <span>평점</span>
-            {post?.score}
+            {detailPost?.score}
           </li>
-          <li>
-            <span>메모</span>
-            {post?.memo}
-          </li>
-          <li className="tag">{post?.tagList?.map((item) => `#${item} `)}</li>
+          {detailPost?.memo ? (
+            <li>
+              <span>메모</span>
+              {detailPost?.memo}
+            </li>
+          ) : (
+            ""
+          )}
+          {detailPost?.tagList ? (
+            <li className="tag">
+              {detailPost?.tagList?.map((item) => `#${item} `)}
+            </li>
+          ) : (
+            ""
+          )}
         </ul>
         <hr />
         <ul>
-          <li>조회수 {post?.viewCount}</li>
+          <li>조회수 {detailPost?.viewCount}</li>
           {user ? (
             <li>
               <div className="like-container">
@@ -267,25 +371,31 @@ const CardDetail = ({ post, close }: PostType) => {
                   onClick={onToggleLike}
                   className="like-btn"
                 >
-                  {checkLike ? (
-                    <span className="material-icons like">favorite</span>
+                  {likeCheck ? (
+                    <span className="material-icons like" ref={refLike}>
+                      favorite
+                    </span>
                   ) : (
-                    <span className="material-icons cancel-like">
+                    <span className="material-icons" ref={refLikeCancel}>
                       favorite_outline
                     </span>
                   )}
                 </button>
-                <span>{numLike}</span>
+                <span>{likeNum}</span>
               </div>
               <button
                 title="북마크"
                 onClick={onToggleBookmark}
                 className="bookmark-btn"
               >
-                {checkBookmark ? (
-                  <span className="material-icons bookmark">bookmark</span>
+                {bookmarkCheck ? (
+                  <span className="material-icons bookmark" ref={refBookmark}>
+                    bookmark
+                  </span>
                 ) : (
-                  <span className="material-icons">bookmark_outline</span>
+                  <span className="material-icons" ref={refBookmarkCancel}>
+                    bookmark_outline
+                  </span>
                 )}
               </button>
             </li>

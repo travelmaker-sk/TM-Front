@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { RootStateOrAny, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { login } from "../../lib/api/auth";
+import Loading from "../common/Loading";
 
 interface LoginType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -50,7 +51,7 @@ const LoginBlock = styled.div`
     > a:last-child {
       color: ${palette.cyan[5]};
       &:hover {
-        color: ${palette.cyan[3]};
+        color: ${palette.cyan[5]};
       }
     }
   }
@@ -131,6 +132,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state: RootStateOrAny) => state.user);
 
@@ -146,6 +148,8 @@ const Login = () => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
+      setLoading(true);
+
       const form = e.target as HTMLFormElement;
       const $inputs = Array.from(form.querySelectorAll("input"));
 
@@ -154,6 +158,7 @@ const Login = () => {
       );
 
       if ([inputEmail, inputPw].includes("")) {
+        setLoading(false);
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else {
@@ -178,6 +183,9 @@ const Login = () => {
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
     [navigate]
@@ -214,58 +222,61 @@ const Login = () => {
   }, [user, navigate]);
 
   return (
-    <LoginBlock>
-      <h2>반갑습니다!</h2>
-      <form onSubmit={onSubmit}>
-        <Input
-          type="text"
-          name="id"
-          autoComplete="username"
-          placeholder="아이디"
-          defaultValue={initialUid.current}
-        />
-        <Input
-          type="password"
-          name="password"
-          autoComplete="current-password"
-          placeholder="비밀번호"
-        />
-        <div className="sub-login sub-login-1">
-          <label>
-            <input type="checkbox" name="save-id" id="save-id" />
-            아이디 저장
-          </label>
-          <label>
-            <input type="checkbox" name="save-id" id="keep-login" />
-            로그인 유지
-          </label>
+    <>
+      <LoginBlock>
+        <h2>반갑습니다!</h2>
+        <form onSubmit={onSubmit}>
+          <Input
+            type="text"
+            name="id"
+            autoComplete="username"
+            placeholder="아이디"
+            defaultValue={initialUid.current}
+          />
+          <Input
+            type="password"
+            name="password"
+            autoComplete="current-password"
+            placeholder="비밀번호"
+          />
+          <div className="sub-login sub-login-1">
+            <label>
+              <input type="checkbox" name="save-id" id="save-id" />
+              아이디 저장
+            </label>
+            <label>
+              <input type="checkbox" name="save-id" id="keep-login" />
+              로그인 유지
+            </label>
+          </div>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          <CyanButtonStyle>
+            <button type="submit" className="login-btn">
+              로그인
+            </button>
+          </CyanButtonStyle>
+        </form>
+        <div className="sub-login sub-login-2">
+          <Link to="/findPw">비밀번호 찾기</Link>
+          <Link to="/privacyPolicy">회원가입</Link>
         </div>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        <CyanButtonStyle>
-          <button type="submit" className="login-btn">
-            로그인
-          </button>
-        </CyanButtonStyle>
-      </form>
-      <div className="sub-login sub-login-2">
-        <Link to="/findPw">비밀번호 찾기</Link>
-        <Link to="/privacyPolicy">회원가입</Link>
-      </div>
-      <span>또는</span>
-      <div className="sns-login">
-        <SelectButtonStyle>
-          <div id="naver_id_login" ref={naverRef}></div>
-          <button className="sns-btn naver-btn" onClick={onNaverLogin}>
-            <img src="./images/naver-icon.png" alt="naver" />
-            네이버 로그인
-          </button>
-          <button className="sns-btn kakao-btn" onClick={onKakaoLogin}>
-            <img src="./images/kakao-icon.png" alt="kakao" />
-            카카오 로그인
-          </button>
-        </SelectButtonStyle>
-      </div>
-    </LoginBlock>
+        <span>또는</span>
+        <div className="sns-login">
+          <SelectButtonStyle>
+            <div id="naver_id_login" ref={naverRef}></div>
+            <button className="sns-btn naver-btn" onClick={onNaverLogin}>
+              <img src="./images/naver-icon.png" alt="naver" />
+              네이버 로그인
+            </button>
+            <button className="sns-btn kakao-btn" onClick={onKakaoLogin}>
+              <img src="./images/kakao-icon.png" alt="kakao" />
+              카카오 로그인
+            </button>
+          </SelectButtonStyle>
+        </div>
+      </LoginBlock>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 

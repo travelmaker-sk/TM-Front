@@ -50,7 +50,7 @@ export const CyanButtonStyle = styled(GlobalButtonStyle)`
       background: ${palette.cyan[4]};
     }
     &:active {
-      background: ${palette.cyan[5]};
+      background: ${palette.cyan[6]};
     }
   }
 `;

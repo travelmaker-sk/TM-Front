@@ -3,6 +3,7 @@ import axios from "axios";
 // const baseUrl = "http://localhost:8080";
 
 export const login = async (username: string, password: string) => {
+  console.log("login");
   const response = await axios.post("/login", {
     username,
     password,
@@ -16,6 +17,7 @@ export const login = async (username: string, password: string) => {
 };
 
 export const naverLogin = async (accessToken: string) => {
+  console.log("naverLogin");
   const response = await axios.post("/naverLogin", {
     accessToken,
   });
@@ -24,6 +26,7 @@ export const naverLogin = async (accessToken: string) => {
 };
 
 export const userInfo = async () => {
+  console.log("userInfo");
   let token = localStorage.getItem("tm-token");
 
   const response = await axios.get("/account/mypage", {
@@ -40,6 +43,7 @@ export const userInfo = async () => {
 };
 
 export const quit = async () => {
+  console.log("quit");
   let token = localStorage.getItem("tm-token");
 
   const response = await axios.delete("/account/delete", {
@@ -56,6 +60,7 @@ export const register = async (
   email: string,
   password: string
 ) => {
+  console.log("register");
   const response = await axios.post("/account/join", {
     username,
     email,
@@ -68,6 +73,7 @@ export const register = async (
 };
 
 export const registerAuth = async (email: string, authToken: string) => {
+  console.log("registerAuth");
   const response = await axios.post("/check-email-token", {
     email,
     authToken,
@@ -77,6 +83,7 @@ export const registerAuth = async (email: string, authToken: string) => {
 };
 
 export const findPw = async (email: string) => {
+  console.log("findPw");
   const response = await axios.post("/account/findpassword", { email });
 
   return response.data;

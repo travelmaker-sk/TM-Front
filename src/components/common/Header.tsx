@@ -51,12 +51,8 @@ const HeaderBlock = styled.div`
       border: 1.3px solid ${palette.gray[5]};
       color: ${palette.gray[6]};
       &:hover {
-        border-color: ${palette.cyan[5]};
-        color: ${palette.cyan[5]};
-      }
-      &:active {
-        border-color: ${palette.cyan[7]};
-        color: ${palette.cyan[7]};
+        border-color: ${palette.cyan[8]};
+        color: ${palette.cyan[8]};
       }
       border-radius: 3px;
       cursor: pointer;
@@ -86,6 +82,10 @@ const UserName = styled.div`
 
 export const HeaderBottom = styled.div`
   height: 90px;
+  // Tablet
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    height: 80px;
+  }
   // Mobile
   @media screen and (max-width: 767px) {
     height: 75.333px;

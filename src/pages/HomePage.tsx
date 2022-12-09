@@ -14,6 +14,8 @@ import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
 import Post from "../components/photocard/Post";
 import { useNavigate } from "react-router";
+import Loading from "../components/common/Loading";
+import ScrollToTopButton from "../components/common/scrollToTopButton";
 
 export const Wrapper = styled(Responsive)`
   .post-list {
@@ -28,9 +30,7 @@ export const Wrapper = styled(Responsive)`
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-
-  const [testPost, setTestPost] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [homePosts, setHomePosts] = useState<AllPostsType>({
     popularList: {
@@ -51,32 +51,24 @@ const HomePage = () => {
   });
 
   useEffect(() => {
-    // 테스트 포스트 출력
-    const loadTestPost = () => {
-      // API 호출
-      loadPost(11)
-        .then((res) => {
-          setTestPost(res);
-          // navigate("/");
-        })
-        .catch((err) => {
-          // alert("세션 만료?");
-          console.warn(err);
-        });
-    };
-
     // 포스트 리스트 출력
     const loadHomePosts = () => {
+      setLoading(true);
+
       // API 호출
       listPosts()
         .then((res) => {
-          // @ts-ignore
+          if (res.status == "403") {
+            alert("토큰 만료");
+          }
+          console.log("homePosts", res);
           setHomePosts(res);
-          // navigate("/");
         })
         .catch((err) => {
-          // alert("세션 만료?");
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     };
 
@@ -91,12 +83,10 @@ const HomePage = () => {
           dispatch(setUser({ user: res }));
         })
         .catch((err) => {
-          // alert("세션 만료?");
           console.warn(err);
         });
     };
 
-    loadTestPost();
     loadUser();
     loadHomePosts();
   }, [dispatch]);
@@ -113,7 +103,9 @@ const HomePage = () => {
         <HomePostList list={homePosts.storeList.content} category="store" />
         <HomePostList list={homePosts.lodgingList.content} category="lodging" />
         <Footer />
+        <ScrollToTopButton />
       </Wrapper>
+      {loading ? <Loading /> : ""}
     </>
   );
 };

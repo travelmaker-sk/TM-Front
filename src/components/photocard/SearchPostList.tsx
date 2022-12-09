@@ -8,8 +8,9 @@ import { useNavigate } from "react-router";
 export interface PostListType {
   list: any[];
   category: AllPostsCategoryType;
-  where?: any;
-  what?: any;
+  location?: any;
+  tag?: any;
+  selSort?: boolean;
 }
 
 export const PostListBlock = styled.div`
@@ -25,10 +26,10 @@ export const PostBlock = styled.div`
   flex-wrap: wrap;
   > ul {
     margin-right: 1.5%;
-    transition: 0.5s;
+    transition: 0.4s;
   }
   > ul:hover {
-    transform: translateY(-15px);
+    transform: translateY(-10px);
   }
   > ul:nth-of-type(4n) {
     margin-right: 0;
@@ -36,7 +37,7 @@ export const PostBlock = styled.div`
   // Tablet
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     > ul:nth-of-type(4n) {
-      margin-right: 1.5%;
+      margin-right: 2%;
     }
     > ul:nth-of-type(3n) {
       margin-right: 0;
@@ -55,22 +56,18 @@ export const MoreButton = styled.button`
   border: 1.3px solid ${palette.gray[5]};
   color: ${palette.gray[6]};
   &:hover {
-    border-color: ${palette.cyan[5]};
-    color: ${palette.cyan[5]};
-  }
-  &:active {
-    border-color: ${palette.cyan[7]};
-    color: ${palette.cyan[7]};
+    border-color: ${palette.cyan[8]};
+    color: ${palette.cyan[8]};
   }
   border-radius: 3px;
   cursor: pointer;
 `;
 
-const SearchPostList = ({ list, category, where, what }: PostListType) => {
+const SearchPostList = ({ list, category, location, tag }: PostListType) => {
   const navigate = useNavigate();
 
   const onDetailMore = () => {
-    navigate(`/more?where=${where}&what=${what}&category=${category}`);
+    navigate(`/more?location=${location}&tag=${tag}&category=${category}`);
   };
 
   return (

@@ -12,12 +12,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { myPosts } from "../../lib/api/home";
 import { useNavigate } from "react-router";
+import Loading from "../common/Loading";
+import { RootStateOrAny, useSelector } from "react-redux";
+import { userInfo } from "../../lib/api/auth";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
-
-interface MyPageType {
-  user: UserType;
-}
 
 const MyPageTopBlock = styled.div`
   display: flex;
@@ -117,19 +116,39 @@ export const MyPageBottomBlock = styled.div`
   }
 `;
 
-const MyPage = ({ user }: MyPageType) => {
+const MyPage = () => {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
+  const [user, setUser] = useState<UserType>();
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
-    // API 호출
-    myPosts()
-      .then(({ list }) => {
-        setPosts(list);
+    setLoading(true);
+
+    userInfo()
+      .then((res) => {
+        setUser(res);
       })
       .catch((err) => {
         console.warn(err);
+      });
+
+    // API 호출
+    myPosts()
+      .then((res) => {
+        if (res.status == "403") {
+          alert("토큰 만료");
+        }
+
+        setPosts(res);
+      })
+      .catch((err) => {
+        console.warn(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [navigate]);
 
@@ -139,7 +158,7 @@ const MyPage = ({ user }: MyPageType) => {
         <div className="left-area">
           <img
             src={
-              user.profileImage
+              user?.profileImage
                 ? user.profileImage
                 : "./images/default-profile.png"
             }
@@ -147,9 +166,9 @@ const MyPage = ({ user }: MyPageType) => {
           />
           <ul>
             <li>
-              <span>{user.username}</span>님 안녕하세요!
+              <span>{user?.username}</span>님 안녕하세요!
             </li>
-            <li>{user.email}</li>
+            <li>{user?.email}</li>
             <CyanButtonStyle>
               <button>
                 <LinkButton to="/setProfile">회원정보 설정</LinkButton>
@@ -160,24 +179,24 @@ const MyPage = ({ user }: MyPageType) => {
         <div className="right-area">
           <ul>
             <li className="first-li">
-              <span>{user.postCount ?? 0}</span>게시물
+              <span>{user?.postCount ?? 0}</span>게시물
             </li>
             <li>
-              <span>{user.followers ?? 0}</span>팔로워
+              <span>{user?.followers ?? 0}</span>팔로워
             </li>
             <li>
-              <span>{user.followings ?? 0}</span>팔로잉
+              <span>{user?.followings ?? 0}</span>팔로잉
             </li>
           </ul>
         </div>
       </MyPageTopBlock>
       <MyPageBottomBlock>
         <div>
-          <h2>{user.username}님의 포토카드 ✈️</h2>
-          {posts.map((list) => (
-            <div key={list.id}>
+          <h2>{user?.username}님의 포토카드 ✈️</h2>
+          {posts.map((content) => (
+            <div key={content.location}>
               <h3>
-                {list.location} ({list.posts.length})
+                {content.location} ({content.total.length})
               </h3>
               <PostBlock>
                 {/* <Swiper
@@ -189,7 +208,7 @@ const MyPage = ({ user }: MyPageType) => {
                   autoplay={{ delay: 3000 }}
                   loop={true}
                 > */}
-                {list.posts.map((post: GetPostType | null) => (
+                {content.total.map((post: GetPostType | null) => (
                   // <SwiperSlide>
                   <Post post={post} key={post?.id} my={true} />
                   // </SwiperSlide>
@@ -200,7 +219,7 @@ const MyPage = ({ user }: MyPageType) => {
           ))}
         </div>
       </MyPageBottomBlock>
-      export{" "}
+      {loading ? <Loading /> : ""}
     </>
   );
 };

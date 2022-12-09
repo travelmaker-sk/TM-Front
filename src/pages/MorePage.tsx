@@ -12,6 +12,8 @@ import palette from "../styles/palette";
 import { Wrapper } from "./HomePage";
 import queryString from "query-string";
 import { useNavigate } from "react-router";
+import Loading from "../components/common/Loading";
+import ScrollToTopButton from "../components/common/scrollToTopButton";
 
 const SelectSort = styled(SelectCategory)`
   display: flex;
@@ -40,22 +42,47 @@ const MorePage = () => {
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
 
+  const [loading, setLoading] = useState(false);
+
+  const [selSort, setSelSort] = useState(false);
+
   const [posts, setPosts] = useState<any[]>([]);
 
-  // 정렬 select
-  const [sort, setSort] = useState("new");
+  // 정렬
+  const [sort, setSort] = useState("id,desc");
 
   useEffect(() => {
-    if (sort === "new") {
-      setSort("new");
+    if (sort === "id,desc") {
+      setSort("id,desc");
     }
-    if (sort === "old") {
-      setSort("old");
+    if (sort === "id,asc") {
+      setSort("id,asc");
     }
-    if (sort === "popular") {
-      setSort("popular");
+    if (sort === "viewcount,desc") {
+      setSort("viewcount,desc");
     }
   }, [sort]);
+
+  useEffect(() => {
+    console.log("setSelSort", selSort);
+    console.log("query.category", query.category);
+    if (query.category === "popular") {
+      setSelSort(false);
+      setSort("viewcount,desc");
+    }
+    if (query.category === "recent") {
+      setSelSort(false);
+    }
+    if (query.category === "place") {
+      setSelSort(true);
+    }
+    if (query.category === "store") {
+      setSelSort(true);
+    }
+    if (query.category === "lodging") {
+      setSelSort(true);
+    }
+  }, [query.category, selSort]);
 
   // 정렬 선택
   const onSelectedSort = useCallback((e: any) => {
@@ -63,88 +90,92 @@ const MorePage = () => {
   }, []);
 
   // 페이지네이션
-  const [totalPage, setTotalPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const itemPerPage = useMemo(() => 16, []);
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
+    setLoading(true);
+
     // API 호출
-    //@ts-ignore
     morePosts(
       query.category as string,
-      sort as string,
+      sort,
       currentPage,
-      query.where as string,
-      query.what as string
+      query.location as string,
+      query.tag as string
     )
       .then((res) => {
-        // const totalPageCount = Math.ceil(res.totalPages / itemPerPage);
+        if (res.status == "403") {
+          alert("토큰 만료");
+        }
+
+        console.log("morePosts", res);
         setTotalPage(res.totalPages);
         setPosts(res.content);
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    console.log("search", sort, currentPage);
-  }, [
-    currentPage,
-    itemPerPage,
-    navigate,
-    query.category,
-    query.what,
-    query.where,
-    sort,
-  ]);
+  }, [currentPage, navigate, query.category, query.tag, query.location, sort]);
 
   return (
-    <Wrapper>
-      <Header />
-      <Search />
-      <SelectSort>
-        <div>
-          <select
-            name="sort"
-            className="select"
-            onChange={onSelectedSort}
-            defaultValue="new"
-          >
-            <option value="new">최신순</option>
-            <option value="old">오래된순</option>
-            <option value="popular">인기순</option>
-          </select>
-        </div>
-      </SelectSort>
-      <PostBlock>
-        {posts.map((post) => (
-          //@ts-ignore
-          <Post post={post} key={post?.id} />
-        ))}
-      </PostBlock>
-      <Pagination>
-        <span className="material-icons">chevron_left</span>
-        {Array.from({ length: totalPage }, (x, i) => i + 1).map(
-          (pageNumber) => (
-            <button
-              key={pageNumber}
-              onClick={() => {
-                setCurrentPage(pageNumber);
-                console.log(pageNumber);
-              }}
-              style={
-                currentPage === pageNumber
-                  ? { color: palette.cyan[5], fontWeight: 700 }
-                  : {}
-              }
-            >
-              {pageNumber}
-            </button>
-          )
+    <>
+      <Wrapper>
+        <Header />
+        <Search />
+        {selSort ? (
+          <SelectSort>
+            <div>
+              <select
+                name="sort"
+                className="select"
+                onChange={onSelectedSort}
+                defaultValue="id,desc"
+              >
+                <option value="id,desc">최신순</option>
+                <option value="id,asc">오래된순</option>
+                <option value="viewcount,desc">인기순</option>
+              </select>
+            </div>
+          </SelectSort>
+        ) : (
+          ""
         )}
-        <span className="material-icons">chevron_right</span>
-      </Pagination>
-      <Footer />
-    </Wrapper>
+        <PostBlock>
+          {posts.map((post) => (
+            //@ts-ignore
+            <Post post={post} key={post?.id} />
+          ))}
+        </PostBlock>
+        <Pagination>
+          <span className="material-icons">chevron_left</span>
+          {Array.from({ length: totalPage }, (x, i) => i + 1).map(
+            (pageNumber) => (
+              <button
+                key={pageNumber}
+                onClick={() => {
+                  setCurrentPage(pageNumber - 1);
+                }}
+                style={
+                  currentPage === pageNumber - 1
+                    ? { color: palette.cyan[5], fontWeight: 700 }
+                    : {}
+                }
+              >
+                {pageNumber}
+              </button>
+            )
+          )}
+          <span className="material-icons">chevron_right</span>
+        </Pagination>
+        <Footer />
+        <ScrollToTopButton />
+      </Wrapper>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 

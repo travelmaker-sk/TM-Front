@@ -8,7 +8,7 @@ import { register } from "../../lib/api/auth";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Loading } from "../common/Loading";
+import Loading from "../common/Loading";
 
 interface RegisterType {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -33,7 +33,7 @@ const RegisterBlock = styled.div`
     a {
       color: ${palette.cyan[5]};
       &:hover {
-        color: ${palette.cyan[3]};
+        color: ${palette.cyan[5]};
       }
     }
   }
@@ -47,19 +47,26 @@ export const ErrorMessage = styled.div`
 
 const Register = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { state } = useLocation();
   useEffect(() => {
     if (!state) {
-      Swal.fire(
-        "",
-        "회원가입을 위해 서비스 이용 약관 동의가 필요합니다",
-        "warning"
-      );
-      navigate("/privacyPolicy");
+      Swal.fire({
+        title: "",
+        text: "회원가입을 위해 서비스 이용 약관 동의가 필요합니다",
+        icon: "warning",
+        showCancelButton: false,
+        confirmButtonColor: "#20c997",
+        confirmButtonText: "확인",
+        iconColor: palette.gray[5],
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/privacyPolicy");
+        }
+      });
     }
   }, [state, navigate]);
 
@@ -69,7 +76,6 @@ const Register = () => {
       e.preventDefault();
 
       setLoading(true);
-      console.log("1", loading);
 
       const form = e.target as HTMLFormElement;
       const $inputs = Array.from(form.querySelectorAll("input"));
@@ -79,9 +85,11 @@ const Register = () => {
       );
 
       if ([inputNickname, inputEmail, inputPw, inputPwConfirm].includes("")) {
+        setLoading(false);
         setError("빈 칸을 모두 입력하세요.");
         return;
       } else if (inputPw !== inputPwConfirm) {
+        setLoading(false);
         setError("비밀번호가 일치하지 않습니다.");
         return;
       } else {
@@ -101,9 +109,12 @@ const Register = () => {
         })
         .catch((err) => {
           console.warn(err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
-    [loading, navigate]
+    [navigate]
   );
 
   return (

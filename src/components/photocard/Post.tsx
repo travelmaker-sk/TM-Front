@@ -1,21 +1,47 @@
-import { useState } from "react";
-import { GetPostType } from "../../lib/type";
+import { useCallback, useState } from "react";
+import { DetailPostType, GetPostType } from "../../lib/type";
 import Card from "./Card";
 import PostModal from "./PostModal";
+import { loadPost } from "../../lib/api/home";
+import Loading from "../common/Loading";
 
 export interface PostType {
   post: GetPostType | null;
+  detailPost?: DetailPostType | null;
   close?: () => void;
   my?: boolean;
   bookmark?: boolean;
 }
 
 const Post = ({ post, my, bookmark }: PostType) => {
+  const [loading, setLoading] = useState(false);
+
   const [openModal, setOpenModal] = useState(false);
-  const onOpenModal = () => {
+  const [detailPost, setDetailPost] = useState<DetailPostType | null>();
+
+  const onOpenModal = useCallback(() => {
     console.log("click modal");
     setOpenModal(true);
-  };
+    setLoading(true);
+
+    // @ts-ignore
+    loadPost(post?.id)
+      .then((res) => {
+        if (res.status == "403") {
+          alert("토큰 만료");
+        }
+
+        console.log("detailPost", res);
+        setDetailPost(res);
+      })
+      .catch((err) => {
+        console.warn(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [post?.id]);
+
   const onCloseModal = () => {
     setOpenModal(false);
   };
@@ -25,11 +51,13 @@ const Post = ({ post, my, bookmark }: PostType) => {
       <Card post={post} onOpenModal={onOpenModal} />
       <PostModal
         post={post}
+        detailPost={detailPost}
         open={openModal}
         close={onCloseModal}
         my={my}
         bookmark={bookmark}
       />
+      {loading ? <Loading /> : ""}
     </>
   );
 };

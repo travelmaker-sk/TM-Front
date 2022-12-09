@@ -1,33 +1,21 @@
 import axios from "axios";
-import popularWhere from "../json/popularWhere.json";
+import popularLocation from "../json/popularLocation.json";
 import postsData from "../json/posts.json";
 import mypostsData from "../json/myposts.json";
 
-// 테스트
-export const loadPost = async (id: number) => {
-  let token = localStorage.getItem("tm-token");
-
-  const response = await axios.get(`/total/api/detailresponse/${id}`, {
-    headers: {
-      Authorization: `${token}`,
-    },
-  });
-
-  return response.data;
-};
-
 // 포스트 리스트 5개
 // 인기 / 최신 / 가볼 만한 곳 / 맛집 / 숙소
-export const listPosts = async (where?: string, what?: string) => {
+export const listPosts = async (location?: string, tag?: string) => {
+  console.log("listPost");
   let token = localStorage.getItem("tm-token");
 
-  const params: Record<string, any> = {};
+  // const params: Record<string, any> = {};
 
-  if (where) params.where = where;
-  if (what) params.what = what;
+  // if (location) params.location = location;
+  // if (tag) params.tag = tag;
 
   const response = await axios.get("/total/api/search", {
-    params,
+    params: { location, tag },
     headers: {
       Authorization: `${token}`,
     },
@@ -65,22 +53,29 @@ export const morePosts = async (
   category: string,
   sort: string,
   currentPage: number,
-  where?: string,
-  what?: string
+  location?: string,
+  tag?: string
 ) => {
+  console.log("morePosts");
   let token = localStorage.getItem("tm-token");
 
-  const params: Record<string, any> = {
-    category,
-    sort,
-    page: currentPage,
-  };
+  // const params: Record<string, any> = {
+  //   category,
+  //   sort,
+  //   page: currentPage,
+  // };
 
-  if (where) params.where = where;
-  if (what) params.what = what;
+  // if (location) params.location = location;
+  // if (tag) params.tag = tag;
 
-  const response = await axios.get("/totla/api/more", {
-    params,
+  const response = await axios.get("/total/api/more", {
+    params: {
+      category,
+      sort,
+      page: currentPage,
+      location,
+      tag,
+    },
     headers: {
       Authorization: `${token}`,
     },
@@ -123,11 +118,25 @@ export const morePosts = async (
   // };
 };
 
+// 개별 포스트
+export const loadPost = async (id: number) => {
+  console.log("loadPost");
+  let token = localStorage.getItem("tm-token");
+
+  const response = await axios.get(`/total/api/detailresponse/${id}`, {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
+
+  return response.data;
+};
+
 // 마이페이지 포스트
 export const myPosts = async () => {
   let token = localStorage.getItem("tm-token");
 
-  const response = await axios.get("/myPosts", {
+  const response = await axios.get("/total/api/mypage", {
     headers: {
       Authorization: `${token}`,
     },
@@ -146,7 +155,7 @@ export const myPosts = async () => {
 export const myBookmarks = async () => {
   let token = localStorage.getItem("tm-token");
 
-  const response = await axios.get("/myBookmarks", {
+  const response = await axios.get("/total/api/bookmark", {
     headers: {
       Authorization: `${token}`,
     },
@@ -163,19 +172,19 @@ export const myBookmarks = async () => {
 
 // 인기 여행지 TOP7
 export const popularArea = async () => {
-  let token = localStorage.getItem("tm-token");
+  // let token = localStorage.getItem("tm-token");
 
-  const response = await axios.get("/popularWhere", {
-    headers: {
-      Authorization: `${token}`,
-    },
-  });
+  // const response = await axios.get("/popularLocation", {
+  //   headers: {
+  //     Authorization: `${token}`,
+  //   },
+  // });
 
-  return response.data;
+  // return response.data;
 
-  // const list = popularWhere.areaList;
+  const list = popularLocation.areaList;
 
-  // return {
-  //   list,
-  // };
+  return {
+    list,
+  };
 };

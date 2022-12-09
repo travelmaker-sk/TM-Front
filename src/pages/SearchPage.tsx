@@ -11,10 +11,12 @@ import palette from "../styles/palette";
 import Footer from "../components/common/Footer";
 import SearchPostList from "../components/photocard/SearchPostList";
 import { useNavigate } from "react-router";
+import Loading from "../components/common/Loading";
+import ScrollToTopButton from "../components/common/scrollToTopButton";
 
 const SearchTitle = styled.div`
   h2 {
-    color: ${palette.cyan[7]};
+    color: ${palette.cyan[8]};
     font-size: 40px;
     font-weight: 700;
     margin: 32px 0;
@@ -79,7 +81,9 @@ const SearchPage = (props: any) => {
   const searchParams = location.search;
   const query = queryString.parse(searchParams);
 
-  const [posts, setposts] = useState<AllPostsType>({
+  const [loading, setLoading] = useState(false);
+
+  const [searchPosts, setSearchPosts] = useState<AllPostsType>({
     popularList: {
       content: [],
     },
@@ -98,61 +102,73 @@ const SearchPage = (props: any) => {
   });
 
   useEffect(() => {
+    setLoading(true);
+
     // API 호출
-    listPosts(query.where as string, query.what as string)
+    listPosts(query.location as string, query.tag as string)
       .then((res) => {
-        // @ts-ignore
-        setposts(res);
+        if (res.status == "403") {
+          alert("토큰 만료");
+        }
+        setSearchPosts(res);
+        console.log("searchPosts", res);
       })
       .catch((err) => {
         console.warn(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }, [navigate, query.what, query.where]);
+  }, [navigate, query.tag, query.location]);
 
   return (
-    <Wrapper>
-      <Header />
-      <Search />
-      <SearchTitle>
-        <h2 className="bounce">{query.where}</h2>
-        <h3>
-          {query.where ?? "전 지역"}
-          &nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;
-          {query.what ?? "전체"}
-        </h3>
-      </SearchTitle>
-      <SearchPostList
-        list={posts.popularList.content}
-        category="popular"
-        where={query.where}
-        what={query.what}
-      />
-      <SearchPostList
-        list={posts.recentList.content}
-        category="recent"
-        where={query.where}
-        what={query.what}
-      />
-      <SearchPostList
-        list={posts.placeList.content}
-        category="place"
-        where={query.where}
-        what={query.what}
-      />
-      <SearchPostList
-        list={posts.storeList.content}
-        category="store"
-        where={query.where}
-        what={query.what}
-      />
-      <SearchPostList
-        list={posts.lodgingList.content}
-        category="lodging"
-        where={query.where}
-        what={query.what}
-      />
-      <Footer />
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Header />
+        <Search />
+        <SearchTitle>
+          <h2 className="bounce">{query.location}</h2>
+          <h3>
+            {query.location ? query.location : "전 지역"}
+            &nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;
+            {query.tag ? query.tag : "전체"}
+          </h3>
+        </SearchTitle>
+        <SearchPostList
+          list={searchPosts.popularList.content}
+          category="popular"
+          location={query.location}
+          tag={query.tag}
+        />
+        <SearchPostList
+          list={searchPosts.recentList.content}
+          category="recent"
+          location={query.location}
+          tag={query.tag}
+        />
+        <SearchPostList
+          list={searchPosts.placeList.content}
+          category="place"
+          location={query.location}
+          tag={query.tag}
+        />
+        <SearchPostList
+          list={searchPosts.storeList.content}
+          category="store"
+          location={query.location}
+          tag={query.tag}
+        />
+        <SearchPostList
+          list={searchPosts.lodgingList.content}
+          category="lodging"
+          location={query.location}
+          tag={query.tag}
+        />
+        <Footer />
+        <ScrollToTopButton />
+      </Wrapper>
+      {loading ? <Loading /> : ""}
+    </>
   );
 };
 
