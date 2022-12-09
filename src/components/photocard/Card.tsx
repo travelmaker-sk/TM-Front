@@ -12,17 +12,18 @@ interface ICard {
 }
 
 const PrintCardUl = styled.ul`
-  width: 204px;
+  margin-left: 17px;
+  width: 340px;
   height: 325px;
   min-height: 325px;
   padding: 15px;
   border: 1.5px solid ${palette.gray[0]};
   cursor: pointer;
-  font-size: 10px;
+  font-size: 17px;
   background-color: white;
   li {
     display: flex;
-    line-height: 1.2em;
+    line-height: 1.6em;
     margin-bottom: 5px;
     img {
       aspect-ratio: 4/3;
