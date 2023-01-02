@@ -17,7 +17,7 @@
 <br>
 
 ## 🎞 프로젝트 발표 영상
-https://www.youtube.com/watch?v=9MgqoV3XX6w
+https://youtu.be/ujqoWcUxWKQ
 
 <br>
   
