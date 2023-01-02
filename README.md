@@ -78,83 +78,69 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 <details>
 <summary><b>메인 페이지</b></summary>
 <div>
-  <img src="https://user-images.githubusercontent.com/50544205/183281240-af1dc310-9233-4683-9571-5caa2a000eaf.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281261-ff1355cc-6fa1-44d9-a7c5-1a3c5fe6d99e.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281281-15032017-05db-4b87-88f6-bce2047bcdfc.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281290-0788f514-c1de-4431-916c-5d8db8d607a2.png"/>
-  - 인기, 최신, 맛집, 가볼만한 곳, 숙소로 분할
-  - 총 5개의 포토카드 리스트
+<div>메인</div>
+<div>포토카드 목록 정렬<div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210213638-09d42f54-3be6-4597-bdf2-2d9619dfc1ec.gif" />
+<div>포토카드 목록 페이지네이션<div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210213614-c42b4c43-eeb0-4b71-b483-b88aa48d7311.gif" />
 </div>
 </details>
 
 <details>
-<summary><b>로그인</b></summary>
+<summary><b>회원가입 및 로그인</b></summary>
 <div>
-  <img src="https://user-images.githubusercontent.com/50544205/183281420-22d95b01-e009-4ae1-88e2-47b8aa187594.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281657-41c41d47-f926-4eb5-9906-d8e6d4e7129a.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281439-ec2b7f87-0367-4b68-b8e4-60164417b408.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281449-c6bcc35c-5f40-4a33-b248-dc7d0a60e0b9.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281456-fdf58237-161b-431d-9d86-69cf3af7c179.png"/>
-  - 회원 자체 로그인, 소셜 로그인
-  - 아이디 저장, 로그인 유지와 같은 편의 기능 제공
-  - 입력한 이메일로 OTP코드 전송
+<div>회원가입 (이메일 인증)</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214038-fb113979-61e4-4f69-932e-0770eea9f07a.gif" />
+<div>비밀번호 찾기</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214199-a2f2ac7d-a510-4658-ba97-9cc5f0577337.gif" />
+<div>로그인</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214064-06a1237b-aee9-4b0a-8af6-478fe5d0056c.gif" />
 </div>
 </details>
 
 <details>
-<summary><b>포토카드 CRUD</b></summary>
-<div">
-  <img src="https://user-images.githubusercontent.com/50544205/183281605-5d81c56b-6adb-403f-8d07-49393d904e0c.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281607-561a9c30-fd2c-4a2f-a11b-3a875fecb571.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281610-82660765-7435-437c-97bc-fdaa39e21915.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281620-2ca73038-cdea-4eda-98c9-fcac76993f1d.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281626-d6f28696-850e-43be-ac9d-4404b7bd1e1d.png"/>
-  #### - 가볼만 한곳 , 숙소 , 맛집 선택 가능
-  #### - 카테고리 별 포토카드 형식 변화
-  #### - 포토카드 데이터 입력 후 업로드 버튼 클릭
-  #### - 위에서 만든 포토카드 목록 출력 확인
-</div>
-</details>
-
-<details>
-<summary><b>북마크</b></summary>
-<div">
-  <img src="https://user-images.githubusercontent.com/50544205/183281747-5b9a4ac0-a00e-4fdc-a66d-b604bf23232a.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281760-5013b242-5d2f-495f-8002-1fa5b4f08712.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281762-a33b4903-133f-4d2f-bf9c-fe20ead0780b.png"/>
-  - 북마크 추가 후 북마크 페이지 이동
-  - 북마크 한 포토카드 출력 확인
-</div>
-</details>
-
-<details>
-<summary><b>좋아요</b></summary>
+<summary><b>포토카드 만들기</b></summary>
 <div>
-  <img src="https://user-images.githubusercontent.com/50544205/183281797-14a056b2-25f9-448e-9a21-5a7670dd7f24.png"/>
-  - 좋아요 하트를 클릭하면 숫자 카운팅
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214426-2d15e6ad-8a4d-4b8c-b30b-86ddfc0a5c57.gif" />
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214417-f43d7f9d-dd2b-4df1-b762-d331f890e256.gif" />
+</div>
+</details>
+
+<details>
+<summary><b>마이페이지 (포토카드 인쇄, 수정, 삭제)</b></summary>
+<div>
+<div>포토카드 인쇄</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214534-e8f19068-8e77-4be5-9c8d-7f2fafc3adec.gif" />
+<div>포토카드 수정</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214545-10c1e2be-42e2-4e9d-94fd-8bacaa0541a6.gif" />
+<div>포토카드 삭제</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214539-47ea63fb-2dbf-48ee-9385-e1610c9b6f1c.gif" />
+</div>
+</details>
+
+<details>
+<summary><b>좋아요 및 북마크</b></summary>
+<div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214697-b3c8a9cf-778c-4bd5-be6f-167593e1edde.gif" />
 </div>
 </details>
 
 <details>
 <summary><b>검색</b></summary>
 <div>
-  <img src="https://user-images.githubusercontent.com/50544205/183281906-82cc1306-b42e-4cfd-996b-8d3fd49a0756.png"/>
-  - 인기 여행지 목록 제공
-  - 글자에 관련된 장소 목록 제공
-  - 키워드 제외 장소만 검색 했을 때 
-  - 장소 검색 페이지
-  - 해수욕장 키워드 검색
-  - 해수욕장 태그가 붙어 있는 게시물 출력 확인
-  - 장소가 부산으로 설정되어 있고 태그에 해수욕장이 붙어 있는 게시물 출력 확인
+<div>실시간 검색</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214783-9612f045-eae1-4572-aaeb-7bb325f5978b.gif" />
+<div>각각 어디에서-제주, 무엇을-해수욕장 검색</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214766-01aa571c-3fb8-489b-b9c2-8f72844ea4d1.gif" />
+<div>어디에서-부산, 무엇을-해수욕장 검색</div>
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214788-f0456905-b452-498c-a34a-3316c19a2583.gif" />
 </div>
 </details>
 
 <details>
-<summary><b>포토카드 인쇄</b></summary>
+<summary><b>회원 탈퇴</b></summary>
 <div>
-  <img src="https://user-images.githubusercontent.com/50544205/183281809-a308a280-991d-47e5-9c5f-93d8faacfe47.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281810-ff29825b-30fb-4b92-a12a-a2081cc21a0c.png"/>
-  <img src="https://user-images.githubusercontent.com/50544205/183281847-985e78c9-a107-4c75-a3e3-83dd5f9e48ec.png"/>
-  - 포토카드 프린트 기기로 포토카드 인쇄!
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214945-4c3b4e73-f78d-47f6-ac26-2a8ffbbb600f.gif" />
+<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214941-167f4be3-ca23-4148-ba11-d2a90855a023.gif" />
 </div>
 </details>
