@@ -77,45 +77,63 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 
 <details>
 <summary><b>메인 페이지</b></summary>
-<div>
-<div>메인</div>
-<div>포토카드 목록 정렬<div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210213638-09d42f54-3be6-4597-bdf2-2d9619dfc1ec.gif" />
-<div>포토카드 목록 페이지네이션<div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210213614-c42b4c43-eeb0-4b71-b483-b88aa48d7311.gif" />
-</div>
+<ul>
+  <li>
+    <div>전체 포토카드 목록 (인기, 최신, 가볼만한곳, 맛집, 숙소)</div>
+  </li>
+  <li>
+    <div>카테고리별 포토카드 목록 정렬 (최신순, 오래된순, 인기순)<div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210213638-09d42f54-3be6-4597-bdf2-2d9619dfc1ec.gif" />
+  </li>
+  <li>
+    <div>카테코리별 포토카드 목록 페이지네이션<div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210213614-c42b4c43-eeb0-4b71-b483-b88aa48d7311.gif" />
+  </li>
+</ul>
 </details>
 
 <details>
 <summary><b>회원가입 및 로그인</b></summary>
-<div>
-<div>회원가입 (이메일 인증)</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214038-fb113979-61e4-4f69-932e-0770eea9f07a.gif" />
-<div>비밀번호 찾기</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214199-a2f2ac7d-a510-4658-ba97-9cc5f0577337.gif" />
-<div>로그인</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214064-06a1237b-aee9-4b0a-8af6-478fe5d0056c.gif" />
-</div>
+<ul>
+  <li>
+    <div>회원가입 (이메일 인증)</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214038-fb113979-61e4-4f69-932e-0770eea9f07a.gif" />
+  </li>
+  <li>
+    <div>비밀번호 찾기</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214199-a2f2ac7d-a510-4658-ba97-9cc5f0577337.gif" />
+  </li>
+  <li>
+    <div>로그인</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214064-06a1237b-aee9-4b0a-8af6-478fe5d0056c.gif" />
+  </li>
+</ul>
 </details>
 
 <details>
 <summary><b>포토카드 만들기</b></summary>
 <div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214426-2d15e6ad-8a4d-4b8c-b30b-86ddfc0a5c57.gif" />
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214417-f43d7f9d-dd2b-4df1-b762-d331f890e256.gif" />
+<div><img width="500px" src="https://user-images.githubusercontent.com/74370531/210214426-2d15e6ad-8a4d-4b8c-b30b-86ddfc0a5c57.gif" /></div>
+<div><img width="500px" src="https://user-images.githubusercontent.com/74370531/210214417-f43d7f9d-dd2b-4df1-b762-d331f890e256.gif" /></div>
 </div>
 </details>
 
 <details>
 <summary><b>마이페이지 (포토카드 인쇄, 수정, 삭제)</b></summary>
-<div>
-<div>포토카드 인쇄</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214534-e8f19068-8e77-4be5-9c8d-7f2fafc3adec.gif" />
-<div>포토카드 수정</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214545-10c1e2be-42e2-4e9d-94fd-8bacaa0541a6.gif" />
-<div>포토카드 삭제</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214539-47ea63fb-2dbf-48ee-9385-e1610c9b6f1c.gif" />
-</div>
+<ul>
+  <li>
+    <div>포토카드 인쇄</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214534-e8f19068-8e77-4be5-9c8d-7f2fafc3adec.gif" />
+  </li>
+  <li>
+    <div>포토카드 수정</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214545-10c1e2be-42e2-4e9d-94fd-8bacaa0541a6.gif" />
+  </li>
+  <li>
+    <div>포토카드 삭제</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214539-47ea63fb-2dbf-48ee-9385-e1610c9b6f1c.gif" />
+  </li>
+</ul>
 </details>
 
 <details>
@@ -128,19 +146,26 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 <details>
 <summary><b>검색</b></summary>
 <div>
-<div>실시간 검색</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214783-9612f045-eae1-4572-aaeb-7bb325f5978b.gif" />
-<div>각각 어디에서-제주, 무엇을-해수욕장 검색</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214766-01aa571c-3fb8-489b-b9c2-8f72844ea4d1.gif" />
-<div>어디에서-부산, 무엇을-해수욕장 검색</div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214788-f0456905-b452-498c-a34a-3316c19a2583.gif" />
-</div>
+  <ul>
+    <li>
+    <div>실시간 검색</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214783-9612f045-eae1-4572-aaeb-7bb325f5978b.gif" />
+  </li>
+  <li>
+    <div>각각 어디에서-제주, 무엇을-해수욕장 검색</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214766-01aa571c-3fb8-489b-b9c2-8f72844ea4d1.gif" />
+  </li>
+  <li>
+    <div>어디에서-부산, 무엇을-해수욕장 검색</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210214788-f0456905-b452-498c-a34a-3316c19a2583.gif" />
+  </li>
+</ul>
 </details>
 
 <details>
 <summary><b>회원 탈퇴</b></summary>
 <div>
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214945-4c3b4e73-f78d-47f6-ac26-2a8ffbbb600f.gif" />
-<img width="500px" src="https://user-images.githubusercontent.com/74370531/210214941-167f4be3-ca23-4148-ba11-d2a90855a023.gif" />
+<div><img width="500px" src="https://user-images.githubusercontent.com/74370531/210214945-4c3b4e73-f78d-47f6-ac26-2a8ffbbb600f.gif" /></div>
+<div><img width="500px" src="https://user-images.githubusercontent.com/74370531/210214941-167f4be3-ca23-4148-ba11-d2a90855a023.gif" /></div>
 </div>
 </details>
