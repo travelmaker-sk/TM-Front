@@ -80,6 +80,8 @@ https://youtu.be/ujqoWcUxWKQ
 <ul>
   <li>
     <div>전체 포토카드 목록 (인기, 최신, 가볼만한곳, 맛집, 숙소)</div>
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210299302-841b8bcf-bd20-4705-a6ad-23277cb5697e.gif" />
+    <img width="500px" src="https://user-images.githubusercontent.com/74370531/210299290-e6587aa0-816b-40b1-b96a-8e5bdbf31d3d.gif" />
   </li>
   <li>
     <div>카테고리별 포토카드 목록 정렬 (최신순, 오래된순, 인기순)<div>
