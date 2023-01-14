@@ -75,7 +75,7 @@ https://youtu.be/ujqoWcUxWKQ
 
 ## 🎬 기능 시연
 
-![그림3](https://user-images.githubusercontent.com/74370531/212478406-687bb49f-6cdb-4c22-a801-4f887fb6a458.png)\
+![그림3](https://user-images.githubusercontent.com/74370531/212478406-687bb49f-6cdb-4c22-a801-4f887fb6a458.png)
 
 <details>
 <summary><b>메인 페이지</b></summary>
