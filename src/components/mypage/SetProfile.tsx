@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import {
   CyanButtonStyle,
@@ -7,11 +7,10 @@ import {
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import { UserType } from "../../lib/type";
 import { ErrorMessage } from "../auth/Register";
 import Input from "../common/Input";
 import { RootStateOrAny, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { UserType } from "../../lib/type/user";
 
 interface SetProfileType {
   user: UserType;
@@ -86,7 +85,6 @@ const SetProfile = () => {
 
   const [newNickname, setNewNickname] = useState(user.username);
 
-  // 프로필 사진 미리보기
   const [image, setImage] = useState({
     profileImageFile: "",
     profileImageUrl: user.profileImage
@@ -116,8 +114,6 @@ const SetProfile = () => {
 
   const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // TODO. API 호출
   }, []);
 
   return (

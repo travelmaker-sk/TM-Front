@@ -1,6 +1,6 @@
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import styled from "styled-components";
-import { AllPostsCategoryType } from "../../lib/type";
+import { AllPostsCategoryType } from "../../lib/type/post";
 import palette from "../../styles/palette";
 
 export interface PostListTitleType {
@@ -14,10 +14,7 @@ const PostListTitleStyle = styled.div`
     margin-bottom: 40px;
     color: ${palette.cyan[8]};
     font-size: 24px;
-    // font-family: "Black Han Sans", sans-serif;
     font-family: "Do Hyeon", sans-serif;
-    // font-family: "Jua", sans-serif;
-    // font-family: "Nanum Gothic", sans-serif;
   }
   hr {
     border-top: 1.3px splid ${palette.gray[5]};

@@ -1,4 +1,3 @@
-import React from "react";
 import AuthTemplate from "../components/auth/AuthTemplate";
 import FindPw from "../components/auth/FindPw";
 

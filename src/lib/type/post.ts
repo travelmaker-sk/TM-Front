@@ -1,11 +1,9 @@
-export interface UserType {
-  username: string;
-  email: string;
-  profileImage?: string;
-  postCount?: number;
-  followers?: number;
-  followings?: number;
-}
+export type AllPostsCategoryType =
+  | "popular"
+  | "recent"
+  | "place"
+  | "store"
+  | "lodging";
 
 export interface AllPostsType {
   popularList: {
@@ -24,13 +22,6 @@ export interface AllPostsType {
     content: GetPostType[];
   };
 }
-
-export type AllPostsCategoryType =
-  | "popular"
-  | "recent"
-  | "place"
-  | "store"
-  | "lodging";
 
 export interface GetPostType {
   viewCount: number;
@@ -51,6 +42,24 @@ export interface GetPostType {
   username?: string;
   useremail?: string;
   profileImage?: string;
+}
+
+export interface AddPostType {
+  category: string;
+  title: string;
+  location: string;
+  date: string;
+  score: number;
+  weather?: string;
+  menu?: string;
+  price?: number;
+  memo?: string;
+  tagList?: Array<string>;
+  image?: File;
+}
+
+export interface EditPostType extends AddPostType {
+  id: number;
 }
 
 export interface DetailPostType {
@@ -81,22 +90,4 @@ export interface DetailPostType {
 
 export interface PostType {
   post: GetPostType | null;
-}
-
-export interface AddPostType {
-  category: string;
-  title: string;
-  location: string;
-  date: string;
-  score: number;
-  weather?: string;
-  menu?: string;
-  price?: number;
-  memo?: string;
-  tagList?: Array<string>;
-  image?: File;
-}
-
-export interface EditPostType extends AddPostType {
-  id: number;
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import palette from "./palette";
@@ -15,8 +14,6 @@ export const GlobalButtonStyle = styled.div`
     cursor: pointer;
   }
 `;
-
-// Auth Button
 
 export const SelectButtonStyle = styled.div`
   width: 100%;

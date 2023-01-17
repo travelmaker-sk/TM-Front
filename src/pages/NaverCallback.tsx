@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { naverLogin } from "../lib/api/auth";
 import { useNavigate } from "react-router";
@@ -20,7 +20,6 @@ const NaverCallback = () => {
         return acc;
       }, {});
 
-    // API 호출
     naverLogin(query.access_token)
       .then((token) => {
         if (!token) {

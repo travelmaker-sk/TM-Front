@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { deletePost } from "../../lib/api/write";
-import { DetailPostType, GetPostType } from "../../lib/type";
+import { DetailPostType, GetPostType } from "../../lib/type/post";
 import { CyanButtonStyle, GrayButtonStyle } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
 import Card from "./Card";
@@ -217,7 +217,7 @@ const PostModal = ({
 
   const refCard = useRef<HTMLLIElement>(null);
 
-  // 수정 버튼
+  // 수정
   const onEdit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -227,7 +227,7 @@ const PostModal = ({
     [navigate, post]
   );
 
-  // 삭제 버튼
+  // 삭제
   const onDelete = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -237,7 +237,7 @@ const PostModal = ({
       // @ts-ignore
       deletePost(post?.id)
         .then((res) => {
-          if (res.status == "403") {
+          if (res.status === 403) {
             alert("토큰 만료");
           }
 

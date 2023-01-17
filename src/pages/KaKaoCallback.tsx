@@ -1,11 +1,11 @@
 import axios from "axios";
 import qs from "qs";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 export const LoadingStyle = styled.div`
-  witdh: 100%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@ const KakaoCallback = () => {
       .then((jwtToken) => {
         // TODO: jwtToken을 저장하고 메인페이지로 redirect
       });
-  }, []);
+  }, [location.search]);
 
   const getAccessToken = async (authCode: string) => {
     const { REACT_APP_KAKAO_REST_API_KEY, REACT_APP_BASE_URL } = process.env;

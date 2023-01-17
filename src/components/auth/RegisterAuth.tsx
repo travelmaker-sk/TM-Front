@@ -10,12 +10,6 @@ import { registerAuth } from "../../lib/api/auth";
 import { useLocation } from "react-router-dom";
 import Loading from "../common/Loading";
 
-interface RegisterAuthType {
-  reSubmit: React.FormEventHandler<HTMLFormElement>;
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
-  error: string | null;
-}
-
 const RegisterAuthBlock = styled.div`
   .material-icons {
     display: block;
@@ -81,10 +75,9 @@ const RegisterAuth = () => {
       } else {
         setError(null);
       }
-      // API 호출
+
       registerAuth(email as string, inputAuthCode as string)
         .then((res) => {
-          console.log("auth res", res);
           if (res) {
             setError("인증번호가 일치하지 않습니다.");
           } else {
@@ -101,11 +94,6 @@ const RegisterAuth = () => {
     },
     [email, navigate]
   );
-
-  const reSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("이메일 인증 코드 재전송");
-  }, []);
 
   return (
     <>

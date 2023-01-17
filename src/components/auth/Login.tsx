@@ -1,10 +1,4 @@
-import React, {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
@@ -15,13 +9,6 @@ import { RootStateOrAny, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { login } from "../../lib/api/auth";
 import Loading from "../common/Loading";
-
-interface LoginType {
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
-  initialUid: MutableRefObject<string>;
-  onKakaoLogin: () => void;
-  error: string | null;
-}
 
 const LoginBlock = styled.div`
   h2 {
@@ -103,7 +90,6 @@ const LoginBlock = styled.div`
     cursor: pointer;
     width: 100%;
     font-size: 18px;
-    // max-height: 45.833px;
   }
   #naver_id_login {
     display: none;
@@ -143,7 +129,6 @@ const Login = () => {
     naverRef.current.children[0].click();
   };
 
-  // 폼 등록 이벤트 핸들러
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -165,7 +150,6 @@ const Login = () => {
         setError(null);
       }
 
-      // API 호출
       login(inputEmail as string, inputPw as string)
         .then((res) => {
           let token = localStorage.getItem("tm-token");

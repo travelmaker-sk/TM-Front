@@ -2,7 +2,7 @@ import Post from "./Post";
 import PostListTitle from "./PostListTitle";
 import styled from "styled-components";
 import palette from "../../styles/palette";
-import { AllPostsCategoryType } from "../../lib/type";
+import { AllPostsCategoryType } from "../../lib/type/post";
 import { useNavigate } from "react-router";
 
 export interface PostListType {

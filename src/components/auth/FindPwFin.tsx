@@ -42,11 +42,6 @@ const FindPwFinBlock = styled.div`
 `;
 
 const FindPwFin = () => {
-  const reSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("이메일 인증 코드 재전송");
-  }, []);
-
   return (
     <FindPwFinBlock>
       <div className="material-icons">mail_outline</div>

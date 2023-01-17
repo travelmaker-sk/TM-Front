@@ -1,28 +1,32 @@
 import { Route, Routes } from "../node_modules/react-router-dom/index";
 
 import HomePage from "./pages/HomePage";
+import SearchPage from "./pages/SearchPage";
+import MorePage from "./pages/MorePage";
+import ScrollToTop from "./components/common/ScrollToTop";
 import NotFoundPage from "./pages/NotFoundPage";
 
-import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import RegisterAuthPage from "./pages/RegisterAuthPage";
 import RegisterFinPage from "./pages/RegisterFinPage";
 
-import MyPagePage from "./pages/MyPage";
-import SetProfilePage from "./pages/SetProfilePage";
-import QuitPage from "./pages/QuitPage";
-import QuitFinPage from "./pages/QuitFinPage";
+import LoginPage from "./pages/LoginPage";
 import NaverCallback from "./pages/NaverCallback";
 import KakaoCallback from "./pages/KaKaoCallback";
+
 import FindPwPage from "./pages/FindPwPage";
 import FindPwFinPage from "./pages/FindPwFinPage";
-import CreateCardPage from "./pages/CreateCardPage";
-import SearchPage from "./pages/SearchPage";
-import ScrollToTop from "./components/common/ScrollToTop";
-import MorePage from "./pages/MorePage";
-import EditCardPage from "./pages/EditCardPage";
+
+import MyPagePage from "./pages/MyPage";
+import SetProfilePage from "./pages/SetProfilePage";
 import BookMarksPage from "./pages/BookMarksPage";
+
+import QuitPage from "./pages/QuitPage";
+import QuitFinPage from "./pages/QuitFinPage";
+
+import CreateCardPage from "./pages/CreateCardPage";
+import EditCardPage from "./pages/EditCardPage";
 
 function App() {
   return (
@@ -44,11 +48,11 @@ function App() {
         <Route path="/more" element={<MorePage />} />
         <Route path="/mypage" element={<MyPagePage />} />
         <Route path="/setProfile" element={<SetProfilePage />} />
+        <Route path="/bookmarks" element={<BookMarksPage />} />
         <Route path="/quit" element={<QuitPage />} />
         <Route path="/quitFin" element={<QuitFinPage />} />
         <Route path="/createPhotocard" element={<CreateCardPage />} />
         <Route path="/editPhotocard" element={<EditCardPage />} />
-        <Route path="/bookmarks" element={<BookMarksPage />} />
 
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>

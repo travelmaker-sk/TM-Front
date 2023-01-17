@@ -1,9 +1,7 @@
 import axios from "axios";
-import { AddPostType, EditPostType } from "../type";
+import { AddPostType, EditPostType } from "../type/post";
 
-// 포토카드 생성
 export const addPost = async (data: AddPostType) => {
-  console.log("addPost");
   let token = localStorage.getItem("tm-token");
 
   const fd = new FormData();
@@ -23,9 +21,7 @@ export const addPost = async (data: AddPostType) => {
   return response.data;
 };
 
-// 포토카드 수정
 export const editPost = async (data: EditPostType) => {
-  console.log("editPost");
   let token = localStorage.getItem("tm-token");
 
   const fd = new FormData();
@@ -45,9 +41,7 @@ export const editPost = async (data: EditPostType) => {
   return response.data;
 };
 
-// 포토카드 삭제
 export const deletePost = async (id: number) => {
-  console.log("deletePost");
   let token = localStorage.getItem("tm-token");
 
   const response = await axios.get(`/total/api/delete/${id}`, {

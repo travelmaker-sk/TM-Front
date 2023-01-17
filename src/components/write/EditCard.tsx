@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import {
@@ -18,9 +18,6 @@ import {
 } from "./CreateCard";
 import palette from "../../styles/palette";
 import areaData from "../../lib/json/areaData.json";
-import DatePicker from "react-datepicker";
-import { ko } from "date-fns/esm/locale";
-import { NumberLiteralType } from "typescript";
 import Loading from "../common/Loading";
 
 export const EditCardBlock = styled(CreateCardBlock)`
@@ -28,17 +25,6 @@ export const EditCardBlock = styled(CreateCardBlock)`
   > div {
     display: block;
   }
-`;
-
-// 날짜
-const CardDatePicker = styled(DatePicker)`
-  margin-top: 1.5rem;
-  width: 300px;
-  height: 42px;
-  box-sizing: border-box;
-  padding: 8px 20px;
-  border-radius: 4px;
-  border: 1px solid ${palette.gray[5]};
 `;
 
 // 평점
@@ -105,10 +91,6 @@ const EditCard = () => {
     post?.tagList ? post.tagList.split(" ") : []
   );
 
-  useEffect(() => {
-    console.log("tagList", tagList);
-  });
-
   const [selectedPlace, setSelectedPlace] = useState(false);
   const [selectedStore, setSelectedStore] = useState(false);
   const [selectedLodging, setSelectedLodging] = useState(false);
@@ -134,7 +116,7 @@ const EditCard = () => {
     }
   }, [category]);
 
-  // 포토카드 이미지 업로드
+  //  이미지
   const [cardImage, setCardImage] = useState({
     cardImageName: "",
     cardImageUrl: post.imageUrl
@@ -188,10 +170,8 @@ const EditCard = () => {
     }, 200);
   };
 
-  // 포토카드 태그 업로드
+  //  태그
   const onKeyPress = (e: any) => {
-    // e.preventDefault();
-
     if (e.target.value.length !== 0 && e.key === "Enter") {
       submitTagItem();
     }
@@ -214,7 +194,7 @@ const EditCard = () => {
     setTagList(filteredTagList);
   };
 
-  // 초기화 버튼
+  // 초기화
   const onInit = () => {
     setTitle("");
     setLocation("");
@@ -231,11 +211,7 @@ const EditCard = () => {
     });
   };
 
-  useEffect(() => {
-    console.log("cardImageUrl", cardImage.cardImageUrl);
-  });
-
-  // 업로드 버튼
+  // 업로드
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -274,7 +250,6 @@ const EditCard = () => {
 
       const file = refInputFile.current?.files?.[0];
 
-      // API 호출
       editPost({
         id: post.id,
         category,
@@ -290,7 +265,7 @@ const EditCard = () => {
         image: file || undefined,
       })
         .then((res) => {
-          if (res.status == "403") {
+          if (res.status === 403) {
             alert("토큰 만료");
           }
 
@@ -415,18 +390,6 @@ const EditCard = () => {
                   setDate(e.target.value);
                 }}
               />
-              <div>
-                {/* @ts-ignore */}
-                {/* <CardDatePicker
-                  locale={ko}
-                  dateFormat="yyyy/MM/dd"
-                  placeholderText="📅 달력에서 선택하기"
-                  selected={date}
-                  onChange={(date: React.SetStateAction<string>) =>
-                    setDate(date)
-                  }
-                /> */}
-              </div>
             </label>
             {selectedPlace ? (
               <label>
