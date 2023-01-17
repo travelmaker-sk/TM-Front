@@ -8,11 +8,6 @@ import { useNavigate } from "react-router";
 import { findPw } from "../../lib/api/auth";
 import Loading from "../common/Loading";
 
-interface FindPwType {
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
-  error: string | null;
-}
-
 const FindPwBlock = styled.div`
   h2 {
     margin-bottom: 26px;
@@ -57,7 +52,6 @@ const FindPw = () => {
         setError(null);
       }
 
-      // API 호출
       findPw(inputEmail)
         .then((res) => {
           if (res) {

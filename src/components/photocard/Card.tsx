@@ -1,8 +1,8 @@
-import { GetPostType } from "../../lib/type";
+import { GetPostType } from "../../lib/type/post";
 import styled from "styled-components";
 import palette from "../../styles/palette";
-import { useEffect, useMemo, useRef } from "react";
-import React, { useState } from "react";
+import { useMemo, useRef } from "react";
+import { useState } from "react";
 
 interface ICard {
   post: GetPostType | null;
@@ -112,7 +112,6 @@ export const CardUl = styled.ul`
 `;
 
 const Card = ({ post, onOpenModal, my, bookmark }: ICard) => {
-  const refPrintCard = useRef<HTMLDivElement>(null);
   const refCard = useRef<HTMLUListElement>(null);
   let cardWidth = refCard.current?.offsetWidth;
 

@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { listPosts } from "../lib/api/home";
-import { AllPostsType } from "../lib/type";
+import { AllPostsType } from "../lib/type/post";
 import { Wrapper } from "./HomePage";
 import Header from "../components/common/Header";
 import Search from "../components/home/Search";
@@ -104,14 +104,12 @@ const SearchPage = (props: any) => {
   useEffect(() => {
     setLoading(true);
 
-    // API 호출
     listPosts(query.location as string, query.tag as string)
       .then((res) => {
-        if (res.status == "403") {
+        if (res.status === 403) {
           alert("토큰 만료");
         }
         setSearchPosts(res);
-        console.log("searchPosts", res);
       })
       .catch((err) => {
         console.warn(err);

@@ -1,6 +1,5 @@
-import React, { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
   CyanButtonStyle,
@@ -11,11 +10,11 @@ import {
 import palette from "../../styles/palette";
 import Input from "../common/Input";
 import { ErrorMessage } from "../auth/Register";
-import { UserType } from "../../lib/type";
 import { quit } from "../../lib/api/auth";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../redux/user";
 import Loading from "../common/Loading";
+import { UserType } from "../../lib/type/user";
 
 interface QuitType {
   user: UserType;
@@ -62,7 +61,6 @@ const Quit = ({ user }: QuitType) => {
 
       setLoading(true);
 
-      // API 호출
       quit()
         .then((res) => {
           if (res) {

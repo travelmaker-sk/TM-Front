@@ -1,6 +1,6 @@
-import { Swiper, SwiperSlide } from "swiper/react"; // basic
+import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
-import "swiper/css"; //basic
+import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import styled from "styled-components";
@@ -41,7 +41,7 @@ export const SwiperBlock = styled.div`
   }
 `;
 
-const SwiperC = () => {
+const SwiperCompo = () => {
   return (
     <SwiperBlock>
       <Swiper
@@ -63,4 +63,4 @@ const SwiperC = () => {
     </SwiperBlock>
   );
 };
-export default SwiperC;
+export default SwiperCompo;

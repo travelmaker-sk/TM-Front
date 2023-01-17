@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { LinkButton } from "../../styles/ButtonStyle";
 
 interface LogoType {
@@ -12,11 +12,8 @@ const LogoStyle = styled.div`
   justify-content: center;
   > a {
     font-family: "Roboto", sans-serif;
-    // font-family: "Staatliches", cursive;
-
     font-size: 20px;
     font-weight: 700;
-    // letter-spacing: -0.01rem;
   }
   .logo {
     display: flex;

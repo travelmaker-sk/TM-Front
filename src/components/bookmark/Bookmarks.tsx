@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { myBookmarks } from "../../lib/api/home";
-import { GetPostType, UserType } from "../../lib/type";
+import { GetPostType } from "../../lib/type/post";
 import { MyPageBottomBlock } from "../mypage/MyPage";
 import Post from "../photocard/Post";
 import { PostBlock } from "../photocard/SearchPostList";
 import { useNavigate } from "react-router";
 import Loading from "../common/Loading";
 import { userInfo } from "../../lib/api/auth";
-
-interface BookmarkType {
-  user: UserType;
-}
+import { UserType } from "../../lib/type/user";
 
 const Bookmarks = () => {
   const navigate = useNavigate();
@@ -31,10 +28,9 @@ const Bookmarks = () => {
         console.warn(err);
       });
 
-    // API 호출
     myBookmarks()
       .then((res) => {
-        if (res.status == "403") {
+        if (res.status === 403) {
           alert("토큰 만료");
         }
 
@@ -59,21 +55,9 @@ const Bookmarks = () => {
                 {content.location} ({content.total.length})
               </h3>
               <PostBlock>
-                {/* <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
-        scrollbar={{ draggable: true }}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
-        loop={true}
-      > */}
                 {content.total.map((post: GetPostType | null) => (
-                  // <SwiperSlide>
                   <Post post={post} key={post?.id} bookmark={true} />
-                  // </SwiperSlide>
                 ))}
-                {/* </Swiper> */}
               </PostBlock>
             </div>
           ))}

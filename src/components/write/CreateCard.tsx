@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Swal from "sweetalert2";
@@ -7,14 +7,12 @@ import {
   CyanButtonStyle,
   SelectButtonStyle,
 } from "../../styles/ButtonStyle";
-import { addPost, editPost } from "../../lib/api/write";
+import { addPost } from "../../lib/api/write";
 import { useNavigate } from "react-router";
 import areaData from "../../lib/json/areaData.json";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
-
 import "react-datepicker/dist/react-datepicker.css";
-import { RootStateOrAny, useSelector } from "react-redux";
 import Loading from "../common/Loading";
 
 export const SelectCategory = styled.div`
@@ -55,7 +53,7 @@ export const CreateCardStyle = styled.div`
   > label,
   .location {
     display: flex;
-    justify-cotent: center;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
     > span:first-of-type {
@@ -114,7 +112,6 @@ export const CreateCardStyle = styled.div`
     .del-photo {
       margin-left: 5px;
       width: 20%;
-      // border: 1px solid ${palette.gray[4]};
       cursor: pointer;
       text-align: center;
       line-height: 24px;
@@ -182,7 +179,6 @@ const CardDatePicker = styled(DatePicker)`
   box-sizing: border-box;
   padding: 8px 20px;
   border-radius: 4px;
-  // border: 1px solid ${palette.gray[5]};
 `;
 
 // 평점
@@ -272,31 +268,7 @@ const CreateCard = () => {
   const [selectedStore, setSelectedStore] = useState(false);
   const [selectedLodging, setSelectedLodging] = useState(false);
 
-  useEffect(() => {
-    console.log("category", category);
-    console.log("title", title);
-    console.log("location", location);
-    console.log("date", date);
-    console.log("weather", weather);
-    console.log("menu", menu);
-    console.log("price", price);
-    console.log("score", score);
-    console.log("memo", memo);
-    console.log("tagList", tagList);
-  }, [
-    category,
-    date,
-    location,
-    memo,
-    menu,
-    price,
-    score,
-    tagList,
-    title,
-    weather,
-  ]);
-
-  // 카테고리 선택
+  // 카테고리
   useEffect(() => {
     if (category === "") {
       Swal.fire({
@@ -394,14 +366,11 @@ const CreateCard = () => {
 
     timer = setTimeout(() => {
       setLocation(e.target.value);
-      console.log("location: ", location);
     }, 200);
   };
 
   // 태그
   const onKeyPress = (e: any) => {
-    // e.preventDefault();
-
     if (e.target.value.length !== 0 && e.key === "Enter") {
       submitTagItem();
     }
@@ -416,7 +385,6 @@ const CreateCard = () => {
   const deleteTagItem = (e: any) => {
     e.preventDefault();
 
-    console.log("delete tag");
     const deleteTagItem = e.target.parentElement.firstChild.innerText;
     const filteredTagList = tagList.filter(
       (tagItem) => tagItem !== deleteTagItem
@@ -424,7 +392,7 @@ const CreateCard = () => {
     setTagList(filteredTagList);
   };
 
-  // 초기화 버튼
+  // 초기화
   const onInit = () => {
     setTitle("");
     setLocation("");
@@ -441,7 +409,7 @@ const CreateCard = () => {
     });
   };
 
-  // 업로드 버튼
+  // 업로드
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -480,7 +448,6 @@ const CreateCard = () => {
 
       const file = refInputFile.current?.files?.[0];
 
-      // API 호출
       addPost({
         category,
         title,
@@ -495,7 +462,7 @@ const CreateCard = () => {
         image: file || undefined,
       })
         .then((res) => {
-          if (res.status == "403") {
+          if (res.status === 403) {
             alert("토큰 만료");
           }
 

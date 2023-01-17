@@ -6,8 +6,6 @@ import { PostType } from "./Post";
 import { useNavigate } from "react-router";
 import { bookmark, like } from "../../lib/api/post";
 import { RootStateOrAny, useSelector } from "react-redux";
-import { loadPost } from "../../lib/api/home";
-import { DetailPostType, GetPostType } from "../../lib/type";
 
 const CardDetailDiv = styled.div`
   > ul:nth-of-type(1) {
@@ -127,13 +125,11 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
     if (likeCheck) {
       like(post?.id as number)
         .then((res) => {
-          if (res.status == "403") {
+          if (res.status === 403) {
             alert("토큰 만료");
           }
 
           setLikeCnt((cnt) => cnt + 1);
-          console.log("likechecknono⭐⭐⭐⭐");
-          console.log("likeCnt", likeCnt);
           if (!refLike.current) return;
           if (likeCnt % 2) {
             refLike.current.style.color = "#ff6b6b";
@@ -150,13 +146,11 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
     } else {
       like(post?.id as number)
         .then((res) => {
-          if (res.status == "403") {
+          if (res.status === 403) {
             alert("토큰 만료");
           }
 
           setCancelLikeCnt((cnt) => cnt + 1);
-          console.log("likecheck⭐⭐⭐⭐");
-          console.log("cancelLikeCnt", cancelLikeCnt);
           if (!refLikeCancel.current) return;
           if (cancelLikeCnt % 2) {
             refLikeCancel.current.style.color = `${palette.gray[6]}`;
@@ -189,19 +183,14 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         if (result.isConfirmed) {
           bookmark(post?.id as number)
             .then((res) => {
-              if (res.status == "403") {
+              if (res.status === 403) {
                 alert("토큰 만료");
               }
 
               setBookmarkCnt((cnt) => cnt + 1);
-              console.log("bookmarkchecknono⭐⭐⭐⭐");
-              console.log("bookmarkCnt", bookmarkCnt);
+
               if (!refBookmark.current) return;
-              // if (bookmarkCnt % 2) {
-              //   refBookmark.current.style.color = "#20c997";
-              // } else {
               refBookmark.current.style.color = `${palette.gray[6]}`;
-              // }
 
               Swal.fire({
                 title: "북마크 삭제 완료!",
@@ -215,8 +204,6 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                 if (result.isConfirmed) {
                   // eslint-disable-next-line no-restricted-globals
                   location.reload();
-
-                  // setBookmarkCheck(!bookmarkCheck);
                 }
               });
             })
@@ -238,19 +225,14 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         if (result.isConfirmed) {
           bookmark(post?.id as number)
             .then((res) => {
-              if (res.status == "403") {
+              if (res.status === 403) {
                 alert("토큰 만료");
               }
 
               setCancelBookmarkCnt((cnt) => cnt + 1);
-              console.log("bookmarkcheck⭐⭐⭐⭐");
-              console.log("cancelBookmarkCnt", cancelBookmarkCnt);
+
               if (!refBookmarkCancel.current) return;
-              // if (cancelBookmarkCnt % 2) {
-              //   refBookmarkCancel.current.style.color = `${palette.gray[6]}`;
-              // } else {
               refBookmarkCancel.current.style.color = "#20c997";
-              // }
 
               Swal.fire({
                 title: "북마크 추가 완료!",
@@ -268,8 +250,6 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
                   navigate("/bookmarks");
                 }
               });
-
-              // setBookmarkCheck(!bookmarkCheck);
             })
             .catch((err) => {
               console.warn(err);
@@ -277,14 +257,7 @@ const CardDetail = ({ post, close, detailPost }: PostType) => {
         }
       });
     }
-  }, [
-    bookmarkCheck,
-    bookmarkCnt,
-    cancelBookmarkCnt,
-    close,
-    navigate,
-    post?.id,
-  ]);
+  }, [bookmarkCheck, close, navigate, post?.id]);
 
   return (
     <>

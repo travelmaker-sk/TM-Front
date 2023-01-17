@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from "react";
+import { useCallback } from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
 import palette from "../../styles/palette";
 import { Link } from "react-router-dom";
 import HeaderMenu from "./HeaderMenu";
-import { UserType } from "../../lib/type";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user";
 import { useNavigate } from "react-router";
@@ -34,7 +33,6 @@ const HeaderBlock = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      // margin-right: 20px;
       img {
         width: 24px;
         height: 24px;
@@ -68,7 +66,6 @@ const HeaderBlock = styled.div`
   @media screen and (max-width: 767px) {
     width: 100%;
     padding: 15px 5%;
-    }
   }
 `;
 

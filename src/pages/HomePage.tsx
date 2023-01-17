@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Responsive from "../components/common/Responsive";
 import styled from "styled-components";
 import Search from "../components/home/Search";
@@ -7,13 +7,10 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../redux/user";
 import Header from "../components/common/Header";
 import Swiper from "../components/home/Swiper";
-import { AllPostsType, PostType } from "../lib/type";
-import { listPosts, loadPost } from "../lib/api/home";
-import PostList from "../components/photocard/SearchPostList";
+import { AllPostsType } from "../lib/type/post";
+import { listPosts } from "../lib/api/home";
 import Footer from "../components/common/Footer";
 import HomePostList from "../components/photocard/HomePostList";
-import Post from "../components/photocard/Post";
-import { useNavigate } from "react-router";
 import Loading from "../components/common/Loading";
 import ScrollToTopButton from "../components/common/scrollToTopButton";
 
@@ -51,17 +48,14 @@ const HomePage = () => {
   });
 
   useEffect(() => {
-    // 포스트 리스트 출력
     const loadHomePosts = () => {
       setLoading(true);
 
-      // API 호출
       listPosts()
         .then((res) => {
-          if (res.status == "403") {
+          if (res.status === 403) {
             alert("토큰 만료");
           }
-          console.log("homePosts", res);
           setHomePosts(res);
         })
         .catch((err) => {
@@ -72,12 +66,10 @@ const HomePage = () => {
         });
     };
 
-    // 유저 확인
     const loadUser = () => {
       let token = localStorage.getItem("tm-token");
       if (!token) return;
 
-      // API 호출
       userInfo()
         .then((res) => {
           dispatch(setUser({ user: res }));

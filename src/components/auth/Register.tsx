@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import palette from "../../styles/palette";
 import Input from "../common/Input";
@@ -9,11 +9,6 @@ import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loading from "../common/Loading";
-
-interface RegisterType {
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
-  error: string | null;
-}
 
 const RegisterBlock = styled.div`
   h2 {
@@ -70,7 +65,6 @@ const Register = () => {
     }
   }, [state, navigate]);
 
-  // 폼 등록 이벤트 핸들러
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -96,11 +90,10 @@ const Register = () => {
         setError(null);
       }
 
-      // API 호출
       register(inputNickname, inputEmail, inputPw)
         .then((res) => {
           if (res) {
-            setError("이미 사용중인 아이디입니다."); // 닉네임 중복 or 이메일 중복 or 비밀번호 형식 미충족
+            setError("이미 사용중인 아이디입니다.");
             return;
           } else {
             setError("");

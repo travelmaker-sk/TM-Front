@@ -1,20 +1,19 @@
 import styled from "styled-components";
 import { CyanButtonStyle, LinkButton } from "../../styles/ButtonStyle";
 import palette from "../../styles/palette";
-import { GetPostType, UserType } from "../../lib/type";
+import { GetPostType } from "../../lib/type/post";
 import { useEffect, useState } from "react";
 import Post from "../photocard/Post";
 import { PostBlock } from "../photocard/SearchPostList";
-import { Swiper, SwiperSlide } from "swiper/react"; // basic
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
-import "swiper/css"; //basic
+import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { myPosts } from "../../lib/api/home";
 import { useNavigate } from "react-router";
 import Loading from "../common/Loading";
-import { RootStateOrAny, useSelector } from "react-redux";
 import { userInfo } from "../../lib/api/auth";
+import { UserType } from "../../lib/type/user";
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
@@ -86,16 +85,16 @@ export const MyPageBottomBlock = styled.div`
   position: absolute;
   left: 0;
   background-color: ${palette.gray[1]};
-  > div{
+  > div {
     max-width: 1320px;
     margin: 0 auto;
     padding: 50px 3%;
-    h2{
+    h2 {
       font-size: 24px;
       font-family: "Do Hyeon", sans-serif;
       padding: 32px 0;
     }
-    h3{
+    h3 {
       font-size: 24px;
       font-family: "Do Hyeon", sans-serif;
       color: ${palette.cyan[5]};
@@ -111,7 +110,6 @@ export const MyPageBottomBlock = styled.div`
     @media screen and (max-width: 767px) {
       width: 100%;
       padding: 35px 5%;
-      }
     }
   }
 `;
@@ -135,10 +133,9 @@ const MyPage = () => {
         console.warn(err);
       });
 
-    // API 호출
     myPosts()
       .then((res) => {
-        if (res.status == "403") {
+        if (res.status === 403) {
           alert("토큰 만료");
         }
 
@@ -199,21 +196,9 @@ const MyPage = () => {
                 {content.location} ({content.total.length})
               </h3>
               <PostBlock>
-                {/* <Swiper
-                  spaceBetween={50}
-                  slidesPerView={1}
-                  scrollbar={{ draggable: true }}
-                  navigation
-                  pagination={{ clickable: true }}
-                  autoplay={{ delay: 3000 }}
-                  loop={true}
-                > */}
                 {content.total.map((post: GetPostType | null) => (
-                  // <SwiperSlide>
                   <Post post={post} key={post?.id} my={true} />
-                  // </SwiperSlide>
                 ))}
-                {/* </Swiper> */}
               </PostBlock>
             </div>
           ))}

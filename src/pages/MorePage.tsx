@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../components/common/Footer";
@@ -44,12 +44,9 @@ const MorePage = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [selSort, setSelSort] = useState(false);
-
-  const [posts, setPosts] = useState<any[]>([]);
-
-  // 정렬
   const [sort, setSort] = useState("id,desc");
+  const [selSort, setSelSort] = useState(false);
+  const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
     if (sort === "id,desc") {
@@ -64,8 +61,6 @@ const MorePage = () => {
   }, [sort]);
 
   useEffect(() => {
-    console.log("setSelSort", selSort);
-    console.log("query.category", query.category);
     if (query.category === "popular") {
       setSelSort(false);
       setSort("viewcount,desc");
@@ -84,19 +79,16 @@ const MorePage = () => {
     }
   }, [query.category, selSort]);
 
-  // 정렬 선택
   const onSelectedSort = useCallback((e: any) => {
     setSort(e.target.value);
   }, []);
 
-  // 페이지네이션
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     setLoading(true);
 
-    // API 호출
     morePosts(
       query.category as string,
       sort,
@@ -105,11 +97,10 @@ const MorePage = () => {
       query.tag as string
     )
       .then((res) => {
-        if (res.status == "403") {
+        if (res.status === 403) {
           alert("토큰 만료");
         }
 
-        console.log("morePosts", res);
         setTotalPage(res.totalPages);
         setPosts(res.content);
       })

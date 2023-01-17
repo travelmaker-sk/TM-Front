@@ -36,7 +36,6 @@ const SearchWrapper = styled.div`
       top: 100%;
       left: 0;
       width: 100%;
-      // margin-top: 1px;
       background-color: ${palette.gray[0]};
       border: 1px solid ${palette.gray[4]};
       z-index: 8888;
@@ -153,8 +152,6 @@ const Search = () => {
 
     timer = setTimeout(() => {
       seInputLocation(e.target.value);
-
-      // TODO: 지역명 검색 API 호출
     }, 200);
   };
 
@@ -162,19 +159,10 @@ const Search = () => {
     const keywordLocation = refLocationInput.current?.value;
     const keywordTag = refTagInput.current?.value;
 
-    // TODO: 페이지 전환. 전환된 페이지에서 API 호출
-    /*
-      [검색API 쿼리 항목]
-      키워드 (장소, 카테고리(기볼만한 곳, 맛집, 숙소), 해시태그)
-      정렬기준 (최신순, 인기순, 오래된순)
-      가져올 아이템 갯수 (limit) = 16
-      몇번째 데이터부터 받을건지 (from)
-    */
     navigate(`/search?location=${keywordLocation}&tag=${keywordTag}`);
   };
 
   useEffect(() => {
-    // API 호출
     popularArea()
       .then(({ list }) => {
         setPopularLocation(list);
