@@ -56,7 +56,7 @@ https://youtu.be/ujqoWcUxWKQ
 
 ## 🖥️ 아키텍처
 
-<img width="600px" alt="아키텍처" src="https://user-images.githubusercontent.com/74370531/213071949-d4dd64a2-95ec-4f2a-8ce8-c58f84b69814.jpg">
+<img width="500px" alt="아키텍처" src="https://user-images.githubusercontent.com/74370531/213071949-d4dd64a2-95ec-4f2a-8ce8-c58f84b69814.jpg">
 
 <br />
 
