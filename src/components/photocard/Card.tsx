@@ -201,10 +201,12 @@ const Card = ({ post, onOpenModal, my, bookmark }: ICard) => {
             ""
           )}
           {post?.tagList ? (
-            <li className="tagList">
-              {splitTagList?.map((item: any) => (
-                <li className="tag" key={item}>{`#${item}`}</li>
-              ))}
+            <li>
+              <ul className="tagList">
+                {splitTagList?.map((item: any) => (
+                  <li className="tag" key={item}>{`#${item}`}</li>
+                ))}
+              </ul>
             </li>
           ) : (
             ""
@@ -278,10 +280,12 @@ const Card = ({ post, onOpenModal, my, bookmark }: ICard) => {
             ""
           )}
           {post?.tagList ? (
-            <li className="tagList">
-              {splitTagList?.map((item: any) => (
-                <li className="tag" key={item}>{`#${item}`}</li>
-              ))}
+            <li>
+              <ul className="tagList">
+                {splitTagList?.map((item: any, idx: number) => (
+                  <li className="tag" key={idx}>{`#${item}`}</li>
+                ))}
+              </ul>
             </li>
           ) : (
             ""
