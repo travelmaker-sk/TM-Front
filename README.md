@@ -52,12 +52,18 @@ https://youtu.be/ujqoWcUxWKQ
   <img alt="Amazon EC2" src="https://img.shields.io/badge/Amazon EC2-FF4F8B?style=for-the-badge&logo=Amazon EC2&logoColor=white"/>
 </div>
 
-<br />  
+<br />
+
+## 🖥️ 아키텍처
+
+<img width="600px" alt="아키텍처" src="https://user-images.githubusercontent.com/74370531/213071949-d4dd64a2-95ec-4f2a-8ce8-c58f84b69814.jpg">
+
+<br />
 
 ## ☁️ 프로젝트 주요 기능 
 
 ### 1️⃣ 로그인
-- 웹 자체의 기본 로그인 기능과 그 정보가 저장되는 DB관리  
+- 웹 자체의 기본 로그인 기능과 그 정보가 저장되는 DB관리
 - 수준 높은 정보보안을 위한 2차 이메일 인증 기능
 - 자신의 게시물을 관리하며 계정정보를 변경할 수 있는 계정관리 기능
 - 암호화 토큰을 사용한 비밀번호 암호화 구현 
